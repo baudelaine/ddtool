@@ -1,0 +1,185 @@
+[
+  {
+    "_id": "PROJECT_ALIASFinal",
+    "_ref": null,
+    "table_name": "PROJECT",
+    "table_alias": "PROJECT_ALIAS",
+    "type": "Final",
+    "visible": false,
+    "filter": "",
+    "linker": false,
+    "linker_ids": [],
+    "fields": [
+      {
+        "_id": "PROJNOCHAR",
+        "_ref": null,
+        "field_name": "PROJNO",
+        "field_type": "CHAR",
+        "label": "",
+        "traduction": false,
+        "visible": false,
+        "timezone": false,
+        "icon": ""
+      },
+      {
+        "_id": "PROJNAMEVARCHAR",
+        "_ref": null,
+        "field_name": "PROJNAME",
+        "field_type": "VARCHAR",
+        "label": "",
+        "traduction": false,
+        "visible": false,
+        "timezone": false,
+        "icon": ""
+      },
+      {
+        "_id": "DEPTNOCHAR",
+        "_ref": null,
+        "field_name": "DEPTNO",
+        "field_type": "CHAR",
+        "label": "",
+        "traduction": false,
+        "visible": false,
+        "timezone": false,
+        "icon": ""
+      },
+      {
+        "_id": "RESPEMPCHAR",
+        "_ref": null,
+        "field_name": "RESPEMP",
+        "field_type": "CHAR",
+        "label": "",
+        "traduction": false,
+        "visible": false,
+        "timezone": false,
+        "icon": ""
+      },
+      {
+        "_id": "PRSTAFFDECIMAL",
+        "_ref": null,
+        "field_name": "PRSTAFF",
+        "field_type": "DECIMAL",
+        "label": "",
+        "traduction": false,
+        "visible": false,
+        "timezone": false,
+        "icon": ""
+      },
+      {
+        "_id": "PRSTDATEDATE",
+        "_ref": null,
+        "field_name": "PRSTDATE",
+        "field_type": "DATE",
+        "label": "",
+        "traduction": false,
+        "visible": false,
+        "timezone": false,
+        "icon": ""
+      },
+      {
+        "_id": "PRENDATEDATE",
+        "_ref": null,
+        "field_name": "PRENDATE",
+        "field_type": "DATE",
+        "label": "",
+        "traduction": false,
+        "visible": false,
+        "timezone": false,
+        "icon": ""
+      },
+      {
+        "_id": "MAJPROJCHAR",
+        "_ref": null,
+        "field_name": "MAJPROJ",
+        "field_type": "CHAR",
+        "label": "",
+        "traduction": false,
+        "visible": false,
+        "timezone": false,
+        "icon": ""
+      }
+    ],
+    "relations": [
+      {
+        "_id": "RPPF",
+        "_rev": null,
+        "key_name": "RPP",
+        "fk_name": "RPP",
+        "pk_name": "PK_PROJECT",
+        "table_name": "PROJECT",
+        "pktable_name": "PROJ",
+        "pktable_alias": "PROJ",
+        "fin": false,
+        "ref": false,
+        "relationship": "[FINAL].[PROJECT_ALIAS].[MAJPROJ] = [PROJ].[PROJNO] AND [FINAL].[PROJECT_ALIAS].[MAJPROJ] = [PROJECT].[PROJNO]",
+        "key_type": "F",
+        "seqs": [
+          {
+            "column_name": "MAJPROJ",
+            "pkcolumn_name": "PROJNO",
+            "key_seq": 1
+          },
+          {
+            "column_name": "MAJPROJ",
+            "pkcolumn_name": "PROJNO",
+            "key_seq": 1
+          }
+        ]
+      },
+      {
+        "_id": "FK_PROJECT_2F",
+        "_rev": null,
+        "key_name": "FK_PROJECT_2",
+        "fk_name": "FK_PROJECT_2",
+        "pk_name": "PK_EMPLOYEE",
+        "table_name": "PROJECT",
+        "pktable_name": "EMP",
+        "pktable_alias": "EMP",
+        "fin": false,
+        "ref": false,
+        "relationship": "[FINAL].[PROJECT_ALIAS].[RESPEMP] = [EMP].[EMPNO] AND [FINAL].[PROJECT_ALIAS].[RESPEMP] = [EMPLOYEE].[EMPNO]",
+        "key_type": "F",
+        "seqs": [
+          {
+            "column_name": "RESPEMP",
+            "pkcolumn_name": "EMPNO",
+            "key_seq": 1
+          },
+          {
+            "column_name": "RESPEMP",
+            "pkcolumn_name": "EMPNO",
+            "key_seq": 1
+          }
+        ]
+      },
+      {
+        "_id": "FK_PROJECT_1F",
+        "_rev": null,
+        "key_name": "FK_PROJECT_1",
+        "fk_name": "FK_PROJECT_1",
+        "pk_name": "PK_DEPARTMENT",
+        "table_name": "PROJECT",
+        "pktable_name": "DEPARTMENT",
+        "pktable_alias": "DEPARTMENT",
+        "fin": false,
+        "ref": false,
+        "relationship": "[FINAL].[PROJECT_ALIAS].[DEPTNO] = [DEPARTMENT].[DEPTNO] AND [FINAL].[PROJECT_ALIAS].[DEPTNO] = [DEPT].[DEPTNO]",
+        "key_type": "F",
+        "seqs": [
+          {
+            "column_name": "DEPTNO",
+            "pkcolumn_name": "DEPTNO",
+            "key_seq": 1
+          },
+          {
+            "column_name": "DEPTNO",
+            "pkcolumn_name": "DEPTNO",
+            "key_seq": 1
+          }
+        ]
+      }
+    ],
+    "relationCount": {},
+    "label": ""
+  }
+]

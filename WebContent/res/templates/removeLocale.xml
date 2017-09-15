@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150324113748038" user="Administrator" version="10.2.1003.39">
+	<transaction saved="false" seq="1" timestamp="20150324113639523" uniqueId="743D0829743D0829">
+		<action seq="1" type="RemoveLocale">
+			<inputparams>
+				<param seq="1" type="i18nstring">
+					<value>de</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+</bmtactionlog>

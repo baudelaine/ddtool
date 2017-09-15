@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150722173540031" user="Administrateur" version="10.2.1003.39">
+	<transaction saved="false" seq="1" timestamp="20150722173432171" uniqueId="724C4BEC724C4BEC">
+		<action seq="1" type="Merge">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>querySubject</mappingpath>
+					<value>[PHYSICAL].[ACTION]</value>
+				</param>
+				<param seq="2" type="integer">
+					<value>0</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+	<transaction saved="false" seq="2" timestamp="20150722173448894" uniqueId="041F32B6041F32B6">
+		<action seq="1" type="Move">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>namespace</mappingpath>
+					<value>[FINAL_TABLES]</value>
+				</param>
+				<param seq="2" type="handle">
+					<mappingpath>querySubject</mappingpath>
+					<value>[PHYSICAL].[ACTION_ACTION]</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+        <transaction saved="false" seq="3" timestamp="20150722173924422" uniqueId="C6C119FAC6C119FA">
+            <action seq="1" type="Modify">
+                <inputparams>
+                    <param seq="1" type="handle">
+                        <mappingpath>querySubject/name</mappingpath>
+                        <value>/O/name[0]/O/[FINAL_TABLES].[ACTION_ACTION]</value>
+                    </param>
+                    <param seq="2" type="i18nstring">
+                        <value>ACTION</value>
+                    </param>
+                </inputparams>
+                <domchanges/>
+                <result success="t">
+                    <outputparams/>
+                </result>
+            </action>
+        </transaction>
+</bmtactionlog>

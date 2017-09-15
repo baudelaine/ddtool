@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150723154806075" user="Administrateur" version="10.2.1003.39">
+	<transaction saved="false" seq="1" timestamp="20150723154629121" uniqueId="0C6375AF0C6375AF">
+		<action seq="1" type="ReorderBefore">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>queryItem</mappingpath>
+					<value>[FINAL_TABLES].[S_SAMPLE_S_SAMPLE].[XXXXXXXXXXXXXXXXXXX]</value>
+				</param>
+				<param seq="2" type="handle">
+					<mappingpath>queryItem</mappingpath>
+					<value>[FINAL_TABLES].[S_SAMPLE_S_SAMPLE].[CLASSIFICATION]</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+</bmtactionlog>

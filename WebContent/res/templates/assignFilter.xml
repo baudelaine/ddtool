@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20160308170455653" user="Administrateur" version="10.2.1003.39">
+	<transaction saved="false" seq="1" timestamp="20160308170346842" uniqueId="ACA323E0ACA323E0">
+		<action seq="1" type="UpdateObject">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>querySubject</mappingpath>
+					<value>[SECURITY].[S_LOCATION]</value>
+				</param>
+				<param seq="2" type="cclnode">
+					<value>
+						<![CDATA[<updateObjectRequest><tasks><task name="addProperty"><parameters><param name="propertyType" value="filter"/><param name="propertyValue"><refobj>[SECURITY].[_FL_S_LOCATION]</refobj></param><param name="filterApplyType" value="always"/></parameters></task></tasks></updateObjectRequest>]]>
+					</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+</bmtactionlog>

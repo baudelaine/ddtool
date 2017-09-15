@@ -1,0 +1,1 @@
+curl --cookie cookies.txt --cookie-jar cookies.txt --data "table=DEPARTMENT&alias=DEPARTMENT_ALIAS&type=Final&linker_id=RPPKEYFinalEMPF&pk=true" http://localhost/ddtool/GetQueryObjects

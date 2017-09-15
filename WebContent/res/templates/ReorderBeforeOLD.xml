@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150406123252044" user="Administrator" version="10.2.1003.39">
+    <transaction saved="false" seq="1" timestamp="20150406123017057" uniqueId="56E7FE6356E7FE63">
+        <action seq="1" type="ReorderBefore">
+            <inputparams>
+                <param seq="1" type="handle">
+                    <mappingpath>queryItem</mappingpath>
+                    <value>[TABLES_T].[SDIDATA].[s_instrumentid_T]</value>
+                </param>
+                <param seq="2" type="handle">
+                    <mappingpath>queryItem</mappingpath>
+                    <value>[TABLES_T].[SDIDATA].[WORKFLOWVERSIONID]</value>
+                </param>
+            </inputparams>
+            <domchanges/>
+            <result success="t">
+                <outputparams/>
+            </result>
+        </action>
+    </transaction>
+</bmtactionlog>

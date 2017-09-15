@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150324113748038" user="Administrator" version="10.2.1003.39">
+    <transaction commit="y" seq="1"> 
+        <action seq="1" type="Publish"> 
+            <inputparams> 
+                <param seq="1" type="handle"> 
+                    <mappingpath>package</mappingpath>  
+                    <value>[].[packages].[limsBI]</value> 
+                </param>  
+                <param seq="2" type="integer"> 
+                    <value>2</value> 
+                </param>  
+                <param seq="3" type="i18nstring"> 
+                    <value>/content/folder[@name='ZZZ']</value> 
+                </param>  
+                <param seq="4" type="i18nstring"> 
+                    <value>limsBI</value> 
+                </param>  
+                <param seq="5" type="integer"> 
+                    <value>0</value> 
+                </param>  
+                <param seq="6" type="integer"> 
+                    <value>1</value> 
+                </param>  
+                <param seq="7" type="integer"> 
+                    <value>-1</value> 
+                </param> 
+            </inputparams>  
+            <domchanges/> 
+        </action> 
+    </transaction> 
+
+</bmtactionlog>

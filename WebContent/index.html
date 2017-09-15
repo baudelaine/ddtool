@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dd tool</title>
+	<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-table.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-editable.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-select.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/mycss.css" type="text/css" rel="stylesheet" />
+
+</head>
+<body>
+
+	<div class="container-fluid" style="margin-top: 10px;">
+
+		<!-- navbar -->
+
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">
+		        <img alt="Brand" src="img/cognos.jpg">
+						<h5><strong>DD TOOL</strong></h5>
+		      </a>
+				</div>
+
+				<form class="navbar-form navbar-left">
+
+							<div id="alert_placeholder"></div>
+
+							<div id="divLoading"></div>
+
+				</form>
+
+
+				<form class="navbar-form navbar-right">
+
+					<div class="input-group">
+						<div class="input-group-btn">
+							<select class="selectpicker" data-style="btn-default" data-width="100%" id="tables" data-live-search="true" title="Choose a table..."></select>
+						</div>
+							<div class="input-group">
+  						<span class="input-group-addon">@</span>
+							<input type="text" id="alias" class="form-control" placeholder="Alias">
+							</div>
+					</div>
+
+						<button type="button" onclick="GetQuerySubjects()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Get Query Subject(s) from table selected above."><span class="glyphicon glyphicon-magnet" aria-hidden="true"></span></button>
+						<button type="button" onclick="Publish()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Publish to Cognos."><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
+						<button type="button" onclick="GetTableData()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Show object in console"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button>
+						<button type="button" onclick="ClearSelections()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Remove all."><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+
+					<button type="button" onclick="TestDBConnection()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Test connection to server database."><span class="glyphicon glyphicon-signal aria-hidden="true"></span></button>
+					<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Release server session" onClick="Reset()"><span class="glyphicon glyphicon-off aria-hidden="true"></span></button>
+				</form>
+
+		  </div>
+		</nav>
+
+		<!-- navbar -->
+
+		<!-- modal -->
+
+		<div class="modal fade" tabindex="-1" role="dialog" id="newRowModal">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Add new relationship</h4>
+		      </div><!-- /.modal-header -->
+		      <div class="modal-body">
+
+						<div class="container-fluid">
+							<div id="modDivLoading"></div>
+							<div class="row">
+								<div class="form-group">
+									<div class="input-group">
+										<!-- <div class="input-group-btn">
+											<select class="selectpicker" data-style="btn-default" id="modQuerySubject" data-live-search="true" title="Choose query subject..."></select>
+										</div> -->
+											<!-- <div class="input-group"> -->
+											<!-- <input type="text" id="modFKTable" class="form-control disabled" placeholder="fktable">
+											<span class="input-group-addon">@</span>
+											<input type="text" id="modFKTableAlias" class="form-control disabled" placeholder="fktable_alias"> -->
+											<!-- </div> -->
+											<label id="modQuerySubject" for="modPKTables"></label>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-btn">
+											<select class="selectpicker" data-style="btn-default" id="modPKTables" data-live-search="true" title="Choose a pktable..."></select>
+										</div>
+											<div class="input-group">
+											<span class="input-group-addon">@</span>
+											<input type="text" id="modPKTableAlias" class="form-control" placeholder="pktable_alias">
+											</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+									<div class="form-group">
+										<label for="modKeyName">key_name</label>
+										<input type="text" id="modKeyName" class="form-control" placeholder="fk_name">
+									</div>
+							</div>
+
+							<div class="row">
+									<div class="form-group">
+										<textarea id="modRelashionship" class="form-control" placeholder="Paste relashionship here..." rows="4"></textarea>
+									</div>
+							</div>
+
+						</div>
+
+					</div> <!-- /.modal-body -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" onclick="modValidate()"><span class="glyphicon glyphicon-ok aria-hidden="true"></button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove aria-hidden="true"></button>
+		      </div><!-- /.modal-footer -->
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<!-- modal -->
+
+		<div>
+
+		  <!-- Nav tabs -->
+		  <ul class="nav nav-tabs" role="tablist" id="navTab">
+		    <li role="presentation" class="active"><a href="#Final" aria-controls="final" role="tab" data-toggle="tab">Final</a></li>
+		    <li role="presentation"><a href="#Reference" aria-controls="reference" role="tab" data-toggle="tab">Reference</a></li>
+		    <li role="presentation"><a href="#QuerySubject" aria-controls="querySubject" role="tab" data-toggle="tab">Query Subject</a></li>
+		    <!-- <li role="presentation"><a href="#Fields" aria-controls="fields" role="tab" data-toggle="tab">Fields</a></li> -->
+		  </ul>
+
+		  <!-- Tab panes -->
+		  <div class="tab-content">
+		    <div role="tabpanel" class="tab-pane active" id="final">
+
+				</div>
+
+		    <div role="tabpanel" class="tab-pane" id="reference">
+
+				</div>
+
+		    <div role="tabpanel" class="tab-pane" id="querySubject">
+
+				</div>
+
+		    <div role="tabpanel" class="tab-pane" id="fields">
+
+				</div>
+		  </div>
+
+		</div>
+
+		<!-- Toolbar -->
+
+					<div class="btn-group" id="DatasToolbar" role="group" aria-label="...">
+
+						<button type="button" onclick="GetQuerySubjects()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Get Query Subject(s) from table selected above."><span class="glyphicon glyphicon-magnet" aria-hidden="true"></span></button>
+						<!-- <button type="button" onclick="DuplicateRow()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Duplicate selected row(s)"><span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span></button>
+						<button type="button" onclick="RemoveRow()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Remove selected row(s)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+						<button type="button" data-toggle="modal" data-target="#newRowModal" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Add a new row"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+						<button type="button" onclick="GetTableData()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Show object in console"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button> -->
+						<button type="button" onclick="ClearSelections()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Remove all."><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+
+					</div>
+
+					<!-- SubToolbar -->
+
+									<!-- <div class="btn-group" id="SubDatasToolbar" role="group" aria-label="...">
+
+									<button type="button" onclick="GetQuerySubjects()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Get Query Subject(s) from table selected above."><span class="glyphicon glyphicon-magnet" aria-hidden="true"></span></button>
+									<button type="button" onclick="DuplicateRow()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Duplicate selected row(s)"><span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span></button>
+									<button type="button" onclick="RemoveRow()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Remove selected row(s)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+									<button type="button" data-toggle="modal" data-target="#newRowModal" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Add a new row"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+									<button type="button" onclick="GetTableData()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Show object in console"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button>
+									<button type="button" onclick="ClearSelections()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Remove all."><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+
+								</div> -->
+
+		<!-- list -->
+
+				<table class="table table-striped fontsize" id="DatasTable">
+
+				</table>
+
+	</div> <!-- container -->
+
+
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-table.min.js"></script>
+	<script src="js/bootstrap-editable.js"></script>
+	<script src="js/bootstrap-table-editable.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/myfunctions.js"></script>
+
+</body>
+</html>

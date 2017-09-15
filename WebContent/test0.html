@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dd tool</title>
+	<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-table.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-editable.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-select.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" />
+	<!-- <link href="css/test0.css" type="text/css" rel="stylesheet" /> -->
+
+</head>
+<body>
+
+			<div class="container">
+	        <h1>Sub Table</h1>
+	        <p>Use <code>onExpandRow</code> event to handle your detail view.</p>
+	        <table id="table">
+	        </table>
+	    </div>
+
+
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-table.min.js"></script>
+
+	<script>
+
+			var data0 = [
+			 {
+			  "_id": "DEPTFinalDEPT",
+			  "_ref": null,
+			  "fields": [
+			   {
+			    "field_name": "DEPTNO",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "DEPTNAME",
+			    "field_type": "VARCHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "MGRNO",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "ADMRDEPT",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "LOCATION",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   }
+			  ],
+			  "filter": "",
+			  "label": "",
+			  "table_alias": "DEPT",
+			  "table_name": "DEPT",
+			  "type": "Final",
+			  "visible": false
+			 },
+			 {
+			  "_id": "EMPLOYEEFinalEMPLOYEE",
+			  "_ref": null,
+			  "fields": [
+			   {
+			    "field_name": "EMPNO",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "FIRSTNME",
+			    "field_type": "VARCHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "MIDINIT",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "LASTNAME",
+			    "field_type": "VARCHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "WORKDEPT",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "PHONENO",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "HIREDATE",
+			    "field_type": "DATE",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "JOB",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "EDLEVEL",
+			    "field_type": "SMALLINT",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "SEX",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "BIRTHDATE",
+			    "field_type": "DATE",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "SALARY",
+			    "field_type": "DECIMAL",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "BONUS",
+			    "field_type": "DECIMAL",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "COMM",
+			    "field_type": "DECIMAL",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   }
+			  ],
+			  "filter": "",
+			  "label": "",
+			  "table_alias": "EMPLOYEE",
+			  "table_name": "EMPLOYEE",
+			  "type": "Final",
+			  "visible": false
+			 },
+			 {
+			  "_id": "PROJECTFinalPROJECT",
+			  "_ref": null,
+			  "fields": [
+			   {
+			    "field_name": "PROJNO",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "PROJNAME",
+			    "field_type": "VARCHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "DEPTNO",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "RESPEMP",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "PRSTAFF",
+			    "field_type": "DECIMAL",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "PRSTDATE",
+			    "field_type": "DATE",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "PRENDATE",
+			    "field_type": "DATE",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   },
+			   {
+			    "field_name": "MAJPROJ",
+			    "field_type": "CHAR",
+			    "icon": "",
+			    "label": "",
+			    "timezone": false,
+			    "traduction": false,
+			    "visibleField": false
+			   }
+			  ],
+			  "filter": "",
+			  "label": "",
+			  "table_alias": "PROJECT",
+			  "table_name": "PROJECT",
+			  "type": "Final",
+			  "visible": false
+			 }
+			]
+
+			var data = [
+			  {
+			    "_id": "PROJECT_ALIASFinal",
+			    "_ref": null,
+			    "table_name": "PROJECT",
+			    "table_alias": "PROJECT_ALIAS",
+			    "type": "Final",
+			    "visible": false,
+			    "filter": "",
+			    "linker": false,
+			    "linker_ids": [],
+			    "fields": [
+			      {
+			        "_id": "PROJNOCHAR",
+			        "_ref": null,
+			        "field_name": "PROJNO",
+			        "field_type": "CHAR",
+			        "label": "",
+			        "traduction": false,
+			        "visible": false,
+			        "timezone": false,
+			        "icon": ""
+			      },
+			      {
+			        "_id": "PROJNAMEVARCHAR",
+			        "_ref": null,
+			        "field_name": "PROJNAME",
+			        "field_type": "VARCHAR",
+			        "label": "",
+			        "traduction": false,
+			        "visible": false,
+			        "timezone": false,
+			        "icon": ""
+			      },
+			      {
+			        "_id": "DEPTNOCHAR",
+			        "_ref": null,
+			        "field_name": "DEPTNO",
+			        "field_type": "CHAR",
+			        "label": "",
+			        "traduction": false,
+			        "visible": false,
+			        "timezone": false,
+			        "icon": ""
+			      },
+			      {
+			        "_id": "RESPEMPCHAR",
+			        "_ref": null,
+			        "field_name": "RESPEMP",
+			        "field_type": "CHAR",
+			        "label": "",
+			        "traduction": false,
+			        "visible": false,
+			        "timezone": false,
+			        "icon": ""
+			      },
+			      {
+			        "_id": "PRSTAFFDECIMAL",
+			        "_ref": null,
+			        "field_name": "PRSTAFF",
+			        "field_type": "DECIMAL",
+			        "label": "",
+			        "traduction": false,
+			        "visible": false,
+			        "timezone": false,
+			        "icon": ""
+			      },
+			      {
+			        "_id": "PRSTDATEDATE",
+			        "_ref": null,
+			        "field_name": "PRSTDATE",
+			        "field_type": "DATE",
+			        "label": "",
+			        "traduction": false,
+			        "visible": false,
+			        "timezone": false,
+			        "icon": ""
+			      },
+			      {
+			        "_id": "PRENDATEDATE",
+			        "_ref": null,
+			        "field_name": "PRENDATE",
+			        "field_type": "DATE",
+			        "label": "",
+			        "traduction": false,
+			        "visible": false,
+			        "timezone": false,
+			        "icon": ""
+			      },
+			      {
+			        "_id": "MAJPROJCHAR",
+			        "_ref": null,
+			        "field_name": "MAJPROJ",
+			        "field_type": "CHAR",
+			        "label": "",
+			        "traduction": false,
+			        "visible": false,
+			        "timezone": false,
+			        "icon": ""
+			      }
+			    ],
+			    "relations": [
+			      {
+			        "_id": "RPPF",
+			        "_rev": null,
+			        "key_name": "RPP",
+			        "fk_name": "RPP",
+			        "pk_name": "PK_PROJECT",
+			        "table_name": "PROJECT",
+			        "pktable_name": "PROJ",
+			        "pktable_alias": "PROJ",
+			        "fin": false,
+			        "ref": false,
+			        "relashionship": "[FINAL].[PROJECT_ALIAS].[MAJPROJ] = [PROJ].[PROJNO] AND [FINAL].[PROJECT_ALIAS].[MAJPROJ] = [PROJECT].[PROJNO]",
+			        "key_type": "F",
+			        "seqs": [
+			          {
+			            "column_name": "MAJPROJ",
+			            "pkcolumn_name": "PROJNO",
+			            "key_seq": 1
+			          },
+			          {
+			            "column_name": "MAJPROJ",
+			            "pkcolumn_name": "PROJNO",
+			            "key_seq": 1
+			          }
+			        ]
+			      },
+			      {
+			        "_id": "FK_PROJECT_2F",
+			        "_rev": null,
+			        "key_name": "FK_PROJECT_2",
+			        "fk_name": "FK_PROJECT_2",
+			        "pk_name": "PK_EMPLOYEE",
+			        "table_name": "PROJECT",
+			        "pktable_name": "EMP",
+			        "pktable_alias": "EMP",
+			        "fin": false,
+			        "ref": false,
+			        "relashionship": "[FINAL].[PROJECT_ALIAS].[RESPEMP] = [EMP].[EMPNO] AND [FINAL].[PROJECT_ALIAS].[RESPEMP] = [EMPLOYEE].[EMPNO]",
+			        "key_type": "F",
+			        "seqs": [
+			          {
+			            "column_name": "RESPEMP",
+			            "pkcolumn_name": "EMPNO",
+			            "key_seq": 1
+			          },
+			          {
+			            "column_name": "RESPEMP",
+			            "pkcolumn_name": "EMPNO",
+			            "key_seq": 1
+			          }
+			        ]
+			      },
+			      {
+			        "_id": "FK_PROJECT_1F",
+			        "_rev": null,
+			        "key_name": "FK_PROJECT_1",
+			        "fk_name": "FK_PROJECT_1",
+			        "pk_name": "PK_DEPARTMENT",
+			        "table_name": "PROJECT",
+			        "pktable_name": "DEPARTMENT",
+			        "pktable_alias": "DEPARTMENT",
+			        "fin": false,
+			        "ref": false,
+			        "relashionship": "[FINAL].[PROJECT_ALIAS].[DEPTNO] = [DEPARTMENT].[DEPTNO] AND [FINAL].[PROJECT_ALIAS].[DEPTNO] = [DEPT].[DEPTNO]",
+			        "key_type": "F",
+			        "seqs": [
+			          {
+			            "column_name": "DEPTNO",
+			            "pkcolumn_name": "DEPTNO",
+			            "key_seq": 1
+			          },
+			          {
+			            "column_name": "DEPTNO",
+			            "pkcolumn_name": "DEPTNO",
+			            "key_seq": 1
+			          }
+			        ]
+			      }
+			    ],
+			    "relationCount": {},
+			    "label": ""
+			  }
+			]
+
+			var $table = $('#table');
+			var url = "js/QuerySubjects.json";
+
+			var cols = [];
+			cols.push({field:"checkbox", checkbox: "true"});
+			cols.push({field:"index", title: "index", formatter: "indexFormatter", sortable: false});
+			cols.push({field:"_id", title: "_id", sortable: false});
+			cols.push({field:"table_name", title: "table_name", sortable: false });
+			cols.push({field:"table_alias", title: "table_alias", editable: false, sortable: false});
+			cols.push({field:"type", title: "type", sortable: false});
+			cols.push({field:"visible", title: "visible", formatter: "boolFormatter", sortable: false});
+			cols.push({field:"filter", title: "filter", editable: {type: "textarea"}, sortable: false});
+			cols.push({field:"label", title: "label", editable: {type: "textarea"}});
+
+			var subcols = [];
+			subcols.push({field:"subindex", title: "subindex", formatter: "indexFormatter", sortable: false});
+			subcols.push({field:"field_name", title: "field_name", sortable: false });
+			subcols.push({field:"label", title: "label", editable: {type: "text"}, sortable: false});
+			subcols.push({field:"traduction", title: "traduction", formatter: "boolFormatter", sortable: false});
+			subcols.push({field:"visibleField", title: "visible", formatter: "boolFormatter", sortable: false});
+			subcols.push({field:"field_type", title: "field_type", editable: false, sortable: false});
+			subcols.push({field:"timezone", title: "timezone", formatter: "boolFormatter", sortable: false});
+
+			$(function () {
+					buildTable($table, cols, data, true);
+					// $table.bootstrapTable('load', data);
+			});
+
+			function expandTable($detail, cols, data) {
+					$subtable = $detail.html('<table></table>').find('table');
+					buildSubTable($subtable, cols, data, false);
+			}
+
+			function buildSubTable($el, cols, data, detailView){
+
+				$el.bootstrapTable({
+						columns: cols,
+						// url: url,
+						data: data,
+						onClickCell: function (field, value, row, $element){
+							if(field.match("traduction|visibleField|timezone")){
+								var newValue = value == false ? true : false;
+
+								console.log($(this).bootstrapTable("getData"));
+
+								console.log("row.index=" + row.index);
+								console.log("field=" + field);
+								console.log("newValue=" + newValue);
+
+								updateCell($el, row.index, field, newValue);
+
+							}
+						}
+				});
+
+			}
+
+			function buildTable($el, cols, data, detailView) {
+
+
+					$el.bootstrapTable({
+							columns: cols,
+							// url: url,
+							data: data,
+							detailView: detailView,
+							onClickCell: function (field, value, row, $element){
+	 							if(field.match("visible")){
+	 								var newValue = value == false ? true : false;
+
+	 								console.log($(this).bootstrapTable("getData"));
+
+	 								console.log("row.index=" + row.index);
+	 								console.log("field=" + field);
+	 								console.log("newValue=" + newValue);
+
+									updateCell($el, row.index, field, newValue);
+
+	 							}
+							},
+							onExpandRow: function (index, row, $detail) {
+									console.log("++++++++++++ row.fields");
+									console.log(row.fields);
+									expandTable($detail, subcols, row.fields);
+							}
+					});
+			}
+
+			function boolFormatter(value, row, index) {
+				var icon = value == true ? 'glyphicon-check' : 'glyphicon-unchecked'
+				return '<i class="glyphicon ' + icon + '"></i> ';
+			}
+
+			function indexFormatter(value, row, index) {
+				row.index = index;
+			  return index;
+			}
+
+			function updateCell($table, index, field, newValue){
+
+				$table.bootstrapTable("updateCell", {
+					index: index,
+					field: field,
+					value: newValue
+				});
+
+			}
+
+	</script>
+
+	<script src="js/bootstrap-editable.js"></script>
+	<script src="js/bootstrap-table-editable.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<!-- <script src="js/test0.js"></script> -->
+
+</body>
+</html>

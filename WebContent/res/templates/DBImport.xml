@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150722113203143" user="Administrateur" version="10.2.1003.39">
+	<transaction saved="false" seq="1" timestamp="20150722113026298" uniqueId="33E5421E33E5421E">
+		<action seq="1" type="DBImport">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>namespace</mappingpath>
+					<value>[X]</value>
+				</param>
+				<param seq="2" type="cclnode">
+					<value><![CDATA[<item Name="DEV" Type="database" Value="partial" dbType="OR" description="DEV" isSystem="false" screenTip="DEV"><item Name="LABVANTAGE" Type="schema" Value="partial"><item Name="Tables" Type="tables" Value="true"/></item></item>]]></value>
+				</param>
+				<param seq="3" type="integer">
+					<value>0</value>
+				</param>
+				<param seq="4" type="integer">
+					<value>1</value>
+				</param>
+				<param seq="5" type="integer">
+					<value>1</value>
+				</param>
+				<param seq="6" type="integer">
+					<value>0</value>
+				</param>
+				<param seq="7" type="integer">
+					<value>0</value>
+				</param>
+				<param seq="8" type="integer">
+					<value>0</value>
+				</param>
+				<param seq="9" type="integer">
+					<value>0</value>
+				</param>
+				<param seq="10" type="integer">
+					<value>1</value>
+				</param>
+				<param seq="11" type="integer">
+					<value>0</value>
+				</param>
+				<param seq="12" type="integer">
+					<value>0</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="2" type="DBRelease">
+			<inputparams/>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+</bmtactionlog>

@@ -1,0 +1,36 @@
+Technote (troubleshooting)
+
+Problem(Abstract)
+The following exception is thrown when using a different axis.jar from the one in <install_location>\sdk\java\lib:
+
+Exception in thread "main" java.lang.ClassCastException: com.cognos.developer.schemas.bibus._3.ContentManagerServiceStub incompatible with org.apache.axis.client.Stub
+
+
+Background: 
+
+Axis is essentially a SOAP engine -- a framework for constructing SOAP processors such as clients, servers, gateways, etc. 
+The current version of Axis is written in Java, and Axis supports the WSDL, which allows you to easily build stubs to access remote services. 
+We can use WSDL2Java tool for building Java stubs (on client) and skeletons (on server) from WSDL documents. 
+IBM Cognos ReportNet and IBM Cognos 8 client stubs are created with Axis 1.1.
+IBM Cognos 10 client stubs are created with Axis 1.4.
+To recompile these client stubs files against a newer version of Axis, WSDL2Java tool is commonly used.
+
+Problem:
+
+The stub files installed by Cognos were compiled with Axis 1.1 , or in the case of Cognos 10 with Axis 1.4.
+It is sometimes common to want to use versions of Axis that are greater than 1.1 or 1.4, possibly to keep up with the corporate standard or to resolve version conflicts that arrise when using SDK in a web application that uses a higher version of Axis.
+Although new stubs can be successfully created using a version of Axis of your choice, you can run into errors when you try to use them to connect to the Cognos service. 
+The reason is that Cognos has modified the Apache Axis 1.1 and 1.4 source and created its own versions of Axis.
+Resolving the problem
+In order to still be able to use higher version of axis.jar, IBM Cognos software and the SDK need to use the Cognos Axis libraries with the Cognos unique path in them.
+Do the following:
+
+- remove the following files from the CLASSPATH variable setting: 
+axis,jar (the one from <install_location>\sdk\java\lib)
+axisCognosClient.jar
+axisReportNetClient.jar
+
+- include in the CLASSPATH variable setting the following files:
+cognos-axis.jar
+cognosClient.jar
+

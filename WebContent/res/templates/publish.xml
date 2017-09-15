@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20160509164042817" user="Administrateur" version="10.2.6100.82">
+	<transaction saved="false" seq="1" timestamp="20160509163650938" uniqueId="2269F2D52269F2D5">
+		<action seq="1" type="Create">
+			<inputparams>
+				<param seq="1" type="integer">
+					<value>16</value>
+				</param>
+				<param seq="2" type="handle">
+					<mappingpath>securityViews</mappingpath>
+					<value>[].[securityViews]</value>
+				</param>
+				<param seq="3" type="i18nstring">
+					<value>NOM__PACK</value>
+				</param>
+				<param seq="4" type="integer">
+					<value>1</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="2" type="SetSecurityViewDefinition">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>securityView</mappingpath>
+					<value>[].[securityViews].[NOM__PACK]</value>
+				</param>
+				<param seq="2" type="handle">
+					<mappingpath>namespace</mappingpath>
+					<value>[STANDARD]</value>
+				</param>
+				<param seq="3" type="integer">
+					<value>2</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="3" type="Create">
+			<inputparams>
+				<param seq="1" type="integer">
+					<value>6</value>
+				</param>
+				<param seq="2" type="handle">
+					<mappingpath>packages</mappingpath>
+					<value>[].[packages]</value>
+				</param>
+				<param seq="3" type="i18nstring">
+					<value>NOM__PACK</value>
+				</param>
+				<param seq="4" type="integer">
+					<value>1</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="4" type="SetSecurityViewDefinition">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>package</mappingpath>
+					<value>[].[packages].[NOM__PACK]</value>
+				</param>
+				<param seq="2" type="handle">
+					<mappingpath>securityView</mappingpath>
+					<value>[].[securityViews].[NOM__PACK]</value>
+				</param>
+				<param seq="3" type="integer">
+					<value>2</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="5" type="SetPackageLocales">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>package</mappingpath>
+					<value>[].[packages].[NOM__PACK]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>en-gb</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="6" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>package/description</mappingpath>
+					<value>/O/description[0]/O/[].[packages].[NOM__PACK]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value/>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="7" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>package/screenTip</mappingpath>
+					<value>/O/screenTip[0]/O/[].[packages].[NOM__PACK]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value/>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="8" type="SetSecurityViewAccess">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>securityView</mappingpath>
+					<value>[].[securityViews].[NOM__PACK]</value>
+				</param>
+				<param seq="2" type="integer">
+					<value>1</value>
+				</param>
+				<param seq="3" type="cclnode">
+					<value>
+						<![CDATA[<securityObjects/>]]>
+					</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="9" type="SetSecurityViewAccess">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>package</mappingpath>
+					<value>[].[packages].[NOM__PACK]</value>
+				</param>
+				<param seq="2" type="integer">
+					<value>1</value>
+				</param>
+				<param seq="3" type="cclnode">
+					<value>
+						<![CDATA[<securityObjects/>]]>
+					</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="10" type="UpdateObject">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>securityView</mappingpath>
+					<value>[].[securityViews].[NOM__PACK]</value>
+				</param>
+				<param seq="2" type="cclnode">
+					<value>
+						<![CDATA[<updateObjectRequest><tasks><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Aster"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_DB2"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Exasol"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Greenplum"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Informix"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_MSAccess"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_MySQL"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Netezza"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Oracle"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Paraccel"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Postgres"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Redbrick"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_SAPBW"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_SFDC"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_SQLServer"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Sybase"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Teradata"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Vectorwise"/></parameters></task><task name="addProperty"><parameters><param name="propertyType" value="functionSet"/><param name="propertyValue" value="V_Vertica"/></parameters></task></tasks></updateObjectRequest>]]>
+					</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="11" type="SetSecurityViewAccess">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>securityView</mappingpath>
+					<value>[].[securityViews].[NOM__PACK]</value>
+				</param>
+				<param seq="2" type="integer">
+					<value>1</value>
+				</param>
+				<param seq="3" type="cclnode">
+					<value>
+						<![CDATA[<securityObjects/>]]>
+					</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="12" type="SetSecurityViewAccess">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>package</mappingpath>
+					<value>[].[packages].[NOM__PACK]</value>
+				</param>
+				<param seq="2" type="integer">
+					<value>1</value>
+				</param>
+				<param seq="3" type="cclnode">
+					<value>
+						<![CDATA[<securityObjects/>]]>
+					</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+</bmtactionlog>

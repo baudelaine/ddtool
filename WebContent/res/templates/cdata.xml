@@ -1,0 +1,8 @@
+<item Name="DEMO_DD03" Type="database" Value="partial" dbType="OR" description="" isSystem="false" screenTip="">
+    <item Name="LABVANTAGE" Type="schema" Value="partial">
+        <item Name="Tables" Type="tables" Value="partial">
+        </item>
+        <item Name="Vues" Type="views" Value="false">
+        </item>
+    </item>
+</item>

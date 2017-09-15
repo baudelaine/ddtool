@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150410184900010" user="Administrator" version="10.2.1003.39">
+    <transaction saved="false" seq="1" timestamp="20150410184419785" uniqueId="678EA01E678EA01E">
+        <action seq="1" type="Copy">
+            <inputparams>
+                <param seq="1" type="handle">
+                    <mappingpath>namespace</mappingpath>
+                    <value>[TABLES_UTIL]</value>
+                </param>
+                <param seq="2" type="handle">
+                    <mappingpath>querySubject</mappingpath>
+                    <value>[TABLES_T].[SYSUSER]</value>
+                </param>
+            </inputparams>
+            <domchanges/>
+            <result success="t">
+                <outputparams/>
+            </result>
+        </action>
+    </transaction>
+</bmtactionlog>

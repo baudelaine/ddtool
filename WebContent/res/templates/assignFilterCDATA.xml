@@ -1,0 +1,1 @@
+<updateObjectRequest><tasks><task name="addProperty"><parameters><param name="propertyType" value="filter"/><param name="propertyValue"><refobj>[SECURITY].[_FL_S_LOCATION]</refobj></param><param name="filterApplyType" value="always"/></parameters></task></tasks></updateObjectRequest>

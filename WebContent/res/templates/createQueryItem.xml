@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150723154520606" user="Administrateur" version="10.2.1003.39">
+	<transaction saved="false" seq="1" timestamp="20150723154315306" uniqueId="35BB8A3435BB8A34">
+		<action seq="1" type="UpdateObject">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>querySubject</mappingpath>
+					<value>[FINAL_TABLES].[S_SAMPLE_S_SAMPLE]</value>
+				</param>
+				<param seq="2" type="cclnode">
+					<value><![CDATA[<updateObjectRequest><tasks><task name="addObject"><parameters><param locale="en-gb" name="objectName" value="XXXXXXXXXXXXXXXXXXX"/><param name="objectType" value="queryItem"/><param name="makeNameUnique" value="false"/><param name="basedOn"><expression>YYYYYYYYYYYYYYYYYYYYYY</expression></param></parameters></task></tasks></updateObjectRequest>]]></value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+</bmtactionlog>

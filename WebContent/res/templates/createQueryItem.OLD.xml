@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150402173313792" user="Administrator" version="10.2.1003.39">
+    <transaction saved="false" seq="1" timestamp="20150402173218505" uniqueId="CD8F52C0CD8F52C0">
+        <action seq="1" type="Create">
+            <inputparams>
+                <param seq="1" type="integer">
+                    <value>2</value>
+                </param>
+                <param seq="2" type="handle">
+                    <mappingpath>querySubject</mappingpath>
+                    <value>[FINAL_TABLES].[S_SAMPLE]</value>
+                </param>
+                <param seq="3" type="i18nstring">
+                    <value>New Query Item</value>
+                </param>
+                <param seq="4" type="integer">
+                    <value>1</value>
+                </param>
+            </inputparams>
+            <domchanges/>
+            <result success="t">
+                <outputparams/>
+            </result>
+        </action>
+
+    </transaction>
+</bmtactionlog>

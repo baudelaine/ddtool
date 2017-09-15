@@ -1,0 +1,281 @@
+[
+ {
+  "_id": "DEPTFinalDEPT",
+  "_ref": null,
+  "fields": [
+   {
+    "field_name": "DEPTNO",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "DEPTNAME",
+    "field_type": "VARCHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "MGRNO",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "ADMRDEPT",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "LOCATION",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   }
+  ],
+  "filter": "",
+  "label": "",
+  "table_alias": "DEPT",
+  "table_name": "DEPT",
+  "type": "Final",
+  "visible": false
+ },
+ {
+  "_id": "EMPLOYEEFinalEMPLOYEE",
+  "_ref": null,
+  "fields": [
+   {
+    "field_name": "EMPNO",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "FIRSTNME",
+    "field_type": "VARCHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "MIDINIT",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "LASTNAME",
+    "field_type": "VARCHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "WORKDEPT",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "PHONENO",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "HIREDATE",
+    "field_type": "DATE",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "JOB",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "EDLEVEL",
+    "field_type": "SMALLINT",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "SEX",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "BIRTHDATE",
+    "field_type": "DATE",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "SALARY",
+    "field_type": "DECIMAL",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "BONUS",
+    "field_type": "DECIMAL",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "COMM",
+    "field_type": "DECIMAL",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   }
+  ],
+  "filter": "",
+  "label": "",
+  "table_alias": "EMPLOYEE",
+  "table_name": "EMPLOYEE",
+  "type": "Final",
+  "visible": false
+ },
+ {
+  "_id": "PROJECTFinalPROJECT",
+  "_ref": null,
+  "fields": [
+   {
+    "field_name": "PROJNO",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "PROJNAME",
+    "field_type": "VARCHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "DEPTNO",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "RESPEMP",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "PRSTAFF",
+    "field_type": "DECIMAL",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "PRSTDATE",
+    "field_type": "DATE",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "PRENDATE",
+    "field_type": "DATE",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   },
+   {
+    "field_name": "MAJPROJ",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visibleField": false
+   }
+  ],
+  "filter": "",
+  "label": "",
+  "table_alias": "PROJECT",
+  "table_name": "PROJECT",
+  "type": "Final",
+  "visible": false
+ }
+]

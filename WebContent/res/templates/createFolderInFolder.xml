@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150916123602448" user="Administrateur" version="10.2.1003.39">
+	<transaction saved="false" seq="1" timestamp="20150916123456507" uniqueId="4E931FA64E931FA6">
+		<action seq="1" type="Create">
+			<inputparams>
+				<param seq="1" type="integer">
+					<value>5</value>
+				</param>
+				<param seq="2" type="handle">
+					<mappingpath>folder</mappingpath>
+					<value>[A].[D2]</value>
+				</param>
+				<param seq="3" type="i18nstring">
+					<value>D3</value>
+				</param>
+				<param seq="4" type="integer">
+					<value>1</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="2" type="Move">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>folder</mappingpath>
+					<value>[A].[D3]</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+</bmtactionlog>

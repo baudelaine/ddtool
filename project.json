@@ -1,0 +1,187 @@
+[
+ {
+  "_id": "PROJECTFinal",
+  "_ref": null,
+  "fields": {
+   "DEPTNOCHAR": {
+    "_id": "DEPTNOCHAR",
+    "_ref": null,
+    "field_name": "DEPTNO",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visible": false
+   },
+   "MAJPROJCHAR": {
+    "_id": "MAJPROJCHAR",
+    "_ref": null,
+    "field_name": "MAJPROJ",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visible": false
+   },
+   "PRENDATEDATE": {
+    "_id": "PRENDATEDATE",
+    "_ref": null,
+    "field_name": "PRENDATE",
+    "field_type": "DATE",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visible": false
+   },
+   "PROJNAMEVARCHAR": {
+    "_id": "PROJNAMEVARCHAR",
+    "_ref": null,
+    "field_name": "PROJNAME",
+    "field_type": "VARCHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visible": false
+   },
+   "PROJNOCHAR": {
+    "_id": "PROJNOCHAR",
+    "_ref": null,
+    "field_name": "PROJNO",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visible": false
+   },
+   "PRSTAFFDECIMAL": {
+    "_id": "PRSTAFFDECIMAL",
+    "_ref": null,
+    "field_name": "PRSTAFF",
+    "field_type": "DECIMAL",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visible": false
+   },
+   "PRSTDATEDATE": {
+    "_id": "PRSTDATEDATE",
+    "_ref": null,
+    "field_name": "PRSTDATE",
+    "field_type": "DATE",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visible": false
+   },
+   "RESPEMPCHAR": {
+    "_id": "RESPEMPCHAR",
+    "_ref": null,
+    "field_name": "RESPEMP",
+    "field_type": "CHAR",
+    "icon": "",
+    "label": "",
+    "timezone": false,
+    "traduction": false,
+    "visible": false
+   }
+  },
+  "filter": "",
+  "label": "",
+  "linker": false,
+  "linker_ids": [
+   "null.null"
+  ],
+  "relationCount": {},
+  "relations": {
+   "FK_PROJECT_1F": {
+    "_id": "FK_PROJECT_1F",
+    "_rev": null,
+    "fin": false,
+    "fk_name": "FK_PROJECT_1",
+    "key_name": "FK_PROJECT_1",
+    "key_type": "F",
+    "pk_name": "PK_DEPARTMENT",
+    "pktable_alias": "PROJECT",
+    "pktable_name": "DEPARTMENT",
+    "ref": false,
+    "relashionship": "[PROJECT].[DEPTNO] = [DEPARTMENT].[DEPTNO] AND [PROJECT].[DEPTNO] = [DEPT].[DEPTNO]",
+    "seqs": [
+     {
+      "column_name": "DEPTNO",
+      "key_seq": 1,
+      "pkcolumn_name": "DEPTNO"
+     },
+     {
+      "column_name": "DEPTNO",
+      "key_seq": 1,
+      "pkcolumn_name": "DEPTNO"
+     }
+    ],
+    "table_name": "PROJECT"
+   },
+   "FK_PROJECT_2F": {
+    "_id": "FK_PROJECT_2F",
+    "_rev": null,
+    "fin": false,
+    "fk_name": "FK_PROJECT_2",
+    "key_name": "FK_PROJECT_2",
+    "key_type": "F",
+    "pk_name": "PK_EMPLOYEE",
+    "pktable_alias": "PROJECT",
+    "pktable_name": "EMP",
+    "ref": false,
+    "relashionship": "[PROJECT].[RESPEMP] = [EMP].[EMPNO] AND [PROJECT].[RESPEMP] = [EMPLOYEE].[EMPNO]",
+    "seqs": [
+     {
+      "column_name": "RESPEMP",
+      "key_seq": 1,
+      "pkcolumn_name": "EMPNO"
+     },
+     {
+      "column_name": "RESPEMP",
+      "key_seq": 1,
+      "pkcolumn_name": "EMPNO"
+     }
+    ],
+    "table_name": "PROJECT"
+   },
+   "RPPF": {
+    "_id": "RPPF",
+    "_rev": null,
+    "fin": false,
+    "fk_name": "RPP",
+    "key_name": "RPP",
+    "key_type": "F",
+    "pk_name": "PK_PROJECT",
+    "pktable_alias": "PROJECT",
+    "pktable_name": "PROJ",
+    "ref": false,
+    "relashionship": "[PROJECT].[MAJPROJ] = [PROJ].[PROJNO] AND [PROJECT].[MAJPROJ] = [PROJECT].[PROJNO]",
+    "seqs": [
+     {
+      "column_name": "MAJPROJ",
+      "key_seq": 1,
+      "pkcolumn_name": "PROJNO"
+     },
+     {
+      "column_name": "MAJPROJ",
+      "key_seq": 1,
+      "pkcolumn_name": "PROJNO"
+     }
+    ],
+    "table_name": "PROJECT"
+   }
+  },
+  "table_alias": "PROJECT",
+  "table_name": "PROJECT",
+  "type": "Final",
+  "visible": false
+ }
+]

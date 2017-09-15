@@ -1,0 +1,1 @@
+<updateObjectRequest><tasks><task name="addObject"><parameters><param locale="en-gb" name="objectName" value="XXXXXXXXXXXXXXXXXXX"/><param name="objectType" value="queryItem"/><param name="makeNameUnique" value="false"/><param name="basedOn"><expression>YYYYYYYYYYYYYYYYYYYYYY</expression></param></parameters></task></tasks></updateObjectRequest>

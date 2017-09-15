@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150729120206717" user="Administrateur" version="10.2.1003.39">
+	<transaction saved="false" seq="1" timestamp="20150729120047126" uniqueId="62FE3E1F62FE3E1F">
+		<action seq="1" type="Create">
+			<inputparams>
+				<param seq="1" type="integer">
+					<value>2</value>
+				</param>
+				<param seq="2" type="handle">
+					<mappingpath>queryItemFolder</mappingpath>
+					<value>[DYNAMIC DATA].[S_SAMPLE].[s_sample.confirmedby]</value>
+				</param>
+				<param seq="3" type="i18nstring">
+					<value>New Query Item</value>
+				</param>
+				<param seq="4" type="integer">
+					<value>1</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="2" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>queryItem/name</mappingpath>
+					<value>/O/name[0]/O/[DYNAMIC DATA].[S_SAMPLE].[New Query Item]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>AAAAAAAAAAAAAAAAAAAAAAAAAAA</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="3" type="ModifyComplex">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>queryItem/expression</mappingpath>
+					<value>/O/expression[0]/O/[DYNAMIC DATA].[S_SAMPLE].[AAAAAAAAAAAAAAAAAAAAAAAAAAA]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>BBBBBBBBBBBBBBBBBBBBBBBBB</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+</bmtactionlog>

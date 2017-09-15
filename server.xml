@@ -1,0 +1,55 @@
+<server description="new server">
+
+    <!-- Enable features -->
+    <featureManager>
+	<feature>servlet-3.0</feature>
+        <feature>jsp-2.2</feature>
+        <feature>localConnector-1.0</feature>
+    	<feature>jndi-1.0</feature>
+		<feature>jdbc-4.0</feature>
+	</featureManager>
+
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint host="*" httpPort="80" httpsPort="443" id="defaultHttpEndpoint"/>
+
+	<!-- Automatically expand WAR files and EAR files -->
+	<applicationManager autoExpand="true"/>
+
+	<library id="ORALib">
+	  <fileset dir="${wlp.install.dir}/lib/ora" includes="*.jar"/>
+	</library>
+	
+	<!-- jndiName as to match jndiName value set to jdbc/ds0 in webmodule com.baudelaine.dd.SessionListener -->   
+	<dataSource jndiName="jdbc/ds0" transactional="false">
+	  <jdbcDriver libraryRef="ORALib"/>
+	<!-- If Oracle machine is behind a firewall and is running a ssh server then connect via a local ssh tunnel -->
+	<!-- and change serverName attribute to localhost -->
+	<!-- /usr/bin/ssh -f -X -Y -N -C -L 1521:172.16.186.243:1521 -g administrateur:Adminvm$@172.16.186.243 -->
+	  <properties.oracle databaseName="lvso112" driverType="thin" password="labvantage" portNumber="1521" serverName="localhost" user="labvantage"/>
+	</dataSource>
+
+	<jndiEntry jndiName="TestORADBConnection" value="select sysdate from dual"/>
+	<jndiEntry jndiName="ORASchema" value="LABVANTAGE"/>
+
+	<library id="DB2Lib">
+            <fileset dir="${wlp.install.dir}/lib/db2" includes="*.jar"/>
+        </library>
+      
+        <dataSource jndiName="jdbc/ds1" transactional="false">
+            <jdbcDriver libraryRef="DB2Lib"/>
+            <properties.db2.jcc currentSchema="DB2INST1" databaseName="SAMPLE" password="spcspc" portNumber="50000" serverName="localhost" user="db2inst1"/>
+     </dataSource>
+
+
+	<jndiEntry jndiName="TestDB2DBConnection" value="select current date from sysibm.sysdummy1"/>
+	<jndiEntry jndiName="DB2Schema" value="DB2INST1"/>
+
+	<jndiEntry jndiName="DBEngine" value="ORA"/>
+
+	
+
+    <applicationMonitor updateTrigger="mbean"/>
+
+    <webApplication id="ddprj0" location="ddprj0.war" name="ddprj0">
+    </webApplication>
+</server>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150323183114850" user="Administrator" version="10.2.1003.39">
+    <transaction saved="false" seq="1" timestamp="20150323183033946" uniqueId="F33C8263F33C8263">
+        <action seq="1" type="Modify">
+            <inputparams>
+                <param seq="1" type="handle">
+                    <mappingpath>queryItem/name</mappingpath>
+                    <value>/O/name[1]/O/[TABLES].[S_SAMPLE].[ACTIVEFLAG]</value>
+                </param>
+                <param seq="2" type="i18nstring">
+                    <value>ALLM2</value>
+                </param>
+            </inputparams>
+            <domchanges/>
+            <result success="t">
+                <outputparams/>
+            </result>
+        </action>
+    </transaction>
+</bmtactionlog>

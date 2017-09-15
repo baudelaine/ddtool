@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20151012110041582" user="Administrateur" version="10.2.1003.39">
+    <transaction saved="false" seq="1" timestamp="20151012105938152" uniqueId="7C11B0387C11B038">
+        <action seq="1" type="Create">
+            <inputparams>
+                <param seq="1" type="integer">
+                    <value>13</value>
+                </param>
+                <param seq="2" type="handle">
+                    <mappingpath>namespace</mappingpath>
+                    <value>[DYNAMIC DATA]</value>
+                </param>
+                <param seq="3" type="i18nstring">
+                    <value>XXXX</value>
+                </param>
+            </inputparams>
+            <domchanges/>
+            <result success="t">
+                <outputparams/>
+            </result>
+        </action>
+        <action seq="2" type="ResetPromptValues">
+            <inputparams>
+                <param seq="1" type="integer">
+                    <value>1</value>
+                </param>
+            </inputparams>
+            <domchanges/>
+            <result success="t">
+                <outputparams/>
+            </result>
+        </action>
+        <action seq="3" type="ModifyComplex">
+            <inputparams>
+                <param seq="1" type="handle">
+                    <mappingpath>filter/expression</mappingpath>
+                    <value>/O/expression[0]/O/[DYNAMIC DATA].[(en-gb) XXXX]</value>
+                </param>
+                <param seq="2" type="i18nstring">
+                    <value>YYYY</value>
+                </param>
+                <param seq="3" type="integer">
+                    <value>1</value>
+                </param>
+            </inputparams>
+            <domchanges/>
+            <result success="t">
+                <outputparams/>
+            </result>
+        </action>
+    </transaction>
+</bmtactionlog>

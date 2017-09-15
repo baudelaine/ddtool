@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150323154050762" user="Administrator" version="10.2.1003.39">
+    <transaction commit="y" saved="false" seq="1" timestamp="20150224150457202" uniqueId="826E6B17826E6B17"> 
+        <action seq="1" type="SetDefaultLocale"> 
+            <inputparams> 
+                <param seq="1" type="i18nstring"> 
+                    <value>en-gb</value> 
+                </param> 
+            </inputparams>  
+            <domchanges/>  
+            <result success="t"> 
+                <outputparams/> 
+            </result> 
+        </action>  
+        <action seq="2" type="SetActiveLocale"> 
+            <inputparams> 
+                <param seq="1" type="i18nstring"> 
+                    <value>en-gb</value> 
+                </param> 
+            </inputparams>  
+            <domchanges/>  
+            <result success="t"> 
+                <outputparams/> 
+            </result> 
+        </action> 
+    </transaction> 
+</bmtactionlog>
+

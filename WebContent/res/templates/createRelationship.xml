@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150723131838883" user="Administrateur" version="10.2.1003.39">
+	<transaction saved="false" seq="1" timestamp="20150723131146060" uniqueId="3D119BDB3D119BDB">
+		<action seq="1" type="Create">
+			<inputparams>
+				<param seq="1" type="integer">
+					<value>3</value>
+				</param>
+				<param seq="2" type="handle">
+					<mappingpath>project</mappingpath>
+					<value>[]</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="2" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>relationship/left/refobj</mappingpath>
+					<value>/O/left[0]/refobj[0]/O/[STANDARD].[New Relationship]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>[TABLES].[WORKITEMITEM]</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="3" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>relationship/left/mincard</mappingpath>
+					<value>/O/left[0]/mincard[0]/O/[STANDARD].[New Relationship]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>one</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="4" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>relationship/left/maxcard</mappingpath>
+					<value>/O/left[0]/maxcard[0]/O/[STANDARD].[New Relationship]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>one</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="5" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>relationship/right/refobj</mappingpath>
+					<value>/O/right[0]/refobj[0]/O/[STANDARD].[New Relationship]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>[TRADUCTION].[TRANSLANGUAGE0]</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="6" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>relationship/right/mincard</mappingpath>
+					<value>/O/right[0]/mincard[0]/O/[AUTOGENERATION].[New Relationship]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>one</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="7" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>relationship/right/maxcard</mappingpath>
+					<value>/O/right[0]/maxcard[0]/O/[AUTOGENERATION].[New Relationship]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>one</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="8" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>relationship/name</mappingpath>
+					<value>/O/name[0]/O/[AUTOGENERATION].[New Relationship]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="9" type="ModifyComplex">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>relationship/expression</mappingpath>
+					<value>/O/expression[0]/O/[AUTOGENERATION].[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</value>
+				</param>
+				<param seq="3" type="integer">
+					<value>0</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+		<action seq="10" type="CreateRemainingRelationships">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>relationship</mappingpath>
+					<value>[AUTOGENERATION].[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]</value>
+				</param>
+				<param seq="2" type="integer">
+					<value>1</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+</bmtactionlog>

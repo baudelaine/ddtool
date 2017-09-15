@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dd tool</title>
+	<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-table.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-editable.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-select.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" />
+	<!-- <link href="css/test0.css" type="text/css" rel="stylesheet" /> -->
+
+</head>
+<body>
+
+<style>
+/*.btn {
+    border: 1px solid transparent;
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 8px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.btn:focus {
+    outline: thin dotted #333333;
+    outline-offset: -2px;
+}
+.btn:hover, .btn:focus {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.btn:active, .btn.active {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.125) inset;
+    outline: 0 none;
+}
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    box-shadow: none;
+    cursor: default;
+    opacity: 0.65;
+    pointer-events: none;
+}
+.btn-default {
+    background-color: #474949;
+    border-color: #474949;
+    color: #FFFFFF;
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active {
+    background-color: #3A3C3C;
+    border-color: #2E2F2F;
+}
+.btn-default.disabled, .btn-default[disabled], fieldset[disabled] .btn-default, .btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .btn-default.disabled:focus, .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .btn-default.disabled:active, .btn-default[disabled]:active, fieldset[disabled] .btn-default:active, .btn-default.disabled.active, .btn-default.active[disabled], fieldset[disabled] .btn-default.active {
+    background-color: #474949;
+    border-color: #474949;
+}
+.btn-primary {
+    background-color: #428BCA;
+    border-color: #428BCA;
+    color: #FFFFFF;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+    background-color: #357EBD;
+    border-color: #3071A9;
+}
+.btn-primary.disabled, .btn-primary[disabled], fieldset[disabled] .btn-primary, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary.active[disabled], fieldset[disabled] .btn-primary.active {
+    background-color: #428BCA;
+    border-color: #428BCA;
+}
+.btn-warning {
+    background-color: #F0AD4E;
+    border-color: #F0AD4E;
+    color: #FFFFFF;
+}
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active {
+    background-color: #EEA236;
+    border-color: #EC971F;
+}
+.btn-warning.disabled, .btn-warning[disabled], fieldset[disabled] .btn-warning, .btn-warning.disabled:hover, .btn-warning[disabled]:hover, fieldset[disabled] .btn-warning:hover, .btn-warning.disabled:focus, .btn-warning[disabled]:focus, fieldset[disabled] .btn-warning:focus, .btn-warning.disabled:active, .btn-warning[disabled]:active, fieldset[disabled] .btn-warning:active, .btn-warning.disabled.active, .btn-warning.active[disabled], fieldset[disabled] .btn-warning.active {
+    background-color: #F0AD4E;
+    border-color: #F0AD4E;
+}
+.btn-danger {
+    background-color: #D9534F;
+    border-color: #D9534F;
+    color: #FFFFFF;
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active {
+    background-color: #D43F3A;
+    border-color: #C9302C;
+}
+.btn-danger.disabled, .btn-danger[disabled], fieldset[disabled] .btn-danger, .btn-danger.disabled:hover, .btn-danger[disabled]:hover, fieldset[disabled] .btn-danger:hover, .btn-danger.disabled:focus, .btn-danger[disabled]:focus, fieldset[disabled] .btn-danger:focus, .btn-danger.disabled:active, .btn-danger[disabled]:active, fieldset[disabled] .btn-danger:active, .btn-danger.disabled.active, .btn-danger.active[disabled], fieldset[disabled] .btn-danger.active {
+    background-color: #D9534F;
+    border-color: #D9534F;
+}
+.btn-success {
+    background-color: #5CB85C;
+    border-color: #5CB85C;
+    color: #FFFFFF;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active {
+    background-color: #4CAE4C;
+    border-color: #449D44;
+}
+.btn-success.disabled, .btn-success[disabled], fieldset[disabled] .btn-success, .btn-success.disabled:hover, .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover, .btn-success.disabled:focus, .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus, .btn-success.disabled:active, .btn-success[disabled]:active, fieldset[disabled] .btn-success:active, .btn-success.disabled.active, .btn-success.active[disabled], fieldset[disabled] .btn-success.active {
+    background-color: #5CB85C;
+    border-color: #5CB85C;
+}
+.btn-info {
+    background-color: #5BC0DE;
+    border-color: #5BC0DE;
+    color: #FFFFFF;
+}
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active {
+    background-color: #46B8DA;
+    border-color: #31B0D5;
+}
+.btn-info.disabled, .btn-info[disabled], fieldset[disabled] .btn-info, .btn-info.disabled:hover, .btn-info[disabled]:hover, fieldset[disabled] .btn-info:hover, .btn-info.disabled:focus, .btn-info[disabled]:focus, fieldset[disabled] .btn-info:focus, .btn-info.disabled:active, .btn-info[disabled]:active, fieldset[disabled] .btn-info:active, .btn-info.disabled.active, .btn-info.active[disabled], fieldset[disabled] .btn-info.active {
+    background-color: #5BC0DE;
+    border-color: #5BC0DE;
+}
+
+.jumbotron {
+    background-color: #EEEEEE;
+    color: inherit;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 2.14286;
+    margin-bottom: 30px;
+    padding: 30px;
+}
+.jumbotron h1 {
+    color: inherit;
+    line-height: 1;
+}
+.jumbotron p {
+    line-height: 1.4;
+}
+.jumbotron {
+    border-radius: 6px 6px 6px 6px;
+}
+.jumbotron {
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+.container .jumbotron {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.jumbotron h1 {
+    font-size: 63px;
+}
+
+.alert {
+    background-color: #FCF8E3;
+    border: 1px solid #FBEED5;
+    border-radius: 4px 4px 4px 4px;
+    color: #C09853;
+    margin-bottom: 20px;
+    padding: 10px 35px 10px 15px;
+}
+.alert h4 {
+    color: inherit;
+    margin-top: 0;
+}
+.alert-danger {
+    background-color: #F2DEDE;
+    border-color: #EED3D7;
+    color: #B94A48;
+}
+.alert-danger hr {
+    border-top-color: #E6C1C7;
+}
+.alert-danger .alert-link {
+    color: #953B39;
+}*/
+
+.flyover {
+   left: 150%;
+   overflow: hidden;
+   position: fixed;
+   width: 50%;
+   opacity: 0.9;
+   z-index: 1050;
+   -webkit-transition: left 0.6s ease-out 0s;
+   transition: left 0.6s ease-out 0s;
+}
+
+.flyover-centered {
+   top: 50%;
+   -webkit-transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%);
+}
+
+.flyover-bottom {
+   bottom: 10px;
+}
+
+.flyover-top {
+   top: 10px;
+}
+
+.flyover.in {
+   left: 50%;
+}
+</style>
+
+<div class="content"></div>
+
+<button class="btn btn-primary js-jumbo">Try It</button>
+
+	<br/>
+
+	<button id="alert1" class="btn btn-danger">Alert</button><br/>
+	<br/>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap-table.min.js"></script>
+
+		<script>
+
+		$(function() {
+		   $('<div>')
+		      .attr( 'id', 'message1' )
+		      .html(
+		         '<h1>Welcome</h1>' +
+		         '<p>' +
+		         '   Just flying in real quick to say hi.  I\'ll zip out of here in a moment.' +
+		         '</p>')
+		      .addClass('jumbotron flyover flyover-centered')
+		      .appendTo( $('.content') );
+
+		   $('<div>')
+		      .attr( 'id', 'message2' )
+		      .html(
+		         '<h1>Clicked!</h1>' +
+		         '<p>' +
+		         '   Click the button again to make this go away or click the "Dismiss" button below.' +
+		         '</p>' +
+		      '<button class="btn btn-primary js-jumbo">Dismiss</button>')
+		      .addClass('jumbotron flyover flyover-centered')
+		      .appendTo( $('.content') );
+
+		   $('<div>')
+		      .attr( 'id', 'alertmsg1' )
+		      .html(
+		        //  '<h1>Oh Snap!</h1>' +
+		         '<p>' +
+		         '   Something bad happened.  You should try to fix it before it gets worse.' +
+		         '</p>')
+		      .addClass('alert alert-success flyover flyover-top')
+		      .appendTo( $('.content') );
+
+		   $('.js-jumbo').click(function() {
+		      $('#message2').toggleClass('in');
+		   });
+
+		   $('#alert1').click(function() {
+		      if ( !$('#alertmsg1').is( '.in' ) ) {
+		         $('#alertmsg1').addClass('in');
+
+		         setTimeout(function() {
+		            $('#alertmsg1').removeClass('in');
+		         }, 3200);
+		      }
+		   });
+
+		   setTimeout(function() {
+		      $('#message1').is('.fly-over')
+		      $('#message1').addClass('in');
+		   }, 200);
+
+		   setTimeout(function() {
+		      $('#message1').removeClass('in');
+		   }, 3200);
+		});
+
+		</script>
+
+		<script src="js/bootstrap-editable.js"></script>
+		<script src="js/bootstrap-table-editable.js"></script>
+		<script src="js/bootstrap-select.min.js"></script>
+		<!-- <script src="js/test0.js"></script> -->
+
+
+</body>
+</html>
