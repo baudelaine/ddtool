@@ -178,11 +178,15 @@ $('#modPKTables').change(function () {
 		$('#modPKTableAlias').val(selectedText);
     var newText = 'CK_' + $('#modQuerySubject').text().split(" - ")[0] + '_' + selectedText;
     $('#modKeyName').val(newText);
+    var relationship = $('#modRelationship').text() + "[" + selectedText + "].[]";
+    $('#modRelationship').val(relationship);
 });
 
 $('#modPKTableAlias').change(function () {
     var newText = 'CK_' + $('#modQuerySubject').text().split(" - ")[0] + '_' + $('#modPKTableAlias').val();
     $('#modKeyName').val(newText);
+    var relationship = $('#modRelationship').text() + "[" + $('#modPKTableAlias').val() + "].[]";
+    $('#modRelationship').val(relationship);
 });
 
 window.operateRelationEvents = {
