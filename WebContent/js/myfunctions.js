@@ -40,7 +40,17 @@ qsCols.push({field:"type", title: "type", sortable: true});
 qsCols.push({field:"visible", title: "visible", formatter: "boolFormatter", align: "center", sortable: false});
 qsCols.push({field:"filter", title: "filter", editable: {type: "textarea"}, sortable: true});
 qsCols.push({field:"label", title: "label", editable: {type: "textarea"}, sortable: true});
-qsCols.push({field:"recurseCount", title: "recurseCount", editable: true, sortable: false});
+qsCols.push({field:"recurseCount", title: "recurseCount", editable: {
+  type: "select",
+  value: "1",
+  source: [
+    {value: "1", text: "1"},
+    {value: "2", text: "2"},
+    {value: "3", text: "3"}
+    ]
+  },
+  sortable: false});
+
 qsCols.push({field:"addRelation", title: '<i class="glyphicon glyphicon-plus-sign" title="Add new relation"></i>', formatter: "addRelationFormatter", align: "center"});
 
 var fieldCols = [];
@@ -229,8 +239,7 @@ window.operateQSEvents = {
         $('#modQuerySubject').text(qs);
         $('#modKeyName').val("CK_" + row.table_alias);
         $('#modPKTableAlias').val("");
-        $('#modRelashionship').val("");
-
+        // $('#modRelathionship').val("[" + row.type.toUpperCase() + "].[" + row.table_alias + "].[] = ");
       }
 
     },
@@ -324,14 +333,14 @@ function modValidate(){
 
   var relation = {};
 
-  relation.relationship = $('#modRelashionship').val();
+  relation.relationship = $('#modRelationship').text();
   relation.ref = null;
   relation.table_name = $('#modQuerySubject').text().split(" - ")[2];
   relation.key_name = $('#modKeyName').val();
   relation.fk_name = "";
   relation.pk_name = "";
-  relation.key_type = 'C';
-  relation.pktable_name = $('#modPKTables').find("option:selected").text()
+  relation.key_type = $('#modKeyType').find("option:selected").text();
+  relation.pktable_name = $('#modPKTables').find("option:selected").text();
   relation.pktable_alias = $('#modPKTableAlias').val();
   relation.fin = false;
   relation.ref = false;
@@ -498,7 +507,7 @@ function buildTable($el, cols, data) {
               $('#modQuerySubject').text(qs);
               $('#modKeyName').val("CK_" + row.table_alias);
               $('#modPKTableAlias').val("");
-              $('#modRelashionship').val("");
+              $('#modRelationship').text("[" + row.type.toUpperCase() + "].[" + row.table_alias + "].[] = ");
             }
           }
 

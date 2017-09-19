@@ -99,8 +99,8 @@
 											<select class="selectpicker" data-style="btn-default" id="modPKTables" data-live-search="true" title="Choose a pktable..."></select>
 										</div>
 											<div class="input-group">
-											<span class="input-group-addon">@</span>
-											<input type="text" id="modPKTableAlias" class="form-control" placeholder="pktable_alias">
+												<span class="input-group-addon">@</span>
+												<input type="text" id="modPKTableAlias" class="form-control" placeholder="pktable_alias">
 											</div>
 									</div>
 								</div>
@@ -108,14 +108,31 @@
 
 							<div class="row">
 									<div class="form-group">
-										<label for="modKeyName">key_name</label>
-										<input type="text" id="modKeyName" class="form-control" placeholder="fk_name">
+										<div class="input-group">
+
+											<div class="input-group">
+												<label for="modKeyName">key_name</label>
+												<input type="text" id="modKeyName" class="form-control" placeholder="fk_name">
+											</div>
+
+											<div class="input-group">
+
+													<label for="modKeyType">key_type</label>
+													<!-- <div class="input-group-btn"> -->
+														<select class="selectpicker form-control" id="modKeyType">
+														<option>F</option>
+														<option>P</option>
+														</select>
+													<!-- </div> -->
+												</div>
+
+										</div>
 									</div>
 							</div>
 
 							<div class="row">
 									<div class="form-group">
-										<textarea id="modRelashionship" class="form-control" placeholder="Paste relashionship here..." rows="4"></textarea>
+										<textarea id="modRelationship" class="form-control" placeholder="Paste relationship here..." rows="4"></textarea>
 									</div>
 							</div>
 
