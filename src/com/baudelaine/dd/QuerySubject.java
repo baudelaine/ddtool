@@ -24,6 +24,12 @@ public class QuerySubject {
 	Map<String, Integer> relationCount = new HashMap<String, Integer>(); 
 	int recurseCount = 1;
 	
+	public int getRecurseCount() {
+		return recurseCount;
+	}
+	public void setRecurseCount(int recurseCount) {
+		this.recurseCount = recurseCount;
+	}
 	public void incRelationCount(String qs_id){
 		if(relationCount.get(qs_id) == null){
 			relationCount.put(qs_id, new Integer(1));

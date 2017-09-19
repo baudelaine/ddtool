@@ -33,6 +33,48 @@ public class FactorySVC {
 		crnConnect = CognosSVC.crnConnect;
 	}
 
+	
+	public static void copyQuerySubject(String targetNameSpace, String sourceQS){
+		try {
+			File xmlFile = new File(ConfigProperties.PathToXML + "/copyQuerySubject.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+			
+			Node n1 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150410184900010\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			n1.setText(targetNameSpace);
+
+			Node n2 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150410184900010\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			n2.setText(sourceQS);
+
+			CognosSVC.executeModel(document);
+
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+		
+	}
+	
+	public static void renameQuerySubject(String qs, String name){
+		try {
+			File xmlFile = new File(ConfigProperties.PathToXML + "/renameQuerySubject.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+			
+			Node n1 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150323183114850\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			n1.setText(qs);
+
+			Node n2 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150323183114850\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			n2.setText(name);
+
+			CognosSVC.executeModel(document);
+
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+		
+	}
+
+	
 	public static void ImportDB(String Namespace) {
 		try {
 			File xmlFile = new File(ConfigProperties.PathToXML + "/DBImport.xml");

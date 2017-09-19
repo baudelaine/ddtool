@@ -40,16 +40,18 @@ qsCols.push({field:"type", title: "type", sortable: true});
 qsCols.push({field:"visible", title: "visible", formatter: "boolFormatter", align: "center", sortable: false});
 qsCols.push({field:"filter", title: "filter", editable: {type: "textarea"}, sortable: true});
 qsCols.push({field:"label", title: "label", editable: {type: "textarea"}, sortable: true});
-qsCols.push({field:"recurseCount", title: "recurseCount", editable: {
+qsCols.push({field:"recurseCount", title: '<i class="glyphicon glyphicon-repeat" title="Set recurse count"></i>', editable: {
   type: "select",
   value: "1",
   source: [
     {value: "1", text: "1"},
     {value: "2", text: "2"},
-    {value: "3", text: "3"}
+    {value: "3", text: "3"},
+    {value: "4", text: "4"},
+    {value: "5", text: "5"}
     ]
   },
-  sortable: false});
+  align: "center"});
 
 qsCols.push({field:"addRelation", title: '<i class="glyphicon glyphicon-plus-sign" title="Add new relation"></i>', formatter: "addRelationFormatter", align: "center"});
 
@@ -104,6 +106,7 @@ $finTab.on('shown.bs.tab', function(e) {
   // $datasTable.bootstrapTable("filterBy", {type: ['Final'], key_type: ['F', 'C']});
   // $datasTable.bootstrapTable('hideColumn', 'fin');
   // $datasTable.bootstrapTable('showColumn', 'ref');
+  $datasTable.bootstrapTable("filterBy", {type: ['Final']});
   $datasTable.bootstrapTable('showColumn', 'operate');
   $datasTable.bootstrapTable('hideColumn', 'visible');
   $datasTable.bootstrapTable('hideColumn', 'filter');
@@ -114,6 +117,7 @@ $finTab.on('shown.bs.tab', function(e) {
 
 $refTab.on('shown.bs.tab', function(e) {
   buildTable($datasTable, qsCols, datas, true, relationCols, "relations");
+  // $datasTable.bootstrapTable("filterBy", {});
   // $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref'], key_type: ['F','P', 'C']});
   // $datasTable.bootstrapTable('hideColumn', 'fin');
   // $datasTable.bootstrapTable('showColumn', 'ref');
@@ -178,15 +182,15 @@ $('#modPKTables').change(function () {
 		$('#modPKTableAlias').val(selectedText);
     var newText = 'CK_' + $('#modQuerySubject').text().split(" - ")[0] + '_' + selectedText;
     $('#modKeyName').val(newText);
-    var relationship = $('#modRelationship').text() + "[" + selectedText + "].[]";
-    $('#modRelationship').val(relationship);
+    // var relationship = $('#modRelationship').text() + "[" + selectedText + "].[]";
+    // $('#modRelationship').val(relationship);
 });
 
 $('#modPKTableAlias').change(function () {
     var newText = 'CK_' + $('#modQuerySubject').text().split(" - ")[0] + '_' + $('#modPKTableAlias').val();
     $('#modKeyName').val(newText);
-    var relationship = $('#modRelationship').text() + "[" + $('#modPKTableAlias').val() + "].[]";
-    $('#modRelationship').val(relationship);
+    // var relationship = $('#modRelationship').text() + "[" + $('#modPKTableAlias').val() + "].[]";
+    // $('#modRelationship').val(relationship);
 });
 
 window.operateRelationEvents = {
@@ -337,7 +341,7 @@ function modValidate(){
 
   var relation = {};
 
-  relation.relationship = $('#modRelationship').text();
+  relation.relationship = $('#modRelationship').val();
   relation.ref = null;
   relation.table_name = $('#modQuerySubject').text().split(" - ")[2];
   relation.key_name = $('#modKeyName').val();
@@ -511,7 +515,7 @@ function buildTable($el, cols, data) {
               $('#modQuerySubject').text(qs);
               $('#modKeyName').val("CK_" + row.table_alias);
               $('#modPKTableAlias').val("");
-              $('#modRelationship').text("[" + row.type.toUpperCase() + "].[" + row.table_alias + "].[] = ");
+              $('#modRelationship').val("[" + row.type.toUpperCase() + "].[" + row.table_alias + "].[] = ");
             }
           }
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bmtactionlog timestamp="20150323183114850" user="Administrator" version="10.2.1003.39">
+    <transaction timestamp="20170919152412811" uniqueId="F4304480F4304480" seq="251" saved="false">
+    	<action seq="1" type="Modify">
+    		<inputparams>
+    			<param seq="1" type="handle">
+    				<mappingpath>querySubject/name</mappingpath>
+    				<value>/O/name[0]/O/[PHYSICAL REF USED].[SYSUSER]</value>
+    			</param>
+    			<param seq="2" type="i18nstring">
+    				<value>SYSUSER4</value></param>
+    		</inputparams>
+    		<domchanges/>
+    		<result success="t">
+    			<outputparams/>
+    		</result>
+    	</action>
+    </transaction>
+</bmtactionlog>
