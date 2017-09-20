@@ -39,7 +39,7 @@ public class TaskerSVC {
 
 	public static void Import() {
 		System.out.println("******** IMPORT	 ***********");
-		FactorySVC.createNamespace("PHYSICAL", "STANDARD");
+		FactorySVC.createNamespace("PHYSICAL", "Model");
 		FactorySVC.ImportDB("PHYSICAL");
 	}
 
@@ -202,7 +202,8 @@ public class TaskerSVC {
 	}
 	
 	public static void IICInitNameSpace() {
-		FactorySVC.createNamespace("AUTOGENERATION", "STANDARD");
+		FactorySVC.createNamespace("PHYSICALUSED", "Model");
+		FactorySVC.createNamespace("AUTOGENERATION", "Model");
 		FactorySVC.createNamespace("FINAL", "AUTOGENERATION");
 		FactorySVC.createNamespace("REF", "AUTOGENERATION");
 		FactorySVC.createNamespace("DATA", "AUTOGENERATION");

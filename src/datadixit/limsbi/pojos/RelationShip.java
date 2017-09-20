@@ -14,7 +14,7 @@ import java.util.UUID;
 public class RelationShip {
 
 	private String Name;
-	private String ParentNamespace = "STANDARD";
+	private String ParentNamespace = "Model";
 	private String querySubject_left;
 	private String querySubject_right;
 	private String expression;

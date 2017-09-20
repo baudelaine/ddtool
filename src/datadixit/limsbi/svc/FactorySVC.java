@@ -61,7 +61,7 @@ public class FactorySVC {
 			Document document = reader.read(xmlFile);
 			
 			Node n1 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150323183114850\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
-			n1.setText(qs);
+			n1.setText("/O/name[0]/O/" + qs);
 
 			Node n2 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150323183114850\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
 			n2.setText(name);
@@ -292,6 +292,7 @@ public class FactorySVC {
 			lg(ex.getMessage());
 		}
 	}
+	
 
 	public static void createRelationship(RelationShip rs) {
 
@@ -438,6 +439,24 @@ public class FactorySVC {
 
 			Node n0 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150727152555245\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
 			n0.setText(QSRefObj + ".[" + Fext + "]");
+
+			Node n2 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150727152555245\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[3]/value");
+			n2.setText(Fint);
+
+			CognosSVC.executeModel(document);
+
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+	public static void createSubFolderInSubFolderIIC(String QSRefObj, String Fint) {
+		try {
+			File xmlFile = new File(ConfigProperties.PathToXML + "/createSubFolder.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Node n0 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150727152555245\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			n0.setText(QSRefObj);
 
 			Node n2 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150727152555245\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[3]/value");
 			n2.setText(Fint);

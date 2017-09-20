@@ -20,7 +20,7 @@
 			<inputparams>
 				<param seq="1" type="handle">
 					<mappingpath>relationship/left/refobj</mappingpath>
-					<value>/O/left[0]/refobj[0]/O/[STANDARD].[New Relationship]</value>
+					<value>/O/left[0]/refobj[0]/O/[Model].[New Relationship]</value>
 				</param>
 				<param seq="2" type="i18nstring">
 					<value>[TABLES].[WORKITEMITEM]</value>
@@ -35,7 +35,7 @@
 			<inputparams>
 				<param seq="1" type="handle">
 					<mappingpath>relationship/left/mincard</mappingpath>
-					<value>/O/left[0]/mincard[0]/O/[STANDARD].[New Relationship]</value>
+					<value>/O/left[0]/mincard[0]/O/[Model].[New Relationship]</value>
 				</param>
 				<param seq="2" type="i18nstring">
 					<value>one</value>
@@ -50,7 +50,7 @@
 			<inputparams>
 				<param seq="1" type="handle">
 					<mappingpath>relationship/left/maxcard</mappingpath>
-					<value>/O/left[0]/maxcard[0]/O/[STANDARD].[New Relationship]</value>
+					<value>/O/left[0]/maxcard[0]/O/[Model].[New Relationship]</value>
 				</param>
 				<param seq="2" type="i18nstring">
 					<value>one</value>
@@ -65,7 +65,7 @@
 			<inputparams>
 				<param seq="1" type="handle">
 					<mappingpath>relationship/right/refobj</mappingpath>
-					<value>/O/right[0]/refobj[0]/O/[STANDARD].[New Relationship]</value>
+					<value>/O/right[0]/refobj[0]/O/[Model].[New Relationship]</value>
 				</param>
 				<param seq="2" type="i18nstring">
 					<value>[TRADUCTION].[TRANSLANGUAGE0]</value>
