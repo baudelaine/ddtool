@@ -23,12 +23,17 @@ relationCols.push({field:"pktable_alias", title: "pktable_alias", sortable: true
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"fin", title: "fin", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"ref", title: "ref", formatter: "boolFormatter", align: "center"});
+relationCols.push({field:"withPK", title: "PK", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"duplicate", title: '<i class="glyphicon glyphicon-duplicate"></i>', formatter: "duplicateFormatter", align: "center"});
 relationCols.push({field:"remove", title: '<i class="glyphicon glyphicon-trash"></i>', formatter: "removeFormatter", align: "center"});
 // relationCols.push({field:"operate", title: "operate", formatter: "operateRelationFormatter", align: "center", events: "operateRelationEvents"});
 
 // relationCols.push({field:"linker", formatter: "boolFormatter", align: "center", title: "linker"});
 // relationCols.push({field:"linker_ids", title: "linker_ids"});
+
+var newRelationCols = [];
+
+newRelationCols.push();
 
 var qsCols = [];
 // qsCols.push({field:"checkbox", checkbox: "true"});
@@ -42,16 +47,26 @@ qsCols.push({field:"filter", title: "filter", editable: {type: "textarea"}, sort
 qsCols.push({field:"label", title: "label", editable: {type: "textarea"}, sortable: true});
 qsCols.push({field:"recurseCount", title: '<i class="glyphicon glyphicon-repeat" title="Set recurse count"></i>', editable: {
   type: "select",
-  value: "1",
-  source: [
-    {value: "1", text: "1"},
-    {value: "2", text: "2"},
-    {value: "3", text: "3"},
-    {value: "4", text: "4"},
-    {value: "5", text: "5"}
-    ]
+  value: 1,
+  // source: [
+  //   {value: 1, text: 1},
+  //   {value: 2, text: 2},
+  //   {value: 3, text: 3},
+  //   {value: 4, text: 4},
+  //   {value: 5, text: 5}
+  //   ],
+  source: function(){
+    var result = [];
+    for(var i = 1; i < 21; i++){
+      var option = {};
+      option.value = i;
+      option.text = i;
+      result.push(option);
+    }
+    return result;
   },
-  align: "center"});
+  align: "center"}
+});
 
 qsCols.push({field:"addRelation", title: '<i class="glyphicon glyphicon-plus-sign" title="Add new relation"></i>', formatter: "addRelationFormatter", align: "center"});
 
@@ -63,6 +78,7 @@ fieldCols.push({field:"traduction", title: "traduction", formatter: "boolFormatt
 fieldCols.push({field:"visible", title: "visible", formatter: "boolFormatter", align: "center", sortable: false});
 fieldCols.push({field:"field_type", title: "field_type", editable: false, sortable: true});
 fieldCols.push({field:"timezone", title: "timezone", formatter: "boolFormatter", align: "center", sortable: false});
+
 
 $(document)
 .ready(function() {
@@ -80,7 +96,7 @@ $(document)
 });
 
 $tableList.change(function () {
-    var selectedText = $(this).find("option:selected").text();
+    var selectedText = $(this).find("option:selected").val();
 		$('#alias').val(selectedText);
 });
 
@@ -173,17 +189,24 @@ $datasTable.on('expand-row.bs.table', function (index, row, $detail) {
 $newRowModal.on('show.bs.modal', function (e) {
   // do something...
 	// ChooseQuerySubject($('#modQuerySubject'));
+  $('#modPKColumn').empty();
+  $('#modPKColumn').selectpicker('refresh');
 	ChooseTable($('#modPKTables'));
+  // $(this)
+  // .find('.modal-body')
+  // .load("sqel.html", function(){
+  //});
 
 })
 
 $('#modPKTables').change(function () {
-    var selectedText = $(this).find("option:selected").text();
+    var selectedText = $(this).find("option:selected").val();
 		$('#modPKTableAlias').val(selectedText);
     var newText = 'CK_' + $('#modQuerySubject').text().split(" - ")[0] + '_' + selectedText;
     $('#modKeyName').val(newText);
     // var relationship = $('#modRelationship').text() + "[" + selectedText + "].[]";
     // $('#modRelationship').val(relationship);
+    ChooseField($('#modPKColumn'), selectedText);
 });
 
 $('#modPKTableAlias').change(function () {
@@ -293,7 +316,18 @@ function addRelationFormatter(value, row, index) {
 }
 
 function boolFormatter(value, row, index) {
+
+  // console.log("****** VALUE *********" + value);
+  //
+  // if(value == undefined){
+  //   value = false;
+  // }
   var icon = value == true ? 'glyphicon-check' : 'glyphicon-unchecked'
+  if(value == undefined){
+      console.log("****** VALUE *********" + value);
+      console.log(row);
+      icon = 'glyphicon-unchecked';
+  }
   return [
     '<a href="javascript:void(0)">',
     '<i class="glyphicon ' + icon + '"></i> ',
@@ -328,10 +362,18 @@ function recurseCountFormatter(value, row, index) {
 
 function modValidate(){
 
-  pk_table_name = $("#modPKTables").find("option:selected").text();
-
-  if (pk_table_name == 'Choose a pktable...') {
+  if ($("#modPKTables").find("option:selected").text() == 'Choose a pktable...') {
     showalert("modValidate()", "No pktable selected.", "alert-warning", "bottom");
+    return;
+  }
+
+  if ($("#modPKColumn").find("option:selected").text() == 'Choose a pkcolumn...') {
+    showalert("modValidate()", "No pkcolumn selected.", "alert-warning", "bottom");
+    return;
+  }
+
+  if ($("#modColumn").find("option:selected").text() == 'Choose a column...') {
+    showalert("modValidate()", "No column selected.", "alert-warning", "bottom");
     return;
   }
 
@@ -340,20 +382,27 @@ function modValidate(){
   }
 
   var relation = {};
+  var seq = {};
 
-  relation.relationship = $('#modRelationship').val();
   relation.ref = null;
   relation.table_name = $('#modQuerySubject').text().split(" - ")[2];
   relation.key_name = $('#modKeyName').val();
   relation.fk_name = "";
   relation.pk_name = "";
   relation.key_type = $('#modKeyType').find("option:selected").text();
-  relation.pktable_name = $('#modPKTables').find("option:selected").text();
+  relation.pktable_name = $('#modPKTables').find("option:selected").val();
   relation.pktable_alias = $('#modPKTableAlias').val();
   relation.fin = false;
   relation.ref = false;
+  relation.withPK = false;
+  seq.column_name = $('#modColumn').find("option:selected").text();
+  seq.pkcolumn_name = $('#modPKColumn').find("option:selected").text();
+  seq.key_seq = 1;
   relation.seqs = [];
+  relation.seqs.push(seq);
   relation._id = $('#modKeyName').val() + relation.key_type;
+  relation.relationship = "[" + $('#modQuerySubject').text().split(" - ")[1].toUpperCase() + "].[" + $('#modQuerySubject').text().split(" - ")[0] +
+    "].[" + seq.column_name + "] = [" + relation.pktable_alias + "].[" + seq.pkcolumn_name + "]";
 
   var data = $datasTable.bootstrapTable("getData");
 
@@ -400,7 +449,7 @@ function buildSubTable($el, cols, data, parentData){
       idField: "index",
       onClickCell: function (field, value, row, $element){
 
-        if(field.match("traduction|visible|timezone|fin|ref")){
+        if(field.match("traduction|visible|timezone|fin|ref|withPK")){
           var newValue = value == false ? true : false;
 
           console.log($(this).bootstrapTable("getData"));
@@ -425,11 +474,11 @@ function buildSubTable($el, cols, data, parentData){
           updateCell($el, row.index, field, newValue);
 
           if(field == "fin" && newValue == true){
-            GetQuerySubjects(row.pktable_name, row.pktable_alias, "Final");
+            GetQuerySubjects(row.pktable_name, row.pktable_alias, "Final", row.withPK);
           }
 
           if(field == "ref" && newValue == true){
-            GetQuerySubjects(row.pktable_name, row.pktable_alias, "Ref");
+            GetQuerySubjects(row.pktable_name, row.pktable_alias, "Ref", row.withPK);
           }
 
         }
@@ -515,7 +564,7 @@ function buildTable($el, cols, data) {
               $('#modQuerySubject').text(qs);
               $('#modKeyName').val("CK_" + row.table_alias);
               $('#modPKTableAlias').val("");
-              $('#modRelationship').val("[" + row.type.toUpperCase() + "].[" + row.table_alias + "].[] = ");
+              ChooseField($('#modColumn'), row._id);
             }
           }
 
@@ -578,12 +627,16 @@ function AddRow($table, row){
 
 }
 
+function GetQuerySubjectsWithPK(){
+  GetQuerySubjects(null, null, null, true);
+}
+
 function GetQuerySubjects(table_name, table_alias, type, pk) {
 
 	var table_name, table_alias, type, linker_id;
 
 	if (table_name == undefined){
-		table_name = $tableList.find("option:selected").text();
+		table_name = $tableList.find("option:selected").val();
 	}
 
   if (table_name == 'Choose a table...') {
@@ -609,6 +662,7 @@ function GetQuerySubjects(table_name, table_alias, type, pk) {
 		//console.log(obj.name);
     if(obj._id == table_alias + type){
       qsAlreadyExist = true;
+      showalert("GetQuerySubjects()", table_alias + type + " already exists.", "alert-info", "bottom");
     }
   });
 
@@ -674,22 +728,63 @@ function ChooseTable(table) {
 
     $.ajax({
         type: 'POST',
-        url: "GetTables",
+        url: "Scan",
         dataType: 'json',
 
         success: function(data) {
             console.log(data);
             $.each(data, function(i, obj){
 							//console.log(obj.name);
-							table.append('<option class="fontsize">' + obj.name + '</option>');
-			            });
-			            table.selectpicker('refresh');
-			        },
+							table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.keyCount + ') (' + obj.seqCount + ')' + '</option>');
+			      });
+			      table.selectpicker('refresh');
+			  },
         error: function(data) {
             console.log(data);
             showalert("ChooseTable()", "Operation failed.", "alert-danger", "bottom");
         }
 		});
+
+}
+
+function ChooseField(table, id){
+  table.empty();
+
+  var data = $datasTable.bootstrapTable('getData');
+  $.each(data, function(i, obj){
+    if(obj._id == id){
+      console.log("!!!!!!!!!!" + obj._id);
+      $.each(obj.fields, function(j, field){
+        table.append('<option class="fontsize">' + field.field_name + '</option>');
+      });
+      table.selectpicker('refresh');
+    }
+  });
+
+  if( table.has('option').length == 0 ) {
+    console.log("!!!!!!!!!! NO VALUE FOUND FOR " + id);
+    $.ajax({
+        type: 'POST',
+        url: "GetFields",
+        dataType: 'json',
+        data: "table=" + id,
+
+        success: function(data) {
+            console.log(data);
+            $.each(data, function(j, field){
+              table.append('<option class="fontsize">' + field + '</option>');
+            });
+            table.selectpicker('refresh');
+            showalert("ChooseField()", "ChooseField was successfull.", "alert-success", "bottom");
+        },
+        error: function(data) {
+            console.log(data);
+            showalert("ChooseField()", "ChooseField failed.", "alert-danger", "bottom");
+        }
+
+    });
+
+  }
 
 }
 
@@ -756,18 +851,23 @@ function Publish(){
 
 	var data = $datasTable.bootstrapTable('getData');
 
-	var objs = [];
+  if (data.length == 0) {
+    showalert("Publish()", "Nothing to publish.", "alert-warning", "bottom");
+    return;
+  }
 
-	$.each(data, function(k, v){
-		var obj = JSON.stringify(v);
-		objs += obj + "\r\n";
-	});
+	// var objs = [];
+  //
+	// $.each(data, function(k, v){
+	// 	var obj = JSON.stringify(v);
+	// 	objs += obj + "\r\n";
+	// });
 
 	$.ajax({
 		type: 'POST',
 		url: "SendQuerySubjects",
 		dataType: 'json',
-		data: objs,
+		data: JSON.stringify(data),
 
 		success: function(data) {
 			$('#DatasTable').bootstrapTable('load', data);
@@ -778,6 +878,58 @@ function Publish(){
 	});
 
 }
+
+function SaveModel(){
+
+	var data = $datasTable.bootstrapTable('getData');
+
+  if (data.length == 0) {
+    showalert("SaveModel()", "Nothing to save.", "alert-warning", "bottom");
+    return;
+  }
+
+	// var objs = [];
+  //
+	// $.each(data, function(k, v){
+	// 	var obj = JSON.stringify(v);
+	// 	objs += obj + "\r\n";
+	// });
+
+	$.ajax({
+		type: 'POST',
+		url: "SaveModel",
+		dataType: 'json',
+		data: JSON.stringify(data),
+
+		success: function(data) {
+			showalert("SaveModel()", "Model saved successfully.", "alert-success", "bottom");
+		},
+		error: function(data) {
+			showalert("SaveModel()", "Saving model failed.", "alert-danger", "bottom");
+		}
+	});
+
+}
+
+function OpenModel(){
+
+	$.ajax({
+		type: 'POST',
+		url: "OpenModel",
+		dataType: 'json',
+
+		success: function(data) {
+      $datasTable.bootstrapTable("load", data);
+			showalert("OpenModel()", "Model opened successfully.", "alert-success", "bottom");
+
+		},
+		error: function(data) {
+			showalert("OpenModel()", "Opening model failed.", "alert-danger", "bottom");
+		}
+	});
+
+}
+
 
 function Reset() {
 
@@ -813,6 +965,15 @@ function GetTableData(){
     console.log(data);
 
 }
+
+function RemoveAll(){
+  $datasTable.bootstrapTable("removeAll");
+}
+
+function ExpandAll(){
+  $datasTable.bootstrapTable('expandAllRows');
+}
+
 // function refreshTable($table){
 // 	var data = $table.bootstrapTable("getData");
 // 	$table.bootstrapTable('load', data);

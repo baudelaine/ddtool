@@ -17,6 +17,7 @@ public class Relation {
 	String pktable_alias = "";	
 	boolean fin = false;
 	boolean ref = false;
+	boolean withPK = false;
 	String relationship = "";
 	String key_type = "";
 	List<Seq> seqs = new ArrayList<Seq>();
@@ -32,6 +33,12 @@ public class Relation {
 	}
 	public void set_rev(String _rev) {
 		this._rev = _rev;
+	}
+	public boolean isWithPK() {
+		return withPK;
+	}
+	public void setWithPK(boolean withPK) {
+		this.withPK = withPK;
 	}
 	public String getKey_name() {
 		return key_name;

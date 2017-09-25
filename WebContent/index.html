@@ -49,10 +49,21 @@
 							</div>
 					</div>
 
-						<button type="button" onclick="GetQuerySubjects()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Get Query Subject(s) from table selected above."><span class="glyphicon glyphicon-magnet" aria-hidden="true"></span></button>
-						<button type="button" onclick="Publish()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Publish to Cognos."><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
-						<button type="button" onclick="GetTableData()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Show object in console"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button>
-						<button type="button" onclick="ClearSelections()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Remove all."><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+						<div class="btn-group">
+							<button type="button" onclick="GetQuerySubjects()" class="btn btn-default dropdown-toggle" data-toggle="tooltip" data-placement="top" title="Get Query Subject."><span class="glyphicon glyphicon-magnet" aria-hidden="true"></span></button>
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    <span class="caret"></span>
+						    <span class="sr-only">Toggle Dropdown</span>
+						  </button>
+						  <ul class="dropdown-menu">
+								<li><a href="#" id="withPK" onClick="GetQuerySubjectsWithPK(); return false;">with PK</a></li>
+						  </ul>
+						</div>
+						<button type="button" onclick="Publish()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Publish model."><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
+						<button type="button" onclick="SaveModel()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Save model to server."><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></button>
+						<button type="button" onclick="OpenModel()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Open model from server."><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span></button>
+						<!-- <button type="button" onclick="ExpandAll()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Expand all rows."><span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span></button>						<button type="button" onclick="GetTableData()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Show object in console"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button> -->
+						<button type="button" onclick="RemoveAll()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Remove all."><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 
 					<button type="button" onclick="TestDBConnection()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Test connection to server database."><span class="glyphicon glyphicon-signal aria-hidden="true"></span></button>
 					<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Release server session" onClick="Reset()"><span class="glyphicon glyphicon-off aria-hidden="true"></span></button>
@@ -115,7 +126,13 @@
 												<input type="text" id="modKeyName" class="form-control" placeholder="fk_name">
 											</div>
 
-											<div class="input-group">
+										</div>
+									</div>
+							</div>
+
+							<div class="row">
+									<div class="form-group">
+										<div class="input-group">
 
 													<label for="modKeyType">key_type</label>
 													<!-- <div class="input-group-btn"> -->
@@ -124,17 +141,33 @@
 														<option>P</option>
 														</select>
 													<!-- </div> -->
-												</div>
 
 										</div>
 									</div>
 							</div>
 
 							<div class="row">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-btn">
+											<select class="selectpicker" data-style="btn-default" id="modColumn" data-live-search="true" title="Choose a column..."></select>
+										</div>
+										<div class="input-group">
+											<!-- <span class="input-group-addon"></span> -->
+											<!-- <input type="text" id="modPKTableAlias" class="form-control" placeholder="pktable_alias"> -->
+										</div>
+										<div class="input-group-btn">
+											<select class="selectpicker" data-style="btn-default" id="modPKColumn" data-live-search="true" title="Choose a pkcolumn..."></select>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- <div class="row">
 									<div class="form-group">
 										<textarea id="modRelationship" class="form-control" placeholder="Paste relationship here..." rows="4"></textarea>
 									</div>
-							</div>
+							</div> -->
 
 						</div>
 

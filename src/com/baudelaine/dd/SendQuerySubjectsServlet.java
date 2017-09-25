@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,19 +54,26 @@ public class SendQuerySubjectsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-        String json = "";
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        
 
+//        QuerySubject[] qsArray = mapper.readValue(br, QuerySubject[].class);
+        List<QuerySubject> qsList = Arrays.asList(mapper.readValue(br, QuerySubject[].class));
+        
         query_subjects = new HashMap<String, QuerySubject>();
         
-        if(br != null){
-            while((json = br.readLine()) != null){
-	            System.out.println("json="+json);
-	            QuerySubject query_subject = mapper.readValue(json, QuerySubject.class);
-	            query_subjects.put(query_subject.get_id(), query_subject);
-            }
+        for(QuerySubject qs: qsList){
+        	query_subjects.put(qs.get_id(), qs);
         }
+        
+//        if(br != null){
+//            while((json = br.readLine()) != null){
+//	            System.out.println("json="+json);
+//	            QuerySubject query_subject = mapper.readValue(json, QuerySubject.class);
+//	            
+//            }
+//        }
         
         
         request.getSession().setAttribute("query_subjects", query_subjects);;

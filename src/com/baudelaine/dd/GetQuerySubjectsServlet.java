@@ -85,6 +85,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 				querySubject.addRelations(getForeignKeys());
 			}
 			if(pk){
+				querySubject.addRelations(getForeignKeys());
 				querySubject.addRelations(getPrimaryKeys());
 			}
 				
@@ -252,14 +253,14 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	    
 	    while (rst.next()) {
 	    	
-	    	String key_name = rst.getString("FK_NAME");
-	    	String fk_name = rst.getString("FK_NAME");
-	    	String pk_name = rst.getString("PK_NAME");
+	    	String key_name = rst.getString("PK_NAME");
+	    	String pk_name = rst.getString("FK_NAME");
+	    	String fk_name = rst.getString("PK_NAME");
 	    	String key_seq = rst.getString("KEY_SEQ");
-	    	String fkcolumn_name = rst.getString("FKCOLUMN_NAME");
-	    	String pkcolumn_name = rst.getString("PKCOLUMN_NAME");
-	        String fktable_name = rst.getString("FKTABLE_NAME");
-	        String pktable_name = rst.getString("PKTABLE_NAME");
+	    	String pkcolumn_name = rst.getString("FKCOLUMN_NAME");
+	    	String fkcolumn_name = rst.getString("PKCOLUMN_NAME");
+	        String pktable_name = rst.getString("FKTABLE_NAME");
+	        String fktable_name = rst.getString("PKTABLE_NAME");
 	        String _id = key_name + "P";
 	        
 	        System.out.println("_id=" + _id);
@@ -277,7 +278,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	        	relation.setTable_name(pktable_name);
 	        	relation.setPktable_name(fktable_name);
 	        	relation.setPktable_alias(alias);
-	        	relation.setRelashionship("[" + fktable_name + "].[" + fkcolumn_name + "] = [" + pktable_name + "].[" + pkcolumn_name + "]");
+	        	relation.setRelashionship("[" + type.toUpperCase() + "].[" + alias + "].[" + fkcolumn_name + "] = [" + pktable_name + "].[" + pkcolumn_name + "]");
 	        	relation.setKey_type("P");
 	        	
 	        	Seq seq = new Seq();
@@ -302,7 +303,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		        	relation.addSeq(seq);
 		        	
 		        	StringBuffer sb = new StringBuffer((String) relation.getRelationship());
-		        	sb.append(" AND [" + fktable_name + "].[" + fkcolumn_name + "] = [" + pktable_name + "].[" + pkcolumn_name + "]");
+		        	sb.append(" AND [" + type.toUpperCase() + "].[" + alias + "].[" + fkcolumn_name + "] = [" + pktable_name + "].[" + pkcolumn_name + "]");
 		        	relation.setRelashionship(sb.toString());
 	        	}
 	        	
