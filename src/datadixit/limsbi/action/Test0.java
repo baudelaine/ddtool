@@ -1,17 +1,6 @@
 package datadixit.limsbi.action;
 
-import java.io.File;
-
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeNode;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Node;
-import org.dom4j.io.SAXReader;
-
-import datadixit.limsbi.properties.ConfigProperties;
-import datadixit.limsbi.svc.CognosSVC;
+import java.util.Calendar;
 
 
 public class Test0 {
@@ -23,19 +12,16 @@ public class Test0 {
 		// TODO Auto-generated method stub
 
 		try {
-			File xmlFile = new File(ConfigProperties.PathToXML + "/renameQuerySubject.xml");
-			SAXReader reader = new SAXReader();
-			Document document = reader.read(xmlFile);
-			Node n1 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150323183114850\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
-			n1.setText("[PHYSICALUSED].[SYSUSER]");
-
-			Node n2 = document.selectSingleNode("/bmtactionlog[@timestamp=\"20150323183114850\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
-			n2.setText("SYSUSER1");
-
-			System.out.println(document.asXML());
 			
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(System.currentTimeMillis());
 
-		} catch (DocumentException ex) {
+			String date = c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + "-" + c.get(Calendar.DAY_OF_MONTH);
+			String time = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
+
+			System.out.println(date + "-" + time);			
+
+		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
         

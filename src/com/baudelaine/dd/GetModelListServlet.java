@@ -1,21 +1,16 @@
 package com.baudelaine.dd;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,19 +18,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
-
 /**
  * Servlet implementation class GetImportedKeysServlet
  */
-@WebServlet("/SaveModel")
-public class SaveModelServlet extends HttpServlet {
+@WebServlet("/GetModelList")
+public class GetModelListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SaveModelServlet() {
+    public GetModelListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,42 +39,33 @@ public class SaveModelServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		List<Object> result = new ArrayList<Object>();
 
-		Calendar c = Calendar.getInstance();
-		c.setTimeInMillis(System.currentTimeMillis());
-
-		String date = c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + "-" + c.get(Calendar.DAY_OF_MONTH);
-		String time = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
-
-				
-		
 		String realPath = getServletContext().getRealPath("/");
 		System.out.println("realPath=" + realPath);
+		File dir = new File(realPath + "/models/.");
 		
-		String fileName = realPath + "/models/model-" + date + "-" + time + ".json";
-		System.out.println("fileName=" + fileName);
-		
-		File file = new File(fileName);
-		if(!file.exists()){file.createNewFile();}
-		file.setReadable(true, false);
-		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(fileName)));
-	
-//		IOUtils.copy(br, bw);
-		
-		String l;
-		while((l=br.readLine())!=null){
-		    bw.write(l);
+		if(dir.exists()){
+			File[] fs = dir.listFiles();
+			
+			Arrays.sort(fs, new Comparator<File>() {
+			    public int compare(File f1, File f2) {
+			        return Long.compare(f2.lastModified(), f1.lastModified());
+			    }
+			});			
+			
+			int i = 0;
+			for(File f: fs){
+				Map<String, String> m = new HashMap<String, String>();
+				m.put("id", String.valueOf(i++));
+				m.put("name", f.getName());
+				result.add(m);
+			}
 		}
-
-		bw.close();		
 		
-		List<Object> result = new ArrayList<Object>();
-		    
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(Tools.toJSON(result));			
+		response.getWriter().write(Tools.toJSON(result));
 
 	}
 

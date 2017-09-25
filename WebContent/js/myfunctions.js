@@ -1,6 +1,7 @@
 
 var datas = [];
 var tables = [];
+var modelList = [];
 var $tableList = $('#tables');
 var $datasTable = $('#DatasTable');
 var $navTab = $('#navTab');
@@ -10,7 +11,7 @@ var $qsTab = $("a[href='#QuerySubject']");
 var activeTab = "Final";
 var $activeSubDatasTable;
 var $newRowModal = $('#newRowModal');
-
+var $modelListModal = $('#modModelList');
 // var url = "js/PROJECT.json";
 
 var relationCols = [];
@@ -205,6 +206,19 @@ $newRowModal.on('show.bs.modal', function (e) {
   //});
 
 })
+
+$modelListModal.on('shown.bs.modal', function() {
+    $(this).find('.modal-body').empty();
+    var models = modelList;
+    var list = '<div class="list-group">';
+
+    $.each(models, function(i, obj){
+        list += '<a href="#" class="list-group-item" onClick="OpenModel(' + obj.id + '); return false;">' + obj.name + '</a>';
+    });
+    list += '<div class="list-group">';
+    $(this).find('.modal-body').append(list);
+
+  });
 
 $('#modPKTables').change(function () {
     var selectedText = $(this).find("option:selected").val();
@@ -926,12 +940,50 @@ function SaveModel(){
 
 }
 
-function OpenModel(){
+function GetModelList(){
+
+  $modelListModal.modal('toggle');
+
+	$.ajax({
+		type: 'POST',
+		url: "GetModelList",
+		dataType: 'json',
+
+		success: function(data) {
+      modelList = data;
+      data.sort(function(a, b) {
+        return b - a;
+      });
+      console.log("modelList");
+      console.log(modelList);
+			showalert("GetModelList()", "Model list get successfull.", "alert-success", "bottom");
+
+		},
+		error: function(data) {
+			showalert("GetModelList()", "Getting model list failed.", "alert-danger", "bottom");
+		}
+	});
+
+
+}
+
+function OpenModel(id){
+
+  var modelName;
+
+  $.each(modelList, function(i, obj){
+    if(obj.id == id){
+      modelName = obj.name;
+    }
+  });
+
+  console.log("modelName=" + modelName);
 
 	$.ajax({
 		type: 'POST',
 		url: "OpenModel",
 		dataType: 'json',
+    data: "model=" + modelName,
 
 		success: function(data) {
       $datasTable.bootstrapTable("load", data);
@@ -942,6 +994,9 @@ function OpenModel(){
 			showalert("OpenModel()", "Opening model failed.", "alert-danger", "bottom");
 		}
 	});
+
+  $modelListModal.modal('toggle');
+
 
 }
 

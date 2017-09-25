@@ -34,7 +34,9 @@ public class OpenModelServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(getServletContext().getResourceAsStream("models/model0.json")));
+		String model = request.getParameter("model");
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(getServletContext().getResourceAsStream("models/" + model)));
 		
 		
 		response.setContentType("application/json");
