@@ -191,7 +191,7 @@ $newRowModal.on('show.bs.modal', function (e) {
 	// ChooseQuerySubject($('#modQuerySubject'));
   $('#modPKColumn').empty();
   $('#modPKColumn').selectpicker('refresh');
-	ChooseTable($('#modPKTables'));
+	// ChooseTable($('#modPKTables'));
   // $(this)
   // .find('.modal-body')
   // .load("sqel.html", function(){
@@ -735,9 +735,13 @@ function ChooseTable(table) {
             console.log(data);
             $.each(data, function(i, obj){
 							//console.log(obj.name);
-							table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.keyCount + ') (' + obj.seqCount + ')' + '</option>');
+              var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.keyCount + ') (' + obj.seqCount + ')' + '</option>';
+							table.append(option);
+              $('#modPKTables').append(option);
+              // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
 			      });
 			      table.selectpicker('refresh');
+            $('#modPKTables').selectpicker('refresh');
 			  },
         error: function(data) {
             console.log(data);

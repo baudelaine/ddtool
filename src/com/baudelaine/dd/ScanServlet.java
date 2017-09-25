@@ -63,6 +63,7 @@ public class ScanServlet extends HttpServlet {
 			    temp.add(table);
 		    }
 		    
+		    rst.close();
 		    
 		    for(Map<String, String> table: temp){
 		    	String tableName = table.get("name");
@@ -82,6 +83,7 @@ public class ScanServlet extends HttpServlet {
 	    		scan.put("keyCount", FKSet.size());
 	    		scan.put("seqCount", seqCount);
 	    		result.add(scan);
+			    rst.close();
 		    	
 		    }
 		    
