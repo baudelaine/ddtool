@@ -1,5 +1,6 @@
 
 var datas = [];
+var tables = [];
 var $tableList = $('#tables');
 var $datasTable = $('#DatasTable');
 var $navTab = $('#navTab');
@@ -189,8 +190,14 @@ $datasTable.on('expand-row.bs.table', function (index, row, $detail) {
 $newRowModal.on('show.bs.modal', function (e) {
   // do something...
 	// ChooseQuerySubject($('#modQuerySubject'));
+  $('#modPKTables').empty();
   $('#modPKColumn').empty();
   $('#modPKColumn').selectpicker('refresh');
+  $.each(tables, function(i, obj){
+    var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.keyCount + ') (' + obj.seqCount + ')' + '</option>';
+    $('#modPKTables').append(option);
+  });
+  $('#modPKTables').selectpicker('refresh');
 	// ChooseTable($('#modPKTables'));
   // $(this)
   // .find('.modal-body')
@@ -736,15 +743,16 @@ function ChooseTable(table) {
             data.sort(function(a, b) {
               return parseInt(b.keyCount) - parseInt(a.keyCount);
             });
+            tables = data;
             $.each(data, function(i, obj){
 							//console.log(obj.name);
               var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.keyCount + ') (' + obj.seqCount + ')' + '</option>';
 							table.append(option);
-              $('#modPKTables').append(option);
+              // $('#modPKTables').append(option);
               // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
 			      });
 			      table.selectpicker('refresh');
-            $('#modPKTables').selectpicker('refresh');
+            // $('#modPKTables').selectpicker('refresh');
 			  },
         error: function(data) {
             console.log(data);
