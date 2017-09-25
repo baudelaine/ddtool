@@ -733,6 +733,9 @@ function ChooseTable(table) {
 
         success: function(data) {
             console.log(data);
+            data.sort(function(a, b) {
+              return parseInt(b.keyCount) - parseInt(a.keyCount);
+            });
             $.each(data, function(i, obj){
 							//console.log(obj.name);
               var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.keyCount + ') (' + obj.seqCount + ')' + '</option>';

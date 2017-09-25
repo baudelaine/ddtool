@@ -60,6 +60,8 @@ public class GetTablesServlet extends HttpServlet {
 			    result.add(table);
 		    }		    
 		    
+		    rst.close();
+		    
 		    response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(Tools.toJSON(result));
