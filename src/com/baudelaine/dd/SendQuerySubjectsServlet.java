@@ -179,7 +179,7 @@ public class SendQuerySubjectsServlet extends HttpServlet {
 								
 							}
 							
-							f1(pkAlias, pkAlias + i);
+							f1(pkAlias, pkAlias + i, gDirName, "[DATA].[" + query_subject.getValue().getTable_alias() + "]" );
 						}
 					}
 					
@@ -330,7 +330,7 @@ public class SendQuerySubjectsServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	protected void f1(String qsAlias, String qsAliasInc){
+	protected void f1(String qsAlias, String qsAliasInc, String gDirName, String qsFinal){
 		
 		QuerySubject query_subject = query_subjects.get(qsAlias + "Ref");
 		
@@ -356,6 +356,36 @@ public class SendQuerySubjectsServlet extends HttpServlet {
 				FactorySVC.renameQuerySubject("[PHYSICALUSED].[" + rel.getPktable_name() + "]","REF_" + pkAlias + String.valueOf(i));
 				FactorySVC.createQuerySubject("PHYSICALUSED", "REF","REF_" + pkAlias + String.valueOf(i), pkAlias + String.valueOf(i));
 				
+				//seq
+				String gFieldName = gDirName.substring(1) + "." + rel.getSeqs().get(0).getColumn_name();
+				String rep = qsFinal + ".[" + gDirName + "]";
+				String gDirNameCurrent = gDirName + "." + rel.getSeqs().get(0).getColumn_name();
+				
+
+				System.out.println("qsAlias=" + qsAlias);
+				System.out.println("qsAliasInc=" + qsAliasInc);
+				System.out.println("rep=" + rep);
+				System.out.println("qsFinal=" + qsFinal);
+
+				System.out.println("gFieldName=" + gFieldName);
+				System.out.println("gDirName=" + gDirNameCurrent);
+				
+				System.out.println("FactorySVC.createSubFolderInSubFolderIIC(" + rep + "," + gDirNameCurrent +")");
+				FactorySVC.createSubFolderInSubFolderIIC(rep, gDirNameCurrent);
+				
+				
+				System.out.println("FactorySVC.ReorderSubFolderBefore");
+				FactorySVC.ReorderSubFolderBefore(qsFinal + ".[" + gDirNameCurrent + "]", qsFinal + ".[" + gFieldName + "]");
+				
+				
+				for(Field field: query_subjects.get(pkAlias + "Ref").getFields()){
+					
+					System.out.println("FactorySVC.createQueryItemInFolder");
+					FactorySVC.createQueryItemInFolder(qsFinal, gDirNameCurrent, gFieldName + "." + field.getField_name(), "[REF].["+ pkAlias + String.valueOf(i) +"].[" + field.getField_name() + "]");
+					
+				}
+				
+				
 				
 				RelationShip RS = new RelationShip("[REF].[" + qsAliasInc + "]" , "[REF].[" + pkAlias + String.valueOf(i) + "]");
 				// changer en qs + refobj
@@ -370,7 +400,7 @@ public class SendQuerySubjectsServlet extends HttpServlet {
 				RS.setParentNamespace("REF");
 				rsList.add(RS);
 
-				f1(pkAlias, pkAlias + String.valueOf(i));
+				f1(pkAlias, pkAlias + String.valueOf(i), gDirNameCurrent, qsFinal);
 			}
 		}
 		

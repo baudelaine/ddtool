@@ -25,7 +25,6 @@ relationCols.push({field:"pktable_alias", title: "pktable_alias", sortable: true
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"fin", title: "fin", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"ref", title: "ref", formatter: "boolFormatter", align: "center"});
-relationCols.push({field:"withPK", title: "PK", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"duplicate", title: '<i class="glyphicon glyphicon-duplicate"></i>', formatter: "duplicateFormatter", align: "center"});
 relationCols.push({field:"remove", title: '<i class="glyphicon glyphicon-trash"></i>', formatter: "removeFormatter", align: "center"});
 // relationCols.push({field:"operate", title: "operate", formatter: "operateRelationFormatter", align: "center", events: "operateRelationEvents"});
@@ -69,7 +68,7 @@ qsCols.push({field:"recurseCount", title: '<i class="glyphicon glyphicon-repeat"
   },
   align: "center"}
 });
-
+qsCols.push({field:"addPKRelation", title: '<i class="glyphicon glyphicon-magnet" title="Add PK relation(s)"></i>', formatter: "addPKRelationFormatter", align: "center"});
 qsCols.push({field:"addRelation", title: '<i class="glyphicon glyphicon-plus-sign" title="Add new relation"></i>', formatter: "addRelationFormatter", align: "center"});
 
 var fieldCols = [];
@@ -87,6 +86,7 @@ $(document)
   $('#DatasToolbar').hide();
   ChooseTable($tableList);
   buildTable($datasTable, qsCols, datas, true);
+
 })
 .ajaxStart(function(){
     $("div#divLoading").addClass('show');
@@ -116,6 +116,7 @@ $qsTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'label');
   $datasTable.bootstrapTable('hideColumn', 'operate');
   $datasTable.bootstrapTable('hideColumn', 'addRelation');
+  $datasTable.bootstrapTable('hideColumn', 'addPKRelation');
   $datasTable.bootstrapTable('hideColumn', 'recurseCount');
 });
 
@@ -131,6 +132,7 @@ $finTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('hideColumn', 'label');
   $datasTable.bootstrapTable('hideColumn', 'recurseCount');
   $datasTable.bootstrapTable('showColumn', 'addRelation');
+  $datasTable.bootstrapTable('hideColumn', 'addPKRelation');
 });
 
 $refTab.on('shown.bs.tab', function(e) {
@@ -143,6 +145,7 @@ $refTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('hideColumn', 'visible');
   $datasTable.bootstrapTable('hideColumn', 'filter');
   $datasTable.bootstrapTable('hideColumn', 'label');
+  $datasTable.bootstrapTable('showColumn', 'addPKRelation');
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('showColumn', 'recurseCount');
 });
@@ -328,6 +331,14 @@ function operateQSFormatter(value, row, index) {
     ].join('');
 }
 
+function addPKRelationFormatter(value, row, index) {
+    return [
+        '<a class="addPKRelation" href="javascript:void(0)" title="Add PK relation(s)">',
+        '<i class="glyphicon glyphicon-magnet"></i>',
+        '</a>'
+    ].join('');
+}
+
 function addRelationFormatter(value, row, index) {
     return [
         '<a class="addRelation" href="javascript:void(0)" title="Add new relation">',
@@ -470,7 +481,7 @@ function buildSubTable($el, cols, data, parentData){
       idField: "index",
       onClickCell: function (field, value, row, $element){
 
-        if(field.match("traduction|visible|timezone|fin|ref|withPK")){
+        if(field.match("traduction|visible|timezone|fin|ref")){
           var newValue = value == false ? true : false;
 
           console.log($(this).bootstrapTable("getData"));
@@ -495,11 +506,11 @@ function buildSubTable($el, cols, data, parentData){
           updateCell($el, row.index, field, newValue);
 
           if(field == "fin" && newValue == true){
-            GetQuerySubjects(row.pktable_name, row.pktable_alias, "Final", row.withPK);
+            GetQuerySubjects(row.pktable_name, row.pktable_alias, "Final");
           }
 
           if(field == "ref" && newValue == true){
-            GetQuerySubjects(row.pktable_name, row.pktable_alias, "Ref", row.withPK);
+            GetQuerySubjects(row.pktable_name, row.pktable_alias, "Ref");
           }
 
         }
@@ -588,6 +599,11 @@ function buildTable($el, cols, data) {
               ChooseField($('#modColumn'), row._id);
             }
           }
+          if(field.match("addPKRelation")){
+            $el.bootstrapTable('expandRow', row.index);
+            GetPKRelations(row.table_name, row.table_alias, row.type);
+          }
+
 
         },
         onExpandRow: function (index, row, $detail) {
@@ -605,6 +621,8 @@ function buildTable($el, cols, data) {
     $el.bootstrapTable('hideColumn', 'filter');
     $el.bootstrapTable('hideColumn', 'label');
     $el.bootstrapTable('hideColumn', 'recurseCount');
+    $el.bootstrapTable('hideColumn', 'addPKRelation');
+
 
     if(activeTab == "Reference"){
       // $el.bootstrapTable("filterBy", {type: ['Final', 'Ref']});
@@ -652,7 +670,58 @@ function GetQuerySubjectsWithPK(){
   GetQuerySubjects(null, null, null, true);
 }
 
-function GetQuerySubjects(table_name, table_alias, type, pk) {
+function GetPKRelations(table_name, table_alias, type){
+
+  var parms = "table=" + table_name + "&alias=" + table_alias + "&type=" + type;
+
+	console.log("calling GetQuerySubjectsWithPK with: " + parms);
+
+  $.ajax({
+    type: 'POST',
+    url: "GetPKRelations",
+    dataType: 'json',
+    data: parms,
+
+    success: function(data) {
+			console.log(data);
+			if (data.length == 0) {
+				showalert("GetPKRelations()", table_name + " has no PK.", "alert-info", "bottom");
+				// return;
+			}
+
+      if($activeSubDatasTable != undefined){
+        $.each(data, function(i, obj){
+          console.log("on passe dans la boucle");
+          AddRow($activeSubDatasTable, obj);
+        });
+      }
+
+      // $.each($datasTable.bootstrapTable("getData"), function(i, obj){
+      //   console.log("on passe dans la boucle");
+      //
+      //   if(obj._id == table_alias + type){
+      //     console.log("on passe dans le IF");
+      //     obj.relations.push(data);
+      //     return;
+      //   }
+      //
+      // });
+
+			// $datasTable.bootstrapTable('append', data);
+      // datas = $datasTable.bootstrapTable("getData");
+
+
+  	},
+      error: function(data) {
+          console.log(data);
+          showalert("GetPKRelations()", "Operation failed.", "alert-danger", "bottom");
+    }
+
+  });
+
+}
+
+function GetQuerySubjects(table_name, table_alias, type) {
 
 	var table_name, table_alias, type, linker_id;
 
@@ -673,10 +742,6 @@ function GetQuerySubjects(table_name, table_alias, type, pk) {
 		type = 'Final';
 	}
 
-  if(pk == undefined){
-		pk = false;
-	}
-
   var qsAlreadyExist = false;
 
   $.each($datasTable.bootstrapTable("getData"), function(i, obj){
@@ -691,7 +756,7 @@ function GetQuerySubjects(table_name, table_alias, type, pk) {
     return;
   }
 
-	var parms = "table=" + table_name + "&alias=" + table_alias + "&type=" + type + "&pk=" + pk;
+	var parms = "table=" + table_name + "&alias=" + table_alias + "&type=" + type;
 
 	console.log("calling GetKeys with: " + parms);
 
@@ -755,7 +820,8 @@ function ChooseTable(table) {
         success: function(data) {
             console.log(data);
             data.sort(function(a, b) {
-              return parseInt(b.keyCount) - parseInt(a.keyCount);
+              // return parseInt(b.keyCount) - parseInt(a.keyCount);
+              return parseInt(b.seqCount) - parseInt(a.seqCount);
             });
             tables = data;
             $.each(data, function(i, obj){

@@ -33,7 +33,6 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	String qs_id = "";
 	String r_id = "";
 	String linker_id = "";
-	boolean pk = false;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -56,7 +55,6 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 //		qs_id = request.getParameter("qs_id");
 //		r_id = request.getParameter("r_id");
 //		linker_id = qs_id + '.' + r_id;
-		pk = Boolean.parseBoolean(request.getParameter("pk"));
 		
 		System.out.println("table=" + table);
 		System.out.println("alias=" + alias);
@@ -64,7 +62,6 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 //		System.out.println("qs_id=" + qs_id);
 //		System.out.println("r_id=" + r_id);
 //		System.out.println("linker_id=" + linker_id);
-		System.out.println("pk=" + pk);
 		List<Object> result = new ArrayList<Object>();
 
 		try{
@@ -78,16 +75,11 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 //			QuerySubject querySubject = query_subjects.get(alias + type);
 //			
 //			if(querySubject == null){
-				
+
 			QuerySubject querySubject = getQuerySubjects();
+
 			querySubject.setFields(getFields());
-			if(!pk){
-				querySubject.addRelations(getForeignKeys());
-			}
-			if(pk){
-				querySubject.addRelations(getForeignKeys());
-				querySubject.addRelations(getPrimaryKeys());
-			}
+			querySubject.addRelations(getForeignKeys());
 				
 //			}
 			
@@ -253,14 +245,14 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	    
 	    while (rst.next()) {
 	    	
-	    	String key_name = rst.getString("PK_NAME");
-	    	String pk_name = rst.getString("FK_NAME");
-	    	String fk_name = rst.getString("PK_NAME");
+	    	String key_name = rst.getString("FK_NAME");
+	    	String fk_name = rst.getString("FK_NAME");
+	    	String pk_name = rst.getString("PK_NAME");
 	    	String key_seq = rst.getString("KEY_SEQ");
-	    	String pkcolumn_name = rst.getString("FKCOLUMN_NAME");
-	    	String fkcolumn_name = rst.getString("PKCOLUMN_NAME");
-	        String pktable_name = rst.getString("FKTABLE_NAME");
-	        String fktable_name = rst.getString("PKTABLE_NAME");
+	    	String fkcolumn_name = rst.getString("FKCOLUMN_NAME");
+	    	String pkcolumn_name = rst.getString("PKCOLUMN_NAME");
+	        String fktable_name = rst.getString("FKTABLE_NAME");
+	        String pktable_name = rst.getString("PKTABLE_NAME");
 	        String _id = key_name + "P";
 	        
 	        System.out.println("_id=" + _id);
@@ -277,8 +269,8 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	        	relation.setPk_name(pk_name);
 	        	relation.setTable_name(pktable_name);
 	        	relation.setPktable_name(fktable_name);
-	        	relation.setPktable_alias(alias);
-	        	relation.setRelashionship("[" + type.toUpperCase() + "].[" + alias + "].[" + fkcolumn_name + "] = [" + pktable_name + "].[" + pkcolumn_name + "]");
+	        	relation.setPktable_alias(fktable_name);
+	        	relation.setRelashionship("[" + type.toUpperCase() + "].[" + alias + "].[" + pkcolumn_name + "] = [" + fktable_name + "].[" + fkcolumn_name + "]");
 	        	relation.setKey_type("P");
 	        	
 	        	Seq seq = new Seq();
@@ -303,7 +295,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		        	relation.addSeq(seq);
 		        	
 		        	StringBuffer sb = new StringBuffer((String) relation.getRelationship());
-		        	sb.append(" AND [" + type.toUpperCase() + "].[" + alias + "].[" + fkcolumn_name + "] = [" + pktable_name + "].[" + pkcolumn_name + "]");
+		        	sb.append(" AND [" + type.toUpperCase() + "].[" + alias + "].[" + pkcolumn_name + "] = [" + fktable_name + "].[" + fkcolumn_name + "]");
 		        	relation.setRelashionship(sb.toString());
 	        	}
 	        	
