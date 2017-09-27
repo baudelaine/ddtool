@@ -25,6 +25,7 @@ relationCols.push({field:"pktable_alias", title: "pktable_alias", sortable: true
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"fin", title: "fin", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"ref", title: "ref", formatter: "boolFormatter", align: "center"});
+relationCols.push({field:"nommageRep", title: "RepTableName", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"duplicate", title: '<i class="glyphicon glyphicon-duplicate"></i>', formatter: "duplicateFormatter", align: "center"});
 relationCols.push({field:"remove", title: '<i class="glyphicon glyphicon-trash"></i>', formatter: "removeFormatter", align: "center"});
 // relationCols.push({field:"operate", title: "operate", formatter: "operateRelationFormatter", align: "center", events: "operateRelationEvents"});
@@ -133,6 +134,8 @@ $finTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('hideColumn', 'recurseCount');
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('hideColumn', 'addPKRelation');
+  $datasTable.bootstrapTable('hideColumn', 'nommageRep');
+
 });
 
 $refTab.on('shown.bs.tab', function(e) {
@@ -148,6 +151,7 @@ $refTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'addPKRelation');
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('showColumn', 'recurseCount');
+  $datasTable.bootstrapTable('showColumn', 'nommageRep');
 });
 
 $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValue, $el) {
@@ -481,7 +485,7 @@ function buildSubTable($el, cols, data, parentData){
       idField: "index",
       onClickCell: function (field, value, row, $element){
 
-        if(field.match("traduction|visible|timezone|fin|ref")){
+        if(field.match("traduction|visible|timezone|fin|ref|nommageRep")){
           var newValue = value == false ? true : false;
 
           console.log($(this).bootstrapTable("getData"));
@@ -489,6 +493,10 @@ function buildSubTable($el, cols, data, parentData){
           console.log("row.index=" + row.index);
           console.log("field=" + field);
           console.log("newValue=" + newValue);
+
+          if(field == "nommage"){
+            // interdire de cocher n fois pour un même pkAlias dans un qs donné
+          }
 
           if(field == "fin" && newValue == true){
             row.relationship = row.relationship.replace(/ = /g, " = [FINAL].")
@@ -545,12 +553,15 @@ function buildSubTable($el, cols, data, parentData){
     // $el.bootstrapTable("filterBy", {key_type: ['F','P', 'C']});
     $el.bootstrapTable('hideColumn', 'fin');
     $el.bootstrapTable('showColumn', 'ref');
+    $el.bootstrapTable('showColumn', 'nommageRep');
+
   }
 
   if(activeTab == "Final"){
     // $el.bootstrapTable("filterBy", {key_type: ['F', 'C']});
     $el.bootstrapTable('hideColumn', 'ref');
     $el.bootstrapTable('showColumn', 'fin');
+    $el.bootstrapTable('hideColumn', 'nommageRep');
   }
 
 }
@@ -623,7 +634,6 @@ function buildTable($el, cols, data) {
     $el.bootstrapTable('hideColumn', 'recurseCount');
     $el.bootstrapTable('hideColumn', 'addPKRelation');
 
-
     if(activeTab == "Reference"){
       // $el.bootstrapTable("filterBy", {type: ['Final', 'Ref']});
     }
@@ -691,25 +701,9 @@ function GetPKRelations(table_name, table_alias, type){
 
       if($activeSubDatasTable != undefined){
         $.each(data, function(i, obj){
-          console.log("on passe dans la boucle");
           AddRow($activeSubDatasTable, obj);
         });
       }
-
-      // $.each($datasTable.bootstrapTable("getData"), function(i, obj){
-      //   console.log("on passe dans la boucle");
-      //
-      //   if(obj._id == table_alias + type){
-      //     console.log("on passe dans le IF");
-      //     obj.relations.push(data);
-      //     return;
-      //   }
-      //
-      // });
-
-			// $datasTable.bootstrapTable('append', data);
-      // datas = $datasTable.bootstrapTable("getData");
-
 
   	},
       error: function(data) {
