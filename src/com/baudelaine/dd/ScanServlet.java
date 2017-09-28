@@ -87,7 +87,7 @@ public class ScanServlet extends HttpServlet {
 		    	int PKSeqCount = 0;
 		    	Set<String> PKSet = new HashSet<String>();
 		    	while(rst.next()){
-		    		String PKName = rst.getString("PK_NAME");
+		    		String PKName = rst.getString("FK_NAME");
 		    		PKSet.add(PKName);
 		    		PKSeqCount++;
 		    	}
@@ -100,7 +100,7 @@ public class ScanServlet extends HttpServlet {
 	    		scan.put("FKCount", FKSet.size());
 	    		scan.put("PKCount", PKSet.size());
 	    		scan.put("FKSeqCount", FKSeqCount);
-	    		scan.put("PKSeqCount", FKSeqCount);
+	    		scan.put("PKSeqCount", PKSeqCount);
 	    		result.add(scan);
 		    	
 		    }

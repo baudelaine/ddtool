@@ -126,7 +126,7 @@ $finTab.on('shown.bs.tab', function(e) {
   // $datasTable.bootstrapTable("filterBy", {type: ['Final'], key_type: ['F', 'C']});
   // $datasTable.bootstrapTable('hideColumn', 'fin');
   // $datasTable.bootstrapTable('showColumn', 'ref');
-  $datasTable.bootstrapTable("filterBy", {type: ['Final']});
+  // $datasTable.bootstrapTable("filterBy", {type: ['Final']});
   $datasTable.bootstrapTable('showColumn', 'operate');
   $datasTable.bootstrapTable('hideColumn', 'visible');
   $datasTable.bootstrapTable('hideColumn', 'filter');
@@ -253,7 +253,7 @@ window.operateRelationEvents = {
       console.log(index);
 
         // alert('You click duplicate action, row: ' + JSON.stringify(row));
-        $activeSubDatasTable.bootstrapTable("filterBy", {});
+        // $activeSubDatasTable.bootstrapTable("filterBy", {});
         nextIndex = row.index + 1;
         console.log("nextIndex=" + nextIndex);
         var newRow = $.extend({}, row);
@@ -473,7 +473,7 @@ function buildSubTable($el, cols, data, parentData){
 
   console.log("activeTab=" + activeTab);
 
-  $el.bootstrapTable("filterBy", {});
+  // $el.bootstrapTable("filterBy", {});
 
   $el.bootstrapTable({
       columns: cols,
@@ -706,8 +706,31 @@ function GetPKRelations(table_name, table_alias, type){
 			}
 
       if($activeSubDatasTable != undefined){
+        console.log("datas");
+        console.log(datas);
+        var index;
+        $.each(datas, function(i, obj){
+          console.log("obj._id");
+          console.log(obj._id);
+          if(obj._id == table_alias + type){
+            console.log("hhhhhhhhhhhhhhhhhhhh");
+            index = i;
+          }
+        })
+        console.log("index=" + index);
+
+        var relations = datas[index].relations;
+        console.log("relations");
+        console.log(relations);
+
+        console.log("data.length=" + data.length)
         $.each(data, function(i, obj){
-          AddRow($activeSubDatasTable, obj);
+          if(i < data.length -1){
+            relations.push(obj);
+          }
+          if(i == data.length -1){
+            AddRow($activeSubDatasTable, obj);
+          }
         });
       }
 
@@ -814,7 +837,7 @@ function ChooseTable(table) {
 
     $.ajax({
         type: 'POST',
-        url: "Scan",
+        url: "GetTables",
         dataType: 'json',
 
         success: function(data) {
