@@ -502,18 +502,19 @@ function buildSubTable($el, cols, data, parentData){
           }
 
           var newValue = value == false ? true : false;
+          var pkAlias = '[' + row.pktable_alias + ']';
 
           if(field == "fin" && newValue == true){
-            row.relationship = row.relationship.replace(/ = /g, " = [FINAL].")
+            row.relationship = row.relationship.split(pkAlias).join("[FINAL]." + pkAlias);
           }
           if(field == "fin" && newValue == false){
-            row.relationship = row.relationship.replace(/ = \[FINAL\]\./g, " = ")
+            row.relationship = row.relationship.split("[FINAL]." + pkAlias).join(pkAlias);
           }
           if(field == "ref" && newValue == true){
-            row.relationship = row.relationship.replace(/ = /g, " = [REF].")
+            row.relationship = row.relationship.split(pkAlias).join("[REF]." + pkAlias);
           }
           if(field == "ref" && newValue == false){
-            row.relationship = row.relationship.replace(/ = \[REF\]\./g, " = ")
+            row.relationship = row.relationship.split("[REF]." + pkAlias).join(pkAlias);
           }
 
           updateCell($el, row.index, field, newValue);

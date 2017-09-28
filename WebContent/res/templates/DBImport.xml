@@ -8,7 +8,7 @@
 					<value>[X]</value>
 				</param>
 				<param seq="2" type="cclnode">
-					<value><![CDATA[<item Name="DEV" Type="database" Value="partial" dbType="OR" description="DEV" isSystem="false" screenTip="DEV"><item Name="LABVANTAGE" Type="schema" Value="partial"><item Name="Tables" Type="tables" Value="true"/></item></item>]]></value>
+					<value><![CDATA[<item Name="DEV" Type="database" Value="partial" dbType="OR" description="DEV" isSystem="false" screenTip="DEV"><item Name="" Type="schema" Value="partial"><item Name="Tables" Type="tables" Value="true"/></item></item>]]></value>
 				</param>
 				<param seq="3" type="integer">
 					<value>0</value>
