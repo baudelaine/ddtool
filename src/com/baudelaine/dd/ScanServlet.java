@@ -70,22 +70,38 @@ public class ScanServlet extends HttpServlet {
 		    for(Map<String, String> table: temp){
 		    	String tableName = table.get("name");
 		    	String tableType = table.get("type");
-		    	rst = metaData.getImportedKeys(con.getCatalog(), schema, table.get("name"));
-		    	int seqCount = 0;
-		    	Set<String> FKSet = new HashSet<String>();
 		    	Map<String, Object> scan = new HashMap<String, Object>();
+		    	
+		    	rst = metaData.getImportedKeys(con.getCatalog(), schema, table.get("name"));
+		    	int FKSeqCount = 0;
+		    	Set<String> FKSet = new HashSet<String>();
 		    	while(rst.next()){
-		    		String keyName = rst.getString("FK_NAME");
-		    		FKSet.add(keyName);
-		    		seqCount++;
+		    		String FKName = rst.getString("FK_NAME");
+		    		FKSet.add(FKName);
+		    		FKSeqCount++;
 		    	}
-	    		System.out.println(tableName + " -> " + FKSet.size() + " -> " + seqCount);
+			    rst.close();
+	    		System.out.println("Scanning FK for " + tableName + " -> " + FKSet.size() + " -> " + FKSeqCount);
+
+		    	rst = metaData.getExportedKeys(con.getCatalog(), schema, table.get("name"));
+		    	int PKSeqCount = 0;
+		    	Set<String> PKSet = new HashSet<String>();
+		    	while(rst.next()){
+		    		String PKName = rst.getString("PK_NAME");
+		    		PKSet.add(PKName);
+		    		PKSeqCount++;
+		    	}
+			    rst.close();
+	    		System.out.println("Scanning PK for " + tableName + " -> " + PKSet.size() + " -> " + PKSeqCount);
+
+	    		
 	    		scan.put("name", tableName);
 	    		scan.put("type", tableType);
-	    		scan.put("keyCount", FKSet.size());
-	    		scan.put("seqCount", seqCount);
+	    		scan.put("FKCount", FKSet.size());
+	    		scan.put("PKCount", PKSet.size());
+	    		scan.put("FKSeqCount", FKSeqCount);
+	    		scan.put("PKSeqCount", FKSeqCount);
 	    		result.add(scan);
-			    rst.close();
 		    	
 		    }
 		    

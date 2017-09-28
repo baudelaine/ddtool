@@ -164,19 +164,19 @@ $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValu
 });
 
 $datasTable.on('reset-view.bs.table', function(){
-  console.log("++++++++++++++on passe dans reset-view");
+  // console.log("++++++++++++++on passe dans reset-view");
   if($activeSubDatasTable != undefined){
     var v = $activeSubDatasTable.bootstrapTable('getData');
-    console.log("+++++++++++ $activeSubDatasTable");
-    console.log(v);
+    // console.log("+++++++++++ $activeSubDatasTable");
+    // console.log(v);
     var $tableRows = $activeSubDatasTable.find('tbody tr');
-    console.log("++++++++++ $tableRows");
-    console.log($tableRows);
+    // console.log("++++++++++ $tableRows");
+    // console.log($tableRows);
     $.each(v, function(i, row){
       // console.log("row.ref");
       // console.log(row.ref);
-      console.log("row.fin");
-      console.log(row.fin);
+      // console.log("row.fin");
+      // console.log(row.fin);
       if(row.fin == true || row.ref == true){
         $tableRows.eq(i).find('a').eq(0).editable('disable');
         // $tableRows.eq(i).find('a').editable('disable');
@@ -486,7 +486,6 @@ function buildSubTable($el, cols, data, parentData){
       onClickCell: function (field, value, row, $element){
 
         if(field.match("traduction|visible|timezone|fin|ref|nommageRep")){
-          var newValue = value == false ? true : false;
 
           console.log($(this).bootstrapTable("getData"));
 
@@ -494,9 +493,15 @@ function buildSubTable($el, cols, data, parentData){
           console.log("field=" + field);
           console.log("newValue=" + newValue);
 
-          if(field == "nommage"){
+          if(field == "nommageRep"){
             // interdire de cocher n fois pour un même pkAlias dans un qs donné
+            $.each($(this).bootstrapTable("getData"), function(i, obj){
+              console.log(obj);
+              console.log(obj.pktable_alias + " -> " + obj.nommageRep);
+            });
           }
+
+          var newValue = value == false ? true : false;
 
           if(field == "fin" && newValue == true){
             row.relationship = row.relationship.replace(/ = /g, " = [FINAL].")
@@ -814,13 +819,14 @@ function ChooseTable(table) {
         success: function(data) {
             console.log(data);
             data.sort(function(a, b) {
-              // return parseInt(b.keyCount) - parseInt(a.keyCount);
-              return parseInt(b.seqCount) - parseInt(a.seqCount);
+              // return parseInt(b.FKCount) - parseInt(a.FKCount);
+              return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
             });
             tables = data;
             $.each(data, function(i, obj){
 							//console.log(obj.name);
-              var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.keyCount + ') (' + obj.seqCount + ')' + '</option>';
+              var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
+               + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ')' + '</option>';
 							table.append(option);
               // $('#modPKTables').append(option);
               // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
@@ -1084,6 +1090,7 @@ function Reset() {
 		showalert("Reset()", "Operation failed.", "alert-danger", "bottom");
 	}
 
+  window.location = window.location.href+'?eraseCache=true';
 	location.reload(true);
 
 }
