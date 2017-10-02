@@ -1231,7 +1231,7 @@ function Reset() {
 		showalert("Reset()", "Operation failed.", "alert-danger", "bottom");
 	}
 
-  window.location = window.location.href+'?eraseCache=true';
+  // window.location = window.location.href+'?eraseCache=true';
 	location.reload(true);
 
 }

@@ -1,0 +1,5717 @@
+[
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 14,
+  "PKCount": 7,
+  "RecCount": 615,
+  "name": "ACTION",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 52,
+  "name": "ACTIONPLAN",
+  "type": "TABLE",
+  "FKCount": 5
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 3491,
+  "name": "ACTIONPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 80,
+  "name": "ACTIONRETURN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 40,
+  "PKCount": 20,
+  "RecCount": 128,
+  "name": "ADDRESS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 2,
+  "name": "ADHOCQUERY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 11,
+  "name": "ADHOCQUERYARG",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 5,
+  "PKCount": 5,
+  "RecCount": 8,
+  "name": "APPROVALTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 15,
+  "name": "APPROVALTYPESTEP",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 299,
+  "name": "A_ACTIONPLAN",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1,
+  "name": "A_DOCUMENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 16,
+  "name": "A_DOCUMENTFIELD",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_DOCUMENTREVIEWITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1042,
+  "name": "A_INCIDENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 182,
+  "name": "A_INCIDENTFIND",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 261,
+  "name": "A_INCIDENTITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_INCIDENTU_PALLET",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_LABELEVENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_LABELEVENTITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1,
+  "name": "A_LABELMETHOD",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1243,
+  "name": "A_PARAMLIMITS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 674,
+  "name": "A_PARAMLIST",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1626,
+  "name": "A_PARAMLISTITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 4,
+  "name": "A_PARAMLISTREAGENTTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_PROTOCOL",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_PROTOCOLPRODUCT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_PROTOCOLPROD_SCHEDULEPLAN",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_PROTOCOL_SCHEDULEPLAN",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2366,
+  "name": "A_QUERY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_REAGENTLOT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_REAGENTLOTRECIPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 4,
+  "name": "A_REAGENTTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_REAGENTTYPERECIPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 504,
+  "name": "A_REPORT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 787,
+  "name": "A_REPORTEVENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2604,
+  "name": "A_REPORTEVENTITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1173,
+  "name": "A_REPORTPARAM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SAPMSGACTION",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SAPMSGACTIONPROPERTY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SAPMSGJOIN",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SAPMSGJOINCRITERIA",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SAPMSGJOINFILTER",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SAPMSGLOG",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SAPMSGQUERY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SAPMSGQUERYARG",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SAPMSGQUERYCOLUMNMAP",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SAPMSGTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SCHEDULECONDITION",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SCHEDULECONDITIONDEFAULTS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SCHEDULECONDITIONREFITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SCHEDULECONDITION_TRACKITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 55,
+  "name": "A_SCHEDULEPLAN",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SCHEDULEPLANDEFAULTS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2,
+  "name": "A_SCHEDULEPLANNODE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SCHEDULEPLANWORKITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SCHEDULETIMERULE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 41,
+  "name": "A_SDIAPPROVAL",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 73,
+  "name": "A_SDIAPPROVALSTEP",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2796,
+  "name": "A_SDIATTACHMENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 181641,
+  "name": "A_SDIDATA",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 571,
+  "name": "A_SDIDATAAPPROVAL",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 665807,
+  "name": "A_SDIDATAITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 56484,
+  "name": "A_SDIDATAITEMLIMITS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2362,
+  "name": "A_SDIDATAITEMSPEC",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2,
+  "name": "A_SDIDATARELATION",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SDIDOCUMENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 6,
+  "name": "A_SDIFORMRULE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2809,
+  "name": "A_SDISPEC",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_SDIWORKFLOW",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 8486,
+  "name": "A_SDIWORKITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_STUDY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_STUDYSUITE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_STUDY_SCHEDULEPLAN",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_ASSAYTYPESAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 7566,
+  "name": "A_S_BATCH",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_BATCHGENEALOGY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_BATCHSTAGE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1014,
+  "name": "A_S_BOX",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 58,
+  "name": "A_S_CLINICALEVENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_CLINICALPROTOCOL",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_CPASSAYTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_CPCOHORT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_CPSAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2,
+  "name": "A_S_PACKAGE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_PARTICIPANT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_PARTICIPANTEVENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2,
+  "name": "A_S_PLATE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_PROCESSSTAGE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_PRODVARIANT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 3,
+  "name": "A_S_PROJECT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_PROJECTMEMBER",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 4709,
+  "name": "A_S_QCBATCH",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 104,
+  "name": "A_S_QCBATCHITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2222,
+  "name": "A_S_REQUEST",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_RESTRICTCLASS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 101442,
+  "name": "A_S_SAMPLE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 9,
+  "name": "A_S_SAMPLEDETAIL",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 3137,
+  "name": "A_S_SAMPLEFAMILY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_SAMPLEMAP",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_SAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1,
+  "name": "A_S_SAMPLETYPECOLLECTMETHODMAP",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_SAMPLETYPECONTAINERTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1,
+  "name": "A_S_SAMPLETYPETREATTYPEMAP",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_SAMPLINGPLAN",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 6,
+  "name": "A_S_SDICERTIFICATION",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_SPDETAIL",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_SPDETAILITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_SPITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 157,
+  "name": "A_S_STUDY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_STUDYMEMBER",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_STUDYRESOURCE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 373,
+  "name": "A_S_STUDYSAMPLEAPPROVAL",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 47,
+  "name": "A_S_STUDYSITE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_STUDYSITESYSUSER",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_S_STUDYSYSUSER",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1,
+  "name": "A_S_SUBJECT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 32837,
+  "name": "A_TRACKITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 359,
+  "name": "A_TRANSFERLOG",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 653,
+  "name": "A_TRANSFERPACKAGE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1360,
+  "name": "A_U_PALLET",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1323,
+  "name": "A_U_PILOTREQUEST",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 152,
+  "name": "A_U_STUDYSPLTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_U_S_STUDYSAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_VENDORITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 232,
+  "name": "A_WORKORDER",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "A_WORKORDERPROPERTY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 1472,
+  "name": "BULLETIN",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1472,
+  "name": "BULLETINSYSUSER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 346,
+  "name": "CATEGORY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 9000,
+  "name": "CATEGORYITEM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "CHARGELIST",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 7,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "CHARGELISTITEM",
+  "type": "TABLE",
+  "FKCount": 7
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "COLLECTIONQUERYSET",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 2,
+  "name": "CONNECTION",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "CONTAINER",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "CONTAINERREQUEST",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "CONTAINERREQUESTITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 9,
+  "PKCount": 9,
+  "RecCount": 6,
+  "name": "CONTAINERTYPE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "CUSTODIAN",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 5,
+  "name": "DATAFILEDEF",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 8,
+  "PKSeqCount": 106,
+  "PKCount": 106,
+  "RecCount": 166,
+  "name": "DEPARTMENT",
+  "type": "TABLE",
+  "FKCount": 7
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 7623,
+  "name": "DEPARTMENTSYSUSER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "DEVICE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "DEVICESYSUSER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 12,
+  "PKCount": 6,
+  "RecCount": 1,
+  "name": "DOCUMENT",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 16,
+  "name": "DOCUMENTFIELD",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "DOCUMENTREVIEWITEM",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 1,
+  "name": "DRAWING",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 14,
+  "name": "DRAWINGOBJECT",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 3,
+  "name": "EDITORSTYLE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 7,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 45,
+  "name": "EVENTLIST",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 270,
+  "name": "EVENTLISTPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 4,
+  "PKCount": 2,
+  "RecCount": 8,
+  "name": "EVENTPLAN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "EVENTPLANHISTORY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 9,
+  "PKCount": 3,
+  "RecCount": 24,
+  "name": "EVENTPLANITEM",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 24,
+  "name": "EVENTPLANITEMCONDITION",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "EVENTPLANITEMPROPERTY",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 18,
+  "name": "EVENTTYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 23,
+  "name": "EVENTTYPECONDITION",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 1,
+  "name": "EXPLORERBAR",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 135,
+  "name": "EXPLORERBARPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 2,
+  "name": "EXPLORERBARTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 22,
+  "name": "EXPLORERBARTYPEPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 34,
+  "name": "EXPRESSION",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 11,
+  "name": "FIELD",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 4,
+  "PKCount": 2,
+  "RecCount": 18,
+  "name": "FORM",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 5,
+  "name": "FORMLET",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "HAZARD",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 9,
+  "PKSeqCount": 6,
+  "PKCount": 6,
+  "RecCount": 204,
+  "name": "INCIDENT",
+  "type": "TABLE",
+  "FKCount": 9
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 36,
+  "name": "INCIDENTFIND",
+  "type": "TABLE",
+  "FKCount": 6
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 195,
+  "name": "INCIDENTITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 36,
+  "name": "INCIDENTU_PALLET",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 8,
+  "PKSeqCount": 10,
+  "PKCount": 10,
+  "RecCount": 103,
+  "name": "INSTRUMENT",
+  "type": "TABLE",
+  "FKCount": 7
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "INSTRUMENTLOG",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 6,
+  "PKCount": 3,
+  "RecCount": 10,
+  "name": "INSTRUMENTMODEL",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 5,
+  "name": "INSTRUMENTMODELCOMMAND",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 2,
+  "name": "INSTRUMENTPROTOCOLPROVIDER",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 4,
+  "PKCount": 4,
+  "RecCount": 34,
+  "name": "INSTRUMENTTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 19,
+  "name": "INSTRUMENTTYPEFIELD",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "INVOICE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 8,
+  "PKCount": 8,
+  "RecCount": 8,
+  "name": "JOBTYPE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 202,
+  "name": "JOBTYPEDEPARTMENT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 87,
+  "name": "JOBTYPEROLE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "LABELEVENT",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "LABELEVENTITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 4,
+  "PKCount": 2,
+  "RecCount": 6,
+  "name": "LABELMETHOD",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 4,
+  "name": "LANGUAGE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 6,
+  "PKCount": 3,
+  "RecCount": 47,
+  "name": "LIMITRULE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 4,
+  "PKCount": 1,
+  "RecCount": 90,
+  "name": "LIMITRULELIMITTYPE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 8,
+  "name": "LIMITRULEPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "LIMITSREPOSITORY",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 5,
+  "PKCount": 5,
+  "RecCount": 19,
+  "name": "LIMITTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 6,
+  "name": "LISTAGGTEST",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 134,
+  "name": "LOCALE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "MEASUREMENT",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 101,
+  "name": "MESSAGELOG",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 5,
+  "name": "MESSAGETYPE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 22,
+  "name": "MODULE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1255,
+  "name": "MODULESYSUSER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "MONITOR",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 52,
+  "name": "PAGE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1501,
+  "name": "PAGEPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 19,
+  "name": "PAGETYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 281,
+  "name": "PAGETYPEPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 7,
+  "PKCount": 7,
+  "RecCount": 1427,
+  "name": "PARAM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 7,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 687,
+  "name": "PARAMLIMITS",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 8,
+  "PKSeqCount": 24,
+  "PKCount": 8,
+  "RecCount": 563,
+  "name": "PARAMLIST",
+  "type": "TABLE",
+  "FKCount": 6
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 10,
+  "PKCount": 2,
+  "RecCount": 1302,
+  "name": "PARAMLISTITEM",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 4,
+  "name": "PARAMLISTREAGENTTYPE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "PRICELIST",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "PRICELISTITEM",
+  "type": "TABLE",
+  "FKCount": 5
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 1,
+  "name": "PROFILE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 10420,
+  "name": "PROFILEPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 6,
+  "PKCount": 6,
+  "RecCount": 183,
+  "name": "PROPERTYTREE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 8,
+  "PKCount": 4,
+  "RecCount": 0,
+  "name": "PROTOCOL",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 3,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "PROTOCOLPRODUCT",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "PROTOCOLPROD_SCHEDULEPLAN",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "PROTOCOL_SCHEDULEPLAN",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 8,
+  "PKCount": 4,
+  "RecCount": 970,
+  "name": "QUERY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1143,
+  "name": "QUERYARG",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "QUOTE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 14,
+  "PKSeqCount": 6,
+  "PKCount": 6,
+  "RecCount": 0,
+  "name": "REAGENTLOT",
+  "type": "TABLE",
+  "FKCount": 11
+ },
+ {
+  "FKSeqCount": 7,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "REAGENTLOTRECIPE",
+  "type": "TABLE",
+  "FKCount": 6
+ },
+ {
+  "FKSeqCount": 15,
+  "PKSeqCount": 20,
+  "PKCount": 10,
+  "RecCount": 4,
+  "name": "REAGENTTYPE",
+  "type": "TABLE",
+  "FKCount": 10
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "REAGENTTYPERECIPE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 6,
+  "PKCount": 6,
+  "RecCount": 364,
+  "name": "REFTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2694,
+  "name": "REFVALUE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 6,
+  "PKCount": 3,
+  "RecCount": 164,
+  "name": "REPORT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 268,
+  "name": "REPORTEVENT",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2604,
+  "name": "REPORTEVENTITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 539,
+  "name": "REPORTPARAM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2077,
+  "name": "RESERVESTORAGEUNIT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 7,
+  "PKCount": 7,
+  "RecCount": 81,
+  "name": "ROLE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 0,
+  "name": "RSET",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "RSETITEMS",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "RSETITEMSDS",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "RSETITEMSNL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 689,
+  "name": "RSETLOG",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 5,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "SAPMSGACTION",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SAPMSGACTIONPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 6,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "SAPMSGJOIN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 9,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SAPMSGJOINCRITERIA",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SAPMSGJOINFILTER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SAPMSGLOG",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 18,
+  "PKCount": 6,
+  "RecCount": 0,
+  "name": "SAPMSGQUERY",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SAPMSGQUERYARG",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SAPMSGQUERYCOLUMNMAP",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 8,
+  "PKCount": 4,
+  "RecCount": 0,
+  "name": "SAPMSGTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 8,
+  "PKCount": 4,
+  "RecCount": 0,
+  "name": "SCHEDULECONDITION",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SCHEDULECONDITIONDEFAULTS",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SCHEDULECONDITIONREFITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SCHEDULECONDITION_TRACKITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 720,
+  "name": "SCHEDULEEVENT",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 2,
+  "name": "SCHEDULEEXCLUDE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 7,
+  "name": "SCHEDULEEXCLUDEITEM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 9,
+  "PKCount": 9,
+  "RecCount": 18,
+  "name": "SCHEDULEPLAN",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SCHEDULEPLANDEFAULTS",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 9,
+  "PKSeqCount": 12,
+  "PKCount": 6,
+  "RecCount": 18,
+  "name": "SCHEDULEPLANITEM",
+  "type": "TABLE",
+  "FKCount": 6
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SCHEDULEPLANITEMDETAILS",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SCHEDULEPLANITEMWORKITEM",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 2,
+  "name": "SCHEDULEPLANNODE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SCHEDULEPLANWORKITEM",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "SCHEDULETIMERULE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 104,
+  "PKCount": 104,
+  "RecCount": 283,
+  "name": "SDC",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDCATTRIBUTEDEF",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 82,
+  "name": "SDCDETAILLINK",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 277,
+  "name": "SDCEXPORT",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 455,
+  "name": "SDCJOBTYPESECURITY",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 1371,
+  "name": "SDCLINK",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 4,
+  "PKCount": 2,
+  "RecCount": 85,
+  "name": "SDCOPERATION",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDCPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDCROLE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 8648,
+  "name": "SDCSECURITY",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2726,
+  "name": "SDCSEQUENCE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 254,
+  "name": "SDIADDRESS",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 133,
+  "name": "SDIALIAS",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 5,
+  "PKCount": 1,
+  "RecCount": 21,
+  "name": "SDIAPPROVAL",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 7,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 35,
+  "name": "SDIAPPROVALSTEP",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 5,
+  "PKCount": 1,
+  "RecCount": 7818,
+  "name": "SDIATTACHMENT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDIATTRIBUTE",
+  "type": "TABLE",
+  "FKCount": 6
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDICOC",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 17,
+  "PKSeqCount": 24,
+  "PKCount": 3,
+  "RecCount": 200056,
+  "name": "SDIDATA",
+  "type": "TABLE",
+  "FKCount": 11
+ },
+ {
+  "FKSeqCount": 8,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 419,
+  "name": "SDIDATAAPPROVAL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 13,
+  "PKSeqCount": 22,
+  "PKCount": 2,
+  "RecCount": 370050,
+  "name": "SDIDATAITEM",
+  "type": "TABLE",
+  "FKCount": 6
+ },
+ {
+  "FKSeqCount": 13,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 38290,
+  "name": "SDIDATAITEMLIMITS",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 14,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 55020,
+  "name": "SDIDATAITEMSPEC",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 11,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDIDATARELATION",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDIDOCUMENT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 8,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "SDIEVENTPLAN",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 8,
+  "PKSeqCount": 9,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "SDIEVENTPLANITEM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 9,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDIEVENTPLANITEMPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 6,
+  "name": "SDIFORMRULE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "SDIGROUP",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDIGROUPITEM",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDIHAZARD",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDIMODULE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDIPRICELIST",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDIRELATION",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 174,
+  "name": "SDIROLE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 6,
+  "PKCount": 1,
+  "RecCount": 44138,
+  "name": "SDISPEC",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 384,
+  "name": "SDISPECRULE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SDITEMP",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 14,
+  "PKCount": 2,
+  "RecCount": 45,
+  "name": "SDIWORKFLOW",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 7,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 50,
+  "name": "SDIWORKFLOWPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 12,
+  "PKSeqCount": 6,
+  "PKCount": 1,
+  "RecCount": 4642,
+  "name": "SDIWORKITEM",
+  "type": "TABLE",
+  "FKCount": 9
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 15907,
+  "name": "SDIWORKITEMITEM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 22,
+  "PKCount": 11,
+  "RecCount": 855,
+  "name": "SPEC",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 3,
+  "PKCount": 1,
+  "RecCount": 2298,
+  "name": "SPECLIMITTYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 8,
+  "PKSeqCount": 7,
+  "PKCount": 1,
+  "RecCount": 14231,
+  "name": "SPECPARAMITEMS",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 11,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 46496,
+  "name": "SPECPARAMLIMITS",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 23,
+  "name": "SPECPARAMLIST",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 3,
+  "PKCount": 1,
+  "RecCount": 42,
+  "name": "SPECRULE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SPECRULECONDITION",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SPECWORKFLOW",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 16,
+  "name": "STATSMONITORITEM",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 9205,
+  "name": "STATSMONITORVALUE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 2,
+  "name": "STORAGECONDTYPE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 4,
+  "PKCount": 4,
+  "RecCount": 5,
+  "name": "STORAGEENV",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 5,
+  "name": "STORAGEENVCOND",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 8,
+  "PKCount": 8,
+  "RecCount": 46363,
+  "name": "STORAGEUNIT",
+  "type": "TABLE",
+  "FKCount": 5
+ },
+ {
+  "FKSeqCount": 9,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 0,
+  "name": "STUDY",
+  "type": "TABLE",
+  "FKCount": 7
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "STUDYSUITE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "STUDY_SCHEDULEPLAN",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 11476,
+  "name": "SYSCOLUMN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 4140,
+  "name": "SYSCOLUMNPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 68,
+  "name": "SYSCONFIG",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 27,
+  "name": "SYSEXTENDEDCOLUMN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 2607,
+  "name": "SYSREF",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 3810,
+  "name": "SYSREFCOLUMN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SYSSDCMAP",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "SYSSQL",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SYSSQLARG",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SYSSQLGROUP",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 4,
+  "PKCount": 4,
+  "RecCount": 526,
+  "name": "SYSTABLE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 11,
+  "PKSeqCount": 138,
+  "PKCount": 138,
+  "RecCount": 242,
+  "name": "SYSUSER",
+  "type": "TABLE",
+  "FKCount": 11
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SYSUSERBUCKET",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "SYSUSERFAVORITE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 13,
+  "name": "SYSUSERFOLDER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 113,
+  "name": "SYSUSERFOLDERITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 30,
+  "name": "SYSUSERJOBTYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 5131,
+  "name": "SYSUSERROLE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 7,
+  "name": "SYSVIEWDEPENDS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 4,
+  "PKCount": 4,
+  "RecCount": 0,
+  "name": "S_ASSAYTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 4,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_ASSAYTYPESAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 3,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_ASSAYTYPEWORKITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 24,
+  "PKSeqCount": 6,
+  "PKCount": 6,
+  "RecCount": 1466,
+  "name": "S_BATCH",
+  "type": "TABLE",
+  "FKCount": 18
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_BATCHGENEALOGY",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 1,
+  "name": "S_BATCHSTAGE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 10,
+  "PKCount": 10,
+  "RecCount": 0,
+  "name": "S_BIOSEQ",
+  "type": "TABLE",
+  "FKCount": 5
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 574,
+  "name": "S_BOX",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_CELLLINE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 1,
+  "name": "S_CLINICALDIAG",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 40,
+  "name": "S_CLINICALEVENT",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 15,
+  "PKCount": 5,
+  "RecCount": 0,
+  "name": "S_CLINICALPROTOCOL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 8,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_CLONE",
+  "type": "TABLE",
+  "FKCount": 8
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 1,
+  "name": "S_COLLECTMETHOD",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_COMPONENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_COMPOUND",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_CONTIG",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_COUNTRULE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 4,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_CPASSAYTYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 13,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_CPASSAYTYPESAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 8,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_CPCOHORT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 4,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_CPSAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 1,
+  "name": "S_DISEASE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_DNA",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_ENZYME",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 4,
+  "PKCount": 4,
+  "RecCount": 0,
+  "name": "S_EVENTDEF",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_EVENTDEFREAGENTTYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 4,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_EVENTDEFSAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_EVENTDEFSTATMAP",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_EVENTDEFSTSPECIMENDEF",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 8,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 8927,
+  "name": "S_EVENTLOG",
+  "type": "TABLE",
+  "FKCount": 8
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_EXPERIMENT",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_EXPERIMENTPROTOCOL",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_EXPERIMENTTASK",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_EXPERIMENTTASKIO",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_FEATURE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_GEL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_GELLANE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_GELSPOT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 9,
+  "PKCount": 9,
+  "RecCount": 0,
+  "name": "S_GENE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_HOLDERLOC",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 9,
+  "PKCount": 9,
+  "RecCount": 0,
+  "name": "S_HOLDERTYPE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 9,
+  "PKCount": 9,
+  "RecCount": 0,
+  "name": "S_HOLDERZONE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_HOLDERZONECON",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_INVENTORY",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_LIBGROUP",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_LIBGROUPTASK",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_LIBGROUPTASKIO",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 0,
+  "name": "S_LOCATION",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_LOCCONTENT",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 4,
+  "PKCount": 4,
+  "RecCount": 0,
+  "name": "S_LOCUS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 0,
+  "name": "S_MATERIAL",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_MATERIALS_COMPONENT",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_METASTASIS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 7,
+  "PKSeqCount": 7,
+  "PKCount": 7,
+  "RecCount": 0,
+  "name": "S_OLIGO",
+  "type": "TABLE",
+  "FKCount": 6
+ },
+ {
+  "FKSeqCount": 8,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 1,
+  "name": "S_PACKAGE",
+  "type": "TABLE",
+  "FKCount": 6
+ },
+ {
+  "FKSeqCount": 7,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_PARTICIPANT",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_PARTICIPANTEVENT",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_PEPTIDE",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 31,
+  "name": "S_PHYSICALSTORE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 1,
+  "name": "S_PLATE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_PLATEWELL",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_PO",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 1,
+  "name": "S_PREPTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1,
+  "name": "S_PREPTYPESAMPLETYPEMAP",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1,
+  "name": "S_PREPTYPETREATMENTTYPEMAP",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 6,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_PROCESSSTAGE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 15,
+  "PKSeqCount": 38,
+  "PKCount": 19,
+  "RecCount": 224,
+  "name": "S_PRODUCT",
+  "type": "TABLE",
+  "FKCount": 15
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 3,
+  "name": "S_PRODUCTFORMULATION",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1,
+  "name": "S_PRODUCTU_CLAIM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2,
+  "name": "S_PRODUCTU_INGREDIENT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 17,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_PRODVARIANT",
+  "type": "TABLE",
+  "FKCount": 9
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 2,
+  "name": "S_PRODVARIANTRULE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 4,
+  "PKCount": 4,
+  "RecCount": 2,
+  "name": "S_PROJECT",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_PROJECTMEMBER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_PROTEIN",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 9,
+  "name": "S_PVRLEVELRULE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 12,
+  "PKCount": 6,
+  "RecCount": 5,
+  "name": "S_PVRSTATE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 5,
+  "name": "S_PVRTRANSITIONRULE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 11,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 996,
+  "name": "S_QCBATCH",
+  "type": "TABLE",
+  "FKCount": 8
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_QCBATCHEVALRULE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_QCBATCHEVALRULEPARAM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 10413,
+  "name": "S_QCBATCHITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 2571,
+  "name": "S_QCBATCHPARAMSET",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_QCBATCHREAGENT",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 12,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 1983,
+  "name": "S_QCBATCHSAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 9
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_QCEVALRULE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_QCEVALRULEITEM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 12,
+  "PKSeqCount": 6,
+  "PKCount": 3,
+  "RecCount": 190,
+  "name": "S_QCMETHOD",
+  "type": "TABLE",
+  "FKCount": 8
+ },
+ {
+  "FKSeqCount": 13,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 99,
+  "name": "S_QCMETHODSAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 9
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_QCMETHODSAMPLETYPELIMIT",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 195,
+  "name": "S_QCMETHOD_WORKITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_RACK",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_RACKTUBE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_REAGENT",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 28,
+  "PKSeqCount": 8,
+  "PKCount": 8,
+  "RecCount": 1409,
+  "name": "S_REQUEST",
+  "type": "TABLE",
+  "FKCount": 28
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_RESTRICTCLASS",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_RNA",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 51,
+  "PKSeqCount": 12,
+  "PKCount": 12,
+  "RecCount": 52654,
+  "name": "S_SAMPLE",
+  "type": "TABLE",
+  "FKCount": 48
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 9,
+  "name": "S_SAMPLEDETAIL",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 22,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 3137,
+  "name": "S_SAMPLEFAMILY",
+  "type": "TABLE",
+  "FKCount": 20
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_SAMPLEMAP",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 13,
+  "PKSeqCount": 17,
+  "PKCount": 17,
+  "RecCount": 327,
+  "name": "S_SAMPLEPOINT",
+  "type": "TABLE",
+  "FKCount": 12
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 15,
+  "PKCount": 15,
+  "RecCount": 14,
+  "name": "S_SAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1,
+  "name": "S_SAMPLETYPECOLLECTMETHODMAP",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_SAMPLETYPECONTAINERTYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1,
+  "name": "S_SAMPLETYPETREATTYPEMAP",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 12,
+  "PKCount": 6,
+  "RecCount": 2,
+  "name": "S_SAMPLINGPLAN",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 6,
+  "name": "S_SDICERTIFICATION",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_SDICOC",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_SHIPMENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_SLIDE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_SLIDESPOT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_SOURCE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 3,
+  "PKCount": 1,
+  "RecCount": 6,
+  "name": "S_SPDETAIL",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 15,
+  "name": "S_SPDETAILITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 1,
+  "name": "S_SPECIES",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 3,
+  "PKCount": 1,
+  "RecCount": 7,
+  "name": "S_SPITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 1,
+  "name": "S_STRAIN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 10,
+  "PKSeqCount": 19,
+  "PKCount": 19,
+  "RecCount": 45,
+  "name": "S_STUDY",
+  "type": "TABLE",
+  "FKCount": 10
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_STUDYMEMBER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_STUDYRESOURCE",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 366,
+  "name": "S_STUDYSAMPLEAPPROVAL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 5,
+  "PKCount": 5,
+  "RecCount": 35,
+  "name": "S_STUDYSITE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_STUDYSITESYSUSER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_STUDYSYSUSER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_STUDYS_SAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 1,
+  "name": "S_SUBJECT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "S_TISSUE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_TRANSFERMODE",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 1,
+  "name": "S_TREATMENTTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 11,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "S_VECTOR",
+  "type": "TABLE",
+  "FKCount": 10
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "S_XFERDETAIL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 33,
+  "name": "TASK",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 165,
+  "name": "TASKPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 5,
+  "name": "TODOLIST",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 146111,
+  "name": "TRACELOG",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 8,
+  "PKSeqCount": 9,
+  "PKCount": 9,
+  "RecCount": 9114,
+  "name": "TRACKITEM",
+  "type": "TABLE",
+  "FKCount": 8
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 431,
+  "name": "TRANSFERLOG",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 4,
+  "name": "TRANSFERPACKAGE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 212,
+  "name": "TRANSLANGUAGE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 1032,
+  "name": "TRANSMASTER",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "TRANSMASTERTEMP",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 35,
+  "name": "UNITCONVERSION",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 62,
+  "PKCount": 62,
+  "RecCount": 171,
+  "name": "UNITS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "UPDCOLUMN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "UPDCOLUMNPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 8361,
+  "name": "UPDLOG",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "UPDREF",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "UPDREFCOLUMN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 197,
+  "name": "UPDSDCMIGR",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "UPDTABLE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 7,
+  "name": "UPDVIEWDEPENDS",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 695,
+  "name": "U_ANALYTICDEPT",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_AUTHORITY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 129,
+  "name": "U_BLOWINGREF",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 209,
+  "name": "U_BLOWINGTRIAL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_BLOWINGTRIALU_PILOTREQUES",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 8,
+  "name": "U_BOTTLETEST",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 146,
+  "name": "U_BOTTLETRIAL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_BOTTLETRIALU_PILOTREQUEST",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 108,
+  "name": "U_BOTTLETRIAL_TEST",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 7,
+  "PKCount": 7,
+  "RecCount": 5,
+  "name": "U_BRAND",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 24,
+  "name": "U_CAPTEST",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 193,
+  "name": "U_CAPTRIAL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_CAPTRIALU_PILOTREQUEST",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 337,
+  "name": "U_CAPTRIAL_TEST",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 39,
+  "name": "U_CAPTYPEHOMOLO",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 2,
+  "name": "U_CARRIER",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 390,
+  "name": "U_CBUDEPT",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 3,
+  "name": "U_CLAIM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 1,
+  "name": "U_CLAIMTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_CONTROLITEM",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 12,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 2,
+  "name": "U_CONTROLPLAN",
+  "type": "TABLE",
+  "FKCount": 11
+ },
+ {
+  "FKSeqCount": 6,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_CPPRODUCT",
+  "type": "TABLE",
+  "FKCount": 5
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 123,
+  "name": "U_DATAIMPORT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 153,
+  "name": "U_DATAIMPORTOPT",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 1,
+  "name": "U_DESTINATION",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 23,
+  "name": "U_DOCUMENT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 3,
+  "name": "U_DPTRAISEDAGST",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 190,
+  "name": "U_ERPCODE",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 9,
+  "PKSeqCount": 4,
+  "PKCount": 4,
+  "RecCount": 5380,
+  "name": "U_EVENT",
+  "type": "TABLE",
+  "FKCount": 9
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 11,
+  "name": "U_EVENTTYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 168,
+  "name": "U_EXPETRIAL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_EXPETRIALU_PILOTREQUEST",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 26,
+  "PKCount": 26,
+  "RecCount": 27,
+  "name": "U_FAMILY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 48,
+  "name": "U_FREQUENCY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 5,
+  "PKCount": 5,
+  "RecCount": 17,
+  "name": "U_GROUP",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_GROUPITEM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 23,
+  "name": "U_GROUPS_SAMPLEPOINT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 4604,
+  "name": "U_HISTORICVALUE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 45476,
+  "name": "U_HYDRETDLPROP",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 1736,
+  "name": "U_HYDRETODOLIST",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 5,
+  "name": "U_INCITEMORIGIN",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 2,
+  "name": "U_INGREDIENT",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 2,
+  "name": "U_INGREDIENTTYP",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 258,
+  "name": "U_INJCTIONTRIAL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_INJCTIONTRIALU_PILOTREQUE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 435,
+  "name": "U_INJECTIONREF",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 164,
+  "name": "U_INJRFMATERIAL",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 6,
+  "name": "U_INSTCONNECT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_INSTCONNECTSYSUSER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "U_INSTPARAM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_INSTPARAMITEM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 6,
+  "name": "U_INSTPROTOCOL",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 16,
+  "name": "U_INSTTRANSACT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 4,
+  "name": "U_INSTVARIABLE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 4,
+  "name": "U_INSTVARITEM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 18,
+  "name": "U_INTIN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 10,
+  "name": "U_INTMLOGIN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 20,
+  "name": "U_INTOUT",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 12,
+  "name": "U_INVOICCONTACT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 435,
+  "name": "U_LCI_DATAITEM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 4,
+  "name": "U_LCI_SYSCONFIG",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 0,
+  "name": "U_LINE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 369,
+  "name": "U_LOG",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1352,
+  "name": "U_LOGINTERVAL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 5,
+  "name": "U_MASTERSAMPLE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_MONITORINGPI",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 11,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 23,
+  "name": "U_MONITORPLAN",
+  "type": "TABLE",
+  "FKCount": 10
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_MONITORPLANIT",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 2,
+  "name": "U_PACKAGETYPE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 432,
+  "name": "U_PALLET",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 122,
+  "name": "U_PALLETTRIAL",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_PALLETTRIALU_PILOTREQUEST",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 87,
+  "name": "U_PIINTERNAL",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 7,
+  "PKCount": 7,
+  "RecCount": 345,
+  "name": "U_PILOTREQUEST",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 28,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 252,
+  "name": "U_PLAN",
+  "type": "TABLE",
+  "FKCount": 27
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 3586,
+  "name": "U_PLANITEM",
+  "type": "TABLE",
+  "FKCount": 5
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "U_PLANT",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 16,
+  "name": "U_POINTMARK",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 5,
+  "name": "U_POSITION",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_PRODERPDEPART",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 35,
+  "name": "U_PRODUCTFAMILY",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 4,
+  "name": "U_PRPCATEGORY",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 242,
+  "name": "U_REFELEVATION",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 19,
+  "name": "U_REPORTCONTACT",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 1662,
+  "name": "U_REPORTVERSION",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 5259,
+  "name": "U_REPVERITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 73,
+  "name": "U_REQUESTSAMPLE",
+  "type": "TABLE",
+  "FKCount": 5
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 3,
+  "name": "U_ROOTCAUSE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 213,
+  "name": "U_SAMPLELINKED",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 155,
+  "name": "U_SDISTB",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 9,
+  "name": "U_SEVERITY",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 7,
+  "PKCount": 7,
+  "RecCount": 0,
+  "name": "U_SPFAMILY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 14,
+  "name": "U_SSCCGRADEREWK",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 16,
+  "name": "U_SSCC_UD_GR",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_SSCC_UD_GRADE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 14,
+  "name": "U_SSCC_UD_RE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_SSCC_UD_REAS",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 16,
+  "name": "U_SSCC_UD_RULE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 30,
+  "name": "U_STB",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 37,
+  "name": "U_STUDYSPLTYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_STUDYSPLTYPES_SAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 13,
+  "name": "U_SUBEVENTTYPE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 8,
+  "PKCount": 8,
+  "RecCount": 11,
+  "name": "U_SUPPLIER",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 3,
+  "PKCount": 3,
+  "RecCount": 10,
+  "name": "U_SUPPLIERSITE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "U_S_STUDYSAMPLETYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 459,
+  "name": "U_TEXTSPEC",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2,
+  "name": "U_UNCERTAINTY",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 8244,
+  "name": "U_UPLOADMD",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 19,
+  "name": "U_VARIABLES",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 9,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 221,
+  "name": "U_WORKORDER",
+  "type": "TABLE",
+  "FKCount": 8
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1351,
+  "name": "U_WORKORDERITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 1,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "VENDORITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 8,
+  "PKCount": 4,
+  "RecCount": 1764,
+  "name": "WEBPAGE",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 45,
+  "name": "WEBPAGELOG",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 2093,
+  "name": "WEBPAGELOGPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 45,
+  "name": "WEBPAGELOGTITLE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "WEBPAGEPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 8794,
+  "name": "WEBPAGEPROPERTYTREE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 13,
+  "name": "WEBPAGEUSEROVERRIDE",
+  "type": "TABLE",
+  "FKCount": 3
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 18,
+  "PKCount": 9,
+  "RecCount": 1,
+  "name": "WORKFLOW",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 10,
+  "PKCount": 2,
+  "RecCount": 41,
+  "name": "WORKFLOWACTION",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 194,
+  "name": "WORKFLOWACTIONPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "WORKFLOWCONTAINERTYPE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "WORKFLOWPARAMLIST",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 5,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 38,
+  "name": "WORKFLOWRETURN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 6,
+  "PKCount": 2,
+  "RecCount": 6,
+  "name": "WORKFLOWSTAGE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 4,
+  "PKCount": 1,
+  "RecCount": 28,
+  "name": "WORKFLOWSTATE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "WORKGROUP",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "WORKGROUPITEM",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "WORKGROUPPARAMLIST",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 0,
+  "name": "WORKGROUPTYPE",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "WORKGROUPTYPERULE",
+  "type": "TABLE",
+  "FKCount": 2
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 18,
+  "PKCount": 9,
+  "RecCount": 233,
+  "name": "WORKITEM",
+  "type": "TABLE",
+  "FKCount": 4
+ },
+ {
+  "FKSeqCount": 2,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 1073,
+  "name": "WORKITEMITEM",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 11,
+  "PKSeqCount": 2,
+  "PKCount": 2,
+  "RecCount": 91,
+  "name": "WORKORDER",
+  "type": "TABLE",
+  "FKCount": 10
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "WORKORDERPROPERTY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 1,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "WORKPLAN",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 3,
+  "PKSeqCount": 4,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "WORKPLANACTIONHISTORY",
+  "type": "TABLE",
+  "FKCount": 1
+ },
+ {
+  "FKSeqCount": 0,
+  "PKSeqCount": 3,
+  "PKCount": 1,
+  "RecCount": 0,
+  "name": "WORKPLANHISTORY",
+  "type": "TABLE",
+  "FKCount": 0
+ },
+ {
+  "FKSeqCount": 4,
+  "PKSeqCount": 0,
+  "PKCount": 0,
+  "RecCount": 0,
+  "name": "WORKPLANPROPERTYHISTORY",
+  "type": "TABLE",
+  "FKCount": 1
+ }
+]
