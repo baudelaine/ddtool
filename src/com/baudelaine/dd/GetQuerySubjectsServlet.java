@@ -54,7 +54,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		type = request.getParameter("type");
 //		qs_id = request.getParameter("qs_id");
 //		r_id = request.getParameter("r_id");
-//		linker_id = qs_id + '.' + r_id;
+		linker_id = request.getParameter("linker_id");
 		
 		System.out.println("table=" + table);
 		System.out.println("alias=" + alias);
@@ -136,6 +136,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		result.setTable_alias(alias);
 		result.setTable_name(table);
 		result.setType(type);
+		result.addLinker_id(linker_id);
         
         return result;
         

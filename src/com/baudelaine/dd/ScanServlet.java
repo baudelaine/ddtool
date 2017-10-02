@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -80,7 +81,7 @@ public class ScanServlet extends HttpServlet {
 		    		FKSet.add(FKName);
 		    		FKSeqCount++;
 		    	}
-			    rst.close();
+	            if(rst != null){rst.close();}
 	    		System.out.println("Scanning FK for " + tableName + " -> " + FKSet.size() + " -> " + FKSeqCount);
 
 		    	rst = metaData.getExportedKeys(con.getCatalog(), schema, table.get("name"));
@@ -91,16 +92,27 @@ public class ScanServlet extends HttpServlet {
 		    		PKSet.add(PKName);
 		    		PKSeqCount++;
 		    	}
-			    rst.close();
+	            if(rst != null){rst.close();}
 	    		System.out.println("Scanning PK for " + tableName + " -> " + PKSet.size() + " -> " + PKSeqCount);
 
-	    		
+	    		Statement stmt = null;
+	    		String query = "SELECT COUNT(*) FROM " + schema + "." + table.get("name");
+	    		stmt = con.createStatement();
+	            ResultSet rs = stmt.executeQuery(query);
+	            long recCount = 0;
+	            while (rs.next()) {
+	            	recCount = rs.getLong(1);
+	            }
+	            if (stmt != null) { stmt.close();}
+	            if(rst != null){rst.close();}
+	            
 	    		scan.put("name", tableName);
 	    		scan.put("type", tableType);
 	    		scan.put("FKCount", FKSet.size());
 	    		scan.put("PKCount", PKSet.size());
 	    		scan.put("FKSeqCount", FKSeqCount);
 	    		scan.put("PKSeqCount", PKSeqCount);
+	    		scan.put("RecCount", recCount);
 	    		result.add(scan);
 		    	
 		    }
