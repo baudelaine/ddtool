@@ -236,19 +236,17 @@ $projectFileModal.on('shown.bs.modal', function() {
     $(this).find('.modal-body').empty();
     var html = [
       '<div class="container-fluid"><div class="row"><div class="form-group"><div class="input-group">',
+	'<span class="input-group-addon">model-</span>',
       '<input type="text" id="filePath" class="form-control">',
       '</div></div></div></div>',
     ].join('');
 
     $(this).find('.modal-body').append(html);
-    $(this).find('#filePath').focus().val("model-N");
+    $(this).find('#filePath').focus().val("NNN");
 
 
 });
 
-function SetProjectFile(){
-  $projectFileModal.modal('toggle');
-}
 
 $('#modPKTables').change(function () {
     var selectedText = $(this).find("option:selected").val();
@@ -1103,14 +1101,23 @@ function TestDBConnection() {
 
 }
 
+function OpenSetProjectModal(){
+
+ $projectFileModal.modal('toggle');
+}
+
 function SetProjectName(){
   var projectName = $projectFileModal.find('#filePath').val();
   console.log("projectName=" + projectName);
+	if (!$.isNumeric(projectName)) {
+	    showalert("SetProjectName()", "Enter a numeric value.", "alert-warning", "bottom");
+	    return;
+  	}
   $.ajax({
 		type: 'POST',
 		url: "SetProjectName",
 		// dataType: 'json',
-		data: "projectName=" + projectName,
+		data: "projectName=" + "model-" + projectName,
 
 		success: function(data) {
 			Publish();
@@ -1120,6 +1127,7 @@ function SetProjectName(){
 		}
 	});
 
+  $projectFileModal.modal('toggle');
 }
 
 function Publish(){

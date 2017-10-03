@@ -55,6 +55,7 @@ public class ConfigProperties {
 
 			// get the property value
 			model = prop.getProperty("model");
+			System.out.println("++++++++++++++++++++++ model=" + model);
 			dispatcher = prop.getProperty("dispatcher");
 			PathToXML = prop.getProperty("PathToXML");
 			System.out.println("++++++++++++++++++++++ PathToXML=" + PathToXML);

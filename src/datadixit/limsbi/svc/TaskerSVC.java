@@ -17,6 +17,7 @@ public class TaskerSVC {
 	public static void start() {
 		CognosSVC.logon();
 		System.out.println("******** logon ***********");
+
 		ProjectSVC.openModel();
 		System.out.println("******** openmodel ***********");
 		ProjectSVC.setLocale();

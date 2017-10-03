@@ -80,6 +80,29 @@ public class ProjectSVC {
 		}
 
 	}
+	
+	
+	public static void createModelIIC() {
+
+		try {
+			File xmlFile = new File(ConfigProperties.PathToXML + "/createModel.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+			
+			Node node = document.selectSingleNode("//@project");
+			node.setText(ConfigProperties.model);
+			
+			node = document.selectSingleNode("/bmtactionlog[@timestamp=\"20171003184009897\"]/transaction[@uniqueId=\"78F4A23E78F4A23E\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			node.setText("bidule");
+			XmlEncodedXML xex = new XmlEncodedXML(node.getParent().asXML());
+			String res = crnConnect.getMetadataService().updateMetadata(xex).toString();
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		} catch (RemoteException ex) {
+			lg(ex.getMessage());
+		}
+
+	}
 
 	public static void createModel() {
 

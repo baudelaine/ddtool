@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog project="C:\LimsBI\models\model-13\model-13.cpf" templatedir="../templates/bmt/Cr1Model" timestamp="20171003184009897" user="Administrateur" version="10.2.6100.82">
+	<transaction event="StartLog" saved="true" seq="1" timestamp="20171003184009897" uniqueId="7E0417567E041756" user="Administrateur"/>
+	<transaction event="StartSession" saved="true" seq="2" timestamp="20171003184009897" uniqueId="7E0417567E041756" user="Administrateur"/>
+	<transaction saved="true" seq="3" timestamp="20171003184009928" uniqueId="7388408173884081">
+		<action seq="1" type="SetDefaultLocale">
+			<inputparams>
+				<param seq="1" type="i18nstring">
+					<value>fr-fr</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+	<transaction saved="true" seq="4" timestamp="20171003184009928" uniqueId="048F7017048F7017">
+		<action seq="1" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>project/@queryMode</mappingpath>
+					<value>/O/@queryMode/O/[]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>dynamic</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+	<transaction saved="true" seq="5" timestamp="20171003184013298" uniqueId="E84BBFAFE84BBFAF">
+		<action seq="1" type="SetDefaultLocale">
+			<inputparams>
+				<param seq="1" type="i18nstring">
+					<value>en-gb</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+	<transaction saved="true" seq="6" timestamp="20171003184013298" uniqueId="9F4C8F399F4C8F39">
+		<action seq="1" type="SetActiveLocale">
+			<inputparams>
+				<param seq="1" type="i18nstring">
+					<value>en-gb</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+	<transaction event="Save" saved="true" seq="7" timestamp="20171003184013298" uniqueId="0FF392A80FF392A8" user="Administrateur"/>
+	<transaction saved="true" seq="8" timestamp="20171003184013298" uniqueId="78F4A23E78F4A23E">
+		<action seq="1" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>project/name</mappingpath>
+					<value>/O/name[0]/O/[]</value>
+				</param>
+				<param seq="2" type="i18nstring">
+					<value>model-13</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+	<transaction saved="true" seq="9" timestamp="20171003184013376" uniqueId="8C80312C8C80312C">
+		<action seq="1" type="Modify">
+			<inputparams>
+				<param seq="1" type="handle">
+					<mappingpath>namespace/name</mappingpath>
+					<value>/O/name[0]/O/[Model]</value>
+				</param><param seq="2" type="i18nstring">
+					<value>Model</value>
+				</param>
+			</inputparams>
+			<domchanges/>
+			<result success="t">
+				<outputparams/>
+			</result>
+		</action>
+	</transaction>
+	<transaction event="Save" saved="true" seq="10" timestamp="20171003184018071" uniqueId="7BCA4EED7BCA4EED" user="Administrateur"/>
+</bmtactionlog>
