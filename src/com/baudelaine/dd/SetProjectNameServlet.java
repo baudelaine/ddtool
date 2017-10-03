@@ -62,7 +62,7 @@ public class SetProjectNameServlet extends HttpServlet {
 
 		String content = new String(Files.readAllBytes(path), charset);
 //		String newContent = StringUtils.replace(content, "rNNN", "r1234");
-		String newContent = content.replaceAll("report-\\d{1,}", projectName);
+		String newContent = content.replaceAll("model-\\d{1,}", projectName);
 		Files.write(path, newContent.getBytes(charset));
 		
 		List<Object> result = new ArrayList<Object>();

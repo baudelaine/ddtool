@@ -241,7 +241,7 @@ $projectFileModal.on('shown.bs.modal', function() {
     ].join('');
 
     $(this).find('.modal-body').append(html);
-    $(this).find('#filePath').focus().val("report-N");
+    $(this).find('#filePath').focus().val("model-N");
 
 
 });
