@@ -746,8 +746,8 @@ function buildTable($el, cols, data) {
     $el.bootstrapTable('hideColumn', 'label');
     $el.bootstrapTable('hideColumn', 'recurseCount');
     $el.bootstrapTable('hideColumn', 'addPKRelation');
-    $el.bootstrapTable('hideColumn', 'linker');
-    $el.bootstrapTable('hideColumn', 'linker_ids');
+    // $el.bootstrapTable('hideColumn', 'linker');
+    // $el.bootstrapTable('hideColumn', 'linker_ids');
 
 
     if(activeTab == "Reference"){
