@@ -84,6 +84,8 @@ public class SendQuerySubjectsServlet extends HttpServlet {
 		
 		System.out.println("+++++++++++ query_subjects.size=" + query_subjects.size());
 		
+		List<Object> result = new ArrayList<Object>();
+
 		try{
 			
 			TaskerSVC.start();
@@ -92,7 +94,6 @@ public class SendQuerySubjectsServlet extends HttpServlet {
 			TaskerSVC.Import();
 			TaskerSVC.IICInitNameSpace();
 			
-			List<Object> result = new ArrayList<Object>();
 		
 			gRefMap = new HashMap<String, Integer>();
 			

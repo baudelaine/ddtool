@@ -61,7 +61,7 @@
 								<li><a href="#" id="withPK" onClick="GetQuerySubjectsWithPK(); return false;">with PK</a></li>
 						  </ul> -->
 						</div>
-						<button type="button" onclick="Publish()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Publish model."><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
+						<button type="button" onclick="SetProjectFile()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Publish model."><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
 						<button type="button" onclick="SaveModel()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Save model to server."><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></button>
 						<button type="button" onclick="GetModelList()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Open model from server."><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span></button>
 						<!-- <button type="button" onclick="ExpandAll()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Expand all rows."><span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span></button>						<button type="button" onclick="GetTableData()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Show object in console"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button> -->
@@ -210,6 +210,28 @@
 		  </div>
 		</div>
 		<!-- modelList modal -->
+
+		<!-- projectFile modal -->
+		<div class="modal fade" id="modProjectFile" tabindex="-1" role="dialog" aria-labelledby="modProjectFileLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="modProjectFileLabel">Enter project name before publishing.</h4>
+					</div>
+					<div class="modal-body">
+
+					</div>
+					<div class="modal-footer">
+						<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button> -->
+						<button type="button" class="btn btn-primary" onclick="SetProjectName()"><span class="glyphicon glyphicon-ok aria-hidden="true"></button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove aria-hidden="true"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- projectFile modal -->
 
 		<div>
 

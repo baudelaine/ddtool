@@ -12,6 +12,7 @@ var activeTab = "Final";
 var $activeSubDatasTable;
 var $newRowModal = $('#newRowModal');
 var $modelListModal = $('#modModelList');
+var $projectFileModal = $('#modProjectFile');
 // var url = "js/PROJECT.json";
 
 var relationCols = [];
@@ -220,15 +221,34 @@ $newRowModal.on('show.bs.modal', function (e) {
 $modelListModal.on('shown.bs.modal', function() {
     $(this).find('.modal-body').empty();
     var models = modelList;
-    var list = '<div class="list-group">';
+    var list = '<div class="container-fluid"><div class="row"><div class="list-group">';
 
     $.each(models, function(i, obj){
         list += '<a href="#" class="list-group-item" onClick="OpenModel(' + obj.id + '); return false;">' + obj.name + '</a>';
     });
-    list += '<div class="list-group">';
+    list += '<div class="list-group"></div></div>';
     $(this).find('.modal-body').append(list);
 
-  });
+});
+
+
+$projectFileModal.on('shown.bs.modal', function() {
+    $(this).find('.modal-body').empty();
+    var html = [
+      '<div class="container-fluid"><div class="row"><div class="form-group"><div class="input-group">',
+      '<input type="text" id="filePath" class="form-control">',
+      '</div></div></div></div>',
+    ].join('');
+
+    $(this).find('.modal-body').append(html);
+    $(this).find('#filePath').focus().val("report-N");
+
+
+});
+
+function SetProjectFile(){
+  $projectFileModal.modal('toggle');
+}
 
 $('#modPKTables').change(function () {
     var selectedText = $(this).find("option:selected").val();
@@ -1083,8 +1103,26 @@ function TestDBConnection() {
 
 }
 
-function Publish(){
+function SetProjectName(){
+  var projectName = $projectFileModal.find('#filePath').val();
+  console.log("projectName=" + projectName);
+  $.ajax({
+		type: 'POST',
+		url: "SetProjectName",
+		// dataType: 'json',
+		data: "projectName=" + projectName,
 
+		success: function(data) {
+			Publish();
+		},
+		error: function(data) {
+			showalert("SetProjectName()", "Error when setting projectName.", "alert-danger", "bottom");
+		}
+	});
+
+}
+
+function Publish(){
 	var data = $datasTable.bootstrapTable('getData');
 
   if (data.length == 0) {
