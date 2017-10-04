@@ -504,19 +504,9 @@ function buildSubTable($el, cols, data, parentData){
 
           console.log($(this).bootstrapTable("getData"));
 
-          console.log("row.index=" + row.index);
-          console.log("field=" + field);
-          console.log("newValue=" + newValue);
-          console.log("row.pktable_alias=" + row.pktable_alias);
-
-          if(field.match("fin|ref") && row.pktable_alias == ""){
-            showalert("buildSubTable()", "Empty is not a valid pktable_alias.", "alert-warning", "bottom");
-            return;
-          }
-
           var allowNommageRep = true;
 
-          if(field == "nommageRep"){
+          if(field == "nommageRep" && value == false){
             // interdire de cocher n fois pour un même pkAlias dans un qs donné
             $.each($el.bootstrapTable("getData"), function(i, obj){
               console.log(obj);
@@ -535,6 +525,17 @@ function buildSubTable($el, cols, data, parentData){
 
           var newValue = value == false ? true : false;
           var pkAlias = '[' + row.pktable_alias + ']';
+
+          console.log("row.index=" + row.index);
+          console.log("field=" + field);
+          console.log("newValue=" + newValue);
+          console.log("row.pktable_alias=" + row.pktable_alias);
+
+          if(field.match("fin|ref") && row.pktable_alias == ""){
+            showalert("buildSubTable()", "Empty is not a valid pktable_alias.", "alert-warning", "bottom");
+            return;
+          }
+
 
           if(field == "fin" && newValue == true){
             row.relationship = row.relationship.split(pkAlias).join("[FINAL]." + pkAlias);
