@@ -9,6 +9,7 @@ var $refTab = $("a[href='#Reference']");
 var $finTab = $("a[href='#Final']");
 var $qsTab = $("a[href='#QuerySubject']");
 var activeTab = "Final";
+var previousTab;
 var $activeSubDatasTable;
 var $newRowModal = $('#newRowModal');
 var $modelListModal = $('#modModelList');
@@ -115,6 +116,7 @@ $navTab.on('shown.bs.tab', function(event){
 
 $qsTab.on('shown.bs.tab', function(e) {
   buildTable($datasTable, qsCols, datas, true, fieldCols, "fields");
+  $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref']});
   $datasTable.bootstrapTable('showColumn', 'visible');
   $datasTable.bootstrapTable('showColumn', 'filter');
   $datasTable.bootstrapTable('showColumn', 'label');
@@ -126,10 +128,7 @@ $qsTab.on('shown.bs.tab', function(e) {
 
 $finTab.on('shown.bs.tab', function(e) {
   buildTable($datasTable, qsCols, datas, true, relationCols, "relations");
-  // $datasTable.bootstrapTable("filterBy", {type: ['Final'], key_type: ['F', 'C']});
-  // $datasTable.bootstrapTable('hideColumn', 'fin');
-  // $datasTable.bootstrapTable('showColumn', 'ref');
-  // $datasTable.bootstrapTable("filterBy", {type: ['Final']});
+  $datasTable.bootstrapTable("filterBy", {type: ['Final']});
   $datasTable.bootstrapTable('showColumn', 'operate');
   $datasTable.bootstrapTable('hideColumn', 'visible');
   $datasTable.bootstrapTable('hideColumn', 'filter');
@@ -143,10 +142,7 @@ $finTab.on('shown.bs.tab', function(e) {
 
 $refTab.on('shown.bs.tab', function(e) {
   buildTable($datasTable, qsCols, datas, true, relationCols, "relations");
-  // $datasTable.bootstrapTable("filterBy", {});
-  // $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref'], key_type: ['F','P', 'C']});
-  // $datasTable.bootstrapTable('hideColumn', 'fin');
-  // $datasTable.bootstrapTable('showColumn', 'ref');
+  $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref']});
   $datasTable.bootstrapTable('showColumn', 'operate');
   $datasTable.bootstrapTable('hideColumn', 'visible');
   $datasTable.bootstrapTable('hideColumn', 'filter');
@@ -273,8 +269,6 @@ window.operateRelationEvents = {
       console.log(row);
       console.log(index);
 
-        // alert('You click duplicate action, row: ' + JSON.stringify(row));
-        // $activeSubDatasTable.bootstrapTable("filterBy", {});
         nextIndex = row.index + 1;
         console.log("nextIndex=" + nextIndex);
         var newRow = $.extend({}, row);
@@ -492,9 +486,8 @@ function expandTable($detail, cols, data, parentData) {
 
 function buildSubTable($el, cols, data, parentData){
 
-  console.log("activeTab=" + activeTab);
-
-  // $el.bootstrapTable("filterBy", {});
+  console.log("buildSubTable: activeTab=" + activeTab);
+  console.log("buildSubTable: previousTab=" + previousTab);
 
   $el.bootstrapTable({
       columns: cols,
@@ -611,7 +604,6 @@ function buildSubTable($el, cols, data, parentData){
   });
 
   if(activeTab == "Reference"){
-    // $el.bootstrapTable("filterBy", {key_type: ['F','P', 'C']});
     $el.bootstrapTable('hideColumn', 'fin');
     $el.bootstrapTable('showColumn', 'ref');
     $el.bootstrapTable('showColumn', 'nommageRep');
@@ -619,7 +611,6 @@ function buildSubTable($el, cols, data, parentData){
   }
 
   if(activeTab == "Final"){
-    // $el.bootstrapTable("filterBy", {key_type: ['F', 'C']});
     $el.bootstrapTable('hideColumn', 'ref');
     $el.bootstrapTable('showColumn', 'fin');
     $el.bootstrapTable('hideColumn', 'nommageRep');
@@ -747,13 +738,13 @@ function buildTable($el, cols, data) {
     // $el.bootstrapTable('hideColumn', 'linker');
     // $el.bootstrapTable('hideColumn', 'linker_ids');
 
+    console.log("in buildTable: activeTab="+activeTab);
+    console.log("in buildTable: previousTab="+previousTab);
 
     if(activeTab == "Reference"){
-      // $el.bootstrapTable("filterBy", {type: ['Final', 'Ref']});
     }
 
     if(activeTab == "Final"){
-      //$el.bootstrapTable("filterBy", {type: ['Final']});
     }
 
     if(activeTab == "Query Subject"){
@@ -927,13 +918,6 @@ function GetQuerySubjects(table_name, table_alias, type, linker_id) {
 
   });
 
-  if(activeTab == 'Final'){
-    // $('#DatasTable').bootstrapTable("filterBy", {type: 'Final', key_type: 'F'});
-  }
-  if(activeTab == 'Reference'){
-    // $('#DatasTable').bootstrapTable("filterBy", {type: ['Final', 'Ref'], key_type: ['F', 'P']});
-  }
-
 }
 
 function RemoveFilter(){
@@ -945,7 +929,6 @@ function RemoveFilter(){
 
 function ApplyFilter(){
   if(activeTab == 'Final'){
-    // $('#DatasTable').bootstrapTable("filterBy", {type: 'Final', key_type: 'F'});
     if($activeSubDatasTable != undefined){
       $activeSubDatasTable.bootstrapTable("filterBy", {key_type: 'F'});
     }
