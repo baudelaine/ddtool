@@ -9,6 +9,7 @@ var $refTab = $("a[href='#Reference']");
 var $finTab = $("a[href='#Final']");
 var $qsTab = $("a[href='#QuerySubject']");
 var activeTab = "Final";
+var previousTab;
 var $activeSubDatasTable;
 var $newRowModal = $('#newRowModal');
 var $modelListModal = $('#modModelList');
@@ -48,28 +49,28 @@ qsCols.push({field:"type", title: "type", sortable: true});
 qsCols.push({field:"visible", title: "visible", formatter: "boolFormatter", align: "center", sortable: false});
 qsCols.push({field:"filter", title: "filter", editable: {type: "textarea"}, sortable: true});
 qsCols.push({field:"label", title: "label", editable: {type: "textarea"}, sortable: true});
-qsCols.push({field:"recurseCount", title: '<i class="glyphicon glyphicon-repeat" title="Set recurse count"></i>', editable: {
-  type: "select",
-  value: 1,
-  // source: [
-  //   {value: 1, text: 1},
-  //   {value: 2, text: 2},
-  //   {value: 3, text: 3},
-  //   {value: 4, text: 4},
-  //   {value: 5, text: 5}
-  //   ],
-  source: function(){
-    var result = [];
-    for(var i = 1; i < 21; i++){
-      var option = {};
-      option.value = i;
-      option.text = i;
-      result.push(option);
-    }
-    return result;
-  },
-  align: "center"}
-});
+  qsCols.push({field:"recurseCount", title: '<i class="glyphicon glyphicon-repeat" title="Set recurse count"></i>', editable: {
+    type: "select",
+    value: 1,
+  //   source: [
+  //     {value: 1, text: 1},
+  //     {value: 2, text: 2},
+  //     {value: 3, text: 3},
+  //     {value: 4, text: 4},
+  //     {value: 5, text: 5}
+  //     ],
+    source: function(){
+      var result = [];
+      for(var i = 1; i < 21; i++){
+        var option = {};
+        option.value = i;
+        option.text = i;
+        result.push(option);
+      }
+      return result;
+    },
+    align: "center"}
+  });
 qsCols.push({field:"addPKRelation", title: '<i class="glyphicon glyphicon-magnet" title="Add PK relation(s)"></i>', formatter: "addPKRelationFormatter", align: "center"});
 qsCols.push({field:"addRelation", title: '<i class="glyphicon glyphicon-plus-sign" title="Add new relation"></i>', formatter: "addRelationFormatter", align: "center"});
 qsCols.push({field:"linker", formatter: "boolFormatter", title: "linker", align: "center"});
@@ -115,6 +116,7 @@ $navTab.on('shown.bs.tab', function(event){
 
 $qsTab.on('shown.bs.tab', function(e) {
   buildTable($datasTable, qsCols, datas, true, fieldCols, "fields");
+  $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref']});
   $datasTable.bootstrapTable('showColumn', 'visible');
   $datasTable.bootstrapTable('showColumn', 'filter');
   $datasTable.bootstrapTable('showColumn', 'label');
@@ -126,10 +128,7 @@ $qsTab.on('shown.bs.tab', function(e) {
 
 $finTab.on('shown.bs.tab', function(e) {
   buildTable($datasTable, qsCols, datas, true, relationCols, "relations");
-  // $datasTable.bootstrapTable("filterBy", {type: ['Final'], key_type: ['F', 'C']});
-  // $datasTable.bootstrapTable('hideColumn', 'fin');
-  // $datasTable.bootstrapTable('showColumn', 'ref');
-  // $datasTable.bootstrapTable("filterBy", {type: ['Final']});
+  $datasTable.bootstrapTable("filterBy", {type: ['Final']});
   $datasTable.bootstrapTable('showColumn', 'operate');
   $datasTable.bootstrapTable('hideColumn', 'visible');
   $datasTable.bootstrapTable('hideColumn', 'filter');
@@ -138,15 +137,14 @@ $finTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('hideColumn', 'addPKRelation');
   $datasTable.bootstrapTable('hideColumn', 'nommageRep');
+  $datasTable.bootstrapTable('showColumn', 'linker');
+  $datasTable.bootstrapTable('showColumn', 'linker_ids');
 
 });
 
 $refTab.on('shown.bs.tab', function(e) {
   buildTable($datasTable, qsCols, datas, true, relationCols, "relations");
-  // $datasTable.bootstrapTable("filterBy", {});
-  // $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref'], key_type: ['F','P', 'C']});
-  // $datasTable.bootstrapTable('hideColumn', 'fin');
-  // $datasTable.bootstrapTable('showColumn', 'ref');
+  $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref']});
   $datasTable.bootstrapTable('showColumn', 'operate');
   $datasTable.bootstrapTable('hideColumn', 'visible');
   $datasTable.bootstrapTable('hideColumn', 'filter');
@@ -155,6 +153,8 @@ $refTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('showColumn', 'recurseCount');
   $datasTable.bootstrapTable('showColumn', 'nommageRep');
+  $datasTable.bootstrapTable('showColumn', 'linker');
+  $datasTable.bootstrapTable('showColumn', 'linker_ids');
 });
 
 $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValue, $el) {
@@ -273,8 +273,6 @@ window.operateRelationEvents = {
       console.log(row);
       console.log(index);
 
-        // alert('You click duplicate action, row: ' + JSON.stringify(row));
-        // $activeSubDatasTable.bootstrapTable("filterBy", {});
         nextIndex = row.index + 1;
         console.log("nextIndex=" + nextIndex);
         var newRow = $.extend({}, row);
@@ -413,9 +411,9 @@ function indexFormatter(value, row, index) {
   return index;
 }
 
-function recurseCountFormatter(value, row, index) {
-  return 1;
-}
+// function recurseCountFormatter(value, row, index) {
+//   return 1;
+// }
 
 function modValidate(){
 
@@ -492,9 +490,8 @@ function expandTable($detail, cols, data, parentData) {
 
 function buildSubTable($el, cols, data, parentData){
 
-  console.log("activeTab=" + activeTab);
-
-  // $el.bootstrapTable("filterBy", {});
+  console.log("buildSubTable: activeTab=" + activeTab);
+  console.log("buildSubTable: previousTab=" + previousTab);
 
   $el.bootstrapTable({
       columns: cols,
@@ -511,19 +508,20 @@ function buildSubTable($el, cols, data, parentData){
 
           console.log($(this).bootstrapTable("getData"));
 
-          console.log("row.index=" + row.index);
-          console.log("field=" + field);
-          console.log("newValue=" + newValue);
-          console.log("row.pktable_alias=" + row.pktable_alias);
-
-          if(field.match("fin|ref") && row.pktable_alias == ""){
-            showalert("buildSubTable()", "Empty is not a valid pktable_alias.", "alert-warning", "bottom");
-            return;
-          }
+          console.log("buildSubTable: row.ref=" + row.ref);
 
           var allowNommageRep = true;
 
-          if(field == "nommageRep"){
+          if(field == "nommageRep" && !row.ref){
+            allowNommageRep = false;
+          }
+
+          if(!allowNommageRep){
+            showalert("buildSubTable()", "Ref for " + row.pktable_alias + " has to be checked first.", "alert-warning", "bottom");
+            return;
+          }
+
+          if(field == "nommageRep" && value == false){
             // interdire de cocher n fois pour un même pkAlias dans un qs donné
             $.each($el.bootstrapTable("getData"), function(i, obj){
               console.log(obj);
@@ -542,6 +540,17 @@ function buildSubTable($el, cols, data, parentData){
 
           var newValue = value == false ? true : false;
           var pkAlias = '[' + row.pktable_alias + ']';
+
+          console.log("row.index=" + row.index);
+          console.log("field=" + field);
+          console.log("newValue=" + newValue);
+          console.log("row.pktable_alias=" + row.pktable_alias);
+
+          if(field.match("fin|ref") && row.pktable_alias == ""){
+            showalert("buildSubTable()", "Empty is not a valid pktable_alias.", "alert-warning", "bottom");
+            return;
+          }
+
 
           if(field == "fin" && newValue == true){
             row.relationship = row.relationship.split(pkAlias).join("[FINAL]." + pkAlias);
@@ -594,6 +603,14 @@ function buildSubTable($el, cols, data, parentData){
           newRow.relationship = newRow.relationship.replace(/ = \[FINAL\]\./g, " = ");
           newRow.relationship = newRow.relationship.replace(/ = \[REF\]\./g, " = ");
           newRow.nommageRep = false;
+          if(newRow.key_type == "F"){
+            newRow.key_name = "DK_" + newRow.pktable_name + "_" + parentData.table_alias;
+            newRow._id = newRow.key_name + "F";
+          }
+          if(newRow.key_type == "P"){
+            newRow.key_name = "DK_" + parentData.table_alias + "_" + newRow.pktable_name;
+            newRow._id = newRow.key_name + "P";
+          }
           console.log("newRow");
           console.log(newRow);
           $el.bootstrapTable('insertRow', {index: nextIndex, row: newRow});
@@ -611,7 +628,6 @@ function buildSubTable($el, cols, data, parentData){
   });
 
   if(activeTab == "Reference"){
-    // $el.bootstrapTable("filterBy", {key_type: ['F','P', 'C']});
     $el.bootstrapTable('hideColumn', 'fin');
     $el.bootstrapTable('showColumn', 'ref');
     $el.bootstrapTable('showColumn', 'nommageRep');
@@ -619,7 +635,6 @@ function buildSubTable($el, cols, data, parentData){
   }
 
   if(activeTab == "Final"){
-    // $el.bootstrapTable("filterBy", {key_type: ['F', 'C']});
     $el.bootstrapTable('hideColumn', 'ref');
     $el.bootstrapTable('showColumn', 'fin');
     $el.bootstrapTable('hideColumn', 'nommageRep');
@@ -692,7 +707,7 @@ function buildTable($el, cols, data) {
         detailView: true,
         onClickCell: function (field, value, row, $element){
 
-          RemoveFilter();
+          // RemoveFilter();
 
           if(field == "visible"){
             var newValue = value == false ? true : false;
@@ -744,22 +759,22 @@ function buildTable($el, cols, data) {
     $el.bootstrapTable('hideColumn', 'label');
     $el.bootstrapTable('hideColumn', 'recurseCount');
     $el.bootstrapTable('hideColumn', 'addPKRelation');
-    // $el.bootstrapTable('hideColumn', 'linker');
-    // $el.bootstrapTable('hideColumn', 'linker_ids');
+    $el.bootstrapTable('hideColumn', 'linker');
+    $el.bootstrapTable('hideColumn', 'linker_ids');
 
+    console.log("in buildTable: activeTab="+activeTab);
+    console.log("in buildTable: previousTab="+previousTab);
 
     if(activeTab == "Reference"){
-      // $el.bootstrapTable("filterBy", {type: ['Final', 'Ref']});
     }
 
     if(activeTab == "Final"){
-      //$el.bootstrapTable("filterBy", {type: ['Final']});
     }
 
     if(activeTab == "Query Subject"){
     }
 
-    ApplyFilter();
+    // ApplyFilter();
 
 }
 
@@ -927,13 +942,6 @@ function GetQuerySubjects(table_name, table_alias, type, linker_id) {
 
   });
 
-  if(activeTab == 'Final'){
-    // $('#DatasTable').bootstrapTable("filterBy", {type: 'Final', key_type: 'F'});
-  }
-  if(activeTab == 'Reference'){
-    // $('#DatasTable').bootstrapTable("filterBy", {type: ['Final', 'Ref'], key_type: ['F', 'P']});
-  }
-
 }
 
 function RemoveFilter(){
@@ -945,7 +953,6 @@ function RemoveFilter(){
 
 function ApplyFilter(){
   if(activeTab == 'Final'){
-    // $('#DatasTable').bootstrapTable("filterBy", {type: 'Final', key_type: 'F'});
     if($activeSubDatasTable != undefined){
       $activeSubDatasTable.bootstrapTable("filterBy", {key_type: 'F'});
     }
