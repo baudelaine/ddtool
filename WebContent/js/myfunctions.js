@@ -23,7 +23,15 @@ relationCols.push({field:"_id", title: "_id", sortable: true});
 relationCols.push({field:"key_name", title: "key_name", sortable: true});
 relationCols.push({field:"key_type", title: "key_type", sortable: true});
 relationCols.push({field:"pktable_name", title: "pktable_name", sortable: true});
-relationCols.push({field:"pktable_alias", title: "pktable_alias", sortable: true, editable: {type: "text"}});
+relationCols.push({class:"pktable_alias", field:"pktable_alias", title: "pktable_alias", sortable: true, editable: {
+  type: "text"
+
+  // ,
+  // validate: function(value){
+  //       alert('value: ' + value);
+  // }
+}
+});
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"fin", title: "fin", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"ref", title: "ref", formatter: "boolFormatter", align: "center"});
@@ -34,6 +42,10 @@ relationCols.push({field:"remove", title: '<i class="glyphicon glyphicon-trash">
 
 // relationCols.push({field:"linker", formatter: "boolFormatter", align: "center", title: "linker"});
 // relationCols.push({field:"linker_ids", title: "linker_ids"});
+
+$('.pktable_alias .editable').on('update', function(e, editable) {
+    alert('new value: ' + editable.value);
+});
 
 var newRelationCols = [];
 
@@ -107,11 +119,22 @@ $tableList.change(function () {
 		$('#alias').val(selectedText);
 });
 
-$navTab.on('shown.bs.tab', function(event){
+// $navTab.on('shown.bs.tab', function(event){
+//     activeTab = $(event.target).text();         // active tab
+// 		console.log("Event shown.bs.tab: activeTab=" + activeTab);
+//     previousTab = $(event.relatedTarget).text();  // previous tab
+// 		console.log("Event shown.bs.tab: previousTab=" + previousTab);
+// });
+
+$('#pktable_alias').on('save', function(e, params) {
+    alert('Saved value: ' + params.newValue);
+});
+
+$navTab.on('show.bs.tab', function(event){
     activeTab = $(event.target).text();         // active tab
-		console.log("activeTab=" + activeTab);
+		console.log("Event show.bs.tab: activeTab=" + activeTab);
     previousTab = $(event.relatedTarget).text();  // previous tab
-		console.log("previousTab=" + previousTab);
+		console.log("Event show.bs.tab: previousTab=" + previousTab);
 });
 
 $qsTab.on('shown.bs.tab', function(e) {
@@ -167,7 +190,9 @@ $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValu
 });
 
 $datasTable.on('reset-view.bs.table', function(){
-  // console.log("++++++++++++++on passe dans reset-view");
+  console.log("++++++++++++++on passe dans reset-view");
+  console.log("activeTab=" + activeTab);
+  console.log("previousTab=" + previousTab);
   if($activeSubDatasTable != undefined){
     var v = $activeSubDatasTable.bootstrapTable('getData');
     // console.log("+++++++++++ $activeSubDatasTable");
@@ -180,10 +205,21 @@ $datasTable.on('reset-view.bs.table', function(){
       // console.log(row.ref);
       // console.log("row.fin");
       // console.log(row.fin);
-      if(row.fin == true || row.ref == true){
+      if(activeTab == "Reference" && !row.ref){
+        $tableRows.eq(i).find('a').eq(3).editable('disable');
+        // $tableRows.eq(i).find('a').editable('disable');
+      }
+      if(row.fin || row.ref){
         $tableRows.eq(i).find('a').eq(0).editable('disable');
         // $tableRows.eq(i).find('a').editable('disable');
       }
+      if(row.fin && activeTab == "Reference"){
+        $tableRows.eq(i).find('a').eq(2).editable('disable');
+      }
+      if(row.ref && activeTab == "Final"){
+        $tableRows.eq(i).find('a').eq(2).editable('disable');
+      }
+
     });
   }
 });
@@ -509,6 +545,16 @@ function buildSubTable($el, cols, data, parentData){
           console.log($(this).bootstrapTable("getData"));
 
           console.log("buildSubTable: row.ref=" + row.ref);
+
+          if(field == "fin" && row.ref){
+            showalert("buildSubTable()", row._id + " is already checked as REF.", "alert-warning", "bottom");
+            return;
+          }
+
+          if(field == "ref" && row.fin){
+            showalert("buildSubTable()", row._id + " is already checked as FINAL.", "alert-warning", "bottom");
+            return;
+          }
 
           var allowNommageRep = true;
 
