@@ -15,6 +15,7 @@ var $newRowModal = $('#newRowModal');
 var $modelListModal = $('#modModelList');
 var $projectFileModal = $('#modProjectFile');
 // var url = "js/PROJECT.json";
+var qs2rm = {qs: "", row: "", qsList: [], removed: false};
 
 var relationCols = [];
 // relationCols.push({field:"checkbox", checkbox: "true"});
@@ -23,7 +24,7 @@ relationCols.push({field:"_id", title: "_id", sortable: true});
 relationCols.push({field:"key_name", title: "key_name", sortable: true});
 relationCols.push({field:"key_type", title: "key_type", sortable: true});
 relationCols.push({field:"pktable_name", title: "pktable_name", sortable: true});
-relationCols.push({field:"pktable_alias", title: "pktable_alias", sortable: true, editable: {type: "text"}});
+relationCols.push({field:"pktable_alias", title: "pktable_alias", class: "pktable_alias", editable: {type: "text"}, sortable: true, events: "pktable_aliasEvents"});
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"fin", title: "fin", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"ref", title: "ref", formatter: "boolFormatter", align: "center"});
@@ -34,6 +35,20 @@ relationCols.push({field:"remove", title: '<i class="glyphicon glyphicon-trash">
 
 // relationCols.push({field:"linker", formatter: "boolFormatter", align: "center", title: "linker"});
 // relationCols.push({field:"linker_ids", title: "linker_ids"});
+
+window.pktable_aliasEvents = {
+      'change .pktable_alias': function (e, value, row, index) {
+        alert("value=" + value);
+      }
+}
+
+// function pktable_aliasFormatter(value, row, index){
+//   return '<a href="#" id="pktable_alias">' + value + 'superuser</a>'
+// }
+//
+// $('pktable_alias .editable').on('update', function(e, editable) {
+//     alert('new value: ' + editable.value);
+// });
 
 var newRelationCols = [];
 
@@ -107,11 +122,22 @@ $tableList.change(function () {
 		$('#alias').val(selectedText);
 });
 
-$navTab.on('shown.bs.tab', function(event){
+// $navTab.on('shown.bs.tab', function(event){
+//     activeTab = $(event.target).text();         // active tab
+// 		console.log("Event shown.bs.tab: activeTab=" + activeTab);
+//     previousTab = $(event.relatedTarget).text();  // previous tab
+// 		console.log("Event shown.bs.tab: previousTab=" + previousTab);
+// });
+
+$('#pktable_alias').on('save', function(e, params) {
+    alert('Saved value: ' + params.newValue);
+});
+
+$navTab.on('show.bs.tab', function(event){
     activeTab = $(event.target).text();         // active tab
-		console.log("activeTab=" + activeTab);
+		console.log("Event show.bs.tab: activeTab=" + activeTab);
     previousTab = $(event.relatedTarget).text();  // previous tab
-		console.log("previousTab=" + previousTab);
+		console.log("Event show.bs.tab: previousTab=" + previousTab);
 });
 
 $qsTab.on('shown.bs.tab', function(e) {
@@ -162,12 +188,22 @@ $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValu
     var newValue = row.pktable_alias;
     if($activeSubDatasTable != undefined){
       updateCell($activeSubDatasTable, row.index, 'relationship', row.relationship.split("[" + oldValue + "]").join("[" + newValue + "]"));
+      if((row.key_name.startsWith("DK_") || row.key_name.startsWith("CK_")) && row.key_type == "F"){
+        updateCell($activeSubDatasTable, row.index, '_id', row._id.replace(row._id.split("_")[1], newValue));
+        updateCell($activeSubDatasTable, row.index, 'key_name', row.key_name.replace(row.key_name.split("_")[1], newValue));
+      }
+      if((row.key_name.startsWith("DK_") || row.key_name.startsWith("CK_")) && row.key_type == "P"){
+        updateCell($activeSubDatasTable, row.index, '_id', row._id.replace(row._id.split("_")[2], newValue));
+        updateCell($activeSubDatasTable, row.index, 'key_name', row.key_name.replace(row.key_name.split("_")[2], newValue));
+      }
     }
   }
 });
 
 $datasTable.on('reset-view.bs.table', function(){
-  // console.log("++++++++++++++on passe dans reset-view");
+  console.log("++++++++++++++on passe dans reset-view");
+  console.log("activeTab=" + activeTab);
+  console.log("previousTab=" + previousTab);
   if($activeSubDatasTable != undefined){
     var v = $activeSubDatasTable.bootstrapTable('getData');
     // console.log("+++++++++++ $activeSubDatasTable");
@@ -180,10 +216,23 @@ $datasTable.on('reset-view.bs.table', function(){
       // console.log(row.ref);
       // console.log("row.fin");
       // console.log(row.fin);
-      if(row.fin == true || row.ref == true){
+      if(activeTab == "Reference" && !row.ref){
+        $tableRows.eq(i).find('a').eq(3).editable('disable');
+        // $tableRows.eq(i).find('a').editable('disable');
+      }
+      if(row.fin || row.ref){
         $tableRows.eq(i).find('a').eq(0).editable('disable');
         // $tableRows.eq(i).find('a').editable('disable');
       }
+      if(row.fin && activeTab == "Reference"){
+        $tableRows.eq(i).find('a').eq(2).editable('disable');
+        $tableRows.eq(i).find('a').eq(1).editable('disable');
+      }
+      if(row.ref && activeTab == "Final"){
+        $tableRows.eq(i).find('a').eq(2).editable('disable');
+        $tableRows.eq(i).find('a').eq(1).editable('disable');
+      }
+
     });
   }
 });
@@ -246,6 +295,7 @@ $projectFileModal.on('shown.bs.modal', function() {
 
 
 });
+
 
 
 $('#modPKTables').change(function () {
@@ -501,14 +551,45 @@ function buildSubTable($el, cols, data, parentData){
       search: false,
       checkboxHeader: false,
       idField: "index",
+      onEditableInit: function(){
+        //Fired when all columns was initialized by $().editable() method.
+      },
+      onEditableShown: function(editable, field, row, $el){
+        //Fired when an editable cell is opened for edits.
+      },
+      onEditableHidden: function(field, row, $el, reason){
+        //Fired when an editable cell is hidden / closed.
+      },
+      onEditableSave: function (field, row, oldValue, editable) {
+        //Fired when an editable cell is saved.
+        console.log("---------- buildSubTable: onEditableSave -------------");
+        console.log("editable=");
+        console.log(editable);
+        console.log("field=");
+        console.log(field);
+        console.log("row=");
+        console.log(row);
+        console.log("oldValue=");
+        console.log(oldValue);
+        console.log("---------- buildSubTable: onEditableSave -------------");
+      },
       onClickCell: function (field, value, row, $element){
-
 
         if(field.match("traduction|visible|timezone|fin|ref|nommageRep")){
 
           console.log($(this).bootstrapTable("getData"));
 
           console.log("buildSubTable: row.ref=" + row.ref);
+
+          if(field == "fin" && row.ref){
+            showalert("buildSubTable()", row._id + " is already checked as REF.", "alert-warning", "bottom");
+            return;
+          }
+
+          if(field == "ref" && row.fin){
+            showalert("buildSubTable()", row._id + " is already checked as FINAL.", "alert-warning", "bottom");
+            return;
+          }
 
           var allowNommageRep = true;
 
@@ -538,6 +619,31 @@ function buildSubTable($el, cols, data, parentData){
             return;
           }
 
+          if(field.match("fin|ref") && value == true){
+            RemoveKeys(row, parentData);
+            return;
+          }
+
+          // console.log("+++++++ qs2rm +++++++");
+          // console.log(qs2rm.row);
+          // console.log(qs2rm.qsList);
+          // console.log(qs2rm.removed);
+          // console.log("+++++++ qs2rm +++++++");
+          //
+          // if(!qs2rm.removed){
+          //   return;
+          // }
+          //
+          // if(field.match("fin|ref") && qs2rm.removed){
+          //   var linked = false;
+          //   $.each(parentData.relations, function(i, obj){
+          //     if(obj.fin || obj.ref){
+          //       linked = true;
+          //     }
+          //   });
+          //   updateCell($datasTable, parentData.index, "linker", linked);
+          // }
+
           var newValue = value == false ? true : false;
           var pkAlias = '[' + row.pktable_alias + ']';
 
@@ -545,6 +651,7 @@ function buildSubTable($el, cols, data, parentData){
           console.log("field=" + field);
           console.log("newValue=" + newValue);
           console.log("row.pktable_alias=" + row.pktable_alias);
+
 
           if(field.match("fin|ref") && row.pktable_alias == ""){
             showalert("buildSubTable()", "Empty is not a valid pktable_alias.", "alert-warning", "bottom");
@@ -565,6 +672,7 @@ function buildSubTable($el, cols, data, parentData){
             row.relationship = row.relationship.split("[REF]." + pkAlias).join(pkAlias);
           }
 
+
           updateCell($el, row.index, field, newValue);
 
           if(field == "fin" && newValue == true){
@@ -578,16 +686,6 @@ function buildSubTable($el, cols, data, parentData){
             updateCell($datasTable, parentData.index, "linker", true);
           }
 
-          if(field.match("fin|ref") && newValue == false){
-            RemoveKeys(row, parentData);
-            var linked = false;
-            $.each(parentData.relations, function(i, obj){
-              if(obj.fin || obj.ref){
-                linked = true;
-              }
-            });
-            updateCell($datasTable, parentData.index, "linker", linked);
-          }
 
         }
 
@@ -600,8 +698,9 @@ function buildSubTable($el, cols, data, parentData){
           newRow.pktable_alias = "";
           newRow.fin = false;
           newRow.ref = false;
-          newRow.relationship = newRow.relationship.replace(/ = \[FINAL\]\./g, " = ");
-          newRow.relationship = newRow.relationship.replace(/ = \[REF\]\./g, " = ");
+          newRow.relationship = newRow.relationship.replace(/\s{1,}=\s{1,}\[FINAL\]\./g, " = ");
+          newRow.relationship = newRow.relationship.replace(/\s{1,}=\s{1,}\[REF\]\./g, " = ");
+          newRow.relationship = newRow.relationship.split("[" + row.pktable_alias + "]").join("[]");
           newRow.nommageRep = false;
           if(newRow.key_type == "F"){
             newRow.key_name = "DK_" + newRow.pktable_name + "_" + parentData.table_alias;
@@ -644,9 +743,10 @@ function buildSubTable($el, cols, data, parentData){
 
 }
 
-function RemoveKeys(o){
+function RemoveKeys(o, qs){
 
         var indexes2rm = [];
+        var row = o;
 
         var recurse = function(o){
                 var tableData = $datasTable.bootstrapTable("getData");
@@ -683,14 +783,54 @@ function RemoveKeys(o){
         };
         recurse(o);
 
-        $datasTable.bootstrapTable('remove', {
+        $("#removeKeysModal").modal('toggle');
+        $("#removeKeysModal").find('.modal-body').empty();
+        var html = '<div class="container-fluid"><div class="row"><div class="list-group">';
+
+        $.each(indexes2rm, function(i, obj){
+            html += '<a href="#" class="list-group-item">' + obj + '</a>';
+        });
+        html += '<div class="list-group"></div></div>';
+
+        $("#removeKeysModal").find('.modal-body').append(html);
+
+        qs2rm.qs = qs;
+        qs2rm.row = row;
+        qs2rm.qsList = indexes2rm;
+        qs2rm.removed = false;
+
+}
+
+function RemoveKeysAccepted(){
+  if(qs2rm != undefined && $activeSubDatasTable != undefined){
+    console.log("qs2rm.row.index="+qs2rm.row.index);
+    console.log("qs2rm.row.fin="+qs2rm.row.fin);
+    if(qs2rm.row.fin){
+     updateCell($activeSubDatasTable, qs2rm.row.index, "fin", false);
+    }
+    if(qs2rm.row.ref){
+     updateCell($activeSubDatasTable, qs2rm.row.index, "ref", true);
+    }
+
+    var linked = false;
+    $.each(qs2rm.qs.relations, function(i, obj){
+      if(obj.fin || obj.ref){
+        linked = true;
+      }
+    });
+    updateCell($datasTable, qs2rm.qs.index, "linker", linked);
+
+    $datasTable.bootstrapTable('remove', {
       field: '_id',
-      values: indexes2rm
-  });
+      values: qs2rm.qsList
+    });
+    qs2rm.removed = true;
+
+  }
+  $("#removeKeysModal").modal('toggle');
 }
 
 function buildTable($el, cols, data) {
-
 
     $el.bootstrapTable({
         columns: cols,
