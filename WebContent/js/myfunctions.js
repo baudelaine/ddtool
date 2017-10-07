@@ -833,7 +833,7 @@ function RemoveKeysAccepted(){
      updateCell($activeSubDatasTable, qs2rm.row.index, "fin", false);
     }
     if(qs2rm.row.ref){
-     updateCell($activeSubDatasTable, qs2rm.row.index, "ref", true);
+     updateCell($activeSubDatasTable, qs2rm.row.index, "ref", false);
     }
 
     var linked = false;
