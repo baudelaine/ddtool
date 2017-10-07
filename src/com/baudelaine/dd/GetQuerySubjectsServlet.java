@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
@@ -145,9 +147,19 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	protected List<Field> getFields() throws SQLException{
 		
 //		Map<String, Field> result = new HashMap<String, Field>();
+		
+		ResultSet rst = metaData.getExportedKeys(con.getCatalog(), schema, table);
+	    Set<String> pks = new HashSet<String>();
+	    
+	    while (rst.next()) {
+	    	pks.add(rst.getString("PKCOLUMN_NAME"));
+	    }
+
+        if(rst != null){rst.close();}
+		
 		List<Field> result = new ArrayList<Field>();
 		
-        ResultSet rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
+        rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
         
         while (rst.next()) {
         	String field_name = rst.getString("COLUMN_NAME");
@@ -157,9 +169,14 @@ public class GetQuerySubjectsServlet extends HttpServlet {
         	field.setField_name(field_name);
         	field.setField_type(field_type);
         	field.set_id(field_name + field_type);
+        	if(pks.contains(rst.getString("COLUMN_NAME"))){
+    			field.setPk(true);
+    		}
         	result.add(field);
         }
-		
+
+        if(rst != null){rst.close();}
+        
 		return result;
 		
 	}

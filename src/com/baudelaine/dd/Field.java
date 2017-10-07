@@ -6,6 +6,7 @@ public class Field {
 	String _ref = null;
 	String field_name = "";
 	String field_type = "";
+	boolean pk = false;
 	String label = "";
 	boolean traduction = false;
 	boolean visible = false;
@@ -35,6 +36,12 @@ public class Field {
 	}
 	public void setField_type(String field_type) {
 		this.field_type = field_type;
+	}
+	public boolean isPk() {
+		return pk;
+	}
+	public void setPk(boolean pk) {
+		this.pk = pk;
 	}
 	public String getLabel() {
 		return label;

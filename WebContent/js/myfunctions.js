@@ -188,14 +188,6 @@ $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValu
     var newValue = row.pktable_alias;
     if($activeSubDatasTable != undefined){
       updateCell($activeSubDatasTable, row.index, 'relationship', row.relationship.split("[" + oldValue + "]").join("[" + newValue + "]"));
-      if((row.key_name.startsWith("DK_") || row.key_name.startsWith("CK_")) && row.key_type == "F"){
-        updateCell($activeSubDatasTable, row.index, '_id', row._id.replace(row._id.split("_")[1], newValue));
-        updateCell($activeSubDatasTable, row.index, 'key_name', row.key_name.replace(row.key_name.split("_")[1], newValue));
-      }
-      if((row.key_name.startsWith("DK_") || row.key_name.startsWith("CK_")) && row.key_type == "P"){
-        updateCell($activeSubDatasTable, row.index, '_id', row._id.replace(row._id.split("_")[2], newValue));
-        updateCell($activeSubDatasTable, row.index, 'key_name', row.key_name.replace(row.key_name.split("_")[2], newValue));
-      }
     }
   }
 });
@@ -296,21 +288,33 @@ $projectFileModal.on('shown.bs.modal', function() {
 
 });
 
+$('#modKeyType').change(function () {
+  updateKeyName();
+});
 
+function updateKeyName(){
+  var keyType = $('#modKeyType').find("option:selected").val();
+  var newText = 'CK_';
+  if(keyType == "P"){
+   newText += $('#modQuerySubject').text().split(" - ")[0] + '_' + $('#modPKTableAlias').val();
+  }
+  if(keyType == "F"){
+   newText +=  $('#modPKTableAlias').val() + '_' + $('#modQuerySubject').text().split(" - ")[0];
+  }
+  $('#modKeyName').val(newText);
+}
 
 $('#modPKTables').change(function () {
     var selectedText = $(this).find("option:selected").val();
 		$('#modPKTableAlias').val(selectedText);
-    var newText = 'CK_' + $('#modQuerySubject').text().split(" - ")[0] + '_' + selectedText;
-    $('#modKeyName').val(newText);
+    updateKeyName();
     // var relationship = $('#modRelationship').text() + "[" + selectedText + "].[]";
     // $('#modRelationship').val(relationship);
     ChooseField($('#modPKColumn'), selectedText);
 });
 
 $('#modPKTableAlias').change(function () {
-    var newText = 'CK_' + $('#modQuerySubject').text().split(" - ")[0] + '_' + $('#modPKTableAlias').val();
-    $('#modKeyName').val(newText);
+  updateKeyName();
     // var relationship = $('#modRelationship').text() + "[" + $('#modPKTableAlias').val() + "].[]";
     // $('#modRelationship').val(relationship);
 });
@@ -500,8 +504,8 @@ function modValidate(){
   relation.fin = false;
   relation.ref = false;
   relation.withPK = false;
-  seq.column_name = $('#modColumn').find("option:selected").text();
-  seq.pkcolumn_name = $('#modPKColumn').find("option:selected").text();
+  seq.column_name = $('#modColumn').find("option:selected").val();
+  seq.pkcolumn_name = $('#modPKColumn').find("option:selected").val();
   seq.key_seq = 1;
   relation.seqs = [];
   relation.seqs.push(seq);
@@ -572,6 +576,21 @@ function buildSubTable($el, cols, data, parentData){
         console.log("oldValue=");
         console.log(oldValue);
         console.log("---------- buildSubTable: onEditableSave -------------");
+
+        var newValue = row._id.substr(0,3);
+        if(newValue.match("DK_|CK_")){
+          if(row.key_type == "F"){
+            newValue += row.pktable_alias + "_" + parentData.table_alias;
+            updateCell($activeSubDatasTable, row.index, '_id', newValue + "F" );
+            updateCell($activeSubDatasTable, row.index, 'key_name', newValue);
+          }
+          if(row.key_type == "P"){
+            newValue += parentData.table_alias + "_" +  row.pktable_alias;
+            updateCell($activeSubDatasTable, row.index, '_id', newValue + "P" );
+            updateCell($activeSubDatasTable, row.index, 'key_name', newValue);
+          }
+        }
+
       },
       onClickCell: function (field, value, row, $element){
 
@@ -872,7 +891,7 @@ function buildTable($el, cols, data) {
               // $('#modQuerySubject').selectpicker('val', qs);
 
               $('#modQuerySubject').text(qs);
-              $('#modKeyName').val("CK_" + row.table_alias);
+              $('#modKeyName').val("CK_");
               $('#modPKTableAlias').val("");
               ChooseField($('#modColumn'), row._id);
             }
@@ -1151,12 +1170,17 @@ function ChooseTable(table) {
 function ChooseField(table, id){
   table.empty();
 
-  var data = $datasTable.bootstrapTable('getData');
-  $.each(data, function(i, obj){
+  var datas = $datasTable.bootstrapTable('getData');
+  $.each(datas, function(i, obj){
     if(obj._id == id){
       console.log("!!!!!!!!!!" + obj._id);
       $.each(obj.fields, function(j, field){
-        table.append('<option class="fontsize">' + field.field_name + '</option>');
+        var icon = "";
+        console.log("field.pk="+field.pk);
+        if(field.pk){
+          icon = "<i class='glyphicon glyphicon-star'></i>";
+        }
+        table.append('<option class="fontsize" value="' + field.field_name + '" data-subtext="' + icon + '">' + field.field_name + '</option>');
       });
       table.selectpicker('refresh');
     }
@@ -1172,8 +1196,20 @@ function ChooseField(table, id){
 
         success: function(data) {
             console.log(data);
-            $.each(data, function(j, field){
-              table.append('<option class="fontsize">' + field + '</option>');
+            var fields = Object.values(data);
+            console.log(fields);
+            fields.sort(function(a, b) {
+              // return parseInt(b.FKCount) - parseInt(a.FKCount);
+              return b.PK - a.PK;
+            });
+            console.log(fields);
+            $.each(fields, function(index, detail){
+              var icon = "";
+              console.log("field.pk="+detail.PK);
+              if(detail.PK){
+                icon = "<i class='glyphicon glyphicon-star'></i>";
+              }
+              table.append('<option class="fontsize" value"' + detail.COLUMN_NAME + '" data-subtext="' + icon + '">' + detail.COLUMN_NAME + '</option>');
             });
             table.selectpicker('refresh');
             showalert("ChooseField()", "ChooseField was successfull.", "alert-success", "bottom");
