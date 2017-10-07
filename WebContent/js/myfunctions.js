@@ -150,6 +150,7 @@ $qsTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('hideColumn', 'addRelation');
   $datasTable.bootstrapTable('hideColumn', 'addPKRelation');
   $datasTable.bootstrapTable('hideColumn', 'recurseCount');
+  $datasTable.bootstrapTable('hideColumn', '_id');
 });
 
 $finTab.on('shown.bs.tab', function(e) {
@@ -163,6 +164,7 @@ $finTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('hideColumn', 'addPKRelation');
   $datasTable.bootstrapTable('hideColumn', 'nommageRep');
+  $datasTable.bootstrapTable('hideColumn', '_id');
   // $datasTable.bootstrapTable('showColumn', 'linker');
   // $datasTable.bootstrapTable('showColumn', 'linker_ids');
 
@@ -179,6 +181,7 @@ $refTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('showColumn', 'recurseCount');
   $datasTable.bootstrapTable('showColumn', 'nommageRep');
+  $datasTable.bootstrapTable('hideColumn', '_id');
   // $datasTable.bootstrapTable('showColumn', 'linker');
   // $datasTable.bootstrapTable('showColumn', 'linker_ids');
 });
@@ -745,6 +748,8 @@ function buildSubTable($el, cols, data, parentData){
 
   });
 
+  $el.bootstrapTable('hideColumn', '_id');
+
   if(activeTab == "Reference"){
     $el.bootstrapTable('hideColumn', 'fin');
     $el.bootstrapTable('showColumn', 'ref');
@@ -918,6 +923,7 @@ function buildTable($el, cols, data) {
     $el.bootstrapTable('hideColumn', 'label');
     $el.bootstrapTable('hideColumn', 'recurseCount');
     $el.bootstrapTable('hideColumn', 'addPKRelation');
+    $el.bootstrapTable('hideColumn', '_id');
     $el.bootstrapTable('hideColumn', 'linker');
     $el.bootstrapTable('hideColumn', 'linker_ids');
 
