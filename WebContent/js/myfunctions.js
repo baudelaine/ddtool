@@ -163,8 +163,8 @@ $finTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('hideColumn', 'addPKRelation');
   $datasTable.bootstrapTable('hideColumn', 'nommageRep');
-  $datasTable.bootstrapTable('showColumn', 'linker');
-  $datasTable.bootstrapTable('showColumn', 'linker_ids');
+  // $datasTable.bootstrapTable('showColumn', 'linker');
+  // $datasTable.bootstrapTable('showColumn', 'linker_ids');
 
 });
 
@@ -179,8 +179,8 @@ $refTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('showColumn', 'recurseCount');
   $datasTable.bootstrapTable('showColumn', 'nommageRep');
-  $datasTable.bootstrapTable('showColumn', 'linker');
-  $datasTable.bootstrapTable('showColumn', 'linker_ids');
+  // $datasTable.bootstrapTable('showColumn', 'linker');
+  // $datasTable.bootstrapTable('showColumn', 'linker_ids');
 });
 
 $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValue, $el) {
