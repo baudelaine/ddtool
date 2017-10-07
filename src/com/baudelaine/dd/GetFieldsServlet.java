@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.sql.ResultSetMetaData;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +38,7 @@ public class GetFieldsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		ResultSet rst = null;
-		List<Object> result = new ArrayList<Object>();
+		Map<String, Object> result = new HashMap<String, Object>();
 		String schema = "";
 
 		try {
@@ -47,12 +48,37 @@ public class GetFieldsServlet extends HttpServlet {
 			schema = (String) request.getSession().getAttribute("schema");
 			
 		    DatabaseMetaData metaData = con.getMetaData();
+		    
+		    rst = metaData.getExportedKeys(con.getCatalog(), schema, table);
+		    Set<String> pks = new HashSet<String>();
+		    
+		    while (rst.next()) {
+		    	pks.add(rst.getString("PKCOLUMN_NAME"));
+		    }
+
+	        if(rst != null){rst.close();}
+		    
 	        rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
+        	ResultSetMetaData rsmd = rst.getMetaData();
+        	
+        	int colCount = rsmd.getColumnCount();
 	        
 	        while (rst.next()) {
-	        	result.add(rst.getString("COLUMN_NAME"));
+        		Map<String, Object> datas = new HashMap<String, Object>();
+    			datas.put("PK", false);
+	        	for(int colNum = 1; colNum <= colCount; colNum++){
+	        		String label = rsmd.getColumnLabel(colNum);
+	        		Object value = rst.getObject(colNum);
+	        		if(pks.contains(rst.getString("COLUMN_NAME"))){
+	        			datas.put("PK", true);
+	        		}
+	        		datas.put(label, value);
+	        	}
+	        	result.put(rst.getString("COLUMN_NAME"), datas);
 	        }		    
 		    
+	        if(rst != null){rst.close();}
+	        
 		    response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(Tools.toJSON(result));
