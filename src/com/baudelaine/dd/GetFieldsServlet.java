@@ -5,8 +5,10 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -38,7 +40,7 @@ public class GetFieldsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		ResultSet rst = null;
-		Map<String, Object> result = new HashMap<String, Object>();
+		List<Field> result = new ArrayList<Field>();
 		String schema = "";
 
 		try {
@@ -60,23 +62,39 @@ public class GetFieldsServlet extends HttpServlet {
 	        if(rst != null){rst.close();}
 
 	        rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
-        	ResultSetMetaData rsmd = rst.getMetaData();
-        	
-        	int colCount = rsmd.getColumnCount();
+	        
+//        	ResultSetMetaData rsmd = rst.getMetaData();
+//        	
+//        	int colCount = rsmd.getColumnCount();
+//	        
+//	        while (rst.next()) {
+//        		Map<String, Object> datas = new HashMap<String, Object>();
+//    			datas.put("PK", false);
+//	        	for(int colNum = 1; colNum <= colCount; colNum++){
+//	        		String label = rsmd.getColumnLabel(colNum);
+//	        		Object value = rst.getObject(colNum);
+//	        		if(pks.contains(rst.getString("COLUMN_NAME"))){
+//	        			datas.put("PK", true);
+//	        		}
+//	        		datas.put(label, value);
+//	        	}
+//	        	result.put(rst.getString("COLUMN_NAME"), datas);
+//	        }		    
 	        
 	        while (rst.next()) {
-        		Map<String, Object> datas = new HashMap<String, Object>();
-    			datas.put("PK", false);
-	        	for(int colNum = 1; colNum <= colCount; colNum++){
-	        		String label = rsmd.getColumnLabel(colNum);
-	        		Object value = rst.getObject(colNum);
-	        		if(pks.contains(rst.getString("COLUMN_NAME"))){
-	        			datas.put("PK", true);
-	        		}
-	        		datas.put(label, value);
-	        	}
-	        	result.put(rst.getString("COLUMN_NAME"), datas);
-	        }		    
+	        	String field_name = rst.getString("COLUMN_NAME");
+	        	String field_type = rst.getString("TYPE_NAME");
+	        	System.out.println(field_name + "," + field_type);
+	        	Field field = new Field();
+	        	field.setField_name(field_name);
+	        	field.setField_type(field_type);
+	        	field.set_id(field_name + field_type);
+	        	if(pks.contains(rst.getString("COLUMN_NAME"))){
+	    			field.setPk(true);
+	    		}
+	        	result.add(field);
+	        }
+	        
 		    
 	        if(rst != null){rst.close();}
 	        
