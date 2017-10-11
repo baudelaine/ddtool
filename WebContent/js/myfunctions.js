@@ -15,7 +15,7 @@ var $newRowModal = $('#newRowModal');
 var $modelListModal = $('#modModelList');
 var $projectFileModal = $('#modProjectFile');
 // var url = "js/PROJECT.json";
-var qs2rm = {qs: "", row: "", qsList: [], removed: false};
+var qs2rm = {qs: "", row: "", qsList: [], ids2rm: {}};
 
 var relationCols = [];
 // relationCols.push({field:"checkbox", checkbox: "true"});
@@ -165,8 +165,8 @@ $finTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('hideColumn', 'addPKRelation');
   $datasTable.bootstrapTable('hideColumn', 'nommageRep');
   $datasTable.bootstrapTable('hideColumn', '_id');
-  // $datasTable.bootstrapTable('showColumn', 'linker');
-  // $datasTable.bootstrapTable('showColumn', 'linker_ids');
+  $datasTable.bootstrapTable('showColumn', 'linker');
+  $datasTable.bootstrapTable('showColumn', 'linker_ids');
 
 });
 
@@ -182,8 +182,8 @@ $refTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'recurseCount');
   $datasTable.bootstrapTable('showColumn', 'nommageRep');
   $datasTable.bootstrapTable('hideColumn', '_id');
-  // $datasTable.bootstrapTable('showColumn', 'linker');
-  // $datasTable.bootstrapTable('showColumn', 'linker_ids');
+  $datasTable.bootstrapTable('showColumn', 'linker');
+  $datasTable.bootstrapTable('showColumn', 'linker_ids');
 });
 
 $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValue, $el) {
@@ -196,9 +196,9 @@ $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValu
 });
 
 $datasTable.on('reset-view.bs.table', function(){
-  console.log("++++++++++++++on passe dans reset-view");
-  console.log("activeTab=" + activeTab);
-  console.log("previousTab=" + previousTab);
+  // console.log("++++++++++++++on passe dans reset-view");
+  // console.log("activeTab=" + activeTab);
+  // console.log("previousTab=" + previousTab);
   if($activeSubDatasTable != undefined){
     var v = $activeSubDatasTable.bootstrapTable('getData');
     // console.log("+++++++++++ $activeSubDatasTable");
@@ -233,12 +233,12 @@ $datasTable.on('reset-view.bs.table', function(){
 });
 
 $datasTable.on('expand-row.bs.table', function (index, row, $detail) {
-  console.log("index: ");
-  console.log(index);
-  console.log("row: ");
-  console.log(row);
-  console.log("$detail: ");
-  console.log($detail);
+  // console.log("index: ");
+  // console.log(index);
+  // console.log("row: ");
+  // console.log(row);
+  // console.log("$detail: ");
+  // console.log($detail);
 
 });
 
@@ -643,28 +643,55 @@ function buildSubTable($el, cols, data, parentData){
 
           if(field.match("fin|ref") && value == true){
             RemoveKeys(row, parentData);
-            return;
+
+            console.log(" **** je suis reviendu de RemoveKeys ***** ")
+
+            console.log("qs2rm.qs=");
+            console.log(qs2rm.qs);
+            console.log("qs2rm.row=");
+            console.log(qs2rm.row);
+            console.log("qs2rm.qsList=");
+            console.log(qs2rm.qsList);
+            console.log("qs2rm.ids2rm");
+            console.log(qs2rm.ids2rm);
+            console.log("value=");
+            console.log(value);
+            if(qs2rm.qsList.length > 0){
+              var resp = confirm("Warning: following Query Subject will be dropped: " + JSON.stringify(qs2rm.qsList));
+              console.log("resp=" + resp);
+              if(!resp){
+                $.each(qs2rm.ids2rm, function(qs, ids){
+                  console.log("qs=" + qs);
+                  $.each(ids, function(i, id){
+                    console.log("id=" +id);
+                    $.each($datasTable.bootstrapTable("getData"), function(k, v){
+                      console.log(qs + " == " + v._id)
+                      if(qs == v._id){
+                        console.log("push back id=" + id + " to qs=" +v._id);
+                        v.linker_ids.push(id);
+                      }
+                    });
+                  });
+                });
+                return;
+              }
+              if(activeTab == "Final"){
+                // qs2rm.row.relationship = qs2rm.row.relationship.split("[FINAL]." + pkAlias).join(pkAlias);
+               updateCell($activeSubDatasTable, qs2rm.row.index, "fin", false);
+              }
+              if(activeTab == "Reference"){
+                // qs2rm.row.relationship = qs2rm.row.relationship.split("[REF]." + pkAlias).join(pkAlias);
+               updateCell($activeSubDatasTable, qs2rm.row.index, "ref", false);
+              }
+
+              $datasTable.bootstrapTable('remove', {
+                field: '_id',
+                values: qs2rm.qsList
+              });
+            }
+
           }
 
-          // console.log("+++++++ qs2rm +++++++");
-          // console.log(qs2rm.row);
-          // console.log(qs2rm.qsList);
-          // console.log(qs2rm.removed);
-          // console.log("+++++++ qs2rm +++++++");
-          //
-          // if(!qs2rm.removed){
-          //   return;
-          // }
-          //
-          // if(field.match("fin|ref") && qs2rm.removed){
-          //   var linked = false;
-          //   $.each(parentData.relations, function(i, obj){
-          //     if(obj.fin || obj.ref){
-          //       linked = true;
-          //     }
-          //   });
-          //   updateCell($datasTable, parentData.index, "linker", linked);
-          // }
 
           var newValue = value == false ? true : false;
           var pkAlias = '[' + row.pktable_alias + ']';
@@ -708,6 +735,13 @@ function buildSubTable($el, cols, data, parentData){
             updateCell($datasTable, parentData.index, "linker", true);
           }
 
+          var linked = false;
+          $.each(parentData.relations, function(i, obj){
+            if(obj.fin || obj.ref){
+              linked = true;
+            }
+          });
+          updateCell($datasTable, parentData.index, "linker", linked);
 
         }
 
@@ -767,10 +801,29 @@ function buildSubTable($el, cols, data, parentData){
 
 }
 
+$("#removeKeysModal").on('hidden.bs.modal', function (e) {
+  // do something...
+  console.log("removeKeysModal hidden event %%%%%%%%%%")
+  if(qs2rm != undefined && $activeSubDatasTable != undefined){
+    console.log("qs2rm.row.index="+qs2rm.row.index);
+    console.log("qs2rm.row.fin="+qs2rm.row.fin);
+    var pkAlias = '[' + qs2rm.row.pktable_alias + ']';
+    if(activeTab == "Final"){
+      qs2rm.row.relationship = qs2rm.row.relationship.split(pkAlias).join("[FINAL]." + pkAlias);
+     updateCell($activeSubDatasTable, qs2rm.row.index, "fin", true);
+    }
+    if(activeTab == "Reference"){
+      qs2rm.row.relationship = qs2rm.row.relationship.split(pkAlias).join("[REF]." + pkAlias);
+     updateCell($activeSubDatasTable, qs2rm.row.index, "ref", true);
+    }
+  }
+})
+
 function RemoveKeys(o, qs){
 
         var indexes2rm = [];
         var row = o;
+        var ids2rm = {};
 
         var recurse = function(o){
                 var tableData = $datasTable.bootstrapTable("getData");
@@ -792,10 +845,12 @@ function RemoveKeys(o, qs){
                                   console.log("RemoveImportedKeys push to indexes2rm: " + e._id);
                                 }
                                 if(e.linker_ids.length > 1){
+                                        ids2rm[e._id] = ids2rm[e._id] || [];
+                                        ids2rm[e._id].push(o._id);
                                         e.linker_ids.splice(e.linker_ids.indexOf(o._id), 1);
                                         var newValue = e.linker_ids;
                                         console.log("newValue=" + newValue);
-                                        updateCell($datasTable, e.index, "linker_ids", newValue);
+                                        // updateCell($datasTable, e.index, "linker_ids", newValue);
                                         console.log("RemoveImportedKeys remove from linker_ids: " + e._id);
                                 }
                                 // return recurse(tableData[e.index]);
@@ -807,21 +862,34 @@ function RemoveKeys(o, qs){
         };
         recurse(o);
 
-        $("#removeKeysModal").modal('toggle');
-        $("#removeKeysModal").find('.modal-body').empty();
-        var html = '<div class="container-fluid"><div class="row"><div class="list-group">';
+        // $datasTable.bootstrapTable('remove', {
+        //   field: '_id',
+        //   values: indexes2rm
+        // });
 
-        $.each(indexes2rm, function(i, obj){
-            html += '<a href="#" class="list-group-item">' + obj + '</a>';
-        });
-        html += '<div class="list-group"></div></div>';
-
-        $("#removeKeysModal").find('.modal-body').append(html);
 
         qs2rm.qs = qs;
         qs2rm.row = row;
         qs2rm.qsList = indexes2rm;
-        qs2rm.removed = false;
+        qs2rm.ids2rm = ids2rm;
+        // qs2rm.removed = false;
+        //
+        // if(qs2rm.qsList.length > 0){
+        //
+        //   $("#removeKeysModal").modal('toggle');
+        //   $("#removeKeysModal").find('.modal-body').empty();
+        //   var html = '<div class="container-fluid"><div class="row"><div class="list-group">';
+        //
+        //   $.each(indexes2rm, function(i, obj){
+        //       html += '<a href="#" class="list-group-item">' + obj + '</a>';
+        //   });
+        //   html += '<div class="list-group"></div></div>';
+        //
+        //   $("#removeKeysModal").find('.modal-body').append(html);
+        //
+        // }
+
+        // return;
 
 }
 
@@ -829,10 +897,13 @@ function RemoveKeysAccepted(){
   if(qs2rm != undefined && $activeSubDatasTable != undefined){
     console.log("qs2rm.row.index="+qs2rm.row.index);
     console.log("qs2rm.row.fin="+qs2rm.row.fin);
-    if(qs2rm.row.fin){
+    var pkAlias = '[' + qs2rm.row.pktable_alias + ']';
+    if(activeTab == "Final"){
+      // qs2rm.row.relationship = qs2rm.row.relationship.split("[FINAL]." + pkAlias).join(pkAlias);
      updateCell($activeSubDatasTable, qs2rm.row.index, "fin", false);
     }
-    if(qs2rm.row.ref){
+    if(activeTab == "Reference"){
+      // qs2rm.row.relationship = qs2rm.row.relationship.split("[REF]." + pkAlias).join(pkAlias);
      updateCell($activeSubDatasTable, qs2rm.row.index, "ref", false);
     }
 
@@ -1204,10 +1275,10 @@ function ChooseField(table, id){
             console.log(data);
             var fields = Object.values(data);
             console.log(fields);
-            fields.sort(function(a, b) {
-              // return parseInt(b.FKCount) - parseInt(a.FKCount);
-              return b.PK - a.PK;
-            });
+            // fields.sort(function(a, b) {
+            //   // return parseInt(b.FKCount) - parseInt(a.FKCount);
+            //   return b.PK - a.PK;
+            // });
             console.log(fields);
             $.each(fields, function(index, detail){
               var icon = "";
