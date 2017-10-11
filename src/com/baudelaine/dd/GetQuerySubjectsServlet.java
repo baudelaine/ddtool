@@ -148,15 +148,15 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		
 //		Map<String, Field> result = new HashMap<String, Field>();
 		
-		ResultSet rst = metaData.getExportedKeys(con.getCatalog(), schema, table);
+		ResultSet rst = metaData.getPrimaryKeys(con.getCatalog(), schema, table);
 	    Set<String> pks = new HashSet<String>();
 	    
 	    while (rst.next()) {
-	    	pks.add(rst.getString("PKCOLUMN_NAME"));
+	    	pks.add(rst.getString("COLUMN_NAME"));
 	    }
 
         if(rst != null){rst.close();}
-		
+        
 		List<Field> result = new ArrayList<Field>();
 		
         rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
