@@ -1273,20 +1273,20 @@ function ChooseField(table, id){
 
         success: function(data) {
             console.log(data);
-            var fields = Object.values(data);
-            console.log(fields);
+            // var fields = Object.values(data);
+            // console.log(fields);
             // fields.sort(function(a, b) {
             //   // return parseInt(b.FKCount) - parseInt(a.FKCount);
             //   return b.PK - a.PK;
             // });
-            console.log(fields);
-            $.each(fields, function(index, detail){
+            // console.log(fields);
+            $.each(data, function(index, detail){
               var icon = "";
-              console.log("field.pk="+detail.PK);
-              if(detail.PK){
+              console.log("data.pk="+detail.pk);
+              if(detail.pk){
                 icon = "<i class='glyphicon glyphicon-star'></i>";
               }
-              table.append('<option class="fontsize" value"' + detail.COLUMN_NAME + '" data-subtext="' + icon + '">' + detail.COLUMN_NAME + '</option>');
+              table.append('<option class="fontsize" value"' + detail.field_name + '" data-subtext="' + icon + '">' + detail.field_name + '</option>');
             });
             table.selectpicker('refresh');
             showalert("ChooseField()", "ChooseField was successfull.", "alert-success", "bottom");
