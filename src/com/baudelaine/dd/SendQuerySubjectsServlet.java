@@ -207,6 +207,8 @@ public class SendQuerySubjectsServlet extends HttpServlet {
 			
 			TaskerSVC.IICCreateRelation(rsList);
 			
+			ProjectSVC.addLocale("en");
+			
 			TaskerSVC.stop();
 
 			response.setContentType("application/json");
