@@ -78,19 +78,11 @@
 //			while(matcher.find()){
 //				System.out.println(matcher.group(0));
 //			}
-<<<<<<< HEAD
-			
-		}
-		catch(Exception e){
-			e.printStackTrace(System.err);
-		}
-=======
 //			
 //		}
 //		catch(Exception e){
 //			e.printStackTrace(System.err);
 //		}
->>>>>>> 70e173b2e4a1fc42c578f86312fb3bb7fa1997c7
 		
 		
 //	}
