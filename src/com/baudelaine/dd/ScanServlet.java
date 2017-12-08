@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -123,16 +124,28 @@ public class ScanServlet extends HttpServlet {
 		            if(rst != null){rst.close();}
 //		    		System.out.println("Scanning PK for " + tableName + " -> " + PKSet.size() + " -> " + PKSeqCount);
 	
-		    		Statement stmt = null;
-		    		String query = "SELECT COUNT(*) FROM " + schema + "." + table.get("name");
-		    		stmt = con.createStatement();
-		            ResultSet rs = stmt.executeQuery(query);
 		            long recCount = 0;
-		            while (rs.next()) {
-		            	recCount = rs.getLong(1);
+		    		Statement stmt = null;
+		    		ResultSet rs = null;
+		            try{
+			    		String query = "SELECT COUNT(*) FROM " + schema + "." + table.get("name");
+			    		stmt = con.createStatement();
+			            rs = stmt.executeQuery(query);
+			            while (rs.next()) {
+			            	recCount = rs.getLong(1);
+			            }
 		            }
-		            if (stmt != null) { stmt.close();}
-		            if(rst != null){rst.close();}
+		            catch(SQLException e){
+		            	System.out.println("CATCHING SQLEXEPTION...");
+		            	System.out.println(e.getSQLState());
+		            	System.out.println(e.getMessage());
+		            	
+		            }
+		            finally {
+			            if (stmt != null) { stmt.close();}
+			            if(rst != null){rst.close();}
+						
+					}
 		            
 		    		scan.put("name", tableName);
 		    		scan.put("type", tableType);
