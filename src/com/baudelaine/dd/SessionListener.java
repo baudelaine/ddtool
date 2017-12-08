@@ -68,8 +68,11 @@ public class SessionListener implements HttpSessionListener {
 			
 			Connection con = null;
 			if(dbEngine.equalsIgnoreCase("DB2400")){
-				AS400JDBCDataSource ds400 = (AS400JDBCDataSource) ic.lookup(jndiName);
-				con = ds400.getConnection();
+				AS400JDBCDataSource datasource = new AS400JDBCDataSource("172.16.2.70");
+				  datasource.setUser("IBMIIC");
+				  datasource.setPassword("MYPWD");
+				  datasource.setDatabaseName("S6514BFA");
+				  con = datasource.getConnection();
 			}
 			else{
 				DataSource ds = (DataSource) ic.lookup(jndiName);
