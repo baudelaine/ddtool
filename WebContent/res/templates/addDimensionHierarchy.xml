@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog timestamp="20171116140403836" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="1" timestamp="20171116140624784" uniqueId="E70E4597E70E4597">
+<action seq="1" type="UpdateObject">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>dimension</mappingpath><value>[DIMENSIONS].[New Dimension]</value></param>
+<param seq="2" type="cclnode"><value><![CDATA[<updateObjectRequest><tasks><task name="addObject"><parameters><param name="objectType" value="hierarchy"/><param name="makeNameUnique" value="true"/><param name="basedOn"><expression><refobj>[FINAL].[S_REQUEST]</refobj></expression></param></parameters></task></tasks></updateObjectRequest>]]></value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction></bmtactionlog>

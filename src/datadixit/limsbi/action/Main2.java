@@ -1,28 +1,28 @@
-package datadixit.limsbi.action;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import datadixit.limsbi.svc.CognosSVC;
-import datadixit.limsbi.svc.ProjectSVC;
-import datadixit.limsbi.svc.TaskerSVC;
-
-
-public class Main2 {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		
-		try{
+//package datadixit.limsbi.action;
+//
+//import java.io.ByteArrayInputStream;
+//import java.io.InputStream;
+//import java.nio.CharBuffer;
+//import java.nio.charset.Charset;
+//import java.nio.charset.StandardCharsets;
+//import java.nio.file.Files;
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
+//
+//import datadixit.limsbi.svc.CognosSVC;
+//import datadixit.limsbi.svc.ProjectSVC;
+//import datadixit.limsbi.svc.TaskerSVC;
+//
+//
+//public class Main2 {
+//
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//
+//		
+//		try{
 
 		/*	
 			<namespace>
@@ -67,24 +67,24 @@ public class Main2 {
 //			Path path = Paths.get("/mnt/dd3/models/model-14/model/xml");
 //			InputStream is = new ByteArrayInputStream(Files.readAllBytes(path));	
 			
-			Path path = Paths.get("/mnt/dd3/models/model-14/model.xml");
-			Charset charset = StandardCharsets.UTF_8;
-			String content = new String(Files.readAllBytes(path), charset);
+//			Path path = Paths.get("/mnt/dd3/models/model-14/model.xml");
+//			Charset charset = StandardCharsets.UTF_8;
+//			String content = new String(Files.readAllBytes(path), charset);
 //			String regex = "<namespace>\\"
 //				<name locale="en-gb">DATA</name>
 //				<name locale="en">DATA</name>";
-			Pattern pattern = Pattern.compile(regex,Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
-			Matcher matcher = pattern.matcher(content);
-			while(matcher.find()){
-				System.out.println(matcher.group(0));
-			}
-			
-		}
-		catch(Exception e){
-			e.printStackTrace(System.err);
-		}
+//			Pattern pattern = Pattern.compile(regex,Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
+//			Matcher matcher = pattern.matcher(content);
+//			while(matcher.find()){
+//				System.out.println(matcher.group(0));
+//			}
+//			
+//		}
+//		catch(Exception e){
+//			e.printStackTrace(System.err);
+//		}
 		
 		
-	}
+//	}
 
-}
+//}

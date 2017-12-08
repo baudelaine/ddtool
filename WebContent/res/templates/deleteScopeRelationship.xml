@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog project="C:\models\model-test\model-test.cpf" templatedir="../templates/bmt/Cr1Model" timestamp="20171116151009906" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="3" timestamp="20171116151130674" uniqueId="74443AF974443AF9">
+<action seq="1" type="Delete">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>scopeRelationship</mappingpath><value>[DIMENSIONS].[New Dimension &lt;=&gt; SDIDATA_MEASURES]</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction></bmtactionlog>

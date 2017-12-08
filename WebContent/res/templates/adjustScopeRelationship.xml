@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog timestamp="20171116145857971" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="1" timestamp="20171116145933790" uniqueId="45749B9C45749B9C">
+<action seq="1" type="AdjustScope"><inputparams>
+<param seq="1" type="handle"><mappingpath>dimension</mappingpath><value>[DIMENSIONS].[SDIDATA_MEASURES]</value></param>
+<param seq="2" type="handle"><mappingpath>dimension</mappingpath><value>[DIMENSIONS].[New Dimension]</value></param>
+<param seq="3" type="handle"><mappingpath>measure</mappingpath><value>[DIMENSIONS].[SDIDATA_MEASURES].[SDIDATA_COUNT]</value></param>
+<param seq="4" type="handle"><mappingpath>level</mappingpath><value>[DIMENSIONS].[New Dimension].[S_PRODUCT].[S_BATCH]</value></param>
+<param seq="5" type="integer"><value>0</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action>
+</transaction></bmtactionlog>

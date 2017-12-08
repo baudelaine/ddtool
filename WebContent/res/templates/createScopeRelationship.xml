@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog timestamp="20171115164101779" user="Administrator" version="11.0.7.11">
+
+<transaction saved="false" seq="1" timestamp="20171115164322616" uniqueId="651044B0651044B0">
+<action seq="1" type="TransformCreateScopeRelationships">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>dimension</mappingpath><value>[DIMENSIONS].[New Dimension]</value></param></inputparams>
+<domchanges/>
+<result success="t"><outputparams/></result></action>
+</transaction>
+</bmtactionlog>
