@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog timestamp="20171127165154093" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="1" timestamp="20171127165227821" uniqueId="68FC208568FC2085">
+<action seq="1" type="Modify"><inputparams>
+<param seq="1" type="handle"><mappingpath>queryItem/name</mappingpath><value>/O/name[0]/O/[DIMENSIONS].[SDIDATA.CREATEDT].[CREATEDT (By month)].[YEAR].[CREATEDT]</value></param>
+<param seq="2" type="i18nstring"><value>YEAR_KEY</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action>
+<action seq="2" type="ResetPromptValues"><inputparams>
+<param seq="1" type="integer"><value>1</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action>
+<action seq="3" type="ResetPromptValues"><inputparams>
+<param seq="1" type="integer"><value>1</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action>
+<action seq="4" type="ModifyComplex"><inputparams>
+<param seq="1" type="handle"><mappingpath>queryItem/expression</mappingpath><value>/O/expression[0]/O/[DIMENSIONS].[SDIDATA.CREATEDT].[CREATEDT (By month)].[YEAR].[YEAR_KEY]</value></param>
+<param seq="2" type="i18nstring"><value>_year(&lt;refobj&gt;[FINAL].[SDIDATA].[CREATEDT]&lt;/refobj&gt;)</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction></bmtactionlog>

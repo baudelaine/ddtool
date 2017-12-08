@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog timestamp="20171122161606340" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="3" timestamp="20171122161636901" uniqueId="E0329EF6E0329EF6">
+<action seq="1" type="Create">
+<inputparams>
+<param seq="1" type="integer"><value>22</value></param>
+<param seq="2" type="handle"><mappingpath>hierarchy</mappingpath><value>[DIMENSIONS].[SDIDATA.CREATEDT].[SDIDATA.CREATEDT (By month)]</value></param>
+<param seq="3" type="i18nstring"><value>New Level</value></param>
+<param seq="4" type="integer"><value>1</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action>
+<action seq="2" type="Modify">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>level/name</mappingpath><value>/O/name[0]/O/[DIMENSIONS].[SDIDATA.CREATEDT].[SDIDATA.CREATEDT (By month)].[New Level]</value></param>
+<param seq="2" type="i18nstring"><value>YEAR</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction></bmtactionlog>

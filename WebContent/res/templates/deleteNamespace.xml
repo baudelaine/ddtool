@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog project="C:\models\model-test1\model-test1.cpf" templatedir="../templates/bmt/Cr1Model" timestamp="20171117155621486" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="3" timestamp="20171117160331566" uniqueId="F993E838F993E838">
+<action seq="1" type="Delete">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>namespace</mappingpath><value>[DIMENSIONS]</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction></bmtactionlog>

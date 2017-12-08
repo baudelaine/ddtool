@@ -1,6 +1,7 @@
 package datadixit.limsbi.svc;
 
 import java.io.File;
+import java.io.StringReader;
 import java.util.logging.Level;
 
 import org.dom4j.Document;
@@ -145,6 +146,23 @@ public class FactorySVC {
 
 			CognosSVC.executeModel(document);
 
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+	
+	public static void deleteNamespace(String namespace) {
+		try {
+	
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/deleteNamespace.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171117155621486\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+
+			handle.setText(namespace);
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
 		} catch (DocumentException ex) {
 			lg(ex.getMessage());
 		}
@@ -525,5 +543,698 @@ public class FactorySVC {
 
 	public static void lg(String msg) {
 		Logger.logInfo(" BuildModel.java ", msg);
+	}
+	
+	// Dimension functions factory
+	public static void createMeasureDimension(String handle, String measureDimensionName) {
+		try {
+	
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createMeasureDimension.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			String mappingPath = "";
+			if (handle.contains("].[")) {mappingPath = "folder";} else {mappingPath="namespace";}
+
+			Element elemMappingPath = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/mappingpath");
+			Element elemHandle = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element cdata = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+
+			String s = cdata.getText();
+			elemMappingPath.setText(mappingPath);
+			elemHandle.setText(handle);
+			
+			Document doc = reader.read(new StringReader(s));
+
+			Element mdn = (Element) doc.selectSingleNode("/updateObjectRequest/tasks/task[@name=\"addObject\"]/parameters//param[1]");
+			Element root_cdata = doc.getRootElement();
+
+			mdn.addAttribute("value", measureDimensionName);
+
+			// attach cdata
+		    cdata.setText("");
+			cdata.addCDATA(root_cdata.asXML());
+
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+
+	public static void createMeasure(String dimensionPath, String measureName, String exp) {
+		try {
+			
+//			String measureName = "SDIDATA_COUNT";
+//			String dimensionPath = "[DIMENSIONS].[SDIDATA_MEASURES]";
+//			String exp = "[FINAL].[SDIDATA].[SDIDATA_COUNT]";
+						
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createMeasure.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element cdata = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+
+			String s = cdata.getText();
+			handle.setText(dimensionPath);
+			
+			Document doc = reader.read(new StringReader(s));
+
+			Element mn = (Element) doc.selectSingleNode("/updateObjectRequest/tasks/task[@name=\"addObject\"]/parameters//param[1]");
+			Element xp = (Element) doc.selectSingleNode("/updateObjectRequest/tasks/task[@name=\"addObject\"]/parameters/param[4]/expression/refobj");
+			
+			Element root_cdata = doc.getRootElement();
+
+			mn.addAttribute("value", measureName);
+			xp.setText(exp);
+
+			// attach cdata
+		    cdata.setText("");
+			cdata.addCDATA(root_cdata.asXML());
+
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+
+	public static void createDimension(String handle, String dimensionName) {
+		try {
+			
+//			namespace = "[DIMENSIONS]";
+//			optionnalFolder = "";
+//			dimensionName = "S_PRODUCT";
+						
+			String mappingPath = "";
+			if (handle.contains("].[")) {mappingPath = "folder";} else {mappingPath="namespace";}
+			
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createDimension.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element elemMappingPath = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/mappingpath");			
+			Element handle1 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element cdata1 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			String s1 = cdata1.getText();
+			elemMappingPath.setText(mappingPath);
+			handle1.setText(handle);
+			Document doc1 = reader.read(new StringReader(s1));
+			Element dn = (Element) doc1.selectSingleNode("/updateObjectRequest/tasks/task[@name=\"addObject\"]/parameters//param[1]");
+			Element root_cdata1 = doc1.getRootElement();
+			dn.addAttribute("value", dimensionName);		
+			// attach cdata
+		    cdata1.setText("");
+		    cdata1.addCDATA(root_cdata1.asXML());
+
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+	
+	public static void createDimensionHierarchy(String dimensionPath, String exp) {
+		try {
+			
+//			dimensionPath = "[DIMENSIONS].[S_PRODUCT]";
+//			exp = "[FINAL].[S_PRODUCT]";
+						
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createDimensionHierarchy.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+	    
+			Element handle2 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element cdata2 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			String s2 = cdata2.getText();
+			handle2.setText(dimensionPath);
+			Document doc2 = reader.read(new StringReader(s2));
+			Element xp = (Element) doc2.selectSingleNode("/updateObjectRequest/tasks/task[@name=\"addObject\"]/parameters/param[3]/expression/refobj");		
+			Element root_cdata2 = doc2.getRootElement();
+			xp.setText(exp);
+			// attach cdata
+		    cdata2.setText("");
+		    cdata2.addCDATA(root_cdata2.asXML());
+
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+
+	public static void addHierarchyLevel(String hierarchyPath, String levelBefore, String newLevel, String exp) {
+		try {
+			
+//			hierarchyPath = "[DIMENSIONS].[S_PRODUCT].[S_PRODUCT]";
+//			levelBefore = "[DIMENSIONS].[S_PRODUCT].[S_PRODUCT].[S_PRODUCT]";
+//			newLevel = "[DIMENSIONS].[S_PRODUCT].[S_PRODUCT].[S_BATCH]";
+//			exp = "[FINAL].[S_BATCH]";
+
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/addHierarchyLevel.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element cdata = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			Element lb = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[1]/value");
+			Element nl = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[2]/value");
+			String s = cdata.getText();
+			handle.setText(hierarchyPath);
+			lb.setText(levelBefore);
+			nl.setText(newLevel);
+			Document doc = reader.read(new StringReader(s));
+	//		Element dn = (Element) doc.selectSingleNode("/updateObjectRequest/tasks/task[@name=\"addObject\"]/parameters//param[1]");
+			Element xp = (Element) doc.selectSingleNode("/updateObjectRequest/tasks/task[@name=\"addObject\"]/parameters/param[3]/expression/refobj");		
+			Element root_cdata = doc.getRootElement();
+//			dn.addAttribute("value", dimensionName);
+			xp.setText(exp);
+			// attach cdata
+		    cdata.setText("");
+		    cdata.addCDATA(root_cdata.asXML());
+		    
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+
+	public static void addDimensionHierarchy(String dimensionPath, String exp) {
+		try {
+			
+//			dimensionPath = "[DIMENSIONS].[S_PRODUCT]";
+//			exp = "[FINAL].[S_REQUEST]";
+
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/addDimensionHierarchy.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171116140403836\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element cdata = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171116140403836\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			String s = cdata.getText();
+			handle.setText(dimensionPath);
+			Document doc = reader.read(new StringReader(s));
+			Element xp = (Element) doc.selectSingleNode("/updateObjectRequest/tasks/task[@name=\"addObject\"]/parameters/param[3]/expression/refobj");		
+			Element root_cdata = doc.getRootElement();
+
+			xp.setText(exp);
+			// attach cdata
+		    cdata.setText("");
+		    cdata.addCDATA(root_cdata.asXML());
+			
+		    
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+	
+	public static void createDimensionRole_BK(String queryItemPath) {
+		try {
+			
+//			String queryItemPath = "[DIMENSIONS].[S_PRODUCT].[S_PRODUCT].[S_PRODUCT].[S_PRODUCTID1]";
+
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createDimensionRole_BK.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle1 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element handle2 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[1]/value");
+			handle1.setText(queryItemPath);
+			handle2.setText(queryItemPath);
+		    
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+	
+	public static void createDimensionRole_MC(String queryItemPath) {
+		try {
+			
+//			String queryItemPath = "[DIMENSIONS].[S_PRODUCT].[S_PRODUCT].[S_PRODUCT].[S_PRODUCTID1]";
+
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createDimensionRole_MC.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle1 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element handle2 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[1]/value");
+			handle1.setText(queryItemPath);
+			handle2.setText(queryItemPath);
+		    
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+	
+	public static void createDimensionRole_MD(String queryItemPath) {
+		try {
+			
+//			String queryItemPath = "[DIMENSIONS].[S_PRODUCT].[S_PRODUCT].[S_PRODUCT].[S_PRODUCTID1]";
+
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createDimensionRole_MD.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle1 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element handle2 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[1]/value");
+			handle1.setText(queryItemPath);
+			handle2.setText(queryItemPath);
+		    
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+	
+	public static void createScopeRelationship(String dimensionPath) {
+				
+			try {
+				
+//				String dimensionPath = "[DIMENSIONS].[S_PRODUCT]";
+
+				File xmlFile = new File("/root/ddtool/WebContent/res/templates/createScopeRelationship.xml");
+				SAXReader reader = new SAXReader();
+				Document document = reader.read(xmlFile);
+
+				Element handle = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171115164101779\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+				handle.setText(dimensionPath);
+		    
+			// System.out.println(document.asXML());
+			CognosSVC.executeModel(document);
+		} catch (DocumentException ex) {
+			lg(ex.getMessage());
+		}
+	}
+
+	public static void adjustScopeRelationship(String dimensionMeasurePath, String measurePath, String dimensionPath, String levelPath) {
+		
+		try {
+//			String dimensionMeasurePath = "[DIMENSIONS].[S_SAMPLE_MEASURES]";
+//			String measurePath = "[DIMENSIONS].[S_SAMPLE_MEASURES].[S_SAMPLE_COUNT]";
+//			String dimensionPath = "[DIMENSIONS].[S_PRODUCT]";
+//			String levelPath = "[DIMENSIONS].[S_PRODUCT].[S_PRODUCT].[S_BATCH]";
+
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/adjustScopeRelationship.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handleDMP = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171116145857971\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element handleMP = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171116145857971\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[3]/value");
+			Element handleDP = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171116145857971\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			Element handleLP = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171116145857971\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[4]/value");
+			
+			handleDMP.setText(dimensionMeasurePath);
+			handleMP.setText(measurePath);
+			handleDP.setText(dimensionPath);
+			handleLP.setText(levelPath);
+		// System.out.println(document.asXML());
+		CognosSVC.executeModel(document);
+	} catch (DocumentException ex) {
+		lg(ex.getMessage());
+	}
+}
+	
+	public static void createEmptyHierarchy(String dimensionPath, String hierarchyName) {
+		
+		try {
+//			String dimensionPath = "[DIMENSIONS].[SDIDATA.CREATEDT]";
+//			String hierarchyName = "SDIDATA.CREATEDT (By month)";
+			
+			String handleHierarchyName = "/O/name[0]/O/" + dimensionPath + ".[New Hierarchy]";
+			String handleLevelName = "/O/name[0]/O/" + dimensionPath + ".[" + hierarchyName + "].[New Hierarchy(All)]";
+			String levelName = hierarchyName + "(All)";
+
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createEmptyHierarchy.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle1 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122155500394\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element ElemhierarchyName = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122155500394\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			Element handle2 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122155500394\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[1]/value");
+			Element ElemlevelName = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122155500394\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[2]/value");
+
+			handle1.setText(handleHierarchyName);
+			ElemhierarchyName.setText(hierarchyName);
+			handle2.setText(handleLevelName);
+			ElemlevelName.setText(levelName);
+			
+		// System.out.println(document.asXML());
+		CognosSVC.executeModel(document);
+	} catch (DocumentException ex) {
+		lg(ex.getMessage());
+	}
+}
+
+	public static void modifyHierarchyName(String dimensionPath, String hierarchyOldName, String hierarchyName) {
+		
+		try {
+//			String dimensionPath = "[DIMENSIONS].[SDIDATA.CREATEDT]";
+//			String hierarchyName = "SDIDATA.CREATEDT (By month)";
+			
+			String handleHierarchyName = "/O/name[0]/O/" + dimensionPath + ".[" + hierarchyOldName + "]";
+			String handleLevelName = "/O/name[0]/O/" + dimensionPath + ".[" + hierarchyName + "].[" + hierarchyOldName +"(All)]";
+			String levelName = hierarchyName + "(All)";
+			
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/modifyHierarchyName.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle1 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122155500394\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element ElemhierarchyName = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122155500394\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			Element handle2 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122155500394\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[1]/value");
+			Element ElemlevelName = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122155500394\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[2]/value");
+
+			handle1.setText(handleHierarchyName);
+			ElemhierarchyName.setText(hierarchyName);
+			handle2.setText(handleLevelName);
+			ElemlevelName.setText(levelName);
+			
+		// System.out.println(document.asXML());
+		CognosSVC.executeModel(document);
+	} catch (DocumentException ex) {
+		lg(ex.getMessage());
+	}
+}
+
+	
+	public static void createEmptyNewHierarchy(String dimensionPath) {
+		
+		try {
+//			String dimensionPath = "[DIMENSIONS].[SDIDATA.CREATEDT]";
+			
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createEmptyNewHierarchy.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122201636874\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			handle.setText(dimensionPath);
+		
+		// System.out.println(document.asXML());
+		CognosSVC.executeModel(document);
+			} catch (DocumentException ex) {
+				lg(ex.getMessage());
+			}
+		}
+	
+	public static void createEmptyHierarchyLevel(String hierarchyPath, String levelName) {
+		
+		try {
+			
+//			String hierarchyPath = "[DIMENSIONS].[SDIDATA.CREATEDT].[SDIDATA.CREATEDT (By month)]";
+//			String levelName = "YEAR";
+					
+			String handleLevelName = "/O/name[0]/O/" + hierarchyPath + ".[New Level]";
+			
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createEmptyHierarchyLevel.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122161606340\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			Element elemhandleLevelName = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122161606340\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[1]/value");
+			Element ElemlevelName = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122161606340\"]/transaction[@saved=\"false\"]/action[@seq=\"2\"]/inputparams/param[2]/value");
+		
+			handle.setText(hierarchyPath);
+			elemhandleLevelName.setText(handleLevelName);
+			ElemlevelName.setText(levelName);
+
+		// System.out.println(document.asXML());
+				CognosSVC.executeModel(document);
+			} catch (DocumentException ex) {
+				lg(ex.getMessage());
+			}
+		}
+
+	public static void modifyLevelName(String hierarchyPath, String levelOldName, String levelName) {
+		
+		try {
+			
+//			String hierarchyPath = "[DIMENSIONS].[SDIDATA.CREATEDT].[SDIDATA.CREATEDT (By month)]";
+//			String levelName = "YEAR";
+					
+			String handleLevelName = "/O/name[0]/O/" + hierarchyPath + ".[" + levelOldName + "]";
+			
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/modifyLevelName.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+			Element elemhandleLevelName = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122161606340\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element ElemlevelName = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122161606340\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+		
+			elemhandleLevelName.setText(handleLevelName);
+			ElemlevelName.setText(levelName);
+
+		// System.out.println(document.asXML());
+				CognosSVC.executeModel(document);
+			} catch (DocumentException ex) {
+				lg(ex.getMessage());
+			}
+		}
+
+	
+	public static void createHierarchyLevelQueryItem(String levelPath, String queryItemName, String exp) {
+		
+		try {
+//			String levelPath = "[DIMENSIONS].[SDIDATA.CREATEDT].[SDIDATA.CREATEDT (By month)].[YEAR]";
+//			String queryItemName = "YEAR_KEY";
+//			String exp = "_year (<refobj>[FINAL].[SDIDATA].[CREATEDT]</refobj>)";
+					
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/createHierarchyLevelQueryItem.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122162251466\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+						
+			Element cdata = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171122162251466\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			String s = cdata.getText();
+			handle.setText(levelPath);
+
+			Document doc = reader.read(new StringReader(s));
+			Element qin = (Element) doc.selectSingleNode("/updateObjectRequest/tasks/task[@name=\"addObject\"]/parameters//param[1]");
+			Element xp = (Element) doc.selectSingleNode("/updateObjectRequest/tasks/task[@name=\"addObject\"]/parameters/param[4]/expression");		
+			Element root_cdata = doc.getRootElement();
+			qin.addAttribute("value", queryItemName);
+			xp.setText(exp);
+			// attach cdata
+		    cdata.setText("");
+		    cdata.addCDATA(root_cdata.asXML());
+
+		// System.out.println(document.asXML());
+				CognosSVC.executeModel(document);
+			} catch (DocumentException ex) {
+				lg(ex.getMessage());
+			}
+		}
+
+	public static void modifyLevelQueryItemName(String levelPath, String queryItemOldName, String queryItemName, String exp) {
+		
+		try {
+//			String queryItemOldName = "CREATEDT";
+//			String queryItemName = "YEAR_KEY";
+//			String exp = "_year(&lt;refobj&gt;[FINAL].[SDIDATA].[CREATEDT]&lt;/refobj&gt;)";
+//			levelPath = "[DIMENSIONS].[SDIDATA.CREATEDT].[SDIDATA.CREATEDT (By month)].[YEAR]";
+
+			File xmlFile = new File("/root/ddtool/WebContent/res/templates/modifyLevelQueryItem.xml");
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(xmlFile);
+
+			Element handle1 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171127165154093\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[1]/value");
+			Element qiName = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171127165154093\"]/transaction[@saved=\"false\"]/action[@seq=\"1\"]/inputparams/param[2]/value");
+			Element handle2 = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171127165154093\"]/transaction[@saved=\"false\"]/action[@seq=\"4\"]/inputparams/param[1]/value");
+			Element qiExp = (Element) document.selectSingleNode("/bmtactionlog[@timestamp=\"20171127165154093\"]/transaction[@saved=\"false\"]/action[@seq=\"4\"]/inputparams/param[2]/value");
+			
+			handle1.setText("/O/name[0]/O/" + levelPath + ".[" + queryItemOldName + "]");
+			qiName.setText(queryItemName);
+			handle2.setText("/O/expression[0]/O/" + levelPath + ".[" + queryItemName + "]");
+			qiExp.setText(exp);
+			
+
+		// System.out.println(document.asXML());
+				CognosSVC.executeModel(document);
+			} catch (DocumentException ex) {
+				lg(ex.getMessage());
+			}
+		}
+	
+	public static void createTimeDimension(String dateQueryItemPath, String dimensionName, String dateQueryItemName) {
+	
+
+	// time dimension
+//			String dateQueryItemPath = "[FINAL].[SDIDATA].[CREATEDT]";
+//			String dateQueryItemName = "CREATEDT";
+//			String dimensionName = "SDIDATA.CREATEDT";	
+			
+			FactorySVC.createDimension("[DIMENSIONS]", dimensionName);
+
+	// hierarchy (By month)
+			FactorySVC.createDimensionHierarchy("[DIMENSIONS].[" + dimensionName + "]", dateQueryItemPath);
+			FactorySVC.createScopeRelationship("[DIMENSIONS].[" + dimensionName + "]");
+		
+	// level year
+			FactorySVC.modifyHierarchyName("[DIMENSIONS].[" + dimensionName + "]", dateQueryItemName,dateQueryItemName + " (By month)");
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", dateQueryItemName, "YEAR");
+			String exp = "_year(" + dateQueryItemPath + ")";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[YEAR]", dateQueryItemName, "YEAR_KEY", exp);
+			exp = "_year (" + dateQueryItemPath + ")";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[YEAR]", "YEAR", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[YEAR].[YEAR]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[YEAR].[YEAR]");
+
+	//level quarter	
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[YEAR]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", dateQueryItemName, "QUARTER");
+			exp = "if (_month (  " + dateQueryItemPath + " ) in (1,2,3)) then (1)  else (\n" + 
+			"if (_month (  " + dateQueryItemPath + " ) in (4,5,6)) then (2)  else (\n" + 
+			"if (_month (  " + dateQueryItemPath + " ) in (7,8,9)) then (3)  else (\n" + 
+			"if (_month (  " + dateQueryItemPath + " ) in (10,11,12)) then (4)  else (0)\n" + 
+			")))";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[QUARTER]", dateQueryItemName, "QUARTER_KEY", exp);
+			exp = "_year (" + dateQueryItemPath + ") + '/' +\n" + 
+					"cast (if (_month (  " + dateQueryItemPath + " ) in (1,2,3)) then (1)  else (\n" + 
+					"if (_month (  " + dateQueryItemPath + " ) in (4,5,6)) then (2)  else (\n" + 
+					"if (_month (  " + dateQueryItemPath + " ) in (7,8,9)) then (3)  else (\n" + 
+					"if (_month (  " + dateQueryItemPath + " ) in (10,11,12)) then (4)  else (0)\n" + 
+					"))),varchar)";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[QUARTER]", "QUARTER", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[QUARTER].[QUARTER]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[QUARTER].[QUARTER]");
+
+	// level month
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[QUARTER]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", dateQueryItemName, "MONTH");
+			exp = "_month (" + dateQueryItemPath + ")";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[MONTH]", dateQueryItemName, "MONTH_KEY", exp);
+			exp = "cast (" + dateQueryItemPath + ",varchar(7))";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[MONTH]", "MONTH", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[MONTH].[MONTH]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[MONTH].[MONTH]");
+
+	// level day
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[MONTH]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", dateQueryItemName, "DAY");
+			exp =  "_day (" + dateQueryItemPath + ")";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[DAY]", dateQueryItemName, "DAY_KEY", exp);
+			exp = "cast (" + dateQueryItemPath + ",varchar(10))";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[DAY]", "DAY", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[DAY].[DAY]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[DAY].[DAY]");
+							
+	// level AM/PM
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[DAY]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", dateQueryItemName, "AM/PM");
+			exp = "if (_hour (  " + dateQueryItemPath + " ) in_range {0:11}) then (1)  else (2)";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[AM/PM]", dateQueryItemName, "AM/PM_KEY", exp);
+			exp = "cast (" + dateQueryItemPath + ",varchar(10)) + ' ' +\n" + 
+					"if (_hour (  " + dateQueryItemPath + " ) in_range {0:11}) then ('AM')  else ('PM')";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[AM/PM]", "AM/PM", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[AM/PM].[AM/PM]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[AM/PM].[AM/PM]");
+
+	// level hour
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[AM/PM]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", dateQueryItemName, "HOUR");
+			exp = "_hour (  " + dateQueryItemPath + " )";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[HOUR]", dateQueryItemName, "HOUR_KEY", exp);
+			exp = "cast (" + dateQueryItemPath + ",varchar(13))";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[HOUR]", "HOUR", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[HOUR].[HOUR]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[HOUR].[HOUR]");
+
+	// level date
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[HOUR]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)]", dateQueryItemName, "DATE");
+			exp = dateQueryItemPath;
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[DATE]", dateQueryItemName, "DATE_KEY", exp);
+			exp = "cast (" + dateQueryItemPath + ",varchar(19))";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[DATE]", "DATE", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[DATE].[DATE]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By month)].[DATE].[DATE]");
+
+			
+	// hierarchy by week
+			FactorySVC.addDimensionHierarchy("[DIMENSIONS].[" + dimensionName + "]", dateQueryItemPath);
+			FactorySVC.modifyHierarchyName("[DIMENSIONS].[" + dimensionName + "]", dateQueryItemName,dateQueryItemName + " (By week)");
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", dateQueryItemName, "YEAR");
+			exp = "_year(" + dateQueryItemPath + ")";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[YEAR]", dateQueryItemName, "YEAR_KEY", exp);
+			exp = "_year (" + dateQueryItemPath + ")";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[YEAR]", "YEAR", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[YEAR].[YEAR]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[YEAR].[YEAR]");
+
+	//level week	
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[YEAR]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", dateQueryItemName, "WEEK");
+			exp = "_week_of_year (" + dateQueryItemPath + ")";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[WEEK]", dateQueryItemName, "WEEK_KEY", exp);
+			exp = "cast(_year (" + dateQueryItemPath + ") ,varchar(4))+ '/' +\n" + 
+					"if (_week_of_year (" + dateQueryItemPath + ") < 10 ) then ('0') else ('') + \n" + 
+					"cast(_week_of_year (" + dateQueryItemPath + "),varchar(2))";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[WEEK]", "WEEK", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[WEEK].[WEEK]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[WEEK].[WEEK]");
+
+	//level day_of_week	
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[WEEK]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", dateQueryItemName, "DAY_OF_WEEK");
+			exp = "_day_of_week (" + dateQueryItemPath + ",1)";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[DAY_OF_WEEK]", dateQueryItemName, "DAY_OF_WEEK_KEY", exp);
+			exp = "cast (" + dateQueryItemPath + ",varchar(10)) + ' ' +\n" + 
+					"if (_day_of_week (" + dateQueryItemPath + ",1) = 1)\n" + 
+					"then ('Mon') else (\n" + 
+					"if (_day_of_week (" + dateQueryItemPath + ",1) = 2)\n" + 
+					"then ('Tue') else (\n" + 
+					"if (_day_of_week (" + dateQueryItemPath + ",1) = 3)\n" + 
+					"then ('Wed') else (\n" + 
+					"if (_day_of_week (" + dateQueryItemPath + ",1) = 4)\n" + 
+					"then ('Thu') else (\n" + 
+					"if (_day_of_week (" + dateQueryItemPath + ",1) = 5)\n" + 
+					"then ('Fri') else (\n" + 
+					"if (_day_of_week (" + dateQueryItemPath + ",1) = 6)\n" + 
+					"then ('Sat') else ('Sun')\n" + 
+					")))))";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[DAY_OF_WEEK]", "DAY_OF_WEEK", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[DAY_OF_WEEK].[DAY_OF_WEEK]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[DAY_OF_WEEK].[DAY_OF_WEEK]");
+
+	// level AM/PM
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[DAY_OF_WEEK]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", dateQueryItemName, "AM/PM");
+			exp = "if (_hour (  " + dateQueryItemPath + " ) in_range {0:11}) then (1)  else (2)";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[AM/PM]", dateQueryItemName, "AM/PM_KEY", exp);
+			exp = "cast (" + dateQueryItemPath + ",varchar(10)) + ' ' +\n" + 
+					"if (_hour (  " + dateQueryItemPath + " ) in_range {0:11}) then ('AM')  else ('PM')";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[AM/PM]", "AM/PM", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[AM/PM].[AM/PM]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[AM/PM].[AM/PM]");
+
+	// level hour
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[AM/PM]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", dateQueryItemName, "HOUR");
+			exp = "_hour (  " + dateQueryItemPath + " )";
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[HOUR]", dateQueryItemName, "HOUR_KEY", exp);
+			exp = "cast (" + dateQueryItemPath + ",varchar(13))";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[HOUR]", "HOUR", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[HOUR].[HOUR]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[HOUR].[HOUR]");
+
+	// level date
+			FactorySVC.addHierarchyLevel("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[HOUR]", "[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[CREATEDT]", dateQueryItemPath);
+			FactorySVC.modifyLevelName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)]", dateQueryItemName, "DATE");
+			exp = dateQueryItemPath;
+			FactorySVC.modifyLevelQueryItemName("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[DATE]", dateQueryItemName, "DATE_KEY", exp);
+			exp = "cast (" + dateQueryItemPath + ",varchar(19))";
+			FactorySVC.createHierarchyLevelQueryItem("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[DATE]", "DATE", exp);
+			FactorySVC.createDimensionRole_MC("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[DATE].[DATE]");
+			FactorySVC.createDimensionRole_MD("[DIMENSIONS].[" + dimensionName + "].[" + dateQueryItemName + " (By week)].[DATE].[DATE]");
+
+		
 	}
 }

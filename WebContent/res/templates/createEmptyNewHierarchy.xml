@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog timestamp="20171122201636874" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="1" timestamp="20171122202700204" uniqueId="1A2601571A260157">
+<action seq="1" type="Create">
+<inputparams>
+<param seq="1" type="integer"><value>24</value></param>
+<param seq="2" type="handle"><mappingpath>dimension</mappingpath><value>[DIMENSIONS].[SDIDATA.CREATEDT]</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction></bmtactionlog>

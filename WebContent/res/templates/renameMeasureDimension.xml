@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog project="C:\models\model-test\model-test.cpf" templatedir="../templates/bmt/Cr1Model" timestamp="20171115164101779" user="Administrator" version="11.0.7.11">
+
+<transaction saved="false" seq="10" timestamp="20171115154405665" uniqueId="7454C3147454C314">
+<action seq="1" type="Modify">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>dimension/name</mappingpath><value>/O/name[0]/O/[DIMENSIONS].[New Dimension]</value></param>
+<param seq="2" type="i18nstring"><value>SDIDATA_MEASURES</value></param></inputparams>
+<domchanges/><result success="t"><outputparams/></result></action></transaction>
+</bmtactionlog>

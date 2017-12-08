@@ -1,28 +1,28 @@
-package datadixit.limsbi.action;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import datadixit.limsbi.svc.CognosSVC;
-import datadixit.limsbi.svc.ProjectSVC;
-import datadixit.limsbi.svc.TaskerSVC;
-
-
-public class Main2 {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		
-		try{
+//package datadixit.limsbi.action;
+//
+//import java.io.ByteArrayInputStream;
+//import java.io.InputStream;
+//import java.nio.CharBuffer;
+//import java.nio.charset.Charset;
+//import java.nio.charset.StandardCharsets;
+//import java.nio.file.Files;
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
+//
+//import datadixit.limsbi.svc.CognosSVC;
+//import datadixit.limsbi.svc.ProjectSVC;
+//import datadixit.limsbi.svc.TaskerSVC;
+//
+//
+//public class Main2 {
+//
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//
+//		
+//		try{
 
 		/*	
 			<namespace>
@@ -78,13 +78,21 @@ public class Main2 {
 //			while(matcher.find()){
 //				System.out.println(matcher.group(0));
 //			}
+<<<<<<< HEAD
 			
 		}
 		catch(Exception e){
 			e.printStackTrace(System.err);
 		}
+=======
+//			
+//		}
+//		catch(Exception e){
+//			e.printStackTrace(System.err);
+//		}
+>>>>>>> 70e173b2e4a1fc42c578f86312fb3bb7fa1997c7
 		
 		
-	}
+//	}
 
-}
+//}

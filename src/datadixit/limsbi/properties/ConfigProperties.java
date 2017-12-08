@@ -48,7 +48,7 @@ public class ConfigProperties {
 
 		try {
 
-			input = new FileInputStream("/opt/wks/ddtool/WebContent/res/conf.properties");
+			input = new FileInputStream("/root/ddtool/WebContent/res/conf.properties");
 
 			// load a properties file
 			prop.load(input);
