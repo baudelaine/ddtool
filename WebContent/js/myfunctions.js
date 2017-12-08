@@ -182,11 +182,12 @@ $refTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'recurseCount');
   $datasTable.bootstrapTable('showColumn', 'nommageRep');
   $datasTable.bootstrapTable('hideColumn', '_id');
-  // $datasTable.bootstrapTable('showColumn', 'linker');
-  // $datasTable.bootstrapTable('showColumn', 'linker_ids');
+  $datasTable.bootstrapTable('showColumn', 'linker');
+  $datasTable.bootstrapTable('showColumn', 'linker_ids');
 });
 
 $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValue, $el) {
+  row._id = row.key_type + 'K' + row.pktable_alias + '_' + row.table_name + row.key_type;
   if(field == "pktable_alias"){
     var newValue = row.pktable_alias;
     if($activeSubDatasTable != undefined){
@@ -436,8 +437,8 @@ function boolFormatter(value, row, index) {
   // }
   var icon = value == true ? 'glyphicon-check' : 'glyphicon-unchecked'
   if(value == undefined){
-      console.log("****** VALUE *********" + value);
-      console.log(row);
+      // console.log("****** VALUE *********" + value);
+      // console.log(row);
       icon = 'glyphicon-unchecked';
   }
   return [
@@ -835,7 +836,9 @@ function RemoveKeys(o, qs){
                                   console.log("RemoveKeys linker_ids for QS " + e._id + " == 1");
                                   console.log("RemoveKeys linker_ids for QS " + e._id + " relations:");
                                   $.each(e.relations, function(k, v){
-                                    console.log(k + " -> " + v);
+                                    console.log("k=" + k);
+                                    console.log("v=");
+                                    console.log(v);
                                     if(v.fin || v.ref){
                                       console.log("RemoveKeys: " + v._id + " is checked. Recurse...");
                                       return recurse(v);

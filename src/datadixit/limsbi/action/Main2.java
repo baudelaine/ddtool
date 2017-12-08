@@ -67,17 +67,17 @@ public class Main2 {
 //			Path path = Paths.get("/mnt/dd3/models/model-14/model/xml");
 //			InputStream is = new ByteArrayInputStream(Files.readAllBytes(path));	
 			
-			Path path = Paths.get("/mnt/dd3/models/model-14/model.xml");
-			Charset charset = StandardCharsets.UTF_8;
-			String content = new String(Files.readAllBytes(path), charset);
+//			Path path = Paths.get("/mnt/dd3/models/model-14/model.xml");
+//			Charset charset = StandardCharsets.UTF_8;
+//			String content = new String(Files.readAllBytes(path), charset);
 //			String regex = "<namespace>\\"
 //				<name locale="en-gb">DATA</name>
 //				<name locale="en">DATA</name>";
-			Pattern pattern = Pattern.compile(regex,Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
-			Matcher matcher = pattern.matcher(content);
-			while(matcher.find()){
-				System.out.println(matcher.group(0));
-			}
+//			Pattern pattern = Pattern.compile(regex,Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
+//			Matcher matcher = pattern.matcher(content);
+//			while(matcher.find()){
+//				System.out.println(matcher.group(0));
+//			}
 			
 		}
 		catch(Exception e){
