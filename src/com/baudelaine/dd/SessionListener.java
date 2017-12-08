@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import javax.sql.DataSource;
 
+import com.ibm.as400.access.AS400JDBCDataSource;
+
 /**
  * Application Lifecycle Listener implementation class SessionListener
  *
@@ -47,6 +49,11 @@ public class SessionListener implements HttpSessionListener {
     	try {
     		
     		String dbEngine = (String) ic.lookup("DBEngine");
+    		if(dbEngine.equalsIgnoreCase("DB2400")){
+				jndiName = "jdbc/ds2";
+				schema = (String) ic.lookup("DB2400Schema");
+				query = (String) ic.lookup("TestDB2400DBConnection");
+			}
     		if(dbEngine.equalsIgnoreCase("DB2")){
 				jndiName = "jdbc/ds1";
 				schema = (String) ic.lookup("DB2Schema");
@@ -59,8 +66,15 @@ public class SessionListener implements HttpSessionListener {
 				query = (String) ic.lookup("TestORADBConnection");
 			}    		
 			
-			DataSource ds = (DataSource) ic.lookup(jndiName);
-			Connection con = ds.getConnection();
+			Connection con = null;
+			if(dbEngine.equalsIgnoreCase("DB2400")){
+				AS400JDBCDataSource ds400 = (AS400JDBCDataSource) ic.lookup(jndiName);
+				con = ds400.getConnection();
+			}
+			else{
+				DataSource ds = (DataSource) ic.lookup(jndiName);
+				con = ds.getConnection();
+			}
 			s.setAttribute("con", con);
 			s.setAttribute("jndiName", jndiName);
 			s.setAttribute("schema", schema);
