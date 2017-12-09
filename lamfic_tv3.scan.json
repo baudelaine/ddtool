@@ -1,0 +1,362 @@
+[
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "ANA1WPF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "ARCHIPF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 1,
+    "name": "FCRPF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "FCR1PF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "FIMPCPF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 202,
+    "name": "FRESPF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "FTRA1PF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "FTRA2PF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMBALAW",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 49702,
+    "name": "LMCAFCPT",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMCAFDET",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMCAFE10",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMCAFE12",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMCAFGEN",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMCAFIMP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMCAFNDO",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 1,
+    "name": "LMCGREP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMFACW",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMFAWPF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMGDLIW",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 1,
+    "name": "LMSELP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMSTASOR",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "LMSTATOP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "QFDMBR",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "SHTR2PF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "STATPF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "STATRA1PF",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 1,
+    "name": "STAWANAP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "STAWCORP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "STAWGPLP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "STAWGRPP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "STAWMEDP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "STAWRALP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "STAWREAP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "STAWRELP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 2,
+    "name": "STAWRESP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 0,
+    "name": "STAWSOCP",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 1,
+    "name": "STAW01P",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 4174,
+    "name": "STAW03P",
+    "type": "TABLE",
+    "FKCount": 0
+  },
+  {
+    "FKSeqCount": 0,
+    "PKSeqCount": 0,
+    "PKCount": 0,
+    "RecCount": 60,
+    "name": "STRA2PF",
+    "type": "TABLE",
+    "FKCount": 0
+  }
+]
