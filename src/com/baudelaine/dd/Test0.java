@@ -28,10 +28,16 @@ public class Test0 {
 			query = "SELECT * FROM qsys2.sysschemas";
 			//query = "SELECT * FROM qsys2.syscst WHERE table_schema = 'LAMFIC_V3'";
 			//query = "select * from LAMFIC_V3.ANA5PF FETCH FIRST 1 ROWS ONLY";
-			
-			//rst =  metaData.getImportedKeys(null, "LAMFIC_V3", "ANA5PF");
-			rst = stmt.executeQuery(query);
-			System.out.println(query);
+
+                        rst = metaData.getCatalogs(); 
+                        while (rst.next()) { 
+                                System.out.println("catalog: " + rst.getString("TABLE_CAT")); 
+                        }
+                        if(rst != null) rst.close();
+
+			rst =  metaData.getImportedKeys("S6514BFA", "LAMFIC_V3", "ANA5PF");
+			//rst = stmt.executeQuery(query);
+			//System.out.println(query);
 			System.out.println("rst=" + rst);
 			
 			ResultSetMetaData rsmd = rst.getMetaData();
@@ -46,9 +52,12 @@ public class Test0 {
 				for(int col = 1; col <= colCount; col++){
 					System.out.print(rst.getString(col) + ";");
 				}
+				System.out.println("");
 			}
 			System.out.println("\n----------------------------------------");
 			
+                        if(rst != null) rst.close();
+
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
