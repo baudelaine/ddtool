@@ -1,6 +1,7 @@
 package com.baudelaine.dd;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import javax.sql.DataSource;
 
+import com.ibm.as400.access.AS400JDBCConnection;
 import com.ibm.as400.access.AS400JDBCDataSource;
 
 /**
@@ -68,11 +70,15 @@ public class SessionListener implements HttpSessionListener {
 			
 			Connection con = null;
 			if(dbEngine.equalsIgnoreCase("DB2400")){
-				AS400JDBCDataSource datasource = new AS400JDBCDataSource("172.16.2.70");
-				  datasource.setUser("IBMIIC");
-				  datasource.setPassword("MYPWD");
-				  datasource.setDatabaseName("S6514BFA");
-				  con = datasource.getConnection();
+				Class.forName("com.ibm.as400.access.AS400JDBCDriver");
+				System.out.println("com.ibm.as400.access.AS400JDBCDriver loaded successfully !!!");
+//				AS400JDBCConnection con400 = (AS400JDBCConnection) DriverManager.getConnection("jdbc:as400:");
+				
+//				AS400JDBCDataSource datasource = new AS400JDBCDataSource("172.16.2.70");
+//				  datasource.setUser("IBMIIC");
+//				  datasource.setPassword("spcspc");
+//				  datasource.setDatabaseName("S6514BFA");
+//				  con = datasource.getConnection();
 			}
 			else{
 				DataSource ds = (DataSource) ic.lookup(jndiName);
@@ -86,6 +92,9 @@ public class SessionListener implements HttpSessionListener {
 			System.out.println("SessionId " + s.getId() + " is now connected to " + jndiName + " using shema " + schema);
 			
 		} catch (NamingException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
