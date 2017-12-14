@@ -69,9 +69,9 @@ public class SessionListener implements HttpSessionListener {
 			}    		
 			
 			Connection con = null;
-			if(dbEngine.equalsIgnoreCase("DB2400")){
-				Class.forName("com.ibm.as400.access.AS400JDBCDriver");
-				System.out.println("com.ibm.as400.access.AS400JDBCDriver loaded successfully !!!");
+//			if(dbEngine.equalsIgnoreCase("DB2400")){
+//				Class.forName("com.ibm.as400.access.AS400JDBCDriver");
+//				System.out.println("com.ibm.as400.access.AS400JDBCDriver loaded successfully !!!");
 //				AS400JDBCConnection con400 = (AS400JDBCConnection) DriverManager.getConnection("jdbc:as400:");
 				
 //				AS400JDBCDataSource datasource = new AS400JDBCDataSource("172.16.2.70");
@@ -79,11 +79,11 @@ public class SessionListener implements HttpSessionListener {
 //				  datasource.setPassword("spcspc");
 //				  datasource.setDatabaseName("S6514BFA");
 //				  con = datasource.getConnection();
-			}
-			else{
+//			}
+//			else{
 				DataSource ds = (DataSource) ic.lookup(jndiName);
 				con = ds.getConnection();
-			}
+//			}
 			s.setAttribute("con", con);
 			s.setAttribute("jndiName", jndiName);
 			s.setAttribute("schema", schema);
@@ -94,10 +94,7 @@ public class SessionListener implements HttpSessionListener {
 		} catch (NamingException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 
     }
 
