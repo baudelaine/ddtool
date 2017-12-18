@@ -138,10 +138,13 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		
 		while (rst.next()) {
 	    	label = rst.getString("REMARKS");
+	    	System.out.println("rst.getString(REMARKS)=" + rst.getString("REMARKS"));
 	    }
 		
 		if(rst != null){rst.close();}
-		
+    	
+		System.out.println("label=" + label);
+    	
 		QuerySubject result = new QuerySubject();
 		
 		result.set_id(alias + type);
