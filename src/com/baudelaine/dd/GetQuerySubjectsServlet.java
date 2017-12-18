@@ -132,12 +132,23 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	
 	protected QuerySubject getQuerySubjects() throws SQLException{
 		
+		String[] types = {"TABLE"};
+		ResultSet rst = metaData.getTables(con.getCatalog(), schema, "%", types);
+		String label = "";
+		
+		while (rst.next()) {
+	    	label = rst.getString("REMARKS");
+	    }
+		
+		if(rst != null){rst.close();}
+		
 		QuerySubject result = new QuerySubject();
 		
 		result.set_id(alias + type);
 		result.setTable_alias(alias);
 		result.setTable_name(table);
 		result.setType(type);
+		result.setLabel(label);
 		result.addLinker_id(linker_id);
         
         return result;
@@ -168,6 +179,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
         	Field field = new Field();
         	field.setField_name(field_name);
         	field.setField_type(field_type);
+        	field.setLabel(rst.getString("REMARKS"));
         	field.set_id(field_name + field_type);
         	if(pks.contains(rst.getString("COLUMN_NAME"))){
     			field.setPk(true);
