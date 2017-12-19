@@ -19,7 +19,9 @@
 	<div class="container-fluid" style="margin-top: 10px;">
 
     <div class="toolbar form-inline" id="searchToolbar">
-      <select class="selectpicker" id="searchSelect" multiple data-actions-box="true">
+      <select class="selectpicker" id="searchSelect" multiple data-actions-box="true" data-live-search="true" title="Choose table(s)...">
+      </select>
+      <select class="selectpicker" id="searchColumnSelect" multiple data-actions-box="true" data-live-search="true" title="Choose columns()...">
       </select>
       <button type="button" onclick="Filter()" class="btn btn-default" data-toggle="tooltip" title="Filter."><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></button>
     </div>
@@ -44,17 +46,18 @@
     var datas = [];
 
     var searchCols = [];
-    searchCols.push({field:"tabName", title: "Table Name", sortable: true});
-    searchCols.push({field:"tabType", title: "Table Type", sortable: true});
-    searchCols.push({field:"tabRemarks", title: "Table Remarks", sortable: true});
-    searchCols.push({field:"colName", title: "Column Name", sortable: true});
-    searchCols.push({field:"colType", title: "Column Type", sortable: true});
-    searchCols.push({field:"colRemarks", title: "Column Remarks", sortable: true});
+    searchCols.push({field:"tabName", title: "Table Name", sortable: true, searchable: false});
+    searchCols.push({field:"tabType", title: "Table Type", sortable: true, searchable: false});
+    searchCols.push({field:"tabRemarks", title: "Table Remarks", sortable: true, searchable: false});
+    searchCols.push({field:"colName", title: "Column Name", sortable: true, searchable: false});
+    searchCols.push({field:"colType", title: "Column Type", sortable: true, searchable: false});
+    searchCols.push({field:"colRemarks", title: "Column Remarks", sortable: true, searchable: false});
 
     $(document)
     .ready(function() {
       buildTable($('#searchTable'), searchCols);
       ChooseTable($('#searchSelect'));
+      ChooseColumn($('#searchColumnSelect'));
       GetSchema($('#searchTable'));
     });
 
@@ -62,6 +65,10 @@
         // var selectedText = $(this).find("option:selected").val();
     		// console.log(selectedText);
         // console.log($('#searchSelect').val());
+    });
+
+    $('#searchTable').on('reset-view.bs.table', function(){
+      console.log("++++++++++++++on passe dans reset-view");
     });
 
     function Filter(){
@@ -75,8 +82,28 @@
             row.filtered = false;
             return false;
           }
-        })
+        });
       });
+
+      selection = $('#searchColumnSelect').val();
+      console.log(selection);
+      var cols = $('#searchTable').bootstrapTable('getOptions').columns[0];
+      console.log(cols);
+
+      $.each(cols, function(i, col){
+        col.searchable = false;
+        $.each(selection, function(j, colName){
+          if(col.field.match(colName)){
+            console.log(col.title + ' searchable');
+            col.searchable = true;
+            return false;
+          }
+        });
+      });
+
+      $('#searchTable').bootstrapTable('destroy');
+      buildTable($('#searchTable'), cols);
+      $('#searchTable').bootstrapTable('load', datas);
 
       $('#searchTable').bootstrapTable("filterBy", {filtered: [false]});
       console.log(datas);
@@ -117,39 +144,61 @@
     				showPaginationSwitch: false,
             detailView: false
         })
+
+        var $tableHeaders = $el.find('thead > tr > th');
+        console.log('$tableHeaders');
+        console.log($tableHeaders.eq(3));
+        var cols = $el.bootstrapTable('getOptions').columns[0];
+        console.log(cols);
+        $.each(cols, function(i, col){
+          if(col.title.match('Table Type')){
+            col.searchable = false;
+          };
+        });
+        console.log(cols);
+    }
+
+    function ChooseColumn(table){
+      table.empty();
+
+      $.each($('#searchTable').bootstrapTable('getOptions').columns[0], function(i, obj){
+        var option = '<option class="fontsize" value=' + obj.field + '>' + obj.title + '</option>';
+        table.append(option);
+      });
+      table.selectpicker('refresh');
     }
 
     function ChooseTable(table) {
 
     	table.empty();
 
-        $.ajax({
-            type: 'POST',
-            url: "Scan",
-            dataType: 'json',
+      $.ajax({
+          type: 'POST',
+          url: "Scan",
+          dataType: 'json',
 
-            success: function(data) {
-                console.log(data);
-                data.sort(function(a, b) {
-                  // return parseInt(b.FKCount) - parseInt(a.FKCount);
-                  return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
-                });
-                tables = data;
-                $.each(data, function(i, obj){
-    							//console.log(obj.name);
-                  var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
-                   + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
-    							table.append(option);
-                  // $('#modPKTables').append(option);
-                  // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
-    			      });
-    			      table.selectpicker('refresh');
-                // $('#modPKTables').selectpicker('refresh');
-    			  },
-            error: function(data) {
-                console.log(data);
-            }
-    		});
+          success: function(data) {
+              console.log(data);
+              data.sort(function(a, b) {
+                // return parseInt(b.FKCount) - parseInt(a.FKCount);
+                return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
+              });
+              tables = data;
+              $.each(data, function(i, obj){
+  							//console.log(obj.name);
+                var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
+                 + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
+  							table.append(option);
+                // $('#modPKTables').append(option);
+                // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
+  			      });
+  			      table.selectpicker('refresh');
+              // $('#modPKTables').selectpicker('refresh');
+  			  },
+          error: function(data) {
+              console.log(data);
+          }
+  		});
 
     }
 
