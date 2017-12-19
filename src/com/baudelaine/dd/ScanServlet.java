@@ -150,15 +150,17 @@ public class ScanServlet extends HttpServlet {
 						
 					}
 		            
-		    		scan.put("name", tableName);
-		    		scan.put("type", tableType);
-		    		scan.put("remarks", tableRemarks);
-		    		scan.put("FKCount", FKSet.size());
-		    		scan.put("PKCount", PKSet.size());
-		    		scan.put("FKSeqCount", FKSeqCount);
-		    		scan.put("PKSeqCount", PKSeqCount);
-		    		scan.put("RecCount", recCount);
-		    		result.add(scan);
+		            if(recCount > 0){
+			            scan.put("name", tableName);
+			    		scan.put("type", tableType);
+			    		scan.put("remarks", tableRemarks);
+			    		scan.put("FKCount", FKSet.size());
+			    		scan.put("PKCount", PKSet.size());
+			    		scan.put("FKSeqCount", FKSeqCount);
+			    		scan.put("PKSeqCount", PKSeqCount);
+			    		scan.put("RecCount", recCount);
+			    		result.add(scan);
+		            }
 			    	
 			    }
 			    
