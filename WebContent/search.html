@@ -18,10 +18,10 @@
 
 	<div class="container-fluid" style="margin-top: 10px;">
 
-    <div class="btn-group" id="searchToolbar" role="group" aria-label="...">
-
-      <!-- <button type="button" onclick="GetQuerySubjects()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Get Query Subject(s) from table selected above."><span class="glyphicon glyphicon-magnet" aria-hidden="true"></span></button> -->
-
+    <div class="toolbar form-inline" id="searchToolbar">
+      <select class="selectpicker" id="searchSelect" multiple data-actions-box="true">
+      </select>
+      <button type="button" onclick="Filter()" class="btn btn-default" data-toggle="tooltip" title="Filter."><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></button>
     </div>
 
 
@@ -54,8 +54,34 @@
     $(document)
     .ready(function() {
       buildTable($('#searchTable'), searchCols);
+      ChooseTable($('#searchSelect'));
       GetSchema($('#searchTable'));
     });
+
+    $('#searchSelect').change(function () {
+        // var selectedText = $(this).find("option:selected").val();
+    		// console.log(selectedText);
+        // console.log($('#searchSelect').val());
+    });
+
+    function Filter(){
+      var selection = $('#searchSelect').val();
+      console.log(selection);
+
+      $.each(datas, function(i, row){
+        row.filtered = true;
+        $.each(selection, function(j, table){
+          if(row.tabName.match(table)){
+            row.filtered = false;
+            return false;
+          }
+        })
+      });
+
+      $('#searchTable').bootstrapTable("filterBy", {filtered: [false]});
+      console.log(datas);
+
+    }
 
     function GetSchema(table) {
 
@@ -67,6 +93,7 @@
             success: function(data) {
                 console.log(data);
                 table.bootstrapTable("load", data);
+                datas = data;
     			  },
             error: function(data) {
                 console.log(data);
@@ -81,7 +108,7 @@
             columns: cols,
             // url: url,
             // data: data,
-            // toolbar: $('#searchToolbar'),
+            toolbar: $('#searchToolbar'),
             search: true,
     				showRefresh: false,
     				showColumns: true,
@@ -91,6 +118,41 @@
             detailView: false
         })
     }
+
+    function ChooseTable(table) {
+
+    	table.empty();
+
+        $.ajax({
+            type: 'POST',
+            url: "Scan",
+            dataType: 'json',
+
+            success: function(data) {
+                console.log(data);
+                data.sort(function(a, b) {
+                  // return parseInt(b.FKCount) - parseInt(a.FKCount);
+                  return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
+                });
+                tables = data;
+                $.each(data, function(i, obj){
+    							//console.log(obj.name);
+                  var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
+                   + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
+    							table.append(option);
+                  // $('#modPKTables').append(option);
+                  // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
+    			      });
+    			      table.selectpicker('refresh');
+                // $('#modPKTables').selectpicker('refresh');
+    			  },
+            error: function(data) {
+                console.log(data);
+            }
+    		});
+
+    }
+
 
   </script>
 
