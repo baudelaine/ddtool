@@ -1,0 +1,178 @@
+[
+  {
+    "tabRemarks": null,
+    "tabName": "ACT",
+    "colName": "ACTDESC",
+    "colType": "VARCHAR",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "CATALOG",
+    "colName": "CATLOG",
+    "colType": "XML",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "CL_SCHED",
+    "colName": "ENDING",
+    "colType": "TIME",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "CUSTOMER",
+    "colName": "HISTORY",
+    "colType": "XML",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "DEPARTMENT",
+    "colName": "LOCATION",
+    "colType": "CHAR",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "EMPLOYEE",
+    "colName": "COMM",
+    "colType": "DECIMAL",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "EMPMDC",
+    "colName": "DIV",
+    "colType": "INTEGER",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "EMPPROJACT",
+    "colName": "EMENDATE",
+    "colType": "DATE",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "EMP_PHOTO",
+    "colName": "PICTURE",
+    "colType": "BLOB",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "EMP_RESUME",
+    "colName": "RESUME",
+    "colType": "CLOB",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "INVENTORY",
+    "colName": "LOCATION",
+    "colType": "VARCHAR",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "IN_TRAY",
+    "colName": "NOTE_TEXT",
+    "colType": "VARCHAR",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "ORG",
+    "colName": "LOCATION",
+    "colType": "VARCHAR",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "PRODUCT",
+    "colName": "DESCRIPTION",
+    "colType": "XML",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "PRODUCTSUPPLIER",
+    "colName": "SID",
+    "colType": "VARCHAR",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "PROJACT",
+    "colName": "ACENDATE",
+    "colType": "DATE",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "PROJECT",
+    "colName": "MAJPROJ",
+    "colType": "CHAR",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "PURCHASEORDER",
+    "colName": "COMMENTS",
+    "colType": "VARCHAR",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "SALES",
+    "colName": "SALES",
+    "colType": "INTEGER",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "STAFF",
+    "colName": "COMM",
+    "colType": "DECIMAL",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "STAFFG",
+    "colName": "COMM",
+    "colType": "DECIMAL",
+    "tabType": "TABLE",
+    "colRemarks": null
+  },
+  {
+    "tabRemarks": null,
+    "tabName": "SUPPLIERS",
+    "colName": "ADDR",
+    "colType": "XML",
+    "tabType": "TABLE",
+    "colRemarks": null
+  }
+]

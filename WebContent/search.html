@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Expires" content="-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dd tool</title>
+	<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-table.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-editable.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-select.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/mycss.css" type="text/css" rel="stylesheet" />
+
+</head>
+<body>
+
+	<div class="container-fluid" style="margin-top: 10px;">
+
+    <div class="btn-group" id="searchToolbar" role="group" aria-label="...">
+
+      <!-- <button type="button" onclick="GetQuerySubjects()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Get Query Subject(s) from table selected above."><span class="glyphicon glyphicon-magnet" aria-hidden="true"></span></button> -->
+
+    </div>
+
+
+		<table class="table table-striped fontsize" id="searchTable">
+
+		</table>
+
+	</div> <!-- container -->
+
+
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-table.min.js"></script>
+	<script src="js/bootstrap-editable.js"></script>
+	<script src="js/bootstrap-table-editable.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+  <script>
+
+    var datas = [];
+
+    var searchCols = [];
+    searchCols.push({field:"tabName", title: "Table Name", sortable: true});
+    searchCols.push({field:"tabType", title: "Table Type", sortable: true});
+    searchCols.push({field:"tabRemarks", title: "Table Remarks", sortable: true});
+    searchCols.push({field:"colName", title: "Column Name", sortable: true});
+    searchCols.push({field:"colType", title: "Column Type", sortable: true});
+    searchCols.push({field:"colRemarks", title: "Column Remarks", sortable: true});
+
+    $(document)
+    .ready(function() {
+      buildTable($('#searchTable'), searchCols);
+      GetSchema($('#searchTable'));
+    });
+
+    function GetSchema(table) {
+
+        $.ajax({
+            type: 'POST',
+            url: "GetSchema",
+            dataType: 'json',
+
+            success: function(data) {
+                console.log(data);
+                table.bootstrapTable("load", data);
+    			  },
+            error: function(data) {
+                console.log(data);
+            }
+    		});
+
+    }
+
+    function buildTable($el, cols) {
+
+        $el.bootstrapTable({
+            columns: cols,
+            // url: url,
+            // data: data,
+            // toolbar: $('#searchToolbar'),
+            search: true,
+    				showRefresh: false,
+    				showColumns: true,
+    				showToggle: false,
+    				pagination: false,
+    				showPaginationSwitch: false,
+            detailView: false
+        })
+    }
+
+  </script>
+
+</body>
+</html>

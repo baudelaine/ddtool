@@ -133,17 +133,14 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	protected QuerySubject getQuerySubjects() throws SQLException{
 		
 		String[] types = {"TABLE"};
-		ResultSet rst = metaData.getTables(con.getCatalog(), schema, "%", types);
+		ResultSet rst = metaData.getTables(con.getCatalog(), schema, table, types);
 		String label = "";
 		
 		while (rst.next()) {
 	    	label = rst.getString("REMARKS");
-	    	System.out.println("rst.getString(REMARKS)=" + rst.getString("REMARKS"));
 	    }
 		
 		if(rst != null){rst.close();}
-    	
-		System.out.println("label=" + label);
     	
 		QuerySubject result = new QuerySubject();
 		
