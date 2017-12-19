@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,8 +41,6 @@ public class GetSchemaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection con = null;
-		ResultSet rst0 = null;
-		ResultSet rst1 = null;
 		List<Object> result = new ArrayList<Object>();
 		String schema = "";
 
@@ -77,27 +77,53 @@ public class GetSchemaServlet extends HttpServlet {
 			    DatabaseMetaData metaData = con.getMetaData();
 			    //String[] types = {"TABLE", "VIEW", "SYSTEM TABLE", "GLOBAL TEMPORARY", "LOCAL TEMPORARY", "ALIAS", "SYNONYM"};
 			    String[] types = {"TABLE"};
-			    rst0 = metaData.getTables(con.getCatalog(), schema, "%", types);	
+			    ResultSet rst0 = metaData.getTables(con.getCatalog(), schema, "%", types);	
 	
 			    
 			    while (rst0.next()) {
+			    	
 			    	String table_name = rst0.getString("TABLE_NAME");
-			    	String table_type = rst0.getString("TABLE_TYPE");
-			    	String table_remarks = rst0.getString("REMARKS");
-				    Map<String, Object> table = new HashMap<>();
-				    table.put("tabName", table_name);
-				    table.put("tabType", table_type);
-				    table.put("tabRemarks", table_remarks);
+			    	long recCount = 0;
+		    		Statement stmt = null;
+		    		ResultSet rs = null;
+		            try{
+			    		String query = "SELECT COUNT(*) FROM " + schema + "." + table_name;
+			    		stmt = con.createStatement();
+			            rs = stmt.executeQuery(query);
+			            while (rs.next()) {
+			            	recCount = rs.getLong(1);
+			            }
+		            }
+		            catch(SQLException e){
+		            	System.out.println("CATCHING SQLEXEPTION...");
+		            	System.out.println(e.getSQLState());
+		            	System.out.println(e.getMessage());
+		            	
+		            }
+		            finally {
+			            if (stmt != null) { stmt.close();}
+			            if(rs != null){rs.close();}
+						
+					}
+			    	
+			    	if(recCount > 0){
+				    	String table_type = rst0.getString("TABLE_TYPE");
+				    	String table_remarks = rst0.getString("REMARKS");
+					    
+					    ResultSet rst1 = metaData.getColumns(con.getCatalog(), schema, table_name, "%");
+					    while(rst1.next()){
+						    Map<String, Object> field = new HashMap<>();
+						    field.put("tabName", table_name);
+						    field.put("tabType", table_type);
+						    field.put("tabRemarks", table_remarks);
+					    	field.put("colName", rst1.getString("COLUMN_NAME"));
+					    	field.put("colType", rst1.getString("TYPE_NAME"));
+					    	field.put("colRemarks", rst1.getString("REMARKS"));
+						    result.add(field);
+					    }
+					    if(rst1 != null){rst1.close();}
+			    	}
 				    
-				    rst1 = metaData.getColumns(con.getCatalog(), schema, table_name, "%");
-				    while(rst1.next()){
-				    	table.put("colName", rst1.getString("COLUMN_NAME"));
-				    	table.put("colType", rst1.getString("TYPE_NAME"));
-				    	table.put("colRemarks", rst1.getString("REMARKS"));
-				    }
-				    if(rst1 != null){rst1.close();}
-				    
-				    result.add(table);
 			    }		    
 			    
 			    if(rst0 != null){rst0.close();}
