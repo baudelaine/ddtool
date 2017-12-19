@@ -1230,7 +1230,7 @@ function ChooseTable(table) {
             tables = data;
             $.each(data, function(i, obj){
 							//console.log(obj.name);
-              var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
+              var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
                + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
 							table.append(option);
               // $('#modPKTables').append(option);

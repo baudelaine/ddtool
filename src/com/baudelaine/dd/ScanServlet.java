@@ -89,9 +89,11 @@ public class ScanServlet extends HttpServlet {
 			    while (rst.next()) {
 			    	String table_name = rst.getString("TABLE_NAME");
 			    	String table_type = rst.getString("TABLE_TYPE");
+			    	String table_remarks = rst.getString("REMARKS");
 				    Map<String, String> table = new HashMap<String, String>();
 				    table.put("name", table_name);
 				    table.put("type", table_type);
+				    table.put("remarks", table_remarks);
 				    temp.add(table);
 			    }
 			    
@@ -100,6 +102,7 @@ public class ScanServlet extends HttpServlet {
 			    for(Map<String, String> table: temp){
 			    	String tableName = table.get("name");
 			    	String tableType = table.get("type");
+			    	String tableRemarks = table.get("remarks");
 			    	Map<String, Object> scan = new HashMap<String, Object>();
 			    	
 			    	rst = metaData.getImportedKeys(con.getCatalog(), schema, table.get("name"));
@@ -149,6 +152,7 @@ public class ScanServlet extends HttpServlet {
 		            
 		    		scan.put("name", tableName);
 		    		scan.put("type", tableType);
+		    		scan.put("remarks", tableRemarks);
 		    		scan.put("FKCount", FKSet.size());
 		    		scan.put("PKCount", PKSet.size());
 		    		scan.put("FKSeqCount", FKSeqCount);
