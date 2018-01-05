@@ -98,6 +98,8 @@ fieldCols.push({field:"label", title: "label", editable: {type: "text"}, sortabl
 fieldCols.push({field:"traduction", title: "traduction", formatter: "boolFormatter", align: "center", sortable: false});
 fieldCols.push({field:"visible", title: "visible", formatter: "boolFormatter", align: "center", sortable: false});
 fieldCols.push({field:"field_type", title: "field_type", editable: false, sortable: true});
+fieldCols.push({field:"field_size", title: "field_size", editable: false, sortable: true});
+fieldCols.push({field:"nullable", title: "nullable", editable: false, sortable: true});
 fieldCols.push({field:"timezone", title: "timezone", formatter: "boolFormatter", align: "center", sortable: false});
 
 
@@ -159,14 +161,14 @@ $finTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'operate');
   $datasTable.bootstrapTable('hideColumn', 'visible');
   $datasTable.bootstrapTable('hideColumn', 'filter');
-  $datasTable.bootstrapTable('hideColumn', 'label');
+  $datasTable.bootstrapTable('showColumn', 'label');
   $datasTable.bootstrapTable('hideColumn', 'recurseCount');
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('hideColumn', 'addPKRelation');
   $datasTable.bootstrapTable('hideColumn', 'nommageRep');
-  $datasTable.bootstrapTable('hideColumn', '_id');
-  // $datasTable.bootstrapTable('showColumn', 'linker');
-  // $datasTable.bootstrapTable('showColumn', 'linker_ids');
+  $datasTable.bootstrapTable('showColumn', '_id');
+  $datasTable.bootstrapTable('showColumn', 'linker');
+  $datasTable.bootstrapTable('showColumn', 'linker_ids');
 
 });
 
@@ -176,12 +178,12 @@ $refTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'operate');
   $datasTable.bootstrapTable('hideColumn', 'visible');
   $datasTable.bootstrapTable('hideColumn', 'filter');
-  $datasTable.bootstrapTable('hideColumn', 'label');
+  $datasTable.bootstrapTable('showColumn', 'label');
   $datasTable.bootstrapTable('showColumn', 'addPKRelation');
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('showColumn', 'recurseCount');
   $datasTable.bootstrapTable('showColumn', 'nommageRep');
-  $datasTable.bootstrapTable('hideColumn', '_id');
+  $datasTable.bootstrapTable('showColumn', '_id');
   $datasTable.bootstrapTable('showColumn', 'linker');
   $datasTable.bootstrapTable('showColumn', 'linker_ids');
 });
@@ -783,7 +785,7 @@ function buildSubTable($el, cols, data, parentData){
 
   });
 
-  $el.bootstrapTable('hideColumn', '_id');
+  // $el.bootstrapTable('hideColumn', '_id');
 
   if(activeTab == "Reference"){
     $el.bootstrapTable('hideColumn', 'fin');
@@ -994,12 +996,12 @@ function buildTable($el, cols, data) {
 
     $el.bootstrapTable('hideColumn', 'visible');
     $el.bootstrapTable('hideColumn', 'filter');
-    $el.bootstrapTable('hideColumn', 'label');
+    $el.bootstrapTable('showColumn', 'label');
     $el.bootstrapTable('hideColumn', 'recurseCount');
     $el.bootstrapTable('hideColumn', 'addPKRelation');
-    $el.bootstrapTable('hideColumn', '_id');
-    $el.bootstrapTable('hideColumn', 'linker');
-    $el.bootstrapTable('hideColumn', 'linker_ids');
+    $el.bootstrapTable('showColumn', '_id');
+    $el.bootstrapTable('showColumn', 'linker');
+    $el.bootstrapTable('showColumn', 'linker_ids');
 
     console.log("in buildTable: activeTab="+activeTab);
     console.log("in buildTable: previousTab="+previousTab);

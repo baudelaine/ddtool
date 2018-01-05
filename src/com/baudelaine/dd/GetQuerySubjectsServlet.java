@@ -175,11 +175,13 @@ public class GetQuerySubjectsServlet extends HttpServlet {
         while (rst.next()) {
         	String field_name = rst.getString("COLUMN_NAME");
         	String field_type = rst.getString("TYPE_NAME");
-        	System.out.println(field_name + "," + field_type);
+//        	System.out.println(field_name + "," + field_type);
         	Field field = new Field();
         	field.setField_name(field_name);
         	field.setField_type(field_type);
         	field.setLabel(rst.getString("REMARKS"));
+        	field.setField_size(rst.getInt("COLUMN_SIZE"));
+        	field.setNullable(rst.getString("IS_NULLABLE"));
         	field.set_id(field_name + field_type);
         	if(pks.contains(rst.getString("COLUMN_NAME"))){
     			field.setPk(true);

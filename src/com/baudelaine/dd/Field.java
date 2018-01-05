@@ -8,6 +8,8 @@ public class Field {
 	String field_type = "";
 	boolean pk = false;
 	String label = "";
+	int field_size = 0;
+	String nullable = "NO";
 	boolean traduction = false;
 	boolean visible = false;
 	boolean timezone = false;
@@ -48,6 +50,18 @@ public class Field {
 	}
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	public int getField_size() {
+		return field_size;
+	}
+	public void setField_size(int field_size) {
+		this.field_size = field_size;
+	}
+	public String getNullable() {
+		return nullable;
+	}
+	public void setNullable(String nullable) {
+		this.nullable = nullable;
 	}
 	public boolean isTraduction() {
 		return traduction;

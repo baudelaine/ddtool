@@ -119,6 +119,8 @@ public class GetSchemaServlet extends HttpServlet {
 					    	field.put("colName", rst1.getString("COLUMN_NAME"));
 					    	field.put("colType", rst1.getString("TYPE_NAME"));
 					    	field.put("colRemarks", rst1.getString("REMARKS"));
+				        	field.put("colSize", rst1.getInt("COLUMN_SIZE"));
+				        	field.put("isNullable", rst1.getString("IS_NULLABLE"));
 					    	field.put("filtered", false);
 						    result.add(field);
 					    }
