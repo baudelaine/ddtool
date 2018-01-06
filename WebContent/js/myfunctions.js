@@ -266,16 +266,16 @@ $newRowModal.on('show.bs.modal', function (e) {
 })
 
 $modelListModal.on('shown.bs.modal', function() {
-    $(this).find('.modal-body').empty();
-    var models = modelList;
-    var list = '<div class="container-fluid"><div class="row"><div class="list-group">';
+  $(this).find('.modal-body').empty();
+  var list = '<div class="container-fluid"><div class="row"><form role="form"><div class="form-group">';
+  list += '<input id="searchinput" class="form-control" type="search" placeholder="Search..." /></div>';
+  list += '<div id="searchlist" class="list-group">';
 
-    $.each(models, function(i, obj){
-        list += '<a href="#" class="list-group-item" onClick="OpenModel(' + obj.id + '); return false;">' + obj.name + '</a>';
-    });
-    list += '<div class="list-group"></div></div>';
-    $(this).find('.modal-body').append(list);
-
+  $.each(modelList, function(index, object){
+    list += '<a href="#" class="list-group-item" onClick="OpenModel(' + object.id + '); return false;"><span>' + object.name + '</span></a>';
+  });
+  list += '</div></form><script>$("#searchlist").btsListFilter("#searchinput", {itemChild: "span", initial: false, casesensitive: false,});</script>';
+  $(this).find('.modal-body').append(list);
 });
 
 
