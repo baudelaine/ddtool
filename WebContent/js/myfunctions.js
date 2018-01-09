@@ -600,185 +600,147 @@ function buildSubTable($el, cols, data, parentData){
       },
       onClickCell: function (field, value, row, $element){
 
-        if(field.match("traduction|visible|timezone|fin|ref|nommageRep")){
+        switch(field){
 
-          console.log($(this).bootstrapTable("getData"));
+          case "traduction":
+          case "visible":
+          case "timezone":
+            var newValue = value == false ? true : false;
+            updateCell($el, row.index, field, newValue);
+            break;
 
-          console.log("buildSubTable: row.ref=" + row.ref);
+          case "nommageRep":
+            var allowNommageRep = true;
 
-          if(field == "fin" && row.ref){
-            showalert("buildSubTable()", row._id + " is already checked as REF.", "alert-warning", "bottom");
+            if(!row.ref){
+              allowNommageRep = false;
+              showalert("buildSubTable()", "Ref for " + row.pktable_alias + " has to be checked first.", "alert-warning", "bottom");
+              return;
+            }
+
+            if(value == false){
+              // interdire de cocher n fois pour un même pkAlias dans un qs donné
+              $.each($el.bootstrapTable("getData"), function(i, obj){
+                console.log(obj);
+                console.log(obj.pktable_alias + " -> " + obj.nommageRep);
+                if((obj.pktable_alias == row.pktable_alias) && obj.nommageRep){
+                  allowNommageRep = false;
+                }
+              });
+
+            }
+            if(!allowNommageRep){
+              showalert("buildSubTable()", "RepTableName for pktable_alias " + row.pktable_alias + " already checked.", "alert-warning", "bottom");
+              return;
+            }
+            var newValue = value == false ? true : false;
+            updateCell($el, row.index, field, newValue);
+
+            break;
+
+          case "duplicate":
+
+            $el.bootstrapTable("filterBy", {});
+            nextIndex = row.index + 1;
+            console.log("nextIndex=" + nextIndex);
+            var newRow = $.extend({}, row);
+            newRow.checkbox = false;
+            newRow.pktable_alias = "";
+            newRow.fin = false;
+            newRow.ref = false;
+            newRow.relationship = newRow.relationship.replace(/\s{1,}=\s{1,}\[FINAL\]\./g, " = ");
+            newRow.relationship = newRow.relationship.replace(/\s{1,}=\s{1,}\[REF\]\./g, " = ");
+            newRow.relationship = newRow.relationship.split("[" + row.pktable_alias + "]").join("[]");
+            newRow.nommageRep = false;
+            if(newRow.key_type == "F"){
+              newRow.key_name = "DK_" + newRow.pktable_name + "_" + parentData.table_alias;
+              newRow._id = newRow.key_name + "F";
+            }
+            if(newRow.key_type == "P"){
+              newRow.key_name = "DK_" + parentData.table_alias + "_" + newRow.pktable_name;
+              newRow._id = newRow.key_name + "P";
+            }
+            console.log("newRow");
+            console.log(newRow);
+            $el.bootstrapTable('insertRow', {index: nextIndex, row: newRow});
             return;
-          }
 
-          if(field == "ref" && row.fin){
-            showalert("buildSubTable()", row._id + " is already checked as FINAL.", "alert-warning", "bottom");
-            return;
-          }
-
-          var allowNommageRep = true;
-
-          if(field == "nommageRep" && !row.ref){
-            allowNommageRep = false;
-          }
-
-          if(!allowNommageRep){
-            showalert("buildSubTable()", "Ref for " + row.pktable_alias + " has to be checked first.", "alert-warning", "bottom");
-            return;
-          }
-
-          if(field == "nommageRep" && value == false){
-            // interdire de cocher n fois pour un même pkAlias dans un qs donné
-            $.each($el.bootstrapTable("getData"), function(i, obj){
-              console.log(obj);
-              console.log(obj.pktable_alias + " -> " + obj.nommageRep);
-              if((obj.pktable_alias == row.pktable_alias) && obj.nommageRep){
-                allowNommageRep = false;
-              }
+          case "remove":
+            $el.bootstrapTable('remove', {
+                field: 'index',
+                values: [row.index]
             });
-
-          }
-
-          if(!allowNommageRep){
-            showalert("buildSubTable()", "RepTableName for pktable_alias " + row.pktable_alias + " already checked.", "alert-warning", "bottom");
             return;
-          }
 
-          if(field.match("fin|ref") && value == true){
-            RemoveKeys(row, parentData);
+          case "fin":
+          case "ref":
 
-            console.log(" **** je suis reviendu de RemoveKeys ***** ")
-
-            console.log("qs2rm.qs=");
-            console.log(qs2rm.qs);
-            console.log("qs2rm.row=");
-            console.log(qs2rm.row);
-            console.log("qs2rm.qsList=");
-            console.log(qs2rm.qsList);
-            console.log("qs2rm.ids2rm");
-            console.log(qs2rm.ids2rm);
-            console.log("value=");
+            console.log(row);
             console.log(value);
-            if(qs2rm.qsList.length > 0){
-              var resp = confirm("Warning: following Query Subject will be dropped: " + JSON.stringify(qs2rm.qsList));
-              console.log("resp=" + resp);
-              if(!resp){
-                $.each(qs2rm.ids2rm, function(qs, ids){
-                  console.log("qs=" + qs);
-                  $.each(ids, function(i, id){
-                    console.log("id=" +id);
-                    $.each($datasTable.bootstrapTable("getData"), function(k, v){
-                      console.log(qs + " == " + v._id)
-                      if(qs == v._id){
-                        console.log("push back id=" + id + " to qs=" +v._id);
-                        v.linker_ids.push(id);
-                      }
-                    });
-                  });
-                });
+
+            if(row.ref && activeTab == "Final"){
+              showalert("buildSubTable()", row._id + " is already checked as REF.", "alert-warning", "bottom");
+              return;
+            }
+            if(row.fin && activeTab == "Reference"){
+              showalert("buildSubTable()", row._id + " is already checked as FINAL.", "alert-warning", "bottom");
+              return;
+            }
+            if(row.pktable_alias == ""){
+              showalert("buildSubTable()", "Empty is not a valid pktable_alias.", "alert-warning", "bottom");
+              return;
+            }
+            var newValue = value == false ? true : false;
+            var pkAlias = '[' + row.pktable_alias + ']';
+            console.log("!!!!!!!!!!");
+            console.log("pkAlias=" + pkAlias);
+            console.log(newValue);
+            if(value == true){
+              PrepareRemoveKeys(row, parentData);
+              if(qs2rm.qsList.length > 0){
+                RemoveKeys(row, parentData);
                 return;
               }
-              if(activeTab == "Final"){
-                // qs2rm.row.relationship = qs2rm.row.relationship.split("[FINAL]." + pkAlias).join(pkAlias);
-               updateCell($activeSubDatasTable, qs2rm.row.index, "fin", false);
+              if(row.fin && activeTab == "Final"){
+                row.relationship = row.relationship.split("[FINAL]." + pkAlias).join(pkAlias);
               }
-              if(activeTab == "Reference"){
-                // qs2rm.row.relationship = qs2rm.row.relationship.split("[REF]." + pkAlias).join(pkAlias);
-               updateCell($activeSubDatasTable, qs2rm.row.index, "ref", false);
+              if(row.ref && activeTab == "Reference"){
+                row.relationship = row.relationship.split("[REF]." + pkAlias).join(pkAlias);
               }
-
-              $datasTable.bootstrapTable('remove', {
-                field: '_id',
-                values: qs2rm.qsList
-              });
+              updateCell($el, row.index, field, newValue);
             }
-
-          }
-
-
-          var newValue = value == false ? true : false;
-          var pkAlias = '[' + row.pktable_alias + ']';
-
-          console.log("row.index=" + row.index);
-          console.log("field=" + field);
-          console.log("newValue=" + newValue);
-          console.log("row.pktable_alias=" + row.pktable_alias);
-
-
-          if(field.match("fin|ref") && row.pktable_alias == ""){
-            showalert("buildSubTable()", "Empty is not a valid pktable_alias.", "alert-warning", "bottom");
-            return;
-          }
-
-
-          if(field == "fin" && newValue == true){
-            row.relationship = row.relationship.split(pkAlias).join("[FINAL]." + pkAlias);
-          }
-          if(field == "fin" && newValue == false){
-            row.relationship = row.relationship.split("[FINAL]." + pkAlias).join(pkAlias);
-          }
-          if(field == "ref" && newValue == true){
-            row.relationship = row.relationship.split(pkAlias).join("[REF]." + pkAlias);
-          }
-          if(field == "ref" && newValue == false){
-            row.relationship = row.relationship.split("[REF]." + pkAlias).join(pkAlias);
-          }
-
-
-          updateCell($el, row.index, field, newValue);
-
-          if(field == "fin" && newValue == true){
-            GetQuerySubjects(row.pktable_name, row.pktable_alias, "Final", row._id);
-            updateCell($datasTable, parentData.index, "linker", true);
-
-          }
-
-          if(field == "ref" && newValue == true){
-            GetQuerySubjects(row.pktable_name, row.pktable_alias, "Ref", row._id);
-            updateCell($datasTable, parentData.index, "linker", true);
-          }
-
-          var linked = false;
-          $.each(parentData.relations, function(i, obj){
-            if(obj.fin || obj.ref){
-              linked = true;
+            if(value == false){
+              if(!row.fin && activeTab == "Final"){
+                row.relationship = row.relationship.split(pkAlias).join("[FINAL]." + pkAlias);
+              }
+              if(!row.ref && activeTab == "Reference"){
+                row.relationship = row.relationship.split(pkAlias).join("[REF]." + pkAlias);
+              }
+              updateCell($el, row.index, field, newValue);
+              if(row.fin && activeTab == "Final"){
+                GetQuerySubjects(row.pktable_name, row.pktable_alias, "Final", row._id);
+              }
+              if(row.ref && activeTab == "Reference"){
+                GetQuerySubjects(row.pktable_name, row.pktable_alias, "Ref", row._id);
+              }
+              updateCell($datasTable, parentData.index, "linker", true);
             }
-          });
-          updateCell($datasTable, parentData.index, "linker", linked);
+            var linked = false;
+            $.each(parentData.relations, function(i, obj){
+              if(obj.fin || obj.ref){
+                linked = true;
+              }
+            });
+            updateCell($datasTable, parentData.index, "linker", linked);
 
-        }
+            break;
 
-        if(field.match("duplicate")){
-          $el.bootstrapTable("filterBy", {});
-          nextIndex = row.index + 1;
-          console.log("nextIndex=" + nextIndex);
-          var newRow = $.extend({}, row);
-          newRow.checkbox = false;
-          newRow.pktable_alias = "";
-          newRow.fin = false;
-          newRow.ref = false;
-          newRow.relationship = newRow.relationship.replace(/\s{1,}=\s{1,}\[FINAL\]\./g, " = ");
-          newRow.relationship = newRow.relationship.replace(/\s{1,}=\s{1,}\[REF\]\./g, " = ");
-          newRow.relationship = newRow.relationship.split("[" + row.pktable_alias + "]").join("[]");
-          newRow.nommageRep = false;
-          if(newRow.key_type == "F"){
-            newRow.key_name = "DK_" + newRow.pktable_name + "_" + parentData.table_alias;
-            newRow._id = newRow.key_name + "F";
-          }
-          if(newRow.key_type == "P"){
-            newRow.key_name = "DK_" + parentData.table_alias + "_" + newRow.pktable_name;
-            newRow._id = newRow.key_name + "P";
-          }
-          console.log("newRow");
-          console.log(newRow);
-          $el.bootstrapTable('insertRow', {index: nextIndex, row: newRow});
-        }
+          default:
 
-        if(field.match("remove")){
-          $el.bootstrapTable('remove', {
-              field: 'index',
-              values: [row.index]
-          });
+            console.log(row);
+            console.log(value);
+            console.log(newValue);
+
         }
 
       }
@@ -822,7 +784,7 @@ $("#removeKeysModal").on('hidden.bs.modal', function (e) {
   }
 })
 
-function RemoveKeys(o, qs){
+function PrepareRemoveKeys(o, qs){
 
         var indexes2rm = [];
         var row = o;
@@ -867,34 +829,69 @@ function RemoveKeys(o, qs){
         };
         recurse(o);
 
-        // $datasTable.bootstrapTable('remove', {
-        //   field: '_id',
-        //   values: indexes2rm
-        // });
-
-
         qs2rm.qs = qs;
         qs2rm.row = row;
         qs2rm.qsList = indexes2rm;
         qs2rm.ids2rm = ids2rm;
-        // qs2rm.removed = false;
-        //
-        // if(qs2rm.qsList.length > 0){
-        //
-        //   $("#removeKeysModal").modal('toggle');
-        //   $("#removeKeysModal").find('.modal-body').empty();
-        //   var html = '<div class="container-fluid"><div class="row"><div class="list-group">';
-        //
-        //   $.each(indexes2rm, function(i, obj){
-        //       html += '<a href="#" class="list-group-item">' + obj + '</a>';
-        //   });
-        //   html += '<div class="list-group"></div></div>';
-        //
-        //   $("#removeKeysModal").find('.modal-body').append(html);
-        //
-        // }
 
-        // return;
+
+}
+
+function RemoveKeys(row, qs){
+
+  var list = '<ul class="list-group">';
+  $.each(qs2rm.qsList, function(i, qs){
+    list += '<li class="list-group-item">' + qs + '</li>';
+  });
+  list += '</ul>';
+
+  bootbox.confirm({
+    title: "Following Query Subject will be dropped: ",
+    message: list,
+    buttons: {
+      cancel: {
+          label: '<span class="glyphicon glyphicon-remove aria-hidden="true">',
+          className: 'btn btn-default'
+      },
+      confirm: {
+          label: '<span class="glyphicon glyphicon-ok aria-hidden="true">',
+          className: 'btn btn-primary'
+      }
+    },
+    callback: function(result){
+      if(result){
+        var pkAlias = '[' + row.pktable_alias + ']';
+        if(activeTab == "Final"){
+          qs2rm.row.relationship = qs2rm.row.relationship.split("[FINAL]." + pkAlias).join(pkAlias);
+          console.log("$activeSubDatasTable");
+          console.log($activeSubDatasTable);
+          if($activeSubDatasTable){
+            updateCell($activeSubDatasTable, qs2rm.row.index, "fin", false);
+          }
+        }
+        if(activeTab == "Reference"){
+          qs2rm.row.relationship = qs2rm.row.relationship.split("[REF]." + pkAlias).join(pkAlias);
+          if($activeSubDatasTable){
+            updateCell($activeSubDatasTable, qs2rm.row.index, "ref", false);
+          }
+        }
+
+        $datasTable.bootstrapTable('remove', {
+          field: '_id',
+          values: qs2rm.qsList
+        });
+
+        var linked = false;
+        $.each(qs.relations, function(i, obj){
+          if(obj.fin || obj.ref){
+            linked = true;
+          }
+        });
+        updateCell($datasTable, qs.index, "linker", linked);
+
+      }
+    }
+  });
 
 }
 
