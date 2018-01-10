@@ -26,7 +26,7 @@ relationCols.push({field:"key_type", title: "key_type", sortable: true});
 relationCols.push({field:"pktable_name", title: "pktable_name", sortable: true});
 relationCols.push({field:"pktable_alias", title: "pktable_alias", class: "pktable_alias", editable: {type: "text"}, sortable: true, events: "pktable_aliasEvents"});
 relationCols.push({field:"label", title: "Label", sortable: false});
-relationCols.push({field:"recCount", title: "count(*) %", sortable: true});
+relationCols.push({field:"recCountPercent", title: "count(*) %", sortable: true});
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"fin", title: "fin", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"ref", title: "ref", formatter: "boolFormatter", align: "center"});
@@ -572,7 +572,7 @@ function expandTable($detail, cols, data, parentData) {
     $.each(data, function(i, obj){
       obj.label = parentData.label;
       var percent = (obj.recCount / parentData.recCount) * 100;
-      obj.recCount = Math.round(percent);
+      obj.recCountPercent = Math.round(percent);
     })
 
     console.log("expandTable.data=");
