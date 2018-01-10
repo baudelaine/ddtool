@@ -36,7 +36,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	String qs_id = "";
 	String r_id = "";
 	String linker_id = "";
-	boolean withRecCount = true;
+	boolean withRecCount = false;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -70,6 +70,8 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 
 		try{
 			
+			withRecCount = (Boolean) request.getSession().getAttribute("withRecCount");
+			System.out.println("withRecCount=" + withRecCount);
 			con = (Connection) request.getSession().getAttribute("con");
 			schema = (String) request.getSession().getAttribute("schema");
 			metaData = con.getMetaData();

@@ -30,6 +30,7 @@ public class SessionListener implements HttpSessionListener {
 	String jndiName = "";
 	String schema = "";
 	String query = "";
+	boolean withRecCount = false;
 	Map<String, QuerySubject> query_subjects = new HashMap<String, QuerySubject>();
 	
     /**
@@ -90,6 +91,9 @@ public class SessionListener implements HttpSessionListener {
 			s.setAttribute("query", query);
 			s.setAttribute("query_subjects", query_subjects);
 			System.out.println("SessionId " + s.getId() + " is now connected to " + jndiName + " using shema " + schema);
+			
+			withRecCount = (Boolean) ic.lookup("WithRecCount");
+			s.setAttribute("withRecCount", withRecCount);
 			
 		} catch (NamingException | SQLException e) {
 			// TODO Auto-generated catch block
