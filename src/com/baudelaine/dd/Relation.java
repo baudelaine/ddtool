@@ -13,14 +13,18 @@ public class Relation {
 	String fk_name = "";
 	String pk_name = "";
 	String table_name = "";
+	String table_alias = "";
 	String pktable_name = "";	
 	String pktable_alias = "";	
 	boolean fin = false;
 	boolean ref = false;
 	boolean nommageRep = false;
 	String relationship = "";
+	String where = "";
 	String key_type = "";
+	String type = "";
 	List<Seq> seqs = new ArrayList<Seq>();
+	long recCount= 0L;
 	
 	public String get_id() {
 		return _id;
@@ -34,7 +38,12 @@ public class Relation {
 	public void set_rev(String _rev) {
 		this._rev = _rev;
 	}
-	
+	public long getRecCount() {
+		return recCount;
+	}
+	public void setRecCount(long recCount) {
+		this.recCount = recCount;
+	}
 	public boolean isNommageRep() {
 		return nommageRep;
 	}
@@ -64,6 +73,12 @@ public class Relation {
 	}
 	public void setTable_name(String table_name) {
 		this.table_name = table_name;
+	}
+	public String getTable_alias() {
+		return table_alias;
+	}
+	public void setTable_alias(String table_alias) {
+		this.table_alias = table_alias;
 	}
 	public String getPktable_name() {
 		return pktable_name;
@@ -95,14 +110,24 @@ public class Relation {
 	public void setRelashionship(String relashionship) {
 		this.relationship = relashionship;
 	}
-
+	public String getWhere() {
+		return where;
+	}
+	public void setWhere(String where) {
+		this.where = where;
+	}
 	public String getKey_type() {
 		return key_type;
 	}
 	public void setKey_type(String key_type) {
 		this.key_type = key_type;
 	}
-
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public List<Seq> getSeqs() {
 		return seqs;
 	}

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,6 +36,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	String qs_id = "";
 	String r_id = "";
 	String linker_id = "";
+	boolean withRecCount = true;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -150,6 +152,33 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		result.setType(type);
 		result.setLabel(label);
 		result.addLinker_id(linker_id);
+		
+		if(withRecCount){
+            long recCount = 0;
+    		Statement stmt = null;
+    		ResultSet rs = null;
+            try{
+	    		String query = "SELECT COUNT(*) FROM " + schema + "." + table;
+	    		stmt = con.createStatement();
+	            rs = stmt.executeQuery(query);
+	            while (rs.next()) {
+	            	recCount = rs.getLong(1);
+	            }
+	            result.setRecCount(recCount);
+            }
+            catch(SQLException e){
+            	System.out.println("CATCHING SQLEXEPTION...");
+            	System.out.println(e.getSQLState());
+            	System.out.println(e.getMessage());
+            	
+            }
+            finally {
+	            if (stmt != null) { stmt.close();}
+	            if(rst != null){rst.close();}
+				
+			}
+			
+		}
         
         return result;
         
@@ -226,12 +255,18 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	        	relation.setFk_name(fk_name);
 	        	relation.setPk_name(pk_name);
 	        	relation.setTable_name(fktable_name);
+	        	relation.setTable_alias(alias);
 	        	relation.setPktable_name(pktable_name);
 	        	relation.setPktable_alias(pktable_name);
 	        	relation.setRelashionship("[" + type.toUpperCase() + "].[" + alias + "].[" + fkcolumn_name + "] = [" + pktable_name + "].[" + pkcolumn_name + "]");
+	        	relation.setWhere(fktable_name + "." + fkcolumn_name + " = " + pktable_name + "." + pkcolumn_name);
 	        	relation.setKey_type("F");
+	        	relation.setType(type.toUpperCase());
+	        	relation.set_id("FK_" + relation.getPktable_alias() + "_" + alias + "_" + type.toUpperCase());
 	        	
 	        	Seq seq = new Seq();
+	        	seq.setTable_name(fktable_name);
+	        	seq.setPktable_name(pktable_name);
 	        	seq.setColumn_name(fkcolumn_name);
 	        	seq.setPkcolumn_name(pkcolumn_name);
 	        	seq.setKey_seq(Short.parseShort(key_seq));
@@ -246,6 +281,8 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	        	if(!relation.getSeqs().isEmpty()){
 		        	System.out.println("+++ update relation +++");
 	        		Seq seq = new Seq();
+		        	seq.setTable_name(fktable_name);
+		        	seq.setPktable_name(pktable_name);
 		        	seq.setColumn_name(fkcolumn_name);
 		        	seq.setPkcolumn_name(pkcolumn_name);
 		        	seq.setKey_seq(Short.parseShort(key_seq));
@@ -255,11 +292,63 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		        	StringBuffer sb = new StringBuffer((String) relation.getRelationship());
 		        	sb.append(" AND [" + type.toUpperCase() + "].[" + alias + "].[" + fkcolumn_name + "] = [" + pktable_name + "].[" + pkcolumn_name + "]");
 		        	relation.setRelashionship(sb.toString());
+		        	
+		        	sb = new StringBuffer((String) relation.getWhere());
+		        	sb.append(" AND " + fktable_name + "." + fkcolumn_name + " = " + pktable_name + "." + pkcolumn_name);
+		        	relation.setWhere(sb.toString());
+		        	
 	        	}
 	        	
 	        }
         	
 	        	
+	    }
+	    
+	    if(withRecCount){
+	    	for(Entry<String, Relation> relation: map.entrySet()){
+	    		Relation rel = relation.getValue();
+	    		
+	    		Set<String> tableSet = new HashSet<String>();
+	    		for(Seq seq: rel.getSeqs()){
+	    			tableSet.add(schema + "." + seq.pktable_name);
+	    			tableSet.add(schema + "." + seq.table_name);
+	    		}
+	    		
+	    		System.out.println("tableSet=" + tableSet);
+	    		
+	    		StringBuffer sb = new StringBuffer();;
+	    		
+	    		for(String table: tableSet){
+	    			sb.append(", " + table);
+	    		}
+	    		String tables = sb.toString().substring(1);
+	    		
+	            long recCount = 0;
+	    		Statement stmt = null;
+	    		ResultSet rs = null;
+	            try{
+		    		String query = "SELECT COUNT(*) FROM " + tables + " WHERE " + rel.where;
+		    		System.out.println(query);
+		    		stmt = con.createStatement();
+		            rs = stmt.executeQuery(query);
+		            while (rs.next()) {
+		            	recCount = rs.getLong(1);
+		            }
+		            rel.setRecCount(recCount);
+	            }
+	            catch(SQLException e){
+	            	System.out.println("CATCHING SQLEXEPTION...");
+	            	System.out.println(e.getSQLState());
+	            	System.out.println(e.getMessage());
+	            	
+	            }
+	            finally {
+		            if (stmt != null) { stmt.close();}
+		            if(rst != null){rst.close();}
+					
+				}
+	    		
+	    	}
 	    }
 	    
 	    return new ArrayList<Relation>(map.values());
@@ -300,10 +389,13 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	        	relation.setFk_name(fk_name);
 	        	relation.setPk_name(pk_name);
 	        	relation.setTable_name(pktable_name);
+	        	relation.setTable_alias(alias);
 	        	relation.setPktable_name(fktable_name);
 	        	relation.setPktable_alias(fktable_name);
 	        	relation.setRelashionship("[" + type.toUpperCase() + "].[" + alias + "].[" + pkcolumn_name + "] = [" + fktable_name + "].[" + fkcolumn_name + "]");
 	        	relation.setKey_type("P");
+	        	relation.setType(type.toUpperCase());
+	        	relation.set_id("PK_" + relation.getPktable_alias() + "_" + alias + "_" + type.toUpperCase());
 	        	
 	        	Seq seq = new Seq();
 	        	seq.setColumn_name(pkcolumn_name);

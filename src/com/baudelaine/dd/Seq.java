@@ -2,11 +2,25 @@ package com.baudelaine.dd;
 
 public class Seq {
 
+		String table_name = "";
+		String pktable_name = "";
         String column_name = ""; 
         String pkcolumn_name = ""; 
         Short key_seq = null;
 
-        public String getColumn_name() {
+        public String getTable_name() {
+			return table_name;
+		}
+		public void setTable_name(String table_name) {
+			this.table_name = table_name;
+		}
+		public String getPktable_name() {
+			return pktable_name;
+		}
+		public void setPktable_name(String pktable_name) {
+			this.pktable_name = pktable_name;
+		}
+		public String getColumn_name() {
                 return column_name;
         }
         public void setColumn_name(String column_name) {

@@ -23,12 +23,19 @@ public class QuerySubject {
 	List<Relation> relations = new ArrayList<Relation>();
 	Map<String, Integer> relationCount = new HashMap<String, Integer>(); 
 	int recurseCount = 1;
+	long recCount= 0L;
 	
 	public int getRecurseCount() {
 		return recurseCount;
 	}
 	public void setRecurseCount(int recurseCount) {
 		this.recurseCount = recurseCount;
+	}
+	public long getRecCount() {
+		return recCount;
+	}
+	public void setRecCount(long recCount) {
+		this.recCount = recCount;
 	}
 	public void incRelationCount(String qs_id){
 		if(relationCount.get(qs_id) == null){

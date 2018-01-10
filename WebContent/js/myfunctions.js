@@ -25,6 +25,8 @@ relationCols.push({field:"key_name", title: "key_name", sortable: true});
 relationCols.push({field:"key_type", title: "key_type", sortable: true});
 relationCols.push({field:"pktable_name", title: "pktable_name", sortable: true});
 relationCols.push({field:"pktable_alias", title: "pktable_alias", class: "pktable_alias", editable: {type: "text"}, sortable: true, events: "pktable_aliasEvents"});
+relationCols.push({field:"label", title: "Label", sortable: false});
+relationCols.push({field:"recCount", title: "count(*)", sortable: true});
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"fin", title: "fin", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"ref", title: "ref", formatter: "boolFormatter", align: "center"});
@@ -64,6 +66,7 @@ qsCols.push({field:"type", title: "type", sortable: true});
 qsCols.push({field:"visible", title: "visible", formatter: "boolFormatter", align: "center", sortable: false});
 qsCols.push({field:"filter", title: "filter", editable: {type: "textarea"}, sortable: true});
 qsCols.push({field:"label", title: "label", editable: {type: "textarea"}, sortable: true});
+qsCols.push({field:"recCount", title: "count(*)", sortable: true});
   qsCols.push({field:"recurseCount", title: '<i class="glyphicon glyphicon-repeat" title="Set recurse count"></i>', editable: {
     type: "select",
     value: 1,
@@ -188,15 +191,19 @@ $refTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'linker_ids');
 });
 
-$datasTable.on('editable-save.bs.table', function (editable, field, row, oldValue, $el) {
-  row._id = row.key_type + 'K' + row.pktable_alias + '_' + row.table_name + row.key_type;
-  if(field == "pktable_alias"){
-    var newValue = row.pktable_alias;
-    if($activeSubDatasTable != undefined){
-      updateCell($activeSubDatasTable, row.index, 'relationship', row.relationship.split("[" + oldValue + "]").join("[" + newValue + "]"));
-    }
-  }
-});
+// $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValue, $el) {
+//   console.log("row");
+//   console.log(row);
+//   console.log("$el");
+//   console.log($el);
+//   row._id = row.key_type + 'K_' + row.pktable_alias + '_' + row.table_alias + '_' + row.type;
+//   if(field == "pktable_alias"){
+//     var newValue = row.pktable_alias;
+//     if($activeSubDatasTable != undefined){
+//       updateCell($activeSubDatasTable, row.index, 'relationship', row.relationship.split("[" + oldValue + "]").join("[" + newValue + "]"));
+//     }
+//   }
+// });
 
 $datasTable.on('reset-view.bs.table', function(){
   // console.log("++++++++++++++on passe dans reset-view");
@@ -250,9 +257,20 @@ $newRowModal.on('show.bs.modal', function (e) {
 	// ChooseQuerySubject($('#modQuerySubject'));
   $('#modPKTables').empty();
   $('#modPKColumn').empty();
+  $('#modKeyType').empty();
   $('#modPKColumn').selectpicker('refresh');
+
+  if(activeTab == "Final"){
+    $('#modKeyType').append('<option value="F">F</option>');
+  }
+  if(activeTab == "Reference"){
+    $('#modKeyType').append('<option value="F">F</option>');
+    $('#modKeyType').append('<option value="P">P</option>');
+  }
+  $('#modKeyType').selectpicker('refresh');
+
   $.each(tables, function(i, obj){
-    var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
+    var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
      + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
     $('#modPKTables').append(option);
   });
@@ -300,13 +318,15 @@ $('#modKeyType').change(function () {
 
 function updateKeyName(){
   var keyType = $('#modKeyType').find("option:selected").val();
-  var newText = 'CK_';
+  var newText = '';
   if(keyType == "P"){
-   newText += $('#modQuerySubject').text().split(" - ")[0] + '_' + $('#modPKTableAlias').val();
+    newText += "PK_";
   }
   if(keyType == "F"){
-   newText +=  $('#modPKTableAlias').val() + '_' + $('#modQuerySubject').text().split(" - ")[0];
+    newText += "FK_";
   }
+  // newText +=  $('#modPKTableAlias').val() + '_' + $('#modQuerySubject').text().split(" - ")[0] + '_' + $('#modQuerySubject').text().split(" - ")[1];
+  newText +=  $('#modPKTableAlias').val() + '_' + $('#modQuerySubject').text().split(" - ")[0];
   $('#modKeyName').val(newText);
 }
 
@@ -501,6 +521,8 @@ function modValidate(){
 
   relation.ref = null;
   relation.table_name = $('#modQuerySubject').text().split(" - ")[2];
+  relation.table_alias = $('#modQuerySubject').text().split(" - ")[0];
+  relation.type = $('#modQuerySubject').text().split(" - ")[1].toUpperCase();
   relation.key_name = $('#modKeyName').val();
   relation.fk_name = "";
   relation.pk_name = "";
@@ -515,13 +537,13 @@ function modValidate(){
   seq.key_seq = 1;
   relation.seqs = [];
   relation.seqs.push(seq);
-  relation._id = $('#modKeyName').val() + relation.key_type;
+  relation._id = $('#modKeyName').val() + '_' + $('#modQuerySubject').text().split(" - ")[1].toUpperCase();
   relation.relationship = "[" + $('#modQuerySubject').text().split(" - ")[1].toUpperCase() + "].[" + $('#modQuerySubject').text().split(" - ")[0] +
     "].[" + seq.column_name + "] = [" + relation.pktable_alias + "].[" + seq.pkcolumn_name + "]";
 
   var data = $datasTable.bootstrapTable("getData");
 
-  var qs = $('#modQuerySubject').text().split(" - ")[0] + $('#modQuerySubject').text().split(" - ")[1]
+  var qs = $('#modQuerySubject').text().split(" - ")[0] + $('#modQuerySubject').text().split(" - ")[1];
 
   $.each(data, function(i, obj){
     //console.log(obj.name);
@@ -544,6 +566,16 @@ function expandTable($detail, cols, data, parentData) {
     $subtable = $detail.html('<table></table>').find('table');
     console.log("expandTable.data=");
     console.log(data);
+    console.log("expandTable.parentData=");
+    console.log(parentData);
+
+    $.each(data, function(i, obj){
+      obj.label = parentData.label;
+    })
+
+    console.log("expandTable.data=");
+    console.log(data);
+
     $activeSubDatasTable = $subtable;
     buildSubTable($subtable, cols, data, parentData);
 }
@@ -583,17 +615,11 @@ function buildSubTable($el, cols, data, parentData){
         console.log(oldValue);
         console.log("---------- buildSubTable: onEditableSave -------------");
 
-        var newValue = row._id.substr(0,3);
-        if(newValue.match("DK_|CK_")){
-          if(row.key_type == "F"){
-            newValue += row.pktable_alias + "_" + parentData.table_alias;
-            updateCell($activeSubDatasTable, row.index, '_id', newValue + "F" );
-            updateCell($activeSubDatasTable, row.index, 'key_name', newValue);
-          }
-          if(row.key_type == "P"){
-            newValue += parentData.table_alias + "_" +  row.pktable_alias;
-            updateCell($activeSubDatasTable, row.index, '_id', newValue + "P" );
-            updateCell($activeSubDatasTable, row.index, 'key_name', newValue);
+        row._id = row.key_type + 'K_' + row.pktable_alias + '_' + row.table_alias + '_' + row.type;
+        if(field == "pktable_alias"){
+          var newValue = row.pktable_alias;
+          if($activeSubDatasTable != undefined){
+            updateCell($activeSubDatasTable, row.index, 'relationship', row.relationship.split("[" + oldValue + "]").join("[" + newValue + "]"));
           }
         }
 
@@ -653,12 +679,12 @@ function buildSubTable($el, cols, data, parentData){
             newRow.relationship = newRow.relationship.split("[" + row.pktable_alias + "]").join("[]");
             newRow.nommageRep = false;
             if(newRow.key_type == "F"){
-              newRow.key_name = "DK_" + newRow.pktable_name + "_" + parentData.table_alias;
-              newRow._id = newRow.key_name + "F";
+              newRow._id = "FK_" + newRow.pktable_alias + "_" + row.table_alias + '_' +row.type;
+              // newRow._id = newRow.key_name + "F";
             }
             if(newRow.key_type == "P"){
-              newRow.key_name = "DK_" + parentData.table_alias + "_" + newRow.pktable_name;
-              newRow._id = newRow.key_name + "P";
+              newRow._id = "PK_" + newRow.pktable_alias + "_" + row.table_alias + '_' +row.type;
+              // newRow._id = newRow.key_name + "P";
             }
             console.log("newRow");
             console.log(newRow);
@@ -692,7 +718,6 @@ function buildSubTable($el, cols, data, parentData){
             }
             var newValue = value == false ? true : false;
             var pkAlias = '[' + row.pktable_alias + ']';
-            console.log("!!!!!!!!!!");
             console.log("pkAlias=" + pkAlias);
             console.log(newValue);
             if(value == true){
@@ -762,7 +787,7 @@ function buildSubTable($el, cols, data, parentData){
     $el.bootstrapTable('hideColumn', 'nommageRep');
   }
 
-  ApplyFilter();
+  // ApplyFilter();
 
 }
 
@@ -962,14 +987,13 @@ function buildTable($el, cols, data) {
           if(field.match("addRelation")){
             $el.bootstrapTable('expandRow', row.index);
 
-            console.log("++++++++++++++on passe dans window.operateQSEvents.add");
             if($activeSubDatasTable != undefined){
               $newRowModal.modal('toggle');
               var qs = row.table_alias + ' - ' + row.type + ' - ' + row.table_name;
               // $('#modQuerySubject').selectpicker('val', qs);
 
               $('#modQuerySubject').text(qs);
-              $('#modKeyName').val("CK_");
+              $('#modKeyName').val("");
               $('#modPKTableAlias').val("");
               ChooseField($('#modColumn'), row._id);
             }
