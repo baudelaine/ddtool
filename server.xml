@@ -3,7 +3,6 @@
     <!-- Enable features -->
     <featureManager>
 	<feature>servlet-3.0</feature>
-        <feature>jsp-2.2</feature>
         <feature>localConnector-1.0</feature>
     	<feature>jndi-1.0</feature>
 		<feature>jdbc-4.0</feature>
@@ -25,31 +24,44 @@
 	<!-- If Oracle machine is behind a firewall and is running a ssh server then connect via a local ssh tunnel -->
 	<!-- and change serverName attribute to localhost -->
 	<!-- /usr/bin/ssh -f -X -Y -N -C -L 1521:172.16.186.243:1521 -g administrateur:Adminvm$@172.16.186.243 -->
-	  <properties.oracle databaseName="lvso112" driverType="thin" password="labvantage" portNumber="1521" serverName="localhost" user="labvantage"/>
+	  <properties.oracle databaseName="lvso112" driverType="thin" password="danone" portNumber="1521" serverName="localhost" user="danone"/>
 	</dataSource>
 
 	<jndiEntry jndiName="TestORADBConnection" value="select sysdate from dual"/>
-	<jndiEntry jndiName="ORASchema" value="LABVANTAGE"/>
+	<jndiEntry jndiName="ORASchema" value="DANONE"/>
 
 	<library id="DB2Lib">
             <fileset dir="${wlp.install.dir}/lib/db2" includes="*.jar"/>
         </library>
       
+	<library id="DB2400Lib">
+            <fileset dir="${wlp.install.dir}/lib/db2400" includes="*.jar"/>
+        </library>
+
         <dataSource jndiName="jdbc/ds1" transactional="false">
             <jdbcDriver libraryRef="DB2Lib"/>
             <properties.db2.jcc currentSchema="DB2INST1" databaseName="SAMPLE" password="spcspc" portNumber="50000" serverName="localhost" user="db2inst1"/>
      </dataSource>
+<!--
+        <dataSource jndiName="jdbc/ds2" transactional="false">
+            <jdbcDriver libraryRef="DB2400Lib"/>
+            <properties.db2.i.toolbox databaseName="" password="" portNumber="" serverName="" user=""/>
+     </dataSource>
+-->
 
+	<jndiEntry jndiName="TestDB2400DBConnection" value="select current date from sysibm.sysdummy1"/>
+	<jndiEntry jndiName="DB2400Schema" value="LAMFIC_TV3"/>
 
 	<jndiEntry jndiName="TestDB2DBConnection" value="select current date from sysibm.sysdummy1"/>
 	<jndiEntry jndiName="DB2Schema" value="DB2INST1"/>
 
-	<jndiEntry jndiName="DBEngine" value="ORA"/>
+	<jndiEntry jndiName="DBEngine" value="DB2"/>
+	<jndiEntry jndiName="WithRecCount" value="true"/>
 
 	
 
     <applicationMonitor updateTrigger="mbean"/>
 
-    <webApplication id="ddprj0" location="ddprj0.war" name="ddprj0">
+    <webApplication id="ddtool" location="ddtool.war" name="ddtool">
     </webApplication>
 </server>
