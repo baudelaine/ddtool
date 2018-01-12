@@ -19,6 +19,8 @@
 
 	<div class="container-fluid" style="margin-top: 10px;">
 
+		<div id="divLoading"></div>
+
     <div class="toolbar form-inline" id="searchToolbar">
       <select class="selectpicker" id="searchSelect" multiple data-actions-box="true" data-live-search="true" title="Choose table(s)...">
       </select>
@@ -47,7 +49,7 @@
 	<script src="js/bootbox.min.js"></script>
   <script>
 
-    var datas = [];
+    var schema = [];
 
     var searchCols = [];
     searchCols.push({field:"tabName", title: "Table Name", sortable: true, searchable: false});
@@ -65,7 +67,13 @@
       ChooseTable($('#searchSelect'));
       ChooseColumn($('#searchColumnSelect'));
       GetSchema($('#searchTable'));
-    });
+    })
+		.ajaxStart(function(){
+		    $("div#divLoading").addClass('show');
+		})
+		.ajaxStop(function(){
+		    $("div#divLoading").removeClass('show');
+		});
 
     $('#searchSelect').change(function () {
         // var selectedText = $(this).find("option:selected").val();
@@ -74,14 +82,13 @@
     });
 
     $('#searchTable').on('reset-view.bs.table', function(){
-      console.log("++++++++++++++on passe dans reset-view");
     });
 
     function Filter(){
       var selection = $('#searchSelect').val();
       console.log(selection);
 
-      $.each(datas, function(i, row){
+      $.each(schema, function(i, row){
         row.filtered = true;
         $.each(selection, function(j, table){
           if(row.tabName.match(table)){
@@ -109,10 +116,9 @@
 
       $('#searchTable').bootstrapTable('destroy');
       buildTable($('#searchTable'), cols);
-      $('#searchTable').bootstrapTable('load', datas);
+      $('#searchTable').bootstrapTable('load', schema);
 
       $('#searchTable').bootstrapTable("filterBy", {filtered: [false]});
-      console.log(datas);
 
     }
 
@@ -124,9 +130,13 @@
             dataType: 'json',
 
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 table.bootstrapTable("load", data);
-                datas = data;
+                schema = data;
+								console.log(schema);
+								localStorage.setItem('schema', JSON.stringify(schema));
+								console.log("localStorage");
+								console.log(localStorage.getItem('schema'));
     			  },
             error: function(data) {
                 console.log(data);

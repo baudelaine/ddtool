@@ -25,7 +25,7 @@ relationCols.push({field:"key_name", title: "key_name", sortable: true});
 relationCols.push({field:"key_type", title: "key_type", sortable: true});
 relationCols.push({field:"pktable_name", title: "pktable_name", sortable: true});
 relationCols.push({field:"pktable_alias", title: "pktable_alias", class: "pktable_alias", editable: {type: "text"}, sortable: true, events: "pktable_aliasEvents"});
-relationCols.push({field:"label", title: "Label", sortable: false});
+relationCols.push({field:"relationLabel", title: "Label", sortable: false});
 relationCols.push({field:"recCountPercent", title: "count(*) %", sortable: true});
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"fin", title: "fin", formatter: "boolFormatter", align: "center"});
@@ -562,6 +562,34 @@ function modValidate(){
 
 }
 
+function Search(){
+  window.open("search.html");
+}
+
+function getLabel(tableName){
+
+  var label;
+
+  $.each(datas, function(i, data){
+    if(data.table_name == tableName){
+      label = data.label;
+    }
+  });
+
+  if(!label){
+    console.log("localStorage");
+    var schema = JSON.parse(localStorage.getItem('schema'));
+    $.each(schema, function(i, table){
+      if(table.tabName == tableName){
+        console.log(table.tabName);
+        console.log(table.tabRemarks);
+        label = table.tabRemarks;
+      }
+    });
+  }
+  return label;
+}
+
 function expandTable($detail, cols, data, parentData) {
     $subtable = $detail.html('<table></table>').find('table');
     console.log("expandTable.data=");
@@ -570,10 +598,12 @@ function expandTable($detail, cols, data, parentData) {
     console.log(parentData);
 
     $.each(data, function(i, obj){
-      obj.label = parentData.label;
+      // var label = getLabel(obj.pktable_name);
+      // console.log("label=" + label);
+      obj.relationLabel = getLabel(obj.pktable_name);
       var percent = (obj.recCount / parentData.recCount) * 100;
       obj.recCountPercent = Math.round(percent);
-    })
+    });
 
     console.log("expandTable.data=");
     console.log(data);
@@ -627,6 +657,8 @@ function buildSubTable($el, cols, data, parentData){
 
       },
       onClickCell: function (field, value, row, $element){
+
+        $activeSubDatasTable = $el;
 
         switch(field){
 
@@ -694,10 +726,15 @@ function buildSubTable($el, cols, data, parentData){
             return;
 
           case "remove":
-            $el.bootstrapTable('remove', {
-                field: 'index',
-                values: [row.index]
-            });
+            if(!row.fin && !row.ref){
+              $el.bootstrapTable('remove', {
+                  field: 'index',
+                  values: [row.index]
+              });
+            }
+            else{
+              showalert("buildSubTable()", row._id + " is checked.", "alert-warning", "bottom");
+            }
             return;
 
           case "fin":
@@ -987,6 +1024,7 @@ function buildTable($el, cols, data) {
           }
 
           if(field.match("addRelation")){
+            $el.bootstrapTable("collapseAllRows")
             $el.bootstrapTable('expandRow', row.index);
 
             if($activeSubDatasTable != undefined){
