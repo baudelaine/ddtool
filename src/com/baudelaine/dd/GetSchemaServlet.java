@@ -116,6 +116,7 @@ public class GetSchemaServlet extends HttpServlet {
 				    	table.put("table_type", table_type);
 				    	table.put("table_remarks", table_remarks);
 				    	table.put("table_recCount", recCount);
+				    	table.put("table_description", "");
 					    
 					    ResultSet rst1 = metaData.getColumns(con.getCatalog(), schema, table_name, "%");
 					    List<Object> fields = new ArrayList<Object>();
@@ -125,6 +126,7 @@ public class GetSchemaServlet extends HttpServlet {
 					    	field.put("column_type", rst1.getString("TYPE_NAME"));
 					    	field.put("colum_remarks", rst1.getString("REMARKS"));
 				        	field.put("colum_size", rst1.getInt("COLUMN_SIZE"));
+					    	field.put("column_description", "");
 				        	field.put("isNullable", rst1.getString("IS_NULLABLE"));
 					    	field.put("filtered", false);
 						    fields.add(field);
