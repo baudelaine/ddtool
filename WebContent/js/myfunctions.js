@@ -580,10 +580,10 @@ function getLabel(tableName){
     console.log("localStorage");
     var schema = JSON.parse(localStorage.getItem('schema'));
     $.each(schema, function(i, table){
-      if(table.tabName == tableName){
-        console.log(table.tabName);
-        console.log(table.tabRemarks);
-        label = table.tabRemarks;
+      if(table.table_name == tableName){
+        console.log(table.table_name);
+        console.log(table.table_remarks);
+        label = table.table_remarks;
       }
     });
   }
