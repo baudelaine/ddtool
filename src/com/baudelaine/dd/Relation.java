@@ -25,6 +25,7 @@ public class Relation {
 	String type = "";
 	List<Seq> seqs = new ArrayList<Seq>();
 	long recCount= 0L;
+	int recCountPercent = 0;
 	
 	public String get_id() {
 		return _id;
@@ -137,6 +138,11 @@ public class Relation {
 	public void addSeq(Seq seq) {
 		this.seqs.add(seq);
 	}
-
+	public int getRecCountPercent() {
+		return recCountPercent;
+	}
+	public void setRecCountPercent(int recCountPercent) {
+		this.recCountPercent = recCountPercent;
+	}
 	
 }
