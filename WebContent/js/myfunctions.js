@@ -1233,16 +1233,16 @@ function GetQuerySubjects(table_name, table_alias, type, linker_id) {
 				// return;
 			}
 
-    $.each(data, function(i, obj){
-      var label = getLabel(obj.pktable_name);
-      console.log("label=" + label);
-      console.log("QSRecCount=" + recCount);
-      obj.relationLabel = getLabel(obj.pktable_name);
-      var percent = (obj.recCount / recCount) * 100;
-      obj.recCountPercent = Math.round(percent);
-    });
-
-    console.log(data);
+    // $.each(data, function(i, obj){
+    //   var label = getLabel(obj.pktable_name);
+    //   console.log("label=" + label);
+    //   console.log("QSRecCount=" + recCount);
+    //   obj.relationLabel = getLabel(obj.pktable_name);
+    //   var percent = (obj.recCount / recCount) * 100;
+    //   obj.recCountPercent = Math.round(percent);
+    // });
+    //
+    // console.log(data);
 
 			$datasTable.bootstrapTable('append', data);
       datas = $datasTable.bootstrapTable("getData");

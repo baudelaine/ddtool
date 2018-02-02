@@ -37,6 +37,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	String r_id = "";
 	String linker_id = "";
 	boolean withRecCount = false;
+	long qs_recCount = 0L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -167,6 +168,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	            	recCount = rs.getLong(1);
 	            }
 	            result.setRecCount(recCount);
+	            qs_recCount = recCount;
             }
             catch(SQLException e){
             	System.out.println("CATCHING SQLEXEPTION...");
@@ -337,6 +339,8 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		            	recCount = rs.getLong(1);
 		            }
 		            rel.setRecCount(recCount);
+		    		long result = (Math.round(((double)recCount / qs_recCount) * 100));
+		            rel.setRecCountPercent((int) result);
 	            }
 	            catch(SQLException e){
 	            	System.out.println("CATCHING SQLEXEPTION...");
