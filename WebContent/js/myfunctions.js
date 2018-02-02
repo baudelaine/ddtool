@@ -20,7 +20,7 @@ var qs2rm = {qs: "", row: "", qsList: [], ids2rm: {}};
 var relationCols = [];
 // relationCols.push({field:"checkbox", checkbox: "true"});
 relationCols.push({field:"index", title: "index", formatter: "indexFormatter", sortable: false});
-relationCols.push({field:"_id", title: "_id", sortable: true});
+// relationCols.push({field:"_id", title: "_id", sortable: true});
 relationCols.push({field:"key_name", title: "key_name", sortable: true});
 relationCols.push({field:"key_type", title: "key_type", sortable: true});
 relationCols.push({field:"pktable_name", title: "pktable_name", sortable: true});
@@ -59,7 +59,7 @@ newRelationCols.push();
 var qsCols = [];
 // qsCols.push({field:"checkbox", checkbox: "true"});
 qsCols.push({field:"index", title: "index", formatter: "indexFormatter", sortable: false});
-qsCols.push({field:"_id", title: "_id", sortable: true});
+// qsCols.push({field:"_id", title: "_id", sortable: true});
 qsCols.push({field:"table_name", title: "table_name", sortable: true});
 qsCols.push({field:"table_alias", title: "table_alias", editable: false, sortable: true});
 qsCols.push({field:"type", title: "type", sortable: true});
@@ -91,8 +91,8 @@ qsCols.push({field:"recCount", title: "count(*)", sortable: true});
   });
 qsCols.push({field:"addPKRelation", title: '<i class="glyphicon glyphicon-magnet" title="Add PK relation(s)"></i>', formatter: "addPKRelationFormatter", align: "center"});
 qsCols.push({field:"addRelation", title: '<i class="glyphicon glyphicon-plus-sign" title="Add new relation"></i>', formatter: "addRelationFormatter", align: "center"});
-qsCols.push({field:"linker", formatter: "boolFormatter", title: "linker", align: "center"});
-qsCols.push({field:"linker_ids", title: "linker_ids"});
+// qsCols.push({field:"linker", formatter: "boolFormatter", title: "linker", align: "center"});
+// qsCols.push({field:"linker_ids", title: "linker_ids"});
 
 var fieldCols = [];
 fieldCols.push({field:"index", title: "index", formatter: "indexFormatter", sortable: false});
@@ -169,9 +169,9 @@ $finTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('hideColumn', 'addPKRelation');
   $datasTable.bootstrapTable('hideColumn', 'nommageRep');
-  $datasTable.bootstrapTable('showColumn', '_id');
-  $datasTable.bootstrapTable('showColumn', 'linker');
-  $datasTable.bootstrapTable('showColumn', 'linker_ids');
+  // $datasTable.bootstrapTable('showColumn', '_id');
+  // $datasTable.bootstrapTable('showColumn', 'linker');
+  // $datasTable.bootstrapTable('showColumn', 'linker_ids');
 
 });
 
@@ -186,9 +186,9 @@ $refTab.on('shown.bs.tab', function(e) {
   $datasTable.bootstrapTable('showColumn', 'addRelation');
   $datasTable.bootstrapTable('showColumn', 'recurseCount');
   $datasTable.bootstrapTable('showColumn', 'nommageRep');
-  $datasTable.bootstrapTable('showColumn', '_id');
-  $datasTable.bootstrapTable('showColumn', 'linker');
-  $datasTable.bootstrapTable('showColumn', 'linker_ids');
+  // $datasTable.bootstrapTable('showColumn', '_id');
+  // $datasTable.bootstrapTable('showColumn', 'linker');
+  // $datasTable.bootstrapTable('showColumn', 'linker_ids');
 });
 
 // $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValue, $el) {
