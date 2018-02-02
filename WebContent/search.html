@@ -116,6 +116,14 @@
 		    $("div#divLoading").removeClass('show');
 		});
 
+		$(window).load(function(){
+
+  		$('div#divLoading').fadeOut(2000);
+			// $("div#divLoading").addClass('show');
+
+		});
+
+
     $('#searchSelect').change(function () {
         // var selectedText = $(this).find("option:selected").val();
     		// console.log(selectedText);
@@ -131,12 +139,12 @@
 
 		function GetLabels(){
 
-			var v = "ACTACTDESC";
-			console.log(v);
-			console.log(schema[v]);
-			schema[v].table_description = "blablablabla";
-
-			Filter();
+			// var v = "ACTACTDESC";
+			// console.log(v);
+			// console.log(schema[v]);
+			// schema[v].table_description = "blablablabla";
+			//
+			// Filter();
 
 			var parms = {};
 			parms.tables = $('#searchSelect').val();
@@ -148,6 +156,20 @@
 			console.log("parms");
 			console.log(parms);
 
+			$.ajax({
+				type: 'POST',
+				url: "GetLabels",
+				dataType: 'json',
+				data: JSON.stringify(parms),
+
+				success: function(data) {
+					console.log("GetLabels() data =");
+					console.log(data);
+				},
+				error: function(data) {
+					showalert("GetLabels()", "Getting labels failed.", "alert-danger", "bottom");
+				}
+			});
 
 			$('#queryModal').modal('toggle');
 
@@ -199,7 +221,8 @@
             dataType: 'json',
 
             success: function(data) {
-                // console.log(data);
+                console.log(data);
+
 
 								$.each(data, function(i, table){
 									$.each(table.columns, function(j, column){
@@ -211,7 +234,7 @@
 										field.table_description = table.table_description
 										field.column_name = column.column_name;
 										field.column_type = column.column_type;
-										field.colum_remarks = column.colum_remarks;
+										field.column_remarks = column.colum_remarks;
 										field.column_description = column.column_description;
 										schema[field._id] = field;
 									})
@@ -223,6 +246,7 @@
 								localStorage.setItem('schema', JSON.stringify(Object.values(schema)));
 								// console.log("localStorage");
 								// console.log(localStorage.getItem('schema'));
+
     			  },
             error: function(data) {
                 console.log(data);
@@ -239,11 +263,13 @@
             // data: data,
             toolbar: $('#searchToolbar'),
             search: true,
+						searchOnEnterKey: true,
     				showRefresh: false,
     				showColumns: true,
     				showToggle: false,
-    				pagination: false,
-    				showPaginationSwitch: false,
+    				pagination: true,
+						pageSize: 25,
+    				showPaginationSwitch: true,
             detailView: false
         })
 

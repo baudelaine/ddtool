@@ -624,6 +624,8 @@ function buildSubTable($el, cols, data, parentData){
       showToggle: false,
       search: false,
       checkboxHeader: false,
+      sortName: "recCountPercent",
+      sortOrder: "desc",
       idField: "index",
       onEditableInit: function(){
         //Fired when all columns was initialized by $().editable() method.
