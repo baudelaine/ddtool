@@ -137,13 +137,16 @@ public class GetLabelsServlet extends HttpServlet {
 				
 				for(String table: tables){
 //					System.out.println("table=" + table);
+
+					List<String> fields = new ArrayList<String>();
 					
 					DatabaseMetaData metaData = con.getMetaData();
 					rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
-					List<String> fields = new ArrayList<String>();
 					while(rst.next()){
 						fields.add(rst.getString("COLUMN_NAME"));
 					}
+					rst.close();
+
 					String columnInClause = "('" + StringUtils.join(fields.iterator(), "','") + "')";
 					if(dbEngine.equalsIgnoreCase("ORA")){
 						columnInClause = columnInClause.toLowerCase();
