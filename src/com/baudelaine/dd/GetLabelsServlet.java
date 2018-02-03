@@ -1,6 +1,8 @@
 package com.baudelaine.dd;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -15,6 +17,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -22,6 +25,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -45,83 +50,192 @@ public class GetLabelsServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection con = null;
-		Map<String, Object> result = new HashMap<String, Object>();
-		String schema = "";
-
+		Map<String, Object> results = new HashMap<String, Object>();
+		String schema = null;
+		String dbEngine = null;
+		PreparedStatement stmt = null;
+		ResultSet rst = null;
+		
 		try {
 			
-			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-	        String json = "";
+			String realPath = getServletContext().getRealPath("/");
+			System.out.println("realPath=" + realPath);
+			
+			String fileName = realPath + "/res/labels.json";
+			System.out.println("fileName=" + fileName);			
+			File file = new File(fileName);
+			BufferedReader br = null; 
+			
+			if(file.exists()){
+				System.out.println("Load labels queries from cache...");
+				br = new BufferedReader(new FileReader(file));
+			}			
+			else {
+				br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+			}
+			
 	        ObjectMapper mapper = new ObjectMapper();
 	        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 	        Map<String, Object>	parms = new HashMap<String, Object>();
 	        parms = mapper.readValue(br, new TypeReference<Map<String, Object>>(){});
-			
+		        
 			con = (Connection) request.getSession().getAttribute("con");
 			schema = (String) request.getSession().getAttribute("schema");
-			Statement stmt = con.createStatement();
-			stmt.execute("ALTER SESSION SET CURRENT_SCHEMA=DANONE");
+			dbEngine = (String) request.getSession().getAttribute("dbEngine");
+			if((dbEngine).equalsIgnoreCase("ORA")){
+				con.createStatement().execute("alter session set current_schema=" + schema);
+			}
 
 			@SuppressWarnings("unchecked")
 			List<String> tables = (List<String>) parms.get("tables");
 			
-			PreparedStatement getTableLabel = null;
+			if(tables.size() > 0){
 			
-			
-//			String queryTableLabel = (String) parms.get("tlQuery");
-			String queryTableLabel = "select singular from systable join sdc on sdc.tableid = systable.tableid where systable.tableid = ?";
-			
-			try {
-				getTableLabel = con.prepareStatement(queryTableLabel);
-				for(String table: tables){
-					System.out.println("table=" + table);
-					getTableLabel.setString(1, table);
-					ResultSet tlRst = getTableLabel.executeQuery("select singular from systable join sdc on sdc.tableid = systable.tableid where systable.tableid = 'S_SAMPLE'");
-					while(tlRst.next()){
-						System.out.println("tlRst.getString(1)=" + tlRst.getString(1));
-						result.put(table, tlRst.getString(1));
+				Map<String, Object> tlMap = new HashMap<String, Object>();
+				Map<String, Object> tdMap = new HashMap<String, Object>();
+				Map<String, Object> clMap = new HashMap<String, Object>();
+				Map<String, Object> cdMap = new HashMap<String, Object>();
+				
+				String tableInClause = "('" + StringUtils.join(tables.iterator(), "','") + "')";
+				
+				if(dbEngine.equalsIgnoreCase("ORA")){
+					tableInClause = tableInClause.toLowerCase();
+				}
+	
+				String tlQuery = (String) parms.get("tlQuery");
+				System.out.println("tlQuery=" + tlQuery);
+				if(!tlQuery.isEmpty() && StringUtils.countMatches(tlQuery, "(?)") == 1){
+					tlQuery = StringUtils.replace(tlQuery, "(?)", tableInClause);
+					System.out.println("tlQuery=" + tlQuery);
+					stmt = con.prepareStatement(tlQuery);
+					rst = stmt.executeQuery();
+					while(rst.next()){
+						tlMap.put(rst.getString(1).toUpperCase(), rst.getString(2));
 					}
+					rst.close();
+					stmt.close();					
+				}
+				
+				String tdQuery = (String) parms.get("tdQuery");
+				System.out.println("tdQuery=" + tdQuery);
+				if(!tdQuery.isEmpty() && StringUtils.countMatches(tdQuery, "(?)") == 1){
+					tdQuery = StringUtils.replace(tdQuery, "(?)", tableInClause);
+					stmt = con.prepareStatement(tdQuery);
+					System.out.println("tdQuery=" + tdQuery);
+					rst = stmt.executeQuery();
+					while(rst.next()){
+						tdMap.put(rst.getString(1).toUpperCase(), rst.getString(2));
+					}
+					rst.close();
+					stmt.close();					
+				}
+				
+				
+				for(String table: tables){
+//					System.out.println("table=" + table);
+					
+					DatabaseMetaData metaData = con.getMetaData();
+					rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
+					List<String> fields = new ArrayList<String>();
+					while(rst.next()){
+						fields.add(rst.getString("COLUMN_NAME"));
+					}
+					String columnInClause = "('" + StringUtils.join(fields.iterator(), "','") + "')";
+					if(dbEngine.equalsIgnoreCase("ORA")){
+						columnInClause = columnInClause.toLowerCase();
+						table = table.toLowerCase();
+					}
+					
+					String clQuery = (String) parms.get("clQuery");
+					if(!clQuery.isEmpty() && StringUtils.countMatches(clQuery, "(?)") == 1 && StringUtils.countMatches(clQuery, " ? ") == 1){
+						clQuery = StringUtils.replace(clQuery, "(?)", columnInClause);
+						
+						Map<String, Object> cols = new HashMap<String, Object>();
+						
+						stmt = con.prepareStatement(clQuery);
+						stmt.setString(1, table);
+						rst = stmt.executeQuery();
+						while(rst.next()){
+							cols.put(rst.getString(2).toUpperCase(), rst.getString(3));
+						}
+						rst.close();
+						stmt.close();
+						
+						clMap.put(table.toUpperCase(), cols);
+					}
+					
+					String cdQuery = (String) parms.get("cdQuery");
+					if(!cdQuery.isEmpty() && StringUtils.countMatches(cdQuery, "(?)") == 1 && StringUtils.countMatches(cdQuery, " ? ") == 1){
+						cdQuery = StringUtils.replace(cdQuery, "(?)", columnInClause);
+						
+						Map<String, Object> cols = new HashMap<String, Object>();
+						
+						stmt = con.prepareStatement(cdQuery);
+						stmt.setString(1, table);
+						rst = stmt.executeQuery();
+						while(rst.next()){
+							cols.put(rst.getString(2).toUpperCase(), rst.getString(3));
+						}
+						rst.close();
+						stmt.close();
+						
+						cdMap.put(table.toUpperCase(), cols);
+					}
+					
+				}
+				
+				System.out.println("tlMap=" + tlMap);
+				System.out.println("tdMap=" + tdMap);
+				System.out.println("clMap=" + clMap);
+				System.out.println("cdMap=" + cdMap);
+				
+				Map<String, Object> result = null;
+				for(String table: tables){
+					result = new HashMap<String, Object>();
+					result.put("table_name", table);
+					result.put("table_remarks", tlMap.get(table));
+					result.put("table_description", tdMap.get(table));
+					
+					Map<String, Object> columns = new HashMap<String, Object>();
+					
+					Map<String, Object> cls = (Map<String, Object>) clMap.get(table);
+					for(Entry<String, Object> cl: cls.entrySet()){
+						String column_name = cl.getKey();
+						Object column_remarks = cl.getValue();
+						if(!columns.containsKey(cl.getKey())){
+							columns.put(cl.getKey(), new HashMap<String, Object>());
+						}
+						((Map<String, Object>) columns.get(column_name)).put("column_remarks", column_remarks);
+					}
+
+					Map<String, Object> cds = (Map<String, Object>) cdMap.get(table);
+					for(Entry<String, Object> cd: cds.entrySet()){
+						String column_name = cd.getKey();
+						Object column_description = cd.getValue();
+						if(!columns.containsKey(cd.getKey())){
+							columns.put(cd.getKey(), new HashMap<String, Object>());
+						}
+						((Map<String, Object>) columns.get(column_name)).put("column_description", column_description);
+					}
+					
+					result.put("columns", columns);
+					results.put(table, result);
 				}
 				
 			}
-			catch(SQLException e){
-				e.printStackTrace(System.err);
-			}
-			finally {
-				if(getTableLabel != null){
-					getTableLabel.close();
-				}
-			}
 			
-//		    DatabaseMetaData metaData = con.getMetaData();
-//		    
-//	        rst = metaData.getColumns(con.getCatalog(), schema, "%", "%");
-//	        
-//	        while (rst.next()) {
-//	        	String field_name = rst.getString("COLUMN_NAME");
-//	        	String field_type = rst.getString("TYPE_NAME");
-//	        	System.out.println(field_name + "," + field_type);
-//	        	Field field = new Field();
-//	        	field.setField_name(field_name);
-//	        	field.setField_type(field_type);
-//	        	field.set_id(field_name + field_type);
-//	        	result.add(field);
-//	        }
-//	        
-//		    
-//	        if(rst != null){rst.close();}
-	        
 		    response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(Tools.toJSON(result));
+			response.getWriter().write(Tools.toJSON(results));
 			
 		}
 		catch (Exception e){
 			e.printStackTrace(System.err);
-		}		
+		}
 		
 	}
 

@@ -1,0 +1,9 @@
+{
+  "tables": [
+    "S_SAMPLE"
+  ],
+  "tlQuery": "select systable.tableid, singular from systable join sdc on sdc.tableid = systable.tableid where systable.tableid in (?)",
+  "tdQuery": "select systable.tableid, tabledoc from systable join sdc on sdc.tableid = systable.tableid where systable.tableid in (?)",
+  "clQuery": "select tableid, columnid, columnlabel from syscolumn where tableid = ? and columnid in (?)",
+  "cdQuery": "select tableid, columnid, columndoc from syscolumn where tableid = ? and columnid in (?)"
+}

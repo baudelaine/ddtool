@@ -44,7 +44,6 @@ public class OpenModelServlet extends HttpServlet {
 
 		String line;
 		while((line = br.readLine()) != null){
-			System.out.print("line=" + line);
 			response.getWriter().write(line);
 		}
 

@@ -43,13 +43,10 @@ public class Test1 {
 					);
 			
 			List<String> queries = Arrays.asList(
-					"select singular from systable join sdc on sdc.tableid = systable.tableid "
-							+ "where systable.tableid = ?",
-					"select tabledoc from systable join sdc on sdc.tableid = systable.tableid "
-							+ "where systable.tableid = ?",
-					"select tableid, columnid, columnlabel from syscolumn where tableid = ? and columnid in ('s_sampleid','sampledesc','sampletypeid','createdt','createby','createtool','moddt','modby','submitterid','modtool','submitteddt','auditdeferflag','notes','auditsequence','tracelogid','usersequence','reviewrequiredflag','priority','disposalstatus','samplestatus','collectiondt','receiveddt','physicalcondition','batchid','productid','projectid','samplepointid','locationid','requestid','starttestingdt','completedt','disposaldt','duedt','basedonsampleid','collectedby','templateflag','receivedby','disposedby','reviewedby','revieweddt','reviewdisposition','reviewremarks','numberlabels','controlsubstanceflag','receiverequiredflag','cocrequiredflag','eventdt','autoreceiveflag','autofinalrptflag','eventplan','studyid','conditionlabel','eventplanitem','schedulerulelabel','samplefamilyid','confirmedby','confirmeddt','sstudyid','pooledflag','glpflag','cocflag','restrictionsflag','concentration','concentrationunits','storagestatus','previousstoragestatus','deviations','treatments','allocatedforaddressid','allocatedforaddresstype','allocatedfordepartmentid','preptypeid','storagedisposalstatus','reagentlotid','qcsampletype','u_batch_info','u_source','u_sampling_stor_cond','u_samplecollecter','u_sampling_condition','u_product_info','u_pds_number','u_supplier','u_country','u_product_expireddt','u_europe','u_production_dt','u_packaging_type','u_amount','u_size_units','u_supply_dt','u_sampling_notes','u_remarks_coa','u_internal_remarks','u_sample_prep_remarks','u_planned_by','u_initial_by','u_completed_by','u_inprogress_by','u_closed_by','u_cancelled_by','u_preparation_status','u_start_testing_by','u_onhold_by','u_planned_date','u_closed_date','u_inprogress_date','u_onhold_date','u_initial_date','u_cancelled_date','u_laboratory','u_prep_required_flag','securityuser','securitydepartment','u_origine','u_sampling_dt','u_sampling_pack','u_start_testing_dt','u_onhold_remarks','u_review_remarks','u_dpt_location','u_samplequantity','u_expirationdt','u_sample_location','u_recipe_code','u_statuspreviewhold','u_localtime','u_number_client','u_productionstage','u_first_carton','u_eventid','u_samplingtime','u_conformity','u_excipiocaseid','u_expected_startdt','u_erp_number','u_storage_location','u_process_phase','specimentype','disposaltargetdt','sourcespid','sourcespversionid','sourcesplevelid','sourcespsourcelabel','batchstageid','activeflag','productversionid','instrumentid','workorderid','classification','u_reference1','u_batch1','u_supplier2','u_reference2','u_batch2','u_supplier3','u_reference3','u_batch3','u_palletid','u_studysiteid','u_subjectid','u_visitid','u_cali_status','u_phenotype','u_shipmentdt','u_returnddt','u_extlab_receivedt','u_production_site','u_cali_volume','u_toughed_time','u_mastersampleid')",
+					"select systable.tableid, singular from systable join sdc on sdc.tableid = systable.tableid where systable.tableid = ?",
+					"select systable.tableid, tabledoc from systable join sdc on sdc.tableid = systable.tableid where systable.tableid = ?",
 					"select tableid, columnid, columnlabel from syscolumn where tableid = ? and columnid in (?)",
-					"select columndoc from syscolumn where tableid = ? and columnid in (?)"
+					"select tableid, columnid, columndoc from syscolumn where tableid = ? and columnid in (?)"
 					);
 			
 			for(String table: tables){
@@ -59,7 +56,7 @@ public class Test1 {
 
 				stmt = con.prepareStatement(queries.get(0));
 				stmt.setString(1, table.toLowerCase());
-				rst = stmt.executeQuery ();
+				rst = stmt.executeQuery();
 				while(rst.next()){
 					tbl.put("table_remarks", rst.getString(1));
 				}
@@ -80,12 +77,12 @@ public class Test1 {
 				List<String> fields = new ArrayList<String>();
 				while(rst.next()){
 					String column_name = rst.getString("COLUMN_NAME");
-					fields.add("'" + column_name.toLowerCase() + "'");
+					fields.add(column_name.toLowerCase());
 				}
 				
 				List<Object> cols = new ArrayList<Object>();
 				
-				String in = "(" + StringUtils.join(fields.iterator(), ",") + ")";
+				String in = "('" + StringUtils.join(fields.iterator(), "','") + "')";
 				System.out.println("in=" + in);
 				String qry  = StringUtils.replace(queries.get(3), "(?)", in);
 				System.out.println(qry);

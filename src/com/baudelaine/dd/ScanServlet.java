@@ -68,7 +68,6 @@ public class ScanServlet extends HttpServlet {
 	
 				String line;
 				while((line = br.readLine()) != null){
-					System.out.print("line=" + line);
 					response.getWriter().write(line);
 				}
 				

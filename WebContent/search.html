@@ -97,7 +97,7 @@
 		searchCols.push({field:"table_description", title: "Table Description", sortable: true, searchable: false});
     searchCols.push({field:"column_name", title: "Column Name", sortable: true, searchable: false});
     searchCols.push({field:"column_type", title: "Column Type", sortable: true, searchable: false});
-    searchCols.push({field:"colum_remarks", title: "Column Remarks", sortable: true, searchable: false});
+    searchCols.push({field:"column_remarks", title: "Column Remarks", sortable: true, searchable: false});
 		searchCols.push({field:"column_description", title: "Column Description", sortable: true, searchable: false});
 		// searchCols.push({field:"colcolum_sizeSize", title: "Column Size", sortable: true, searchable: false});
 		// searchCols.push({field:"isNullable", title: "Is Nullable", sortable: true, searchable: false});
@@ -154,7 +154,7 @@
 			parms.cdQuery = $('#columnDescription').val();
 
 			console.log("parms");
-			console.log(parms);
+			console.log(JSON.stringify(parms));
 
 			$.ajax({
 				type: 'POST',
@@ -162,12 +162,38 @@
 				dataType: 'json',
 				data: JSON.stringify(parms),
 
-				success: function(data) {
-					console.log("GetLabels() data =");
-					console.log(data);
+				success: function(labels) {
+					console.log("GetLabels() labels =");
+					console.log(labels);
+
+					var datas = $('#searchTable').bootstrapTable("getData");
+
+					$.each(datas, function(i, object){
+						if(labels[object.table_name]){
+							object.table_remarks = labels[object.table_name].table_remarks;
+							object.table_description = labels[object.table_name].table_description;
+
+							console.log("labels[object.table_name.columns]");
+							console.log(labels[object.table_name].columns[object.column_name]);
+							console.log("labels[object.table_name.object.column_name].column_remarks");
+							console.log(labels[object.table_name].columns[object.column_name].column_remarks);
+							if(labels[object.table_name].columns[object.column_name]){
+								object.column_remarks = labels[object.table_name].columns[object.column_name].column_remarks;
+								object.column_description = labels[object.table_name].columns[object.column_name].column_description;
+							}
+
+						}
+					})
+
+					// console.log(schema);
+					$('#searchTable').bootstrapTable("load", datas);
+					// // schema = data;
+					// localStorage.setItem('schema', JSON.stringify(Object.values(schema)));
+
+
 				},
 				error: function(data) {
-					showalert("GetLabels()", "Getting labels failed.", "alert-danger", "bottom");
+					// showalert("GetLabels()", "Getting labels failed.", "alert-danger", "bottom");
 				}
 			});
 

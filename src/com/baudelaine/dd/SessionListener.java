@@ -86,6 +86,7 @@ public class SessionListener implements HttpSessionListener {
 				con = ds.getConnection();
 //			}
 			s.setAttribute("con", con);
+			s.setAttribute("dbEngine", dbEngine);
 			s.setAttribute("jndiName", jndiName);
 			s.setAttribute("schema", schema);
 			s.setAttribute("query", query);
