@@ -88,8 +88,6 @@
 	<script src="js/bootbox.min.js"></script>
   <script>
 
-    var schema = {};
-
     var searchCols = [];
     searchCols.push({field:"table_name", title: "Table Name", sortable: true, searchable: false});
     searchCols.push({field:"table_type", title: "Table Type", sortable: true, searchable: false});
@@ -99,8 +97,8 @@
     searchCols.push({field:"column_type", title: "Column Type", sortable: true, searchable: false});
     searchCols.push({field:"column_remarks", title: "Column Remarks", sortable: true, searchable: false});
 		searchCols.push({field:"column_description", title: "Column Description", sortable: true, searchable: false});
-		// searchCols.push({field:"colcolum_sizeSize", title: "Column Size", sortable: true, searchable: false});
-		// searchCols.push({field:"isNullable", title: "Is Nullable", sortable: true, searchable: false});
+		searchCols.push({field:"column_size", title: "Column Size", sortable: true, searchable: false});
+		searchCols.push({field:"isNullable", title: "Is Nullable", sortable: true, searchable: false});
 
     $(document)
     .ready(function() {
@@ -139,13 +137,6 @@
 
 		function GetLabels(){
 
-			// var v = "ACTACTDESC";
-			// console.log(v);
-			// console.log(schema[v]);
-			// schema[v].table_description = "blablablabla";
-			//
-			// Filter();
-
 			var parms = {};
 			parms.tables = $('#searchSelect').val();
 			parms.tlQuery = $('#tableLabel').val();
@@ -163,7 +154,6 @@
 				data: JSON.stringify(parms),
 
 				success: function(labels) {
-					console.log("GetLabels() labels =");
 					console.log(labels);
 
 					var datas = $('#searchTable').bootstrapTable("getData");
@@ -172,28 +162,19 @@
 						if(labels[object.table_name]){
 							object.table_remarks = labels[object.table_name].table_remarks;
 							object.table_description = labels[object.table_name].table_description;
-
-							// console.log("labels[object.table_name.columns]");
-							// console.log(labels[object.table_name].columns[object.column_name]);
-							// console.log("labels[object.table_name.object.column_name].column_remarks");
-							// console.log(labels[object.table_name].columns[object.column_name].column_remarks);
 							if(labels[object.table_name].columns[object.column_name]){
 								object.column_remarks = labels[object.table_name].columns[object.column_name].column_remarks;
 								object.column_description = labels[object.table_name].columns[object.column_name].column_description;
 							}
-
 						}
 					})
 
-					// console.log(schema);
 					$('#searchTable').bootstrapTable("load", datas);
-					// // schema = data;
-					// localStorage.setItem('schema', JSON.stringify(Object.values(schema)));
-
+					localStorage.setItem('labels', JSON.stringify(labels));
 
 				},
 				error: function(data) {
-					// showalert("GetLabels()", "Getting labels failed.", "alert-danger", "bottom");
+					console.log(data);
 				}
 			});
 
@@ -249,11 +230,11 @@
             success: function(data) {
                 console.log(data);
 
+								var schema = [];
 
 								$.each(data, function(i, table){
 									$.each(table.columns, function(j, column){
 										var field = {};
-										field._id = table.table_name + column.column_name;
 										field.table_name = table.table_name;
 										field.table_type = table.table_type;
 										field.table_remarks = table.table_remarks;
@@ -262,16 +243,15 @@
 										field.column_type = column.column_type;
 										field.column_remarks = column.colum_remarks;
 										field.column_description = column.column_description;
-										schema[field._id] = field;
+										field.column_size = column.column_size;
+										field.column_isNullable = column.isNullable;
+										field.filtered = column.filtered;
+										schema.push(field);
 									})
 								});
 
 								console.log(schema);
-								table.bootstrapTable("load", Object.values(schema));
-                // schema = data;
-								localStorage.setItem('schema', JSON.stringify(Object.values(schema)));
-								// console.log("localStorage");
-								// console.log(localStorage.getItem('schema'));
+								table.bootstrapTable("load", schema);
 
     			  },
             error: function(data) {

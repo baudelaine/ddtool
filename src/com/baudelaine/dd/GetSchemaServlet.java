@@ -124,8 +124,8 @@ public class GetSchemaServlet extends HttpServlet {
 						    Map<String, Object> field = new HashMap<>();
 					    	field.put("column_name", rst1.getString("COLUMN_NAME"));
 					    	field.put("column_type", rst1.getString("TYPE_NAME"));
-					    	field.put("colum_remarks", rst1.getString("REMARKS"));
-				        	field.put("colum_size", rst1.getInt("COLUMN_SIZE"));
+					    	field.put("column_remarks", rst1.getString("REMARKS"));
+				        	field.put("column_size", rst1.getInt("COLUMN_SIZE"));
 					    	field.put("column_description", "");
 				        	field.put("isNullable", rst1.getString("IS_NULLABLE"));
 					    	field.put("filtered", false);
