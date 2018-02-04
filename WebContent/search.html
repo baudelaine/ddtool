@@ -166,8 +166,8 @@
 			parms.clQuery = $('#columnLabel').val();
 			parms.cdQuery = $('#columnDescription').val();
 
-			console.log("parms");
-			console.log(JSON.stringify(parms));
+			// console.log("parms");
+			// console.log(JSON.stringify(parms));
 
 			$.ajax({
 				type: 'POST',
@@ -195,6 +195,8 @@
 					localStorage.setItem('labels', JSON.stringify(labels));
 
 					var tables = JSON.parse(localStorage.getItem('tables'));
+					console.log("tables");
+					console.log(tables);
 					if(tables){
 						$.each(tables, function(i, table){
 							table.remarks = labels[table.name].table_remarks;
