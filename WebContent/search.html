@@ -194,6 +194,13 @@
 					$('#searchTable').bootstrapTable("load", datas);
 					localStorage.setItem('labels', JSON.stringify(labels));
 
+					var tables = JSON.parse(localStorage.getItem('tables'));
+					if(tables){
+						$.each(tables, function(i, table){
+							table.remarks = labels[table.name].table_remarks;
+						})
+					}
+
 				},
 				error: function(data) {
 					console.log(data);
