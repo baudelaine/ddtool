@@ -566,9 +566,9 @@ function Search(){
   window.open("search.html");
 }
 
-function getLabel(tableName){
+function getLabel(tableName, columnName){
 
-  var label;
+  var label = null;
 
   $.each(datas, function(i, data){
     if(data.table_name == tableName){
@@ -579,15 +579,15 @@ function getLabel(tableName){
   if(!label){
     console.log("localStorage");
     var labels = JSON.parse(localStorage.getItem('labels'));
-    console.log("labels");
-    console.log(labels);
-    $.each(labels, function(i, table){
-      if(table.table_name == tableName){
-        console.log(table.table_name);
-        console.log(table.table_remarks);
-        label = table.table_remarks;
+    if(labels){
+      if(labels[tableName] && !columnName){
+        label = labels[tableName].table_remarks;
       }
-    });
+      if(labels[tableName].columns[columnName]){
+        label = labels[tableName].columns[columnName].column_remarks;
+      }
+    }
+
   }
   return label;
 }
@@ -601,7 +601,7 @@ function expandTable($detail, cols, data, parentData) {
 
     $.each(data, function(i, obj){
       var label = getLabel(obj.pktable_name);
-      console.log("label=" + label);
+      // console.log("label=" + label);
       obj.relationLabel = label;
     });
 
@@ -1235,19 +1235,18 @@ function GetQuerySubjects(table_name, table_alias, type, linker_id) {
 				// return;
 			}
 
-    // $.each(data, function(i, obj){
-    //   var label = getLabel(obj.pktable_name);
-    //   console.log("label=" + label);
-    //   console.log("QSRecCount=" + recCount);
-    //   obj.relationLabel = getLabel(obj.pktable_name);
-    //   var percent = (obj.recCount / recCount) * 100;
-    //   obj.recCountPercent = Math.round(percent);
-    // });
-    //
-    // console.log(data);
+    $.each(data, function(i, table){
+      var tableLabel = getLabel(table.pktable_name);
+      // console.log("label=" + label);
+      table.label = tableLabel;
+      $.each(table.fields, function(j, field){
+        var columnLabel = getLabel(table.pktable_name, field.field_name);
+        field.label = columnLabel;
+      })
+    });
 
-			$datasTable.bootstrapTable('append', data);
-      datas = $datasTable.bootstrapTable("getData");
+		$datasTable.bootstrapTable('append', data);
+    datas = $datasTable.bootstrapTable("getData");
 
   	},
       error: function(data) {
