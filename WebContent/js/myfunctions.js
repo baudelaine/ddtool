@@ -583,7 +583,7 @@ function getLabel(tableName, columnName){
       if(labels[tableName] && !columnName){
         label = labels[tableName].table_remarks;
       }
-      if(columnName){
+      if(labels[tableName] && columnName){
         if(labels[tableName].columns[columnName]){
           label = labels[tableName].columns[columnName].column_remarks;
         }
