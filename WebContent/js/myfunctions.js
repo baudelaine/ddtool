@@ -602,7 +602,7 @@ function expandTable($detail, cols, data, parentData) {
     $.each(data, function(i, obj){
       var label = getLabel(obj.pktable_name);
       console.log("label=" + label);
-      // obj.relationLabel = getLabel(obj.pktable_name);
+      obj.relationLabel = label;
     });
 
     // console.log("expandTable.data=");
