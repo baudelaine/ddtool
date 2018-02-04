@@ -1323,8 +1323,12 @@ function ChooseTable(table) {
               // return parseInt(b.FKCount) - parseInt(a.FKCount);
               return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
             });
-            tables = data;
             $.each(data, function(i, obj){
+              var tableLabel = obj.remarks;
+              if(!tableLabel){
+                tableLabel = getLabel(obj.name);
+                obj.remarks = tableLabel;
+              }
 							//console.log(obj.name);
               var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
                + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
@@ -1334,6 +1338,7 @@ function ChooseTable(table) {
 			      });
 			      table.selectpicker('refresh');
             // $('#modPKTables').selectpicker('refresh');
+            tables = data;
 			  },
         error: function(data) {
             console.log(data);
