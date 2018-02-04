@@ -573,45 +573,27 @@ function getLabel(tableName, columnName){
 
   var label = null;
 
-  $.each(datas, function(i, data){
-    if(data.table_name == tableName){
-      label = data.label;
+  console.log("localStorage");
+  var labels = JSON.parse(localStorage.getItem('labels'));
+  if(labels){
+    if(labels[tableName] && !columnName){
+      label = labels[tableName].table_remarks;
     }
-  });
-
-  if(!label){
-    console.log("localStorage");
-    var labels = JSON.parse(localStorage.getItem('labels'));
-    if(labels){
-      if(labels[tableName] && !columnName){
-        label = labels[tableName].table_remarks;
-      }
-      if(labels[tableName] && columnName){
-        if(labels[tableName].columns[columnName]){
-          label = labels[tableName].columns[columnName].column_remarks;
-        }
+    if(labels[tableName] && columnName){
+      if(labels[tableName].columns[columnName]){
+        label = labels[tableName].columns[columnName].column_remarks;
       }
     }
-
   }
   return label;
 }
 
 function expandTable($detail, cols, data, parentData) {
     $subtable = $detail.html('<table></table>').find('table');
-    console.log("expandTable.data=");
-    console.log(data);
-    console.log("expandTable.parentData=");
-    console.log(parentData);
-
-    $.each(data, function(i, obj){
-      var label = getLabel(obj.pktable_name);
-      // console.log("label=" + label);
-      obj.relationLabel = label;
-    });
-
     // console.log("expandTable.data=");
     // console.log(data);
+    // console.log("expandTable.parentData=");
+    // console.log(parentData);
 
     $activeSubDatasTable = $subtable;
     buildSubTable($subtable, cols, data, parentData);
@@ -1247,6 +1229,10 @@ function GetQuerySubjects(table_name, table_alias, type, linker_id) {
         $.each(table.fields, function(j, field){
           var columnLabel = getLabel(table.table_name, field.field_name);
           field.label = columnLabel;
+        })
+        $.each(table.relations, function(j, relation){
+          var relationLabel = getLabel(relation.pktable_name);
+          relation.relationLabel = relationLabel;
         })
       });
 
