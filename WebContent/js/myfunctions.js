@@ -579,7 +579,9 @@ function getLabel(tableName){
   if(!label){
     console.log("localStorage");
     var labels = JSON.parse(localStorage.getItem('labels'));
-    $.each(schema, function(i, table){
+    console.log("labels");
+    console.log(labels);
+    $.each(labels, function(i, table){
       if(table.table_name == tableName){
         console.log(table.table_name);
         console.log(table.table_remarks);
