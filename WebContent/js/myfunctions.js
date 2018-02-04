@@ -26,6 +26,7 @@ relationCols.push({field:"key_type", title: "key_type", sortable: true});
 relationCols.push({field:"pktable_name", title: "pktable_name", sortable: true});
 relationCols.push({field:"pktable_alias", title: "pktable_alias", class: "pktable_alias", editable: {type: "text"}, sortable: true, events: "pktable_aliasEvents"});
 relationCols.push({field:"relationLabel", title: "Label", sortable: true, editable: {type: "textarea", rows: 4}});
+relationCols.push({field:"description", title: "Description", sortable: false});
 relationCols.push({field:"recCountPercent", title: "count(*) %", sortable: true});
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"fin", title: "fin", formatter: "boolFormatter", align: "center"});
@@ -66,6 +67,7 @@ qsCols.push({field:"type", title: "type", sortable: true});
 qsCols.push({field:"visible", title: "visible", formatter: "boolFormatter", align: "center", sortable: false});
 qsCols.push({field:"filter", title: "filter", editable: {type: "textarea"}, sortable: true});
 qsCols.push({field:"label", title: "label", editable: {type: "textarea"}, sortable: true});
+qsCols.push({field:"description", title: "Description", sortable: false});
 qsCols.push({field:"recCount", title: "count(*)", sortable: true});
   qsCols.push({field:"recurseCount", title: '<i class="glyphicon glyphicon-repeat" title="Set recurse count"></i>', editable: {
     type: "select",
@@ -98,6 +100,7 @@ var fieldCols = [];
 fieldCols.push({field:"index", title: "index", formatter: "indexFormatter", sortable: false});
 fieldCols.push({field:"field_name", title: "field_name", sortable: true });
 fieldCols.push({field:"label", title: "label", editable: {type: "text"}, sortable: true});
+fieldCols.push({field:"description", title: "Description", sortable: false});
 fieldCols.push({field:"traduction", title: "traduction", formatter: "boolFormatter", align: "center", sortable: false});
 fieldCols.push({field:"visible", title: "visible", formatter: "boolFormatter", align: "center", sortable: false});
 fieldCols.push({field:"field_type", title: "field_type", editable: false, sortable: true});
@@ -568,8 +571,8 @@ function Search(){
 
 function getLabel(tableName, columnName){
 
-  console.log("tableName=" + tableName);
-  console.log("columnName=" + columnName);
+  // console.log("tableName=" + tableName);
+  // console.log("columnName=" + columnName);
 
   var label = null;
 
@@ -586,6 +589,28 @@ function getLabel(tableName, columnName){
     }
   }
   return label;
+}
+
+function getDescription(tableName, columnName){
+
+  // console.log("tableName=" + tableName);
+  // console.log("columnName=" + columnName);
+
+  var description = null;
+
+  console.log("localStorage");
+  var labels = JSON.parse(localStorage.getItem('labels'));
+  if(labels){
+    if(labels[tableName] && !columnName){
+      description = labels[tableName].table_description;
+    }
+    if(labels[tableName] && columnName){
+      if(labels[tableName].columns[columnName]){
+        description = labels[tableName].columns[columnName].column_description;
+      }
+    }
+  }
+  return description;
 }
 
 function expandTable($detail, cols, data, parentData) {
@@ -611,6 +636,7 @@ function buildSubTable($el, cols, data, parentData){
       showToggle: false,
       search: false,
       checkboxHeader: false,
+      showColumns: true,
       sortName: "recCountPercent",
       sortOrder: "desc",
       idField: "index",
@@ -1224,15 +1250,20 @@ function GetQuerySubjects(table_name, table_alias, type, linker_id) {
 
       $.each(data, function(i, table){
         var tableLabel = getLabel(table.table_name);
-        // console.log("label=" + label);
         table.label = tableLabel;
+        var description = getDescription(table.table_name);
+        table.description = description;
         $.each(table.fields, function(j, field){
           var columnLabel = getLabel(table.table_name, field.field_name);
           field.label = columnLabel;
+          var description = getDescription(table.table_name, field.field_name);
+          field.description = description;
         })
         $.each(table.relations, function(j, relation){
           var relationLabel = getLabel(relation.pktable_name);
           relation.relationLabel = relationLabel;
+          var description = getDescription(relation.pktable_name);
+          relation.description = description;
         })
       });
 
