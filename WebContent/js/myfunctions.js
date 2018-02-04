@@ -597,13 +597,11 @@ function expandTable($detail, cols, data, parentData) {
     console.log("expandTable.parentData=");
     console.log(parentData);
 
-    // $.each(data, function(i, obj){
-    //   // var label = getLabel(obj.pktable_name);
-    //   // console.log("label=" + label);
-    //   obj.relationLabel = getLabel(obj.pktable_name);
-    //   var percent = (obj.recCount / parentData.recCount) * 100;
-    //   obj.recCountPercent = Math.round(percent);
-    // });
+    $.each(data, function(i, obj){
+      var label = getLabel(obj.pktable_name);
+      console.log("label=" + label);
+      // obj.relationLabel = getLabel(obj.pktable_name);
+    });
 
     // console.log("expandTable.data=");
     // console.log(data);
