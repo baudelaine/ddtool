@@ -225,7 +225,7 @@ $datasTable.on('reset-view.bs.table', function(){
       // console.log("row.fin");
       // console.log(row.fin);
       if(activeTab == "Reference" && !row.ref){
-        $tableRows.eq(i).find('a').eq(3).editable('disable');
+        $tableRows.eq(i).find('a').eq(4).editable('disable');
         // $tableRows.eq(i).find('a').editable('disable');
       }
       if(row.fin || row.ref){
@@ -233,12 +233,12 @@ $datasTable.on('reset-view.bs.table', function(){
         // $tableRows.eq(i).find('a').editable('disable');
       }
       if(row.fin && activeTab == "Reference"){
+        $tableRows.eq(i).find('a').eq(3).editable('disable');
         $tableRows.eq(i).find('a').eq(2).editable('disable');
-        $tableRows.eq(i).find('a').eq(1).editable('disable');
       }
       if(row.ref && activeTab == "Final"){
+        $tableRows.eq(i).find('a').eq(3).editable('disable');
         $tableRows.eq(i).find('a').eq(2).editable('disable');
-        $tableRows.eq(i).find('a').eq(1).editable('disable');
       }
 
     });
@@ -576,7 +576,6 @@ function getLabel(tableName, columnName){
 
   var label = null;
 
-  console.log("localStorage");
   var labels = JSON.parse(localStorage.getItem('labels'));
   if(labels){
     if(labels[tableName] && !columnName){
