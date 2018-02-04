@@ -568,6 +568,9 @@ function Search(){
 
 function getLabel(tableName, columnName){
 
+  console.log("tableName=" + tableName);
+  console.log("columnName=" + columnName);
+
   var label = null;
 
   $.each(datas, function(i, data){
@@ -1237,15 +1240,15 @@ function GetQuerySubjects(table_name, table_alias, type, linker_id) {
 				// return;
 			}
 
-    $.each(data, function(i, table){
-      var tableLabel = getLabel(table.pktable_name);
-      // console.log("label=" + label);
-      table.label = tableLabel;
-      $.each(table.fields, function(j, field){
-        var columnLabel = getLabel(table.pktable_name, field.field_name);
-        field.label = columnLabel;
-      })
-    });
+      $.each(data, function(i, table){
+        var tableLabel = getLabel(table.table_name);
+        // console.log("label=" + label);
+        table.label = tableLabel;
+        $.each(table.fields, function(j, field){
+          var columnLabel = getLabel(table.table_name, field.field_name);
+          field.label = columnLabel;
+        })
+      });
 
 		$datasTable.bootstrapTable('append', data);
     datas = $datasTable.bootstrapTable("getData");
