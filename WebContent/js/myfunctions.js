@@ -597,7 +597,6 @@ function getDescription(tableName, columnName){
 
   var description = null;
 
-  console.log("localStorage");
   var labels = JSON.parse(localStorage.getItem('labels'));
   if(labels){
     if(labels[tableName] && !columnName){
