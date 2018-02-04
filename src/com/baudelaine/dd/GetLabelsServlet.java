@@ -57,21 +57,7 @@ public class GetLabelsServlet extends HttpServlet {
 		
 		try {
 			
-			String realPath = getServletContext().getRealPath("/");
-			System.out.println("realPath=" + realPath);
-			
-			String fileName = realPath + "/res/labels.json";
-			System.out.println("fileName=" + fileName);			
-			File file = new File(fileName);
-			BufferedReader br = null; 
-			
-			if(file.exists()){
-				System.out.println("Load labels queries from cache...");
-				br = new BufferedReader(new FileReader(file));
-			}			
-			else {
-				br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-			}
+			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 			
 	        ObjectMapper mapper = new ObjectMapper();
 	        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);

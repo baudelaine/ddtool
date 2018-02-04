@@ -133,6 +133,28 @@
 
 		function OpenQueryModal(){
 			$('#queryModal').modal('toggle');
+			GetLabelsQueries();
+		}
+
+		function GetLabelsQueries(){
+
+			$.ajax({
+				type: 'POST',
+				url: "GetLabelsQueries",
+				dataType: 'json',
+
+				success: function(queries) {
+					console.log(queries);
+					$('#tableLabel').val(queries.tlQuery);
+					$('#tableDescription').val(queries.tdQuery);
+					$('#columnLabel').val(queries.clQuery);
+					$('#columnDescription').val(queries.cdQuery);
+				},
+				error: function(data) {
+					console.log(data);
+				}
+			});
+
 		}
 
 		function GetLabels(){
@@ -186,7 +208,9 @@
       var selection = $('#searchSelect').val();
       console.log(selection);
 
-      $.each(Object.values(schema), function(i, row){
+			var datas = $('#searchTable').bootstrapTable("getData");
+
+      $.each(datas, function(i, row){
         row.filtered = true;
         $.each(selection, function(j, table){
           if(row.table_name.match(table)){
@@ -214,7 +238,7 @@
 
       $('#searchTable').bootstrapTable('destroy');
       buildTable($('#searchTable'), cols);
-      $('#searchTable').bootstrapTable('load', Object.values(schema));
+      $('#searchTable').bootstrapTable('load', datas);
 
       $('#searchTable').bootstrapTable("filterBy", {filtered: [false]});
 
