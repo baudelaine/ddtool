@@ -130,6 +130,15 @@ $tableList.change(function () {
 		$('#alias').val(selectedText);
 });
 
+$tableList.on('show.bs.select', function (e) {
+  // do something...
+  console.log("$tableList.on('show.bs.select'");
+  if(localStorage.getItem('tables')){
+    ChooseTable($tableList);
+  }
+
+});
+
 // $navTab.on('shown.bs.tab', function(event){
 //     activeTab = $(event.target).text();         // active tab
 // 		console.log("Event shown.bs.tab: activeTab=" + activeTab);
@@ -272,6 +281,7 @@ $newRowModal.on('show.bs.modal', function (e) {
   }
   $('#modKeyType').selectpicker('refresh');
 
+  var tables = JSON.parse(localStorage.getItem('tables'));
   $.each(tables, function(i, obj){
     var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
      + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
@@ -544,6 +554,12 @@ function modValidate(){
   relation.relationship = "[" + $('#modQuerySubject').text().split(" - ")[1].toUpperCase() + "].[" + $('#modQuerySubject').text().split(" - ")[0] +
     "].[" + seq.column_name + "] = [" + relation.pktable_alias + "].[" + seq.pkcolumn_name + "]";
 
+  var relationLabel = getLabel(relation.pktable_name);
+  relation.relationLabel = relationLabel;
+  var description = getDescription(relation.pktable_name);
+  relation.description = description;
+
+
   var data = $datasTable.bootstrapTable("getData");
 
   var qs = $('#modQuerySubject').text().split(" - ")[0] + $('#modQuerySubject').text().split(" - ")[1];
@@ -634,7 +650,7 @@ function buildSubTable($el, cols, data, parentData){
       showToggle: false,
       search: false,
       checkboxHeader: false,
-      showColumns: true,
+      showColumns: false,
       sortName: "recCountPercent",
       sortOrder: "desc",
       idField: "index",
@@ -1245,7 +1261,6 @@ function GetQuerySubjects(table_name, table_alias, type, linker_id) {
 				showalert("GetQuerySubjects()", table_name + " has no key.", "alert-info", "bottom");
 				// return;
 			}
-
       $.each(data, function(i, table){
         var tableLabel = getLabel(table.table_name);
         table.label = tableLabel;
@@ -1311,35 +1326,41 @@ function ChooseTable(table) {
 
 	table.empty();
 
-    $.ajax({
-        type: 'POST',
-        url: "Scan",
-        dataType: 'json',
+  var tables;
 
-        success: function(data) {
-            console.log(data);
-            data.sort(function(a, b) {
-              // return parseInt(b.FKCount) - parseInt(a.FKCount);
-              return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
-            });
-            $.each(data, function(i, obj){
-							//console.log(obj.name);
-              var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
-               + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
-							table.append(option);
-              // $('#modPKTables').append(option);
-              // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
-			      });
-			      table.selectpicker('refresh');
-            // $('#modPKTables').selectpicker('refresh');
-            tables = data;
-            localStorage.setItem('tables', JSON.stringify(tables));
-			  },
-        error: function(data) {
-            console.log(data);
-            showalert("ChooseTable()", "Operation failed.", "alert-danger", "bottom");
-        }
-		});
+  if(localStorage.getItem('tables')){
+    tables = JSON.parse(localStorage.getItem('tables'));
+  }
+  else {
+    $.ajax({
+      type: 'POST',
+      url: "Scan",
+      dataType: 'json',
+      async: false,
+      success: function(data) {
+        tables = data;
+      }
+    });
+
+  }
+
+  console.log(tables);
+
+  tables.sort(function(a, b) {
+    // return parseInt(b.FKCount) - parseInt(a.FKCount);
+    return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
+  });
+  $.each(tables, function(i, obj){
+		//console.log(obj.name);
+    var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
+     + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
+		table.append(option);
+    // $('#modPKTables').append(option);
+    // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
+  });
+  table.selectpicker('refresh');
+  // $('#modPKTables').selectpicker('refresh');
+  localStorage.setItem('tables', JSON.stringify(tables));
 
 }
 

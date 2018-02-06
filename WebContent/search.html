@@ -121,7 +121,6 @@
 
 		});
 
-
     $('#searchSelect').change(function () {
         // var selectedText = $(this).find("option:selected").val();
     		// console.log(selectedText);
@@ -195,12 +194,15 @@
 					localStorage.setItem('labels', JSON.stringify(labels));
 
 					var tables = JSON.parse(localStorage.getItem('tables'));
-					console.log("tables");
-					console.log(tables);
 					if(tables){
+						console.log("tables");
+						console.log(tables);
 						$.each(tables, function(i, table){
 							table.remarks = labels[table.name].table_remarks;
+							table.description = labels[table.name].table_description;
 						})
+						localStorage.setItem('tables', JSON.stringify(tables));
+						ChooseTable($('#searchSelect'));
 					}
 
 				},
@@ -338,35 +340,42 @@
 
     function ChooseTable(table) {
 
-    	table.empty();
+			table.empty();
 
-      $.ajax({
-          type: 'POST',
-          url: "Scan",
-          dataType: 'json',
+			var tables;
 
-          success: function(data) {
-              console.log(data);
-              data.sort(function(a, b) {
-                // return parseInt(b.FKCount) - parseInt(a.FKCount);
-                return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
-              });
-              tables = data;
-              $.each(data, function(i, obj){
-  							//console.log(obj.name);
-                var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
-                 + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
-  							table.append(option);
-                // $('#modPKTables').append(option);
-                // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
-  			      });
-  			      table.selectpicker('refresh');
-              // $('#modPKTables').selectpicker('refresh');
-  			  },
-          error: function(data) {
-              console.log(data);
-          }
-  		});
+			if(localStorage.getItem('tables')){
+				tables = JSON.parse(localStorage.getItem('tables'));
+			}
+			else {
+					$.ajax({
+					type: 'POST',
+					url: "Scan",
+					dataType: 'json',
+					async: false,
+					success: function(data) {
+						tables = data;
+					}
+				});
+			}
+
+			console.log(tables);
+
+			tables.sort(function(a, b) {
+				// return parseInt(b.FKCount) - parseInt(a.FKCount);
+				return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
+			});
+			$.each(tables, function(i, obj){
+				//console.log(obj.name);
+				var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
+				 + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
+				table.append(option);
+				// $('#modPKTables').append(option);
+				// table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
+			});
+			table.selectpicker('refresh');
+			// $('#modPKTables').selectpicker('refresh');
+			localStorage.setItem('tables', JSON.stringify(tables));
 
     }
 
