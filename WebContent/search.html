@@ -266,14 +266,23 @@
                 console.log(data);
 
 								var schema = [];
+								var labels = {};
 
 								$.each(data, function(i, table){
+									labels[table.table_name] = {};
+									labels[table.table_name].table_name = table.table_name;
+									labels[table.table_name].table_remarks = table.table_remarks;
+									labels[table.table_name].table_description = table.table_description;
+									labels[table.table_name].columns = {};
 									$.each(table.columns, function(j, column){
+										labels[table.table_name].columns[column.column_name] = {};
+										labels[table.table_name].columns[column.column_name].column_remarks = column.column_remarks;
+										labels[table.table_name].columns[column.column_name].column_description = column.column_description;
 										var field = {};
 										field.table_name = table.table_name;
 										field.table_type = table.table_type;
 										field.table_remarks = table.table_remarks;
-										field.table_description = table.table_description
+										field.table_description = table.table_description;
 										field.column_name = column.column_name;
 										field.column_type = column.column_type;
 										field.column_remarks = column.column_remarks;
@@ -285,6 +294,8 @@
 									})
 								});
 
+								console.log(labels);
+								localStorage.setItem('labels', JSON.stringify(labels));
 								console.log(schema);
 								table.bootstrapTable("load", schema);
 
