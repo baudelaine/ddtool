@@ -18,6 +18,8 @@ public class Relation {
 	String pktable_alias = "";	
 	boolean fin = false;
 	boolean ref = false;
+	boolean sec = false;
+	boolean tra = false;
 	boolean nommageRep = false;
 	String relationship = "";
 	String where = "";
@@ -104,6 +106,18 @@ public class Relation {
 	}
 	public void setRef(boolean ref) {
 		this.ref = ref;
+	}
+	public boolean isSec() {
+		return sec;
+	}
+	public void setSec(boolean sec) {
+		this.sec = sec;
+	}
+	public boolean isTra() {
+		return tra;
+	}
+	public void setTra(boolean tra) {
+		this.tra = tra;
 	}
 	public String getRelationship() {
 		return relationship;

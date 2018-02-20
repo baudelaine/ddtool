@@ -67,7 +67,7 @@ qsCols.push({field:"type", title: "type", sortable: true});
 qsCols.push({field:"visible", title: "visible", formatter: "boolFormatter", align: "center", sortable: false});
 qsCols.push({field:"filter", title: "filter", editable: {type: "textarea"}, sortable: true});
 qsCols.push({field:"label", title: "label", editable: {type: "textarea"}, sortable: true});
-qsCols.push({field:"description", title: "Description", sortable: false});
+qsCols.push({field:"description", title: "Description", sortable: false, editable: {type: "textarea", rows: 4}});
 qsCols.push({field:"recCount", title: "count(*)", sortable: true});
   qsCols.push({field:"recurseCount", title: '<i class="glyphicon glyphicon-repeat" title="Set recurse count"></i>', editable: {
     type: "select",
@@ -100,7 +100,7 @@ var fieldCols = [];
 fieldCols.push({field:"index", title: "index", formatter: "indexFormatter", sortable: false});
 fieldCols.push({field:"field_name", title: "field_name", sortable: true });
 fieldCols.push({field:"label", title: "label", editable: {type: "text"}, sortable: true});
-fieldCols.push({field:"description", title: "Description", sortable: false});
+fieldCols.push({field:"description", title: "Description", sortable: false, editable: {type: "textarea", rows: 4}});
 fieldCols.push({field:"traduction", title: "traduction", formatter: "boolFormatter", align: "center", sortable: false});
 fieldCols.push({field:"visible", title: "visible", formatter: "boolFormatter", align: "center", sortable: false});
 fieldCols.push({field:"field_type", title: "field_type", editable: false, sortable: true});
@@ -281,14 +281,14 @@ $newRowModal.on('show.bs.modal', function (e) {
   }
   $('#modKeyType').selectpicker('refresh');
 
-  var tables = JSON.parse(localStorage.getItem('tables'));
-  $.each(tables, function(i, obj){
-    var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
-     + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
-    $('#modPKTables').append(option);
-  });
-  $('#modPKTables').selectpicker('refresh');
-	// ChooseTable($('#modPKTables'));
+  // var tables = JSON.parse(localStorage.getItem('tables'));
+  // $.each(tables, function(i, obj){
+  //   var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
+  //    + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
+  //   $('#modPKTables').append(option);
+  // });
+  // $('#modPKTables').selectpicker('refresh');
+	ChooseTable($('#modPKTables'));
   // $(this)
   // .find('.modal-body')
   // .load("sqel.html", function(){
@@ -592,7 +592,7 @@ function getLabel(tableName, columnName){
 
   var label = null;
 
-  var labels = JSON.parse(localStorage.getItem('labels'));
+  var labels = JSON.parse(localStorage.getItem('dbmd'));
   if(labels){
     if(labels[tableName] && !columnName){
       label = labels[tableName].table_remarks;
@@ -613,7 +613,7 @@ function getDescription(tableName, columnName){
 
   var description = null;
 
-  var labels = JSON.parse(localStorage.getItem('labels'));
+  var labels = JSON.parse(localStorage.getItem('dbmd'));
   if(labels){
     if(labels[tableName] && !columnName){
       description = labels[tableName].table_description;
@@ -1322,45 +1322,127 @@ function ChooseQuerySubject(table) {
 
 }
 
-function ChooseTable(table) {
+function SortOnStats(){
 
-	table.empty();
+  bootbox.prompt({
+      title: "Sort tables list.",
+      inputType: 'select',
+      inputOptions: [
+          {
+              text: 'Sort by...',
+              value: '',
+          },
+          {
+              text: 'Number of fields within primary key',
+              value: '1',
+          },
+          {
+              text: 'Number of primary keys imported',
+              value: '2',
+          },
+          {
+              text: 'Number of sequence within primary keys imported',
+              value: '3',
+          },
+          {
+              text: 'Number of foreign keys exported',
+              value: '4',
+          },
+          {
+              text: 'Number of sequence within foreign keys exported',
+              value: '5',
+          },
+          {
+              text: 'Number of indexed fields',
+              value: '6',
+          },
+          {
+              text: 'Number of records',
+              value: '7',
+          }
+      ],
+      callback: function (result) {
+          console.log(result);
+          ChooseTable($tableList, result);
+          console.log(result);
+      }
+  });
 
-  var tables;
+}
 
-  if(localStorage.getItem('tables')){
-    tables = JSON.parse(localStorage.getItem('tables'));
+function ChooseTable(table, sort) {
+
+  table.empty();
+
+  var dbmd;
+
+  if(localStorage.getItem('dbmd')){
+    dbmd = JSON.parse(localStorage.getItem('dbmd'));
+    console.log("dbmd loaded from cache...");
+
+    console.log(dbmd);
+
+    var tables = Object.values(dbmd);
+
+    console.log(tables);
+    console.log(sort);
+
+    switch(sort){
+      case "1":
+        tables.sort(function(a, b){return b.table_primaryKeyFieldsCount - a.table_primaryKeyFieldsCount});
+        break;
+      case "2":
+        tables.sort(function(a, b){return b.table_importedKeysCount - a.table_importedKeysCount});
+        break;
+      case "3":
+        tables.sort(function(a, b){return b.table_importedKeysSeqCount - a.table_importedKeysSeqCount});
+        break;
+      case "4":
+        tables.sort(function(a, b){return b.table_exportedKeysCount - a.table_exportedKeysCount});
+        break;
+      case "5":
+        tables.sort(function(a, b){return b.table_exportedKeysSeqCount - a.table_exportedKeysSeqCount});
+        break;
+      case "6":
+        tables.sort(function(a, b){return b.table_indexesCount - a.table_indexesCount});
+        break;
+      case "7":
+        tables.sort(function(a, b){return b.table_recCount - a.table_recCount});
+        break;
+      default:
+        tables.sort(function(a, b){return b.table_primaryKeyFieldsCount - a.table_primaryKeyFieldsCount});
+    }
+
+    $.each(tables, function(i, obj){
+      //console.log(obj.name);
+      // var dataContent = "<span class='label label-success'>" + obj.RecCount + "</span>";
+      var option = '<option class="fontsize" value="' + obj.table_name + '" data-subtext="' + obj.table_remarks +  ' ' + obj.table_stats + '">'
+       + obj.table_name + '</option>';
+      table.append(option);
+      // $('#modPKTables').append(option);
+      // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
+    });
+    table.selectpicker('refresh');
+    // $('#modPKTables').selectpicker('refresh');
+    // localStorage.setItem('tables', JSON.stringify(tables));
+
   }
   else {
-    $.ajax({
+      $.ajax({
       type: 'POST',
-      url: "Scan",
+      url: "GetTables",
       dataType: 'json',
-      async: false,
-      success: function(data) {
-        tables = data;
+      async: true,
+      success: function(tables) {
+        $.each(tables, function(i, obj){
+          var option = '<option class="fontsize" value="' + obj.name + '">' + obj.name + '</option>';
+          table.append(option);
+        });
+        table.selectpicker('refresh');
       }
     });
-
   }
 
-  console.log(tables);
-
-  tables.sort(function(a, b) {
-    // return parseInt(b.FKCount) - parseInt(a.FKCount);
-    return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
-  });
-  $.each(tables, function(i, obj){
-		//console.log(obj.name);
-    var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
-     + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
-		table.append(option);
-    // $('#modPKTables').append(option);
-    // table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
-  });
-  table.selectpicker('refresh');
-  // $('#modPKTables').selectpicker('refresh');
-  localStorage.setItem('tables', JSON.stringify(tables));
 
 }
 
@@ -1422,26 +1504,28 @@ function ChooseField(table, id){
 
 }
 
-function showalert(title, message, alerttype, area) {
+function showalert(title, message, alertType, area) {
 
-    // $('#alert_placeholder').append('<div id="alertdiv" class="alert ' +
-		// alerttype + ' input-sm"><span>' + message + '</span></div>')
-    //
-    // setTimeout(function() {
-    //
-    //   $("#alertdiv").remove();
-    //
-    // }, 2500);
-
-    // if($('#alertmsg').length){
     $('#alertmsg').remove();
-    // }
+
+    var timeout = 5000;
 
     if(area == undefined){
-      area = "top";
+      area = "bottom";
+    }
+    if(alertType.match('warning')){
+      area = "bottom";
+      timeout = 10000;
+    }
+    if(alertType.match('danger')){
+      area = "bottom";
+      timeout = 30000;
     }
 
-    var $newDiv = $('<div/>')
+    var $newDiv;
+
+    if(alertType.match('alert-success|alert-info')){
+      $newDiv = $('<div/>')
        .attr( 'id', 'alertmsg' )
        .html(
           '<h4>' + title + '</h4>' +
@@ -1449,15 +1533,29 @@ function showalert(title, message, alerttype, area) {
           message +
           '</p>'
         )
-       .addClass('alert ' + alerttype + ' flyover flyover-' + area);
-    $('#alert_placeholder').append($newDiv);
+       .addClass('alert ' + alertType + ' flyover flyover-' + area);
+    }
+    else{
+      $newDiv = $('<div/>')
+       .attr( 'id', 'alertmsg' )
+       .html(
+          '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+          '<h4>' + title + '</h4>' +
+          '<p>' +
+          '<strong>' + message + '</strong>' +
+          '</p>'
+        )
+       .addClass('alert ' + alertType + ' alert-dismissible flyover flyover-' + area);
+    }
+
+    $('#Alert').append($newDiv);
 
     if ( !$('#alertmsg').is( '.in' ) ) {
       $('#alertmsg').addClass('in');
 
       setTimeout(function() {
          $('#alertmsg').removeClass('in');
-      }, 3200);
+      }, timeout);
     }
 }
 

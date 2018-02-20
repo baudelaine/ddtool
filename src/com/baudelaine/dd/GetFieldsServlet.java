@@ -51,7 +51,6 @@ public class GetFieldsServlet extends HttpServlet {
 			
 		    DatabaseMetaData metaData = con.getMetaData();
 		    
-		    
 		    rst = metaData.getPrimaryKeys(con.getCatalog(), schema, table);
 		    Set<String> pks = new HashSet<String>();
 		    
@@ -61,40 +60,36 @@ public class GetFieldsServlet extends HttpServlet {
 
 	        if(rst != null){rst.close();}
 
-	        rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
+		    rst = metaData.getIndexInfo(con.getCatalog(), schema, table, false, true);
+		    Set<String> indexes = new HashSet<String>();
+		    
+		    while (rst.next()) {
+		    	indexes.add(rst.getString("COLUMN_NAME"));
+		    }
+
+	        if(rst != null){rst.close();}
 	        
-//        	ResultSetMetaData rsmd = rst.getMetaData();
-//        	
-//        	int colCount = rsmd.getColumnCount();
-//	        
-//	        while (rst.next()) {
-//        		Map<String, Object> datas = new HashMap<String, Object>();
-//    			datas.put("PK", false);
-//	        	for(int colNum = 1; colNum <= colCount; colNum++){
-//	        		String label = rsmd.getColumnLabel(colNum);
-//	        		Object value = rst.getObject(colNum);
-//	        		if(pks.contains(rst.getString("COLUMN_NAME"))){
-//	        			datas.put("PK", true);
-//	        		}
-//	        		datas.put(label, value);
-//	        	}
-//	        	result.put(rst.getString("COLUMN_NAME"), datas);
-//	        }		    
+	        rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
 	        
 	        while (rst.next()) {
 	        	String field_name = rst.getString("COLUMN_NAME");
 	        	String field_type = rst.getString("TYPE_NAME");
+	        	String field_remarks = rst.getString("REMARKS");
+	        	
 	        	System.out.println(field_name + "," + field_type);
 	        	Field field = new Field();
 	        	field.setField_name(field_name);
 	        	field.setField_type(field_type);
+	        	field.setLabel(field_remarks);
 	        	field.set_id(field_name + field_type);
 	        	if(pks.contains(rst.getString("COLUMN_NAME"))){
 	    			field.setPk(true);
 	    		}
+	        	if(indexes.contains(rst.getString("COLUMN_NAME"))){
+	        		field.setIndex(true);
+	        	}
 	        	result.add(field);
 	        }
-	        
 		    
 	        if(rst != null){rst.close();}
 	        

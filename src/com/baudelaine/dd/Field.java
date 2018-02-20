@@ -7,14 +7,17 @@ public class Field {
 	String field_name = "";
 	String field_type = "";
 	boolean pk = false;
+	boolean index = false;
 	String label = "";
 	int field_size = 0;
 	String nullable = "NO";
 	boolean traduction = false;
 	boolean visible = false;
 	boolean timezone = false;
-	String icon = "";
-
+	String icon = "Attribute";
+	String displayType = "Value";
+	String description = "";
+	
 	public String get_id() {
 		return _id;
 	}
@@ -44,6 +47,12 @@ public class Field {
 	}
 	public void setPk(boolean pk) {
 		this.pk = pk;
+	}
+	public boolean isIndex() {
+		return index;
+	}
+	public void setIndex(boolean index) {
+		this.index = index;
 	}
 	public String getLabel() {
 		return label;
@@ -87,6 +96,18 @@ public class Field {
 	}
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+	public String getDisplayType() {
+		return displayType;
+	}
+	public void setDisplayType(String displayType) {
+		this.displayType = displayType;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

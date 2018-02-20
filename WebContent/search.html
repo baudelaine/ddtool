@@ -20,14 +20,20 @@
 	<div class="container-fluid" style="margin-top: 10px;">
 
 		<div id="divLoading"></div>
+		<div id="Alert"></div>
 
     <div class="toolbar form-inline" id="searchToolbar">
       <select class="selectpicker" id="searchSelect" multiple data-actions-box="true" data-live-search="true" title="Choose table(s)...">
       </select>
-      <select class="selectpicker" id="searchColumnSelect" multiple data-actions-box="true" data-live-search="true" title="Choose columns()...">
+
+      <button type="button" onclick="SortOnStats()" class="btn btn-default" data-toggle="tooltip" title="Sort within stats."><span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></button>
+			<select class="selectpicker" id="searchColumnSelect" multiple data-actions-box="true" data-live-search="true" title="Choose columns()...">
       </select>
+
       <button type="button" onclick="Filter()" class="btn btn-default" data-toggle="tooltip" title="Filter."><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></button>
 			<button type="button" onclick="OpenQueryModal()" class="btn btn-default" data-toggle="tooltip" title="Set SQL queries for labels and description."><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></button>
+			<button type="button" onclick="location.reload();" class="btn btn-default" data-toggle="tooltip" title="Reload page."><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+
     </div>
 
 
@@ -89,23 +95,57 @@
   <script>
 
     var searchCols = [];
-    searchCols.push({field:"table_name", title: "Table Name", sortable: true, searchable: false});
-    searchCols.push({field:"table_type", title: "Table Type", sortable: true, searchable: false});
-    searchCols.push({field:"table_remarks", title: "Table Remarks", sortable: true, searchable: false});
-		searchCols.push({field:"table_description", title: "Table Description", sortable: true, searchable: false});
-    searchCols.push({field:"column_name", title: "Column Name", sortable: true, searchable: false});
-    searchCols.push({field:"column_type", title: "Column Type", sortable: true, searchable: false});
-    searchCols.push({field:"column_remarks", title: "Column Remarks", sortable: true, searchable: false});
-		searchCols.push({field:"column_description", title: "Column Description", sortable: true, searchable: false});
-		searchCols.push({field:"column_size", title: "Column Size", sortable: true, searchable: false});
-		searchCols.push({field:"isNullable", title: "Is Nullable", sortable: true, searchable: false});
+    searchCols.push({field:"table_name", title: "Table<br>Name", sortable: true, searchable: false});
+    searchCols.push({field:"table_type", title: "Table<br>Type", sortable: true, searchable: false});
+    searchCols.push({field:"table_remarks", title: "Table<br>Label", sortable: true, searchable: false});
+		searchCols.push({field:"table_description", title: "Table<br>Description", sortable: true, searchable: false});
+
+		searchCols.push({field:"table_primaryKeyFieldsCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of fields within primary key", sortable: true, searchable: false});
+		searchCols.push({field:"table_importedKeysCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of primary keys imported", sortable: true, searchable: false});
+		searchCols.push({field:"table_importedKeysSeqCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of sequence within primary keys imported", sortable: true, searchable: false});
+		searchCols.push({field:"table_exportedKeysCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of foreign keys exported", sortable: true, searchable: false});
+		searchCols.push({field:"table_exportedKeysSeqCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of sequence within foreign keys exported", sortable: true, searchable: false});
+		searchCols.push({field:"table_indexesCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of indexed fields", sortable: true, searchable: false});
+		searchCols.push({field:"table_recCount", title: "Select<br>count(*)", sortable: true, searchable: false});
+
+    searchCols.push({field:"column_name", title: "Column<br>Name", sortable: true, searchable: false});
+    searchCols.push({field:"column_type", title: "Column<br>Type", sortable: true, searchable: false});
+    searchCols.push({field:"column_remarks", title: "Column<br>Label", sortable: true, searchable: false});
+		searchCols.push({field:"column_description", title: "Column<br>Description", sortable: true, searchable: false});
+		searchCols.push({field:"column_isPrimaryKey", title: "Primary<br>Key", formatter: "isPrimaryKeyFormatter", sortable: true, searchable: false});
+		searchCols.push({field:"column_isIndexed", title: "Indexed", formatter: "isIndexedFormatter", sortable: true, searchable: false});
+		searchCols.push({field:"column_isNullable", title: "Nullable", sortable: true, searchable: false});
+
+		function isPrimaryKeyFormatter(value, row, index) {
+		  var icon = value == true ? 'glyphicon-star' : ''
+		  if(value == undefined){
+		      icon = '';
+		  }
+		  return [
+		    '<a href="javascript:void(0)">',
+		    '<i class="glyphicon ' + icon + '"></i> ',
+		    '</a>'
+		  ].join('');
+		}
+
+		function isIndexedFormatter(value, row, index) {
+		  var icon = value == true ? 'glyphicon-star-empty' : ''
+		  if(value == undefined){
+		      icon = '';
+		  }
+		  return [
+		    '<a href="javascript:void(0)">',
+		    '<i class="glyphicon ' + icon + '"></i> ',
+		    '</a>'
+		  ].join('');
+		}
 
     $(document)
     .ready(function() {
       buildTable($('#searchTable'), searchCols);
+			GetDBMD($('#searchTable'));
       ChooseTable($('#searchSelect'));
       ChooseColumn($('#searchColumnSelect'));
-      GetSchema($('#searchTable'));
     })
 		.ajaxStart(function(){
 		    $("div#divLoading").addClass('show');
@@ -219,7 +259,9 @@
       var selection = $('#searchSelect').val();
       console.log(selection);
 
+			$('#searchTable').bootstrapTable("filterBy", {});
 			var datas = $('#searchTable').bootstrapTable("getData");
+			console.log(datas);
 
       $.each(datas, function(i, row){
         row.filtered = true;
@@ -240,7 +282,6 @@
         col.searchable = false;
         $.each(selection, function(j, colName){
           if(col.field.match(colName)){
-            console.log(col.title + ' searchable');
             col.searchable = true;
             return false;
           }
@@ -250,60 +291,65 @@
       $('#searchTable').bootstrapTable('destroy');
       buildTable($('#searchTable'), cols);
       $('#searchTable').bootstrapTable('load', datas);
-
-      $('#searchTable').bootstrapTable("filterBy", {filtered: [false]});
+      $('#searchTable').bootstrapTable("filterBy", {filtered: false});
 
     }
 
-    function GetSchema(table) {
+    function GetDBMD(table) {
 
-        $.ajax({
-            type: 'POST',
-            url: "GetSchema",
-            dataType: 'json',
+			var dbmd;
 
-            success: function(data) {
-                console.log(data);
+			if(localStorage.getItem('dbmd')){
+				dbmd = JSON.parse(localStorage.getItem('dbmd'));
+				console.log("dbmd loaded from cache...");
+			}
+			else {
+					$.ajax({
+					type: 'POST',
+					url: "GetDBMD",
+					dataType: 'json',
+					async: false,
+					success: function(data) {
+						dbmd = data;
+					}
+				});
+			}
 
-								var schema = [];
-								var labels = {};
+			var datas = [];
 
-								$.each(data, function(i, table){
-									labels[table.table_name] = {};
-									labels[table.table_name].table_name = table.table_name;
-									labels[table.table_name].table_remarks = table.table_remarks;
-									labels[table.table_name].table_description = table.table_description;
-									labels[table.table_name].columns = {};
-									$.each(table.columns, function(j, column){
-										labels[table.table_name].columns[column.column_name] = {};
-										labels[table.table_name].columns[column.column_name].column_remarks = column.column_remarks;
-										labels[table.table_name].columns[column.column_name].column_description = column.column_description;
-										var field = {};
-										field.table_name = table.table_name;
-										field.table_type = table.table_type;
-										field.table_remarks = table.table_remarks;
-										field.table_description = table.table_description;
-										field.column_name = column.column_name;
-										field.column_type = column.column_type;
-										field.column_remarks = column.column_remarks;
-										field.column_description = column.column_description;
-										field.column_size = column.column_size;
-										field.isNullable = column.isNullable;
-										field.filtered = column.filtered;
-										schema.push(field);
-									})
-								});
+			$.each(dbmd, function(i, table){
+				$.each(table.columns, function(j, column){
+					var field = {};
+					field.table_name = table.table_name;
+					field.table_type = table.table_type;
+					field.table_remarks = table.table_remarks;
+					field.table_description = table.table_description;
+					field.table_recCount = table.table_recCount;
+					field.table_importedKeysCount = table.table_importedKeysCount;
+	    		field.table_exportedKeysCount = table.table_exportedKeysCount;
+	    		field.table_importedKeysSeqCount = table.table_importedKeysSeqCount;
+	    		field.table_exportedKeysSeqCount = table.table_exportedKeysSeqCount;
+	    		field.table_primaryKeyFieldsCount = table.table_primaryKeyFieldsCount;
+					field.table_stats = table.table_stats;
+	    		field.table_indexesCount = table.table_indexesCount;
+					field.column_name = column.column_name;
+					field.column_type = column.column_type;
+					field.column_remarks = column.column_remarks;
+					field.column_description = column.column_description;
+					field.column_isPrimaryKey = column.column_isPrimaryKey;
+					field.column_isIndexed = column.column_isIndexed;
+					field.column_size = column.column_size;
+					field.column_isNullable = column.column_isNullable;
+					field.filtered = column.filtered;
+					console.log(field.filtered);
+					datas.push(field);
+				})
+			});
 
-								console.log(labels);
-								localStorage.setItem('labels', JSON.stringify(labels));
-								console.log(schema);
-								table.bootstrapTable("load", schema);
-
-    			  },
-            error: function(data) {
-                console.log(data);
-            }
-    		});
+			console.log(dbmd);
+			localStorage.setItem('dbmd', JSON.stringify(dbmd));
+			console.log(datas);
+			table.bootstrapTable("load", datas);
 
     }
 
@@ -343,53 +389,186 @@
       table.empty();
 
       $.each($('#searchTable').bootstrapTable('getOptions').columns[0], function(i, obj){
-        var option = '<option class="fontsize" value=' + obj.field + '>' + obj.title + '</option>';
-        table.append(option);
+				if(!obj.title.match("glyphicon-question-sign")){
+	        var option = '<option class="fontsize" value=' + obj.field + '>' + obj.title + '</option>';
+	        table.append(option);
+				}
       });
       table.selectpicker('refresh');
     }
 
-    function ChooseTable(table) {
+		function SortOnStats(){
+
+			bootbox.prompt({
+			    title: "Sort tables list.",
+			    inputType: 'select',
+			    inputOptions: [
+			        {
+			            text: 'Sort by...',
+			            value: '',
+			        },
+			        {
+			            text: 'Number of fields within primary key',
+			            value: '1',
+			        },
+			        {
+			            text: 'Number of primary keys imported',
+			            value: '2',
+			        },
+							{
+			            text: 'Number of sequence within primary keys imported',
+			            value: '3',
+			        },
+							{
+			            text: 'Number of foreign keys exported',
+			            value: '4',
+			        },
+							{
+			            text: 'Number of sequence within foreign keys exported',
+			            value: '5',
+			        },
+			        {
+			            text: 'Number of indexed fields',
+			            value: '6',
+			        },
+							{
+			            text: 'Number of records',
+			            value: '7',
+			        }
+			    ],
+			    callback: function (result) {
+			        console.log(result);
+							ChooseTable($('#searchSelect'), result);
+							console.log(result);
+			    }
+			});
+
+		}
+
+    function ChooseTable(table, sort) {
 
 			table.empty();
 
-			var tables;
+			var dbmd;
 
-			if(localStorage.getItem('tables')){
-				tables = JSON.parse(localStorage.getItem('tables'));
+			if(localStorage.getItem('dbmd')){
+				dbmd = JSON.parse(localStorage.getItem('dbmd'));
+				console.log("dbmd loaded from cache...");
 			}
 			else {
 					$.ajax({
 					type: 'POST',
-					url: "Scan",
+					url: "GetDBMD",
 					dataType: 'json',
 					async: false,
 					success: function(data) {
-						tables = data;
+						dbmd = data;
 					}
 				});
 			}
 
-			console.log(tables);
+			console.log(dbmd);
 
-			tables.sort(function(a, b) {
-				// return parseInt(b.FKCount) - parseInt(a.FKCount);
-				return parseInt(b.FKSeqCount) - parseInt(a.FKSeqCount);
-			});
+			var tables = Object.values(dbmd);
+
+			console.log(tables);
+			console.log(sort);
+
+			switch(sort){
+				case "1":
+					tables.sort(function(a, b){return b.table_primaryKeyFieldsCount - a.table_primaryKeyFieldsCount});
+					break;
+				case "2":
+					tables.sort(function(a, b){return b.table_importedKeysCount - a.table_importedKeysCount});
+					break;
+				case "3":
+					tables.sort(function(a, b){return b.table_importedKeysSeqCount - a.table_importedKeysSeqCount});
+					break;
+				case "4":
+					tables.sort(function(a, b){return b.table_exportedKeysCount - a.table_exportedKeysCount});
+					break;
+				case "5":
+					tables.sort(function(a, b){return b.table_exportedKeysSeqCount - a.table_exportedKeysSeqCount});
+					break;
+				case "6":
+					tables.sort(function(a, b){return b.table_indexesCount - a.table_indexesCount});
+					break;
+				case "7":
+					tables.sort(function(a, b){return b.table_recCount - a.table_recCount});
+					break;
+				default:
+					tables.sort(function(a, b){return b.table_primaryKeyFieldsCount - a.table_primaryKeyFieldsCount});
+			}
+
 			$.each(tables, function(i, obj){
 				//console.log(obj.name);
-				var option = '<option class="fontsize" value=' + obj.name + '>' + obj.name + ' (' + obj.remarks + ') (' + obj.FKCount + ') (' + obj.FKSeqCount + ')'
-				 + ' (' + obj.PKCount + ') (' + obj.PKSeqCount + ') (' + obj.RecCount + ')' + '</option>';
+				// var dataContent = "<span class='label label-success'>" + obj.RecCount + "</span>";
+				var option = '<option class="fontsize" value="' + obj.table_name + '" data-subtext="' + obj.table_remarks +  ' ' + obj.table_stats + '">'
+				 + obj.table_name + '</option>';
 				table.append(option);
 				// $('#modPKTables').append(option);
 				// table.append('<option class="fontsize" value=' + obj.name + '>' + obj.name + '</option>');
 			});
 			table.selectpicker('refresh');
 			// $('#modPKTables').selectpicker('refresh');
-			localStorage.setItem('tables', JSON.stringify(tables));
+			// localStorage.setItem('tables', JSON.stringify(tables));
 
     }
 
+		function ShowAlert(title, message, alertType, area) {
+
+		    $('#alertmsg').remove();
+
+		    var timeout = 5000;
+
+		    if(area == undefined){
+		      area = "bottom";
+		    }
+		    if(alertType.match('warning')){
+		      area = "bottom";
+		      timeout = 10000;
+		    }
+		    if(alertType.match('danger')){
+		      area = "bottom";
+		      timeout = 30000;
+		    }
+
+		    var $newDiv;
+
+		    if(alertType.match('alert-success|alert-info')){
+		      $newDiv = $('<div/>')
+		       .attr( 'id', 'alertmsg' )
+		       .html(
+		          '<h4>' + title + '</h4>' +
+		          '<p>' +
+		          message +
+		          '</p>'
+		        )
+		       .addClass('alert ' + alertType + ' flyover flyover-' + area);
+		    }
+		    else{
+		      $newDiv = $('<div/>')
+		       .attr( 'id', 'alertmsg' )
+		       .html(
+		          '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+		          '<h4>' + title + '</h4>' +
+		          '<p>' +
+		          '<strong>' + message + '</strong>' +
+		          '</p>'
+		        )
+		       .addClass('alert ' + alertType + ' alert-dismissible flyover flyover-' + area);
+		    }
+
+		    $('#Alert').append($newDiv);
+
+		    if ( !$('#alertmsg').is( '.in' ) ) {
+		      $('#alertmsg').addClass('in');
+
+		      setTimeout(function() {
+		         $('#alertmsg').removeClass('in');
+		      }, timeout);
+		    }
+		}
 
   </script>
 
