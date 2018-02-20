@@ -114,7 +114,6 @@ public class GetDatabaseMetaDatasServlet extends HttpServlet {
 				    while (rst.next()) {
 				    	pks.add(rst.getString("COLUMN_NAME"));
 				    }
-
 			        if(rst != null){rst.close();}
 
 				    rst = metaData.getIndexInfo(con.getCatalog(), schema, table_name, false, true);
@@ -123,6 +122,7 @@ public class GetDatabaseMetaDatasServlet extends HttpServlet {
 				    while (rst.next()) {
 				    	indexes.add(rst.getString("COLUMN_NAME"));
 				    }
+			        if(rst != null){rst.close();}
 			    	
 			    	long recCount = 0;
 		    		Statement stmt = null;
