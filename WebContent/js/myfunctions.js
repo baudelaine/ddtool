@@ -1374,11 +1374,13 @@ function ChooseTable(table, sort) {
 
   table.empty();
 
-  var dbmd;
+  var dbmd = localStorage.getItem('dbmd');
 
-  if(localStorage.getItem('dbmd')){
-    dbmd = JSON.parse(localStorage.getItem('dbmd'));
+  console.log(dbmd);
+
+  if('null' != dbmd){
     console.log("dbmd loaded from cache...");
+    dbmd = JSON.parse(localStorage.getItem('dbmd'));
 
     console.log(dbmd);
 
@@ -1756,6 +1758,7 @@ function Reset() {
 	}
 
   // window.location = window.location.href+'?eraseCache=true';
+  localStorage.setItem('dbmd', null);
 	location.reload(true);
 
 }
