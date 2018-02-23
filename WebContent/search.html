@@ -431,7 +431,7 @@
 					type: 'POST',
 					url: "SaveDBMD",
 					dataType: 'json',
-					data: JSON.stringify(dbmd),
+					data: dbmd,
 
 					success: function(data) {
 						ShowAlert("SaveDBMD()", "Database metadata saved successfully.", "alert-success", "bottom");

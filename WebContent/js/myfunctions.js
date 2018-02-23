@@ -591,7 +591,7 @@ function getLabel(tableName, columnName){
   var label = null;
 
   var dbmd = JSON.parse(localStorage.getItem('dbmd'));
-  if(dbmd != 'null'){
+  if(dbmd != 'null' && dbmd){
     if(dbmd[tableName] && !columnName){
       label = dbmd[tableName].table_remarks;
     }
