@@ -225,10 +225,10 @@
 						if(dbmd[table]){
 							dbmd[table].table_remarks = labels[table].table_remarks;
 							dbmd[table].table_description = labels[table].table_description;
-							$.each(table.columns, function(j, column){
-								if(dbmd[table].columns[column.column_name]){
-									dbmd[table].columns[column.column_name].column_remarks = labels[table].columns[column.column_name].column_remarks;
-									dbmd[table].columns[column.column_name].column_description = labels[table].columns[column.column_name].column_description;
+							$.each(labels[table].columns, function(j, column){
+								if(dbmd[table].columns[j]){
+									dbmd[table].columns[j].column_remarks = column.column_remarks;
+									dbmd[table].columns[j].column_description = column.column_description;
 								}
 							})
 						}
