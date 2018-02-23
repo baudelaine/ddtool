@@ -8,6 +8,8 @@ var $navTab = $('#navTab');
 var $refTab = $("a[href='#Reference']");
 var $finTab = $("a[href='#Final']");
 var $qsTab = $("a[href='#QuerySubject']");
+var $secTab = $("a[href='#Security']");
+var $traTab = $("a[href='#Translation']");
 var activeTab = "Final";
 var previousTab;
 var $activeSubDatasTable;
@@ -200,6 +202,17 @@ $refTab.on('shown.bs.tab', function(e) {
   // $datasTable.bootstrapTable('showColumn', 'linker');
   // $datasTable.bootstrapTable('showColumn', 'linker_ids');
 });
+
+$secTab.on('shown.bs.tab', function(e) {
+  buildTable($datasTable, qsCols, datas, true, relationCols, "relations");
+  $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref', 'Sec']});
+});
+
+$traTab.on('shown.bs.tab', function(e) {
+  buildTable($datasTable, qsCols, datas, true, relationCols, "relations");
+  $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref', 'Tra']});
+});
+
 
 // $datasTable.on('editable-save.bs.table', function (editable, field, row, oldValue, $el) {
 //   console.log("row");
