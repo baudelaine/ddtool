@@ -32,6 +32,7 @@
 
       <button type="button" onclick="Filter()" class="btn btn-default" data-toggle="tooltip" title="Filter."><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></button>
 			<button type="button" onclick="OpenQueryModal()" class="btn btn-default" data-toggle="tooltip" title="Set SQL queries for labels and description."><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></button>
+			<button type="button" onclick="SaveDBMD()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Save database metadata to server."><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></button>
 			<button type="button" onclick="location.reload();" class="btn btn-default" data-toggle="tooltip" title="Reload page."><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
 
     </div>
@@ -235,7 +236,7 @@
 					})
 
 					loadDBMD(dbmd);
-					
+
 					console.log(dbmd);
 
 					// var datas = $('#searchTable').bootstrapTable("getData");
@@ -418,25 +419,28 @@
 			console.log(datas);
 			$('#searchTable').bootstrapTable("load", datas);
 			ChooseTable($('#searchSelect'), '0');
-			SaveDBMD(dbmd);
 
 		}
 
-		function SaveDBMD(dbmd){
+		function SaveDBMD(){
 
-			$.ajax({
-				type: 'POST',
-				url: "SaveDBMD",
-				dataType: 'json',
-				data: JSON.stringify(dbmd),
+			var dbmd = localStorage.getItem('dbmd');
 
-				success: function(data) {
-					ShowAlert("SaveDBMD()", "Database metadata saved successfully.", "alert-success", "bottom");
-				},
-				error: function(data) {
-					ShowAlert("SaveDBMD()", "Saving database metadata failed.", "alert-danger", "bottom");
-				}
-			});
+			if(dbmd != 'null'){
+				$.ajax({
+					type: 'POST',
+					url: "SaveDBMD",
+					dataType: 'json',
+					data: JSON.stringify(dbmd),
+
+					success: function(data) {
+						ShowAlert("SaveDBMD()", "Database metadata saved successfully.", "alert-success", "bottom");
+					},
+					error: function(data) {
+						ShowAlert("SaveDBMD()", "Saving database metadata failed.", "alert-danger", "bottom");
+					}
+				});
+			}
 
 		}
 
