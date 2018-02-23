@@ -111,7 +111,7 @@ fieldCols.push({field:"timezone", title: "timezone", formatter: "boolFormatter",
 
 $(document)
 .ready(function() {
-  $('#DatasToolbar').hide();
+  localStorage.setItem('dbmd', null);
   ChooseTable($tableList);
   buildTable($datasTable, qsCols, datas, true);
 
@@ -132,10 +132,8 @@ $tableList.change(function () {
 
 $tableList.on('show.bs.select', function (e) {
   // do something...
-  console.log("$tableList.on('show.bs.select'");
-  if(localStorage.getItem('tables')){
-    ChooseTable($tableList);
-  }
+  // console.log("$tableList.on('show.bs.select'");
+  // ChooseTable($tableList);
 
 });
 
@@ -1333,38 +1331,40 @@ function SortOnStats(){
               value: '',
           },
           {
-              text: 'Number of fields within primary key',
+              text: '...alphabetic table name (ASC).',
+              value: '0',
+          },
+          {
+              text: '...number of fields within primary key (DESC).',
               value: '1',
           },
           {
-              text: 'Number of primary keys imported',
+              text: '...number of primary keys imported (DESC).',
               value: '2',
           },
           {
-              text: 'Number of sequence within primary keys imported',
+              text: '...number of sequence within primary keys imported (DESC).',
               value: '3',
           },
           {
-              text: 'Number of foreign keys exported',
+              text: '...number of foreign keys exported (DESC).',
               value: '4',
           },
           {
-              text: 'Number of sequence within foreign keys exported',
+              text: '...number of sequence within foreign keys exported (DESC).',
               value: '5',
           },
           {
-              text: 'Number of indexed fields',
+              text: '...number of indexed fields (DESC).',
               value: '6',
           },
           {
-              text: 'Number of records',
+              text: '...number of records (DESC).',
               value: '7',
           }
       ],
       callback: function (result) {
-          console.log(result);
           ChooseTable($tableList, result);
-          console.log(result);
       }
   });
 
@@ -1376,13 +1376,9 @@ function ChooseTable(table, sort) {
 
   var dbmd = localStorage.getItem('dbmd');
 
-  console.log(dbmd);
-
   if('null' != dbmd){
     console.log("dbmd loaded from cache...");
     dbmd = JSON.parse(localStorage.getItem('dbmd'));
-
-    console.log(dbmd);
 
     var tables = Object.values(dbmd);
 
@@ -1390,6 +1386,11 @@ function ChooseTable(table, sort) {
     console.log(sort);
 
     switch(sort){
+      case "0":
+        tables.sort(function(a, b){
+          return a.table_name.localeCompare(b.table_name);
+        });
+        break;
       case "1":
         tables.sort(function(a, b){return b.table_primaryKeyFieldsCount - a.table_primaryKeyFieldsCount});
         break;
@@ -1444,8 +1445,6 @@ function ChooseTable(table, sort) {
       }
     });
   }
-
-
 }
 
 function ChooseField(table, id){

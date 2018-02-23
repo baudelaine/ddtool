@@ -100,12 +100,12 @@
     searchCols.push({field:"table_remarks", title: "Table<br>Label", sortable: true, searchable: false});
 		searchCols.push({field:"table_description", title: "Table<br>Description", sortable: true, searchable: false});
 
-		searchCols.push({field:"table_primaryKeyFieldsCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of fields within primary key", sortable: true, searchable: false});
-		searchCols.push({field:"table_importedKeysCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of primary keys imported", sortable: true, searchable: false});
-		searchCols.push({field:"table_importedKeysSeqCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of sequence within primary keys imported", sortable: true, searchable: false});
-		searchCols.push({field:"table_exportedKeysCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of foreign keys exported", sortable: true, searchable: false});
-		searchCols.push({field:"table_exportedKeysSeqCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of sequence within foreign keys exported", sortable: true, searchable: false});
-		searchCols.push({field:"table_indexesCount", title: '<i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of indexed fields", sortable: true, searchable: false});
+		searchCols.push({field:"table_primaryKeyFieldsCount", title: 'FPK<br><i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of fields within primary key", sortable: true, searchable: false});
+		searchCols.push({field:"table_importedKeysCount", title: 'IPK<br><i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of primary keys imported", sortable: true, searchable: false});
+		searchCols.push({field:"table_importedKeysSeqCount", title: 'IPKS<br><i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of sequence within primary keys imported", sortable: true, searchable: false});
+		searchCols.push({field:"table_exportedKeysCount", title: 'EFK<br><i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of foreign keys exported", sortable: true, searchable: false});
+		searchCols.push({field:"table_exportedKeysSeqCount", title: 'EFKS<br><i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of sequence within foreign keys exported", sortable: true, searchable: false});
+		searchCols.push({field:"table_indexesCount", title: 'Indexes<br><i class="glyphicon glyphicon-question-sign"></i>', titleTooltip: "Number of indexed fields", sortable: true, searchable: false});
 		searchCols.push({field:"table_recCount", title: "Select<br>count(*)", sortable: true, searchable: false});
 
     searchCols.push({field:"column_name", title: "Column<br>Name", sortable: true, searchable: false});
@@ -145,7 +145,8 @@
       buildTable($('#searchTable'), searchCols);
       ChooseTable($('#searchSelect'));
       ChooseColumn($('#searchColumnSelect'));
-			GetDBMD($('#searchTable'));
+			checkDBMD();
+			// GetDBMD($('#searchTable'));
     })
 		.ajaxStart(function(){
 		    $("div#divLoading").addClass('show');
@@ -295,6 +296,40 @@
 
     }
 
+		function checkDBMD(){
+
+			var dbmd = localStorage.getItem('dbmd');
+
+			if(dbmd != 'null'){
+				dbmd = JSON.parse(localStorage.getItem('dbmd'));
+				console.log("dbmd loaded from cache...");
+				GetDBMD($('#searchTable'));
+			}
+			else{
+				bootbox.confirm({
+			    title: "No database metadata found in cache.",
+			    message: "You have to load database metadata to use this tool ? This could take few minutes.",
+					buttons: {
+						cancel: {
+								label: '<span class="glyphicon glyphicon-remove aria-hidden="true">',
+								className: 'btn btn-default'
+						},
+						confirm: {
+								label: '<span class="glyphicon glyphicon-ok aria-hidden="true">',
+								className: 'btn btn-primary'
+						}
+					},
+					callback: function (result) {
+			        console.log(result);
+							if(result){
+									GetDBMD($('#searchTable'));
+							}
+			    }
+				});
+			}
+
+		}
+
     function GetDBMD(table) {
 
 			var dbmd = localStorage.getItem('dbmd');
@@ -302,6 +337,7 @@
 			if(dbmd != 'null'){
 				dbmd = JSON.parse(localStorage.getItem('dbmd'));
 				console.log("dbmd loaded from cache...");
+				loadDBMD(dbmd);
 			}
 			else {
 					$.when(
@@ -314,92 +350,76 @@
 								// dbmd = data;
 							}
 						})
-					).then(
+					)
+					.then(
 						function(data){
 							dbmd = data;
-							console.log(dbmd);
-							var datas = [];
-							console.log(dbmd);
-
-							$.each(dbmd, function(i, table){
-								$.each(table.columns, function(j, column){
-									var field = {};
-									field.table_name = table.table_name;
-									field.table_type = table.table_type;
-									field.table_remarks = table.table_remarks;
-									field.table_description = table.table_description;
-									field.table_recCount = table.table_recCount;
-									field.table_importedKeysCount = table.table_importedKeysCount;
-					    		field.table_exportedKeysCount = table.table_exportedKeysCount;
-					    		field.table_importedKeysSeqCount = table.table_importedKeysSeqCount;
-					    		field.table_exportedKeysSeqCount = table.table_exportedKeysSeqCount;
-					    		field.table_primaryKeyFieldsCount = table.table_primaryKeyFieldsCount;
-									field.table_stats = table.table_stats;
-					    		field.table_indexesCount = table.table_indexesCount;
-									field.column_name = column.column_name;
-									field.column_type = column.column_type;
-									field.column_remarks = column.column_remarks;
-									field.column_description = column.column_description;
-									field.column_isPrimaryKey = column.column_isPrimaryKey;
-									field.column_isIndexed = column.column_isIndexed;
-									field.column_size = column.column_size;
-									field.column_isNullable = column.column_isNullable;
-									field.filtered = column.filtered;
-									console.log(field.filtered);
-									datas.push(field);
-								})
-							});
-
-							console.log(dbmd);
-							localStorage.setItem('dbmd', JSON.stringify(dbmd));
-							console.log(datas);
-							table.bootstrapTable("load", datas);
+							loadDBMD(dbmd);
 						}
 					);
 			}
 
-			// var datas = [];
-			// console.log(dbmd);
-			//
-			// $.each(dbmd, function(i, table){
-			// 	$.each(table.columns, function(j, column){
-			// 		var field = {};
-			// 		field.table_name = table.table_name;
-			// 		field.table_type = table.table_type;
-			// 		field.table_remarks = table.table_remarks;
-			// 		field.table_description = table.table_description;
-			// 		field.table_recCount = table.table_recCount;
-			// 		field.table_importedKeysCount = table.table_importedKeysCount;
-	    // 		field.table_exportedKeysCount = table.table_exportedKeysCount;
-	    // 		field.table_importedKeysSeqCount = table.table_importedKeysSeqCount;
-	    // 		field.table_exportedKeysSeqCount = table.table_exportedKeysSeqCount;
-	    // 		field.table_primaryKeyFieldsCount = table.table_primaryKeyFieldsCount;
-			// 		field.table_stats = table.table_stats;
-	    // 		field.table_indexesCount = table.table_indexesCount;
-			// 		field.column_name = column.column_name;
-			// 		field.column_type = column.column_type;
-			// 		field.column_remarks = column.column_remarks;
-			// 		field.column_description = column.column_description;
-			// 		field.column_isPrimaryKey = column.column_isPrimaryKey;
-			// 		field.column_isIndexed = column.column_isIndexed;
-			// 		field.column_size = column.column_size;
-			// 		field.column_isNullable = column.column_isNullable;
-			// 		field.filtered = column.filtered;
-			// 		console.log(field.filtered);
-			// 		datas.push(field);
-			// 	})
-			// });
-			//
-			// console.log(dbmd);
-			// localStorage.setItem('dbmd', JSON.stringify(dbmd));
-			// console.log(datas);
-			// table.bootstrapTable("load", datas);
-
     }
 
-		// function loadDBMD($el, datas){
-		//
-		// }
+		function loadDBMD(dbmd){
+
+			var datas = [];
+
+			$.each(dbmd, function(i, table){
+				$.each(table.columns, function(j, column){
+					var field = {};
+					field.table_name = table.table_name;
+					field.table_type = table.table_type;
+					field.table_remarks = table.table_remarks;
+					field.table_description = table.table_description;
+					field.table_recCount = table.table_recCount;
+					field.table_importedKeysCount = table.table_importedKeysCount;
+					field.table_exportedKeysCount = table.table_exportedKeysCount;
+					field.table_importedKeysSeqCount = table.table_importedKeysSeqCount;
+					field.table_exportedKeysSeqCount = table.table_exportedKeysSeqCount;
+					field.table_primaryKeyFieldsCount = table.table_primaryKeyFieldsCount;
+					field.table_stats = table.table_stats;
+					field.table_indexesCount = table.table_indexesCount;
+					field.column_name = column.column_name;
+					field.column_type = column.column_type;
+					field.column_remarks = column.column_remarks;
+					field.column_description = column.column_description;
+					field.column_isPrimaryKey = column.column_isPrimaryKey;
+					field.column_isIndexed = column.column_isIndexed;
+					field.column_size = column.column_size;
+					field.column_isNullable = column.column_isNullable;
+					field.filtered = column.filtered;
+					datas.push(field);
+				})
+			});
+
+			console.log(dbmd);
+			localStorage.setItem('dbmd', JSON.stringify(dbmd));
+			console.log(datas);
+			$('#searchTable').bootstrapTable("load", datas);
+			ChooseTable($('#searchSelect'), '0');
+			SaveDBMD(dbmd);
+
+		}
+
+		function SaveDBMD(dbmd){
+
+			$.ajax({
+				type: 'POST',
+				url: "SaveDBMD",
+				dataType: 'json',
+				data: JSON.stringify(dbmd),
+
+				success: function(data) {
+					ShowAlert("SaveDBMD()", "Database metadata saved successfully.", "alert-success", "bottom");
+				},
+				error: function(data) {
+					ShowAlert("SaveDBMD()", "Saving database metadata failed.", "alert-danger", "bottom");
+				}
+			});
+
+		}
+
 
     function buildTable($el, cols) {
 
@@ -456,35 +476,35 @@
 			            value: '',
 			        },
 							{
-			            text: 'Alphabetic table name',
+			            text: '...alphabetic table name (ASC).',
 			            value: '0',
 			        },
 			        {
-			            text: 'Number of fields within primary key',
+			            text: '...number of fields within primary key (DESC).',
 			            value: '1',
 			        },
 			        {
-			            text: 'Number of primary keys imported',
+			            text: '...number of primary keys imported (DESC).',
 			            value: '2',
 			        },
 							{
-			            text: 'Number of sequence within primary keys imported',
+			            text: '...number of sequence within primary keys imported (DESC).',
 			            value: '3',
 			        },
 							{
-			            text: 'Number of foreign keys exported',
+			            text: '...number of foreign keys exported (DESC).',
 			            value: '4',
 			        },
 							{
-			            text: 'Number of sequence within foreign keys exported',
+			            text: '...number of sequence within foreign keys exported (DESC).',
 			            value: '5',
 			        },
 			        {
-			            text: 'Number of indexed fields',
+			            text: '...number of indexed fields (DESC).',
 			            value: '6',
 			        },
 							{
-			            text: 'Number of records',
+			            text: '...number of records (DESC).',
 			            value: '7',
 			        }
 			    ],
@@ -503,12 +523,9 @@
 
 			var dbmd = localStorage.getItem('dbmd');
 
-			console.log(dbmd);
-
 			if('null' != dbmd){
 				console.log("dbmd loaded from cache...");
 				dbmd = JSON.parse(localStorage.getItem('dbmd'));
-		    console.log(dbmd);
 
 		    var tables = Object.values(dbmd);
 
@@ -517,7 +534,9 @@
 
 		    switch(sort){
 					case "0":
-		        tables.sort(function(a, b){return b.table_name - a.table_name});
+		        tables.sort(function(a, b){
+							return a.table_name.localeCompare(b.table_name);
+						});
 		        break;
 		      case "1":
 		        tables.sort(function(a, b){return b.table_primaryKeyFieldsCount - a.table_primaryKeyFieldsCount});
