@@ -234,10 +234,8 @@
 						}
 					})
 
-					localStorage.setItem('dbmd', JSON.stringify(dbmd));
-
 					loadDBMD(dbmd);
-
+					
 					console.log(dbmd);
 
 					// var datas = $('#searchTable').bootstrapTable("getData");
@@ -416,6 +414,7 @@
 			});
 
 			console.log(dbmd);
+			localStorage.setItem('dbmd', JSON.stringify(dbmd));
 			console.log(datas);
 			$('#searchTable').bootstrapTable("load", datas);
 			ChooseTable($('#searchSelect'), '0');
