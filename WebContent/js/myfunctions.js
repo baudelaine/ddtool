@@ -590,14 +590,14 @@ function getLabel(tableName, columnName){
 
   var label = null;
 
-  var labels = JSON.parse(localStorage.getItem('dbmd'));
-  if(labels){
-    if(labels[tableName] && !columnName){
-      label = labels[tableName].table_remarks;
+  var dbmd = JSON.parse(localStorage.getItem('dbmd'));
+  if(dbmd != 'null'){
+    if(dbmd[tableName] && !columnName){
+      label = dbmd[tableName].table_remarks;
     }
-    if(labels[tableName] && columnName){
-      if(labels[tableName].columns[columnName]){
-        label = labels[tableName].columns[columnName].column_remarks;
+    if(dbmd[tableName] && columnName){
+      if(dbmd[tableName].columns[columnName]){
+        label = dbmd[tableName].columns[columnName].column_remarks;
       }
     }
   }

@@ -218,33 +218,55 @@
 				success: function(labels) {
 					console.log(labels);
 
-					var datas = $('#searchTable').bootstrapTable("getData");
+					var tables = Object.keys(labels);
+					var dbmd = JSON.parse(localStorage.getItem('dbmd'));
 
-					$.each(datas, function(i, object){
-						if(labels[object.table_name]){
-							object.table_remarks = labels[object.table_name].table_remarks;
-							object.table_description = labels[object.table_name].table_description;
-							if(labels[object.table_name].columns[object.column_name]){
-								object.column_remarks = labels[object.table_name].columns[object.column_name].column_remarks;
-								object.column_description = labels[object.table_name].columns[object.column_name].column_description;
-							}
+					$.each(tables, function(i, table){
+						if(dbmd[table]){
+							dbmd[table].table_remarks = labels[table].table_remarks;
+							dbmd[table].table_description = labels[table].table_description;
+							$.each(table.columns, function(j, column){
+								if(dbmd[table].columns[column.column_name]){
+									dbmd[table].columns[column.column_name].column_remarks = labels[table].columns[column.column_name].column_remarks;
+									dbmd[table].columns[column.column_name].column_description = labels[table].columns[column.column_name].column_description;
+								}
+							})
 						}
 					})
 
-					$('#searchTable').bootstrapTable("load", datas);
-					localStorage.setItem('labels', JSON.stringify(labels));
+					localStorage.setItem('dbmd', JSON.stringify(dbmd));
 
-					var tables = JSON.parse(localStorage.getItem('tables'));
-					if(tables){
-						console.log("tables");
-						console.log(tables);
-						$.each(tables, function(i, table){
-							table.remarks = labels[table.name].table_remarks;
-							table.description = labels[table.name].table_description;
-						})
-						localStorage.setItem('tables', JSON.stringify(tables));
-						ChooseTable($('#searchSelect'));
-					}
+					loadDBMD(dbmd);
+
+					console.log(dbmd);
+
+					// var datas = $('#searchTable').bootstrapTable("getData");
+					//
+					// $.each(datas, function(i, object){
+					// 	if(labels[object.table_name]){
+					// 		object.table_remarks = labels[object.table_name].table_remarks;
+					// 		object.table_description = labels[object.table_name].table_description;
+					// 		if(labels[object.table_name].columns[object.column_name]){
+					// 			object.column_remarks = labels[object.table_name].columns[object.column_name].column_remarks;
+					// 			object.column_description = labels[object.table_name].columns[object.column_name].column_description;
+					// 		}
+					// 	}
+					// })
+					//
+					// $('#searchTable').bootstrapTable("load", datas);
+					// localStorage.setItem('labels', JSON.stringify(labels));
+					//
+					// var tables = JSON.parse(localStorage.getItem('tables'));
+					// if(tables){
+					// 	console.log("tables");
+					// 	console.log(tables);
+					// 	$.each(tables, function(i, table){
+					// 		table.remarks = labels[table.name].table_remarks;
+					// 		table.description = labels[table.name].table_description;
+					// 	})
+					// 	localStorage.setItem('tables', JSON.stringify(tables));
+					// 	ChooseTable($('#searchSelect'));
+					// }
 
 				},
 				error: function(data) {
@@ -394,7 +416,6 @@
 			});
 
 			console.log(dbmd);
-			localStorage.setItem('dbmd', JSON.stringify(dbmd));
 			console.log(datas);
 			$('#searchTable').bootstrapTable("load", datas);
 			ChooseTable($('#searchSelect'), '0');
