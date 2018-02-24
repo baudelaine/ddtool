@@ -17,6 +17,7 @@ public class QuerySubject {
 	boolean visible = false;
 	String filter = "";
 	String Label = "";
+	String description = "";
 	boolean linker = false;
 	Set<String> linker_ids =  new HashSet<String>();
 	List<Field> fields = new ArrayList<Field>();
@@ -99,6 +100,12 @@ public class QuerySubject {
 	}
 	public void setLabel(String label) {
 		Label = label;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public boolean isLinker() {
 		return linker;

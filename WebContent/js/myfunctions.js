@@ -33,6 +33,8 @@ relationCols.push({field:"recCountPercent", title: "count(*) %", sortable: true}
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"fin", title: "fin", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"ref", title: "ref", formatter: "boolFormatter", align: "center"});
+relationCols.push({field:"sec", title: "sec", formatter: "boolFormatter", align: "center"});
+relationCols.push({field:"tra", title: "tra", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"nommageRep", title: "RepTableName", formatter: "boolFormatter", align: "center"});
 relationCols.push({field:"duplicate", title: '<i class="glyphicon glyphicon-duplicate"></i>', formatter: "duplicateFormatter", align: "center"});
 relationCols.push({field:"remove", title: '<i class="glyphicon glyphicon-trash"></i>', formatter: "removeFormatter", align: "center"});
@@ -218,11 +220,27 @@ $refTab.on('shown.bs.tab', function(e) {
 $secTab.on('shown.bs.tab', function(e) {
   buildTable($datasTable, qsCols, datas, true, relationCols, "relations");
   $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref', 'Sec']});
+  $datasTable.bootstrapTable('showColumn', 'operate');
+  $datasTable.bootstrapTable('hideColumn', 'visible');
+  $datasTable.bootstrapTable('hideColumn', 'filter');
+  $datasTable.bootstrapTable('showColumn', 'label');
+  $datasTable.bootstrapTable('showColumn', 'addPKRelation');
+  $datasTable.bootstrapTable('showColumn', 'addRelation');
+  $datasTable.bootstrapTable('showColumn', 'recurseCount');
+  $datasTable.bootstrapTable('showColumn', 'nommageRep');
 });
 
 $traTab.on('shown.bs.tab', function(e) {
   buildTable($datasTable, qsCols, datas, true, relationCols, "relations");
   $datasTable.bootstrapTable("filterBy", {type: ['Final', 'Ref', 'Tra']});
+  $datasTable.bootstrapTable('showColumn', 'operate');
+  $datasTable.bootstrapTable('hideColumn', 'visible');
+  $datasTable.bootstrapTable('hideColumn', 'filter');
+  $datasTable.bootstrapTable('showColumn', 'label');
+  $datasTable.bootstrapTable('showColumn', 'addPKRelation');
+  $datasTable.bootstrapTable('showColumn', 'addRelation');
+  $datasTable.bootstrapTable('showColumn', 'recurseCount');
+  $datasTable.bootstrapTable('showColumn', 'nommageRep');
 });
 
 
@@ -869,7 +887,22 @@ function buildSubTable($el, cols, data, parentData){
     $el.bootstrapTable('hideColumn', 'fin');
     $el.bootstrapTable('showColumn', 'ref');
     $el.bootstrapTable('showColumn', 'nommageRep');
+  }
 
+  if(activeTab == "Security"){
+    $el.bootstrapTable('hideColumn', 'fin');
+    $el.bootstrapTable('hideColumn', 'ref');
+    $el.bootstrapTable('hideColumn', 'tra');
+    $el.bootstrapTable('showColumn', 'sec');
+    $el.bootstrapTable('showColumn', 'nommageRep');
+  }
+
+  if(activeTab == "Translation"){
+    $el.bootstrapTable('hideColumn', 'fin');
+    $el.bootstrapTable('hideColumn', 'ref');
+    $el.bootstrapTable('hideColumn', 'sec');
+    $el.bootstrapTable('showColumn', 'tra');
+    $el.bootstrapTable('showColumn', 'nommageRep');
   }
 
   if(activeTab == "Final"){
@@ -1098,7 +1131,7 @@ function buildTable($el, cols, data) {
 
         },
         onExpandRow: function (index, row, $detail) {
-          if(activeTab == "Final" || activeTab == "Reference"){
+          if(activeTab.match("Final|Reference|Security|Translation")){
             expandTable($detail, relationCols, row.relations, row);
           }
           else{
