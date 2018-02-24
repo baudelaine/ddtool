@@ -611,7 +611,6 @@ function modValidate(){
       if(obj.relations.length == 0){
         obj.relations.push(relation);
       }
-      console.log("+++ obj +++");
       console.log(obj);
     }
   });
@@ -886,6 +885,8 @@ function buildSubTable($el, cols, data, parentData){
   if(activeTab == "Reference"){
     $el.bootstrapTable('hideColumn', 'fin');
     $el.bootstrapTable('showColumn', 'ref');
+    $el.bootstrapTable('hideColumn', 'sec');
+    $el.bootstrapTable('hideColumn', 'tra');
     $el.bootstrapTable('showColumn', 'nommageRep');
   }
 
@@ -907,6 +908,8 @@ function buildSubTable($el, cols, data, parentData){
 
   if(activeTab == "Final"){
     $el.bootstrapTable('hideColumn', 'ref');
+    $el.bootstrapTable('hideColumn', 'sec');
+    $el.bootstrapTable('hideColumn', 'tra');
     $el.bootstrapTable('showColumn', 'fin');
     $el.bootstrapTable('hideColumn', 'nommageRep');
   }
@@ -1114,6 +1117,7 @@ function buildTable($el, cols, data) {
 
             if($activeSubDatasTable != undefined){
               $newRowModal.modal('toggle');
+              console.log(row);
               var qs = row.table_alias + ' - ' + row.type + ' - ' + row.table_name;
               // $('#modQuerySubject').selectpicker('val', qs);
 
