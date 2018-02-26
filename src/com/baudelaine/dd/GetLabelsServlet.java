@@ -211,6 +211,7 @@ public class GetLabelsServlet extends HttpServlet {
 				
 			}
 			
+			request.getSession().setAttribute("labels", results);
 		    response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(Tools.toJSON(results));

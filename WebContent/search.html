@@ -27,6 +27,8 @@
       </select>
 
       <button type="button" onclick="SortOnStats()" class="btn btn-default" data-toggle="tooltip" title="Sort within stats."><span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></button>
+			<button type="button" onclick="WatchContent()" class="btn btn-default" data-toggle="tooltip" title="Watch content."><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+
 			<select class="selectpicker" id="searchColumnSelect" multiple data-actions-box="true" data-live-search="true" title="Choose columns()...">
       </select>
 
@@ -171,6 +173,10 @@
 
     $('#searchTable').on('reset-view.bs.table', function(){
     });
+
+		function WatchContent(){
+			window.open("watchContent.html");
+		}
 
 		function OpenQueryModal(){
 			$('#queryModal').modal('toggle');
@@ -465,6 +471,16 @@
 			bootbox.prompt({
 			    title: "Sort tables list.",
 			    inputType: 'select',
+					buttons: {
+						cancel: {
+								label: '<span class="glyphicon glyphicon-remove aria-hidden="true">',
+								className: 'btn btn-default'
+						},
+						confirm: {
+								label: '<span class="glyphicon glyphicon-ok aria-hidden="true">',
+								className: 'btn btn-primary'
+						}
+					},
 			    inputOptions: [
 			        {
 			            text: 'Sort by...',

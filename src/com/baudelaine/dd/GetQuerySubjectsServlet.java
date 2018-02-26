@@ -38,6 +38,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	String linker_id = "";
 	boolean withRecCount = false;
 	long qs_recCount = 0L;
+	Map<String, Object> labels = null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -75,6 +76,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 			System.out.println("withRecCount=" + withRecCount);
 			con = (Connection) request.getSession().getAttribute("con");
 			schema = (String) request.getSession().getAttribute("schema");
+			labels = (Map<String, Object>) request.getSession().getAttribute("labels");
 			metaData = con.getMetaData();
 			
 //			Map<String, QuerySubject> query_subjects = (Map<String, QuerySubject>) request.getSession().getAttribute("query_subjects");
@@ -183,11 +185,19 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 			}
 			
 		}
+		
+		if(labels != null){
+			@SuppressWarnings("unchecked")
+			Map<String, Object> o = (Map<String, Object>) labels.get(table);
+			result.setLabel((String) o.get("table_remarks"));
+			result.setDescription((String) o.get("table_description"));
+		}
         
         return result;
         
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected List<Field> getFields() throws SQLException{
 		
 //		Map<String, Field> result = new HashMap<String, Field>();
@@ -205,6 +215,11 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		
         rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
         
+        Map<String, Object> table_labels = null;
+        if(labels != null){
+			table_labels = (Map<String, Object>) labels.get(table);
+        }
+		
         while (rst.next()) {
         	String field_name = rst.getString("COLUMN_NAME");
         	String field_type = rst.getString("TYPE_NAME");
@@ -219,6 +234,15 @@ public class GetQuerySubjectsServlet extends HttpServlet {
         	if(pks.contains(rst.getString("COLUMN_NAME"))){
     			field.setPk(true);
     		}
+        	
+    		if(table_labels != null){
+    			Map<String, Object> columns = (Map<String, Object>) table_labels.get("columns");
+    			Map<String, Object> column = (Map<String, Object>) columns.get(field_name); 
+    			field.setLabel((String) column.get("table_remarks"));
+    			field.setDescription((String) column.get("table_description"));
+    		}
+        	
+        	
         	result.add(field);
         }
 
