@@ -292,6 +292,21 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	        	relation.setType(type.toUpperCase());
 	        	relation.set_id("FK_" + relation.getPktable_alias() + "_" + alias + "_" + type.toUpperCase());
 	        	
+	        	String[] types = {"TABLE"};
+	    		ResultSet rst0 = metaData.getTables(con.getCatalog(), schema, pktable_name, types);
+	    		while (rst0.next()) {
+	    	    	relation.setLabel(rst0.getString("REMARKS"));
+	    	    }
+	    		if(rst0 != null){rst0.close();}
+	        	
+	    		if(labels != null){
+	    			@SuppressWarnings("unchecked")
+	    			Map<String, Object> o = (Map<String, Object>) labels.get(pktable_name);
+	    			relation.setLabel((String) o.get("table_remarks"));
+	    			relation.setDescription((String) o.get("table_description"));
+	    		}
+	        	
+	        	
 	        	Seq seq = new Seq();
 	        	seq.setTable_name(fktable_name);
 	        	seq.setPktable_name(pktable_name);

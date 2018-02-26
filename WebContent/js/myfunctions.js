@@ -27,7 +27,7 @@ relationCols.push({field:"key_name", title: "key_name", sortable: true});
 relationCols.push({field:"key_type", title: "key_type", sortable: true});
 relationCols.push({field:"pktable_name", title: "pktable_name", sortable: true});
 relationCols.push({field:"pktable_alias", title: "pktable_alias", class: "pktable_alias", editable: {type: "text"}, sortable: true, events: "pktable_aliasEvents"});
-relationCols.push({field:"relationLabel", title: "Label", sortable: true, editable: {type: "textarea", rows: 4}});
+relationCols.push({field:"label", title: "Label", sortable: true, editable: {type: "textarea", rows: 4}});
 relationCols.push({field:"description", title: "Description", sortable: false});
 relationCols.push({field:"recCountPercent", title: "count(*) %", sortable: true});
 relationCols.push({field:"relationship", title: "relationship", editable: {type: "textarea", rows: 4}});
@@ -1321,24 +1321,24 @@ function GetQuerySubjects(table_name, table_alias, type, linker_id) {
 				showalert("GetQuerySubjects()", table_name + " has no key.", "alert-info", "bottom");
 				// return;
 			}
-      $.each(data, function(i, table){
-        var tableLabel = getLabel(table.table_name);
-        table.label = tableLabel;
-        var description = getDescription(table.table_name);
-        table.description = description;
-        $.each(table.fields, function(j, field){
-          var columnLabel = getLabel(table.table_name, field.field_name);
-          field.label = columnLabel;
-          var description = getDescription(table.table_name, field.field_name);
-          field.description = description;
-        })
-        $.each(table.relations, function(j, relation){
-          var relationLabel = getLabel(relation.pktable_name);
-          relation.relationLabel = relationLabel;
-          var description = getDescription(relation.pktable_name);
-          relation.description = description;
-        })
-      });
+      // $.each(data, function(i, table){
+      //   var tableLabel = getLabel(table.table_name);
+      //   table.label = tableLabel;
+      //   var description = getDescription(table.table_name);
+      //   table.description = description;
+      //   $.each(table.fields, function(j, field){
+      //     var columnLabel = getLabel(table.table_name, field.field_name);
+      //     field.label = columnLabel;
+      //     var description = getDescription(table.table_name, field.field_name);
+      //     field.description = description;
+      //   })
+      //   $.each(table.relations, function(j, relation){
+      //     var relationLabel = getLabel(relation.pktable_name);
+      //     relation.relationLabel = relationLabel;
+      //     var description = getDescription(relation.pktable_name);
+      //     relation.description = description;
+      //   })
+      // });
 
 		$datasTable.bootstrapTable('append', data);
     datas = $datasTable.bootstrapTable("getData");

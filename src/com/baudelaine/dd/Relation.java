@@ -16,6 +16,8 @@ public class Relation {
 	String table_alias = "";
 	String pktable_name = "";	
 	String pktable_alias = "";	
+	String label = "";
+	String description = "";
 	boolean fin = false;
 	boolean ref = false;
 	boolean sec = false;
@@ -94,6 +96,18 @@ public class Relation {
 	}
 	public void setPktable_alias(String pktable_alias) {
 		this.pktable_alias = pktable_alias;
+	}
+	public String getLabel() {
+		return label;
+	}
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public boolean isFin() {
 		return fin;
