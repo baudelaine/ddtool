@@ -264,8 +264,10 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	    		if(dbmd != null){
 	    			@SuppressWarnings("unchecked")
 	    			Map<String, Object> o = (Map<String, Object>) dbmd.get(pktable_name);
-	    			relation.setLabel((String) o.get("table_remarks"));
-	    			relation.setDescription((String) o.get("table_description"));
+	    			if(o != null){
+		    			relation.setLabel((String) o.get("table_remarks"));
+		    			relation.setDescription((String) o.get("table_description"));
+	    			}
 	    		}
 	        	
 	        	
@@ -414,8 +416,10 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	    		if(dbmd != null){
 	    			@SuppressWarnings("unchecked")
 	    			Map<String, Object> o = (Map<String, Object>) dbmd.get(pktable_name);
-	    			relation.setLabel((String) o.get("table_remarks"));
-	    			relation.setDescription((String) o.get("table_description"));
+	    			if(o != null){
+		    			relation.setLabel((String) o.get("table_remarks"));
+		    			relation.setDescription((String) o.get("table_description"));
+	    			}
 	    		}
 	        	
 	        	Seq seq = new Seq();

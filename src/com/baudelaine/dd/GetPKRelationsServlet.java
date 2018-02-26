@@ -110,8 +110,10 @@ public class GetPKRelationsServlet extends HttpServlet {
 		        	
 		    		if(dbmd != null){
 		    			Map<String, Object> o = (Map<String, Object>) dbmd.get(fktable_name);
-		    			relation.setLabel((String) o.get("table_remarks"));
-		    			relation.setDescription((String) o.get("table_description"));
+		    			if(o != null){
+			    			relation.setLabel((String) o.get("table_remarks"));
+			    			relation.setDescription((String) o.get("table_description"));
+		    			}
 		    		}
 		        	
 		        	Seq seq = new Seq();
