@@ -22,6 +22,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * Servlet implementation class GetTablesServlet
  */
@@ -60,14 +64,16 @@ public class GetDatabaseMetaDatasServlet extends HttpServlet {
 				System.out.println("Load Database Meta Datas from cache...");
 				
 				BufferedReader br = new BufferedReader(new FileReader(file));
-			
+				
+				ObjectMapper mapper = new ObjectMapper();
+		        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+				result = mapper.readValue(br, new TypeReference<Map<String, Object>>(){});
+
+				request.getSession().setAttribute("dbmd", result);
+				
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
-	
-				String line;
-				while((line = br.readLine()) != null){
-					response.getWriter().write(line);
-				}
+				response.getWriter().write(Tools.toJSON(result));
 				
 				if(br != null){br.close();}
 			}

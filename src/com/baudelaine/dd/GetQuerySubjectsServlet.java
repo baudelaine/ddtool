@@ -58,16 +58,11 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 		table = request.getParameter("table");
 		alias = request.getParameter("alias");
 		type = request.getParameter("type");
-//		qs_id = request.getParameter("qs_id");
-//		r_id = request.getParameter("r_id");
 		linker_id = request.getParameter("linker_id");
 		
 		System.out.println("table=" + table);
 		System.out.println("alias=" + alias);
 		System.out.println("type=" + type);
-//		System.out.println("qs_id=" + qs_id);
-//		System.out.println("r_id=" + r_id);
-//		System.out.println("linker_id=" + linker_id);
 		List<Object> result = new ArrayList<Object>();
 
 		try{
@@ -79,44 +74,11 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 			labels = (Map<String, Object>) request.getSession().getAttribute("labels");
 			metaData = con.getMetaData();
 			
-//			Map<String, QuerySubject> query_subjects = (Map<String, QuerySubject>) request.getSession().getAttribute("query_subjects");
-//			
-//			QuerySubject querySubject = query_subjects.get(alias + type);
-//			
-//			if(querySubject == null){
-
 			QuerySubject querySubject = getQuerySubjects();
-
+			
 			querySubject.setFields(getFields());
 			querySubject.addRelations(getForeignKeys());
 				
-//			}
-			
-//			if(linker_id != null && linker_id.length() > -1){
-//				querySubject.addLinker_id(linker_id);
-//			}
-//			
-//			query_subjects.put(querySubject.get_id(), querySubject);
-			
-			// Update fin/ref to true of the linker relation
-//			QuerySubject linker = query_subjects.get(qs_id);
-//			if(linker != null){
-//				Map<String, Relation> linkerRelations = linker.getRelations();
-//				Relation linkerRelation = linkerRelations.get(r_id);
-//				if(type.equalsIgnoreCase("Final")){
-//					linkerRelation.setFin(true);
-//				}
-//				if(type.equalsIgnoreCase("Ref")){
-//					linkerRelation.setRef(true);
-//				}
-//				linker.incRelationCount(alias + type);
-//			}
-//			
-//
-//			for(Entry<String, QuerySubject> query_subject : query_subjects.entrySet()){
-//		    	result.add(query_subject.getValue());
-//		    }
-			
 			result.add(querySubject);
 			
 			response.setContentType("application/json");

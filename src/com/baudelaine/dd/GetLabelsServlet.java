@@ -50,6 +50,7 @@ public class GetLabelsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		Map<String, Object> results = new HashMap<String, Object>();
+		Map<String, Object> dbmd = new HashMap<String, Object>();
 		String schema = null;
 		String dbEngine = null;
 		PreparedStatement stmt = null;
@@ -64,6 +65,7 @@ public class GetLabelsServlet extends HttpServlet {
 	        Map<String, Object>	parms = new HashMap<String, Object>();
 	        parms = mapper.readValue(br, new TypeReference<Map<String, Object>>(){});
 		        
+	        dbmd = (Map<String, Object>) request.getSession().getAttribute("dbmd");
 			con = (Connection) request.getSession().getAttribute("con");
 			schema = (String) request.getSession().getAttribute("schema");
 			dbEngine = (String) request.getSession().getAttribute("dbEngine");
@@ -178,12 +180,12 @@ public class GetLabelsServlet extends HttpServlet {
 				
 				Map<String, Object> result = null;
 				for(String table: tables){
-					result = new HashMap<String, Object>();
+					result = (Map<String, Object>) dbmd.get(table);
 					result.put("table_name", table);
 					result.put("table_remarks", tlMap.get(table));
 					result.put("table_description", tdMap.get(table));
 					
-					Map<String, Object> columns = new HashMap<String, Object>();
+					Map<String, Object> columns = (Map<String, Object>) result.get("columns");
 					
 					Map<String, Object> cls = (Map<String, Object>) clMap.get(table);
 					for(Entry<String, Object> cl: cls.entrySet()){
@@ -211,7 +213,7 @@ public class GetLabelsServlet extends HttpServlet {
 				
 			}
 			
-			request.getSession().setAttribute("labels", results);
+			request.getSession().setAttribute("dbmd", results);
 		    response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(Tools.toJSON(results));
