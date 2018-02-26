@@ -38,7 +38,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	String linker_id = "";
 	boolean withRecCount = false;
 	long qs_recCount = 0L;
-	Map<String, Object> labels = null;
+	Map<String, Object> dbmd = null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -71,7 +71,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 			System.out.println("withRecCount=" + withRecCount);
 			con = (Connection) request.getSession().getAttribute("con");
 			schema = (String) request.getSession().getAttribute("schema");
-			labels = (Map<String, Object>) request.getSession().getAttribute("labels");
+			dbmd = (Map<String, Object>) request.getSession().getAttribute("dbmd");
 			metaData = con.getMetaData();
 			
 			QuerySubject querySubject = getQuerySubjects();
@@ -148,9 +148,9 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 			
 		}
 		
-		if(labels != null){
+		if(dbmd != null){
 			@SuppressWarnings("unchecked")
-			Map<String, Object> o = (Map<String, Object>) labels.get(table);
+			Map<String, Object> o = (Map<String, Object>) dbmd.get(table);
 			result.setLabel((String) o.get("table_remarks"));
 			result.setDescription((String) o.get("table_description"));
 		}
@@ -178,8 +178,8 @@ public class GetQuerySubjectsServlet extends HttpServlet {
         rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
         
         Map<String, Object> table_labels = null;
-        if(labels != null){
-			table_labels = (Map<String, Object>) labels.get(table);
+        if(dbmd != null){
+			table_labels = (Map<String, Object>) dbmd.get(table);
         }
 		
         while (rst.next()) {
@@ -261,9 +261,9 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	    	    }
 	    		if(rst0 != null){rst0.close();}
 	        	
-	    		if(labels != null){
+	    		if(dbmd != null){
 	    			@SuppressWarnings("unchecked")
-	    			Map<String, Object> o = (Map<String, Object>) labels.get(pktable_name);
+	    			Map<String, Object> o = (Map<String, Object>) dbmd.get(pktable_name);
 	    			relation.setLabel((String) o.get("table_remarks"));
 	    			relation.setDescription((String) o.get("table_description"));
 	    		}
@@ -411,9 +411,9 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	    	    }
 	    		if(rst0 != null){rst0.close();}
 	        	
-	    		if(labels != null){
+	    		if(dbmd != null){
 	    			@SuppressWarnings("unchecked")
-	    			Map<String, Object> o = (Map<String, Object>) labels.get(pktable_name);
+	    			Map<String, Object> o = (Map<String, Object>) dbmd.get(pktable_name);
 	    			relation.setLabel((String) o.get("table_remarks"));
 	    			relation.setDescription((String) o.get("table_description"));
 	    		}

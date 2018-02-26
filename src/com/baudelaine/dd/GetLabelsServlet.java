@@ -181,11 +181,17 @@ public class GetLabelsServlet extends HttpServlet {
 				Map<String, Object> result = null;
 				for(String table: tables){
 					result = (Map<String, Object>) dbmd.get(table);
+					if(result == null){
+						result = new HashMap<String, Object>();
+					}
 					result.put("table_name", table);
 					result.put("table_remarks", tlMap.get(table));
 					result.put("table_description", tdMap.get(table));
 					
 					Map<String, Object> columns = (Map<String, Object>) result.get("columns");
+					if(columns == null){
+						columns = new HashMap<String, Object>();
+					}
 					
 					Map<String, Object> cls = (Map<String, Object>) clMap.get(table);
 					for(Entry<String, Object> cl: cls.entrySet()){

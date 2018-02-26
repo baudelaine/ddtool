@@ -48,7 +48,7 @@ public class GetPKRelationsServlet extends HttpServlet {
 		boolean withRecCount = false;
 
 		List<Object> result = new ArrayList<Object>();
-		Map<String, Object> labels = null;
+		Map<String, Object> dbmd = null;
 		
 		Connection con = null;
 		ResultSet rst = null;
@@ -59,7 +59,7 @@ public class GetPKRelationsServlet extends HttpServlet {
 			
 			con = (Connection) request.getSession().getAttribute("con");
 			schema = (String) request.getSession().getAttribute("schema");
-			labels = (Map<String, Object>) request.getSession().getAttribute("labels");
+			dbmd = (Map<String, Object>) request.getSession().getAttribute("dbmd");
 			withRecCount = (Boolean) request.getSession().getAttribute("withRecCount");
 			
 		    Map<String, Relation> map = new HashMap<String, Relation>();
@@ -108,8 +108,8 @@ public class GetPKRelationsServlet extends HttpServlet {
 		    	    }
 		    		if(rst0 != null){rst0.close();}
 		        	
-		    		if(labels != null){
-		    			Map<String, Object> o = (Map<String, Object>) labels.get(fktable_name);
+		    		if(dbmd != null){
+		    			Map<String, Object> o = (Map<String, Object>) dbmd.get(fktable_name);
 		    			relation.setLabel((String) o.get("table_remarks"));
 		    			relation.setDescription((String) o.get("table_description"));
 		    		}
