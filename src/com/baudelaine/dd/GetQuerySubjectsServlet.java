@@ -442,6 +442,20 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	        	relation.setType(type.toUpperCase());
 	        	relation.set_id("PK_" + relation.getPktable_alias() + "_" + alias + "_" + type.toUpperCase());
 	        	
+	        	String[] types = {"TABLE"};
+	    		ResultSet rst0 = metaData.getTables(con.getCatalog(), schema, pktable_name, types);
+	    		while (rst0.next()) {
+	    	    	relation.setLabel(rst0.getString("REMARKS"));
+	    	    }
+	    		if(rst0 != null){rst0.close();}
+	        	
+	    		if(labels != null){
+	    			@SuppressWarnings("unchecked")
+	    			Map<String, Object> o = (Map<String, Object>) labels.get(pktable_name);
+	    			relation.setLabel((String) o.get("table_remarks"));
+	    			relation.setDescription((String) o.get("table_description"));
+	    		}
+	        	
 	        	Seq seq = new Seq();
 	        	seq.setColumn_name(pkcolumn_name);
 	        	seq.setPkcolumn_name(fkcolumn_name);
@@ -470,8 +484,57 @@ public class GetQuerySubjectsServlet extends HttpServlet {
 	        	
 	        }
         	
-	        	
 	    }
+	    
+	    if(withRecCount){
+	    	for(Entry<String, Relation> relation: map.entrySet()){
+	    		Relation rel = relation.getValue();
+	    		
+	    		Set<String> tableSet = new HashSet<String>();
+	    		for(Seq seq: rel.getSeqs()){
+	    			tableSet.add(schema + "." + seq.pktable_name);
+	    			tableSet.add(schema + "." + seq.table_name);
+	    		}
+	    		
+	    		System.out.println("tableSet=" + tableSet);
+	    		
+	    		StringBuffer sb = new StringBuffer();;
+	    		
+	    		for(String table: tableSet){
+	    			sb.append(", " + table);
+	    		}
+	    		String tables = sb.toString().substring(1);
+	    		
+	            long recCount = 0;
+	    		Statement stmt = null;
+	    		ResultSet rs = null;
+	            try{
+		    		String query = "SELECT COUNT(*) FROM " + tables + " WHERE " + rel.where;
+		    		System.out.println(query);
+		    		stmt = con.createStatement();
+		            rs = stmt.executeQuery(query);
+		            while (rs.next()) {
+		            	recCount = rs.getLong(1);
+		            }
+		            rel.setRecCount(recCount);
+		    		long result = (Math.round(((double)recCount / qs_recCount) * 100));
+		            rel.setRecCountPercent((int) result);
+	            }
+	            catch(SQLException e){
+	            	System.out.println("CATCHING SQLEXEPTION...");
+	            	System.out.println(e.getSQLState());
+	            	System.out.println(e.getMessage());
+	            	
+	            }
+	            finally {
+		            if (stmt != null) { stmt.close();}
+		            if(rst != null){rst.close();}
+					
+				}
+	    		
+	    	}
+	    }
+	    
 	    
 	    return new ArrayList<Relation>(map.values());
 		
