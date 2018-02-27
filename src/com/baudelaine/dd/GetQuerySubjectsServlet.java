@@ -201,8 +201,8 @@ public class GetQuerySubjectsServlet extends HttpServlet {
     		if(columns != null){
     			Map<String, Object> column = (Map<String, Object>) columns.get(field_name); 
             	System.out.println("column=" + column);
-    			field.setLabel((String) column.get("table_remarks"));
-    			field.setDescription((String) column.get("table_description"));
+    			field.setLabel((String) column.get("column_remarks"));
+    			field.setDescription((String) column.get("column_description"));
     		}
         	
         	
