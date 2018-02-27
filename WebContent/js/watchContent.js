@@ -56,9 +56,9 @@ function buildTable($el, cols, datas) {
         showRefresh: false,
         showColumns: true,
         showToggle: false,
-        pagination: true,
+        pagination: false,
         pageSize: 25,
-        showPaginationSwitch: true,
+        showPaginationSwitch: false,
         paginationVAlign: "both",
         detailView: false
     })
