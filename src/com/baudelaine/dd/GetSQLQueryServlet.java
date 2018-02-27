@@ -74,10 +74,12 @@ public class GetSQLQueryServlet extends HttpServlet {
 
 			String query = (String) parms.get("query");
 			results.put("query", query);
+			results.put("schema", schema);
 			
 			System.out.println("query=" + query);
 			
 			stmt = con.prepareStatement(query);
+			stmt.setMaxRows(20);
 			rst = stmt.executeQuery();
 			ResultSetMetaData rsmd = rst.getMetaData();
 			int colCount = rsmd.getColumnCount();

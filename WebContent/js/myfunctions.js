@@ -346,7 +346,7 @@ $modelListModal.on('shown.bs.modal', function() {
   $.each(modelList, function(index, object){
     list += '<a href="#" class="list-group-item" onClick="OpenModel(' + object.id + '); return false;"><span>' + object.name + '</span></a>';
   });
-  list += '</div></form><script>$("#searchlist").btsListFilter("#searchinput", {itemChild: "span", initial: false, casesensitive: false,});</script>';
+  list += '</div></form><script>$("#searchlist").btsListFilter("#searchinput", {itemChild: "span", initial: false, casesensitive: false});</script>';
   $(this).find('.modal-body').append(list);
 });
 
