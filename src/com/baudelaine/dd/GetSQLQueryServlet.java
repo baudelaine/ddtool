@@ -94,7 +94,9 @@ public class GetSQLQueryServlet extends HttpServlet {
 			
 			System.out.println("column_names=" + column_names);
 			List<Object> recs = new ArrayList<Object>();
+			int i = 0;
 			while(rst.next()){
+				System.out.println(i++);
 				Map<String, Object> rec = new HashMap<String, Object>();
 				for(int colid = 1; colid <= colCount; colid++){
 					rec.put(column_names.get(colid -1), rst.getObject(colid));
