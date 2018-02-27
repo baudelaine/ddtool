@@ -196,7 +196,7 @@ public class GetQuerySubjectsServlet extends HttpServlet {
         	if(pks.contains(rst.getString("COLUMN_NAME"))){
     			field.setPk(true);
     		}
-        	
+        	System.out.println("table_labels=" + table_labels);
     		if(table_labels != null){
     			Map<String, Object> columns = (Map<String, Object>) table_labels.get("columns");
     			Map<String, Object> column = (Map<String, Object>) columns.get(field_name); 
