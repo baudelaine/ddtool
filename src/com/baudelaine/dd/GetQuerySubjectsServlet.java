@@ -178,8 +178,10 @@ public class GetQuerySubjectsServlet extends HttpServlet {
         rst = metaData.getColumns(con.getCatalog(), schema, table, "%");
         
         Map<String, Object> table_labels = null;
+        Map<String, Object> columns = null;
         if(dbmd != null){
 			table_labels = (Map<String, Object>) dbmd.get(table);
+			columns = (Map<String, Object>) table_labels.get("columns");
         }
 		
         while (rst.next()) {
@@ -196,10 +198,9 @@ public class GetQuerySubjectsServlet extends HttpServlet {
         	if(pks.contains(rst.getString("COLUMN_NAME"))){
     			field.setPk(true);
     		}
-        	System.out.println("table_labels=" + table_labels);
-    		if(table_labels != null){
-    			Map<String, Object> columns = (Map<String, Object>) table_labels.get("columns");
+    		if(columns != null){
     			Map<String, Object> column = (Map<String, Object>) columns.get(field_name); 
+            	System.out.println("column=" + column);
     			field.setLabel((String) column.get("table_remarks"));
     			field.setDescription((String) column.get("table_description"));
     		}
