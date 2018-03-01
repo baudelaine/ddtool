@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog project="C:\models\model-47\model-47.cpf" templatedir="../templates/bmt/Cr1Model" timestamp="20180223193206917" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="3" timestamp="20180223193315620" uniqueId="B9F3326FB9F3326F">
+<action seq="1" type="Modify">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>queryItem/screenTip</mappingpath><value>/O/screenTip[0]/O/[DATA].[S_SAMPLE].[S_SAMPLEID]</value></param>
+<param seq="2" type="i18nstring"><value>The Sample ID</value></param>
+</inputparams><domchanges/><result success="t"><outputparams/></result>
+</action></transaction></bmtactionlog>

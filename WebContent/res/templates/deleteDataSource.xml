@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog timestamp="20180206111718781" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="1" timestamp="20180206111742477" uniqueId="A5A8A0DEA5A8A0DE">
+<action seq="1" type="Delete">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>dataSource</mappingpath><value>[].[dataSources].[DEV]</value></param>
+</inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction></bmtactionlog>

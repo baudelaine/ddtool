@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog project="C:\models\model-43\model-43.cpf" templatedir="../templates/bmt/Cr1Model" timestamp="20180211181100486" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="1" timestamp="20180211181307767" uniqueId="0066C23B0066C23B">
+<action seq="1" type="SetSecurityViewAccess">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>securityView</mappingpath><value>[].[securityViews].[DDToolTest]</value></param>
+<param seq="2" type="integer"><value>1</value></param><param seq="3" type="cclnode"><value><![CDATA[<securityObjects/>]]></value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction>
+<transaction saved="false" seq="2" timestamp="20180211181307767" uniqueId="996F9381996F9381">
+<action seq="1" type="SetSecurityViewAccess">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>package</mappingpath><value>[].[packages].[DDToolTest]</value></param>
+<param seq="2" type="integer"><value>1</value></param>
+<param seq="3" type="cclnode"><value><![CDATA[<securityObjects/>]]></value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction>
+<transaction saved="false" seq="3" timestamp="20180211181314974" uniqueId="A8A444A5A8A444A5">
+<action seq="1" type="Publish">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>package</mappingpath><value>[].[packages].[DDToolTest]</value></param>
+<param seq="2" type="integer"><value>2</value></param>
+<param seq="3" type="i18nstring"><value>/content/folder[@name=&apos;Folder DDTool&apos;]</value></param>
+<param seq="4" type="i18nstring"><value>DDToolTest</value></param>
+<param seq="5" type="integer"><value>16</value></param>
+<param seq="6" type="integer"><value>1</value></param>
+<param seq="7" type="integer"><value>-1</value></param></inputparams><domchanges/></action></transaction>
+</bmtactionlog>

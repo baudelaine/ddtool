@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog project="C:\models\model-55\model-55.cpf" templatedir="../templates/bmt/Cr1Model" timestamp="20180225224752468" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="3" timestamp="20180225224821690" uniqueId="FBFFB35AFBFFB35A">
+<action seq="1" type="Modify">
+<inputparams>
+<param seq="1" type="handle"><mappingpath>project/fixIdsToDefaultLocale</mappingpath><value>/O/fixIdsToDefaultLocale[0]/O/[]</value></param>
+<param seq="2" type="i18nstring"><value>true</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction></bmtactionlog>

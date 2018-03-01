@@ -1,0 +1,25 @@
+ try {
+    OutputFormat format = OutputFormat.createPrettyPrint();
+    format.setEncoding(document.getXMLEncoding());
+    StringWriter stringWriter = new StringWriter();
+    XMLWriter writer = new XMLWriter( stringWriter, format );
+    // XMLWriter has a bug that is avoided if we reparse the document
+    // prior to calling XMLWriter.write()
+    writer.write(DocumentHelper.parseText(document.asXML()));
+    writer.close();
+    document = DocumentHelper.parseText( stringWriter.toString() );
+  }
+  catch ( Exception e ){
+    e.printStackTrace();
+          return( null );
+		  
+		  
+		  
+		  
+OutputFormat format = OutputFormat.createPrettyPrint();
+         XMLWriter writer;
+         writer = new XMLWriter( System.out, format );
+         writer.write( document );
+		 
+		 
+new PrintStream(new BufferedOutputStream(new FileOutputStream("file.txt")), true);

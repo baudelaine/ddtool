@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bmtactionlog project="C:\models\model-54\model-54.cpf" templatedir="../templates/bmt/Cr1Model" timestamp="20180225184617117" user="Administrator" version="11.0.7.11">
+<transaction saved="false" seq="1" timestamp="20180225184713078" uniqueId="84E8991884E89918">
+<action seq="1" type="Modify"><inputparams>
+<param seq="1" type="handle"><mappingpath>queryItem/hidden</mappingpath><value>/O/hidden[0]/O/[DATA].[S_SAMPLE].[S_SAMPLEID]</value></param>
+<param seq="2" type="i18nstring"><value>true</value></param></inputparams><domchanges/>
+<result success="t"><outputparams/></result></action></transaction></bmtactionlog>
